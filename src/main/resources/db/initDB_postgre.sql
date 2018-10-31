@@ -17,12 +17,19 @@ CREATE SEQUENCE MOVES_SEQ START 10000;
 CREATE TABLE departments
 (
   id    INTEGER PRIMARY KEY DEFAULT nextval('GLOBAL_SEQ'),
-  name  VARCHAR(255) NOT NULL UNIQUE
+  name  VARCHAR(255) NOT NULL
 );
 CREATE UNIQUE INDEX departments_unique_name_idx ON departments (name);
 
 CREATE TABLE positions
 (
   id        INTEGER PRIMARY KEY DEFAULT nextval('GLOBAL_SEQ'),
-  position  VARCHAR(100) NOT NULL UNIQUE
+  position  VARCHAR(100) NOT NULL
 );
+CREATE UNIQUE INDEX positions_unique_position_idx ON positions (position);
+
+CREATE TABLE employees
+(
+  id INTEGER PRIMARY KEY  DEFAULT  nextval('GLOBAL_SEQ'),
+  dep_id INTEGER
+)
