@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS emp_schedules;
 DROP TABLE IF EXISTS edits;
 DROP TABLE IF EXISTS absences;
 DROP TABLE IF EXISTS days_off;
-DROP TABLE IF EXISTS dep_weekends;
+DROP TABLE IF EXISTS weekends;
 DROP TABLE IF EXISTS absence_reasons;
 DROP TABLE IF EXISTS week_days;
 DROP TABLE IF EXISTS employees;
@@ -62,14 +62,62 @@ CREATE TABLE absence_reasons
   description VARCHAR NOT NULL
 );
 
-CREATE TABLE dep_weekends
+CREATE TABLE weekends
 (
-  id INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
-  dep_id INTEGER NOT NULL,
+  id         INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
+  dep_id     INTEGER NOT NULL,
   weekday_id INTEGER NOT NULL,
   FOREIGN KEY (dep_id) REFERENCES departments (id),
   FOREIGN KEY (weekday_id) REFERENCES week_days (id),
   CONSTRAINT depid_weekdayid_idx UNIQUE (dep_id, weekday_id)
 );
-CREATE INDEX depweekends_depid_idx ON dep_weekends (dep_id);
+CREATE INDEX weekends_depid_idx ON weekends (dep_id);
 
+CREATE TABLE days_off
+(
+  id INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
+  dep_id INTEGER NOT NULL,
+  date DATE NOT NULL,
+  FOREIGN KEY (dep_id) REFERENCES departments (id),
+  CONSTRAINT depid_daysoff_idx UNIQUE (dep_id, date)
+);
+CREATE INDEX daysoff_depid_idx ON days_off (dep_id);
+
+CREATE TABLE absences
+(
+  id SERIAL PRIMARY KEY,
+  emp_id INTEGER NOT NULL,
+  reason_id INTEGER NOT NULL,
+  start_absence DATE NOT NULL,
+  end_absence DATE NOT NULL,
+  description VARCHAR NOT NULL,
+  FOREIGN KEY (emp_id) REFERENCES employees (id),
+  FOREIGN KEY (reason_id) REFERENCES absence_reasons (id),
+  CONSTRAINT abs_start_end_con CHECK (start_absence < end_absence)
+);
+CREATE INDEX abs_empid_idx ON absences (emp_id);
+
+CREATE TABLE edits
+(
+  id SERIAL PRIMARY KEY,
+  emp_id INTEGER NOT NULL,
+  edit_date TIMESTAMP DEFAULT now() NOT NULL,
+  edit_type VARCHAR(100) NOT NULL,
+  description VARCHAR NOT NULL,
+  FOREIGN KEY (emp_id) REFERENCES employees (id)
+);
+
+CREATE TABLE emp_schedules
+(
+  id INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
+  emp_id INTEGER NOT NULL,
+  start_work TIME,
+  end_work TIME,
+  start_lunch TIME,
+  end_lunch TIME,
+  FOREIGN KEY (emp_id) REFERENCES employees (id),
+  CONSTRAINT empsched_start_end_con CHECK (start_work < start_lunch
+                                           AND start_lunch < end_lunch
+                                           AND end_lunch < end_work)
+);
+CREATE UNIQUE INDEX empsched_unique_empid_idx ON emp_schedules (emp_id);
