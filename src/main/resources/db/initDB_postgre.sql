@@ -1,3 +1,6 @@
+DROP TRIGGER IF EXISTS chek_abs ON absences;
+DROP FUNCTION IF EXISTS new_absence();
+
 DROP TABLE IF EXISTS visitors;
 DROP TABLE IF EXISTS employee_roles;
 DROP TABLE IF EXISTS actions;
@@ -17,9 +20,27 @@ DROP TABLE IF EXISTS departments;
 DROP SEQUENCE IF EXISTS PERS_SEQ;
 DROP SEQUENCE IF EXISTS SCHEDULES_SEQ;
 
+/*
+Последовательнсть для первичных ключей отношений
+-"Сотрудники"
+-"Посетители"
+ */
 CREATE SEQUENCE PERS_SEQ START 10000;
+/*
+Последовательность для первичных ключей отношений
+-"Расписание департаментов"
+-"Расписание сотрудников"
+-"Выходные"
+-"Нерабочие и праздничные дни"
+ */
 CREATE SEQUENCE SCHEDULES_SEQ START 10000;
 
+/*
+Отношение "Департаменты"
+содержит:
+-первичный ключ;
+-название департамента, должно быть уникальным.
+*/
 CREATE TABLE departments
 (
   id    SERIAL PRIMARY KEY,
@@ -27,6 +48,13 @@ CREATE TABLE departments
 );
 CREATE UNIQUE INDEX departments_unique_name_idx ON departments (name);
 
+/*
+Отношение "Должности"
+содержит:
+-первичный ключ;
+-название должности: должно быть уникальным и существовать;
+-комментарий: описание должности, должно существовать.
+ */
 CREATE TABLE positions
 (
   id          SERIAL PRIMARY KEY,
@@ -34,15 +62,28 @@ CREATE TABLE positions
   description VARCHAR NOT NULL
 );
 
+/*
+Отношение "Сотрудники"
+содержит:
+-первичный ключ;
+-id департамента в котором работатет, должно существовать;
+-id занимаемой должности, должно существовать;
+-серийный номер ключ-карты, должно существовать и быть уникальным;
+-фамилия;
+-имя;
+-отчество;
+-email, должен быть уникальным.
+
+ */
 CREATE TABLE employees
 (
   id          INTEGER PRIMARY KEY  DEFAULT  nextval('PERS_SEQ'),
   dep_id      INTEGER NOT NULL,
   pos_id      INTEGER NOT NULL,
   card_num    INTEGER NOT NULL,
+  last_name   VARCHAR(255) NOT NULL,
   first_name  VARCHAR(255) NOT NULL,
   second_name VARCHAR(255) NOT NULL,
-  last_name   VARCHAR(255) NOT NULL,
   email       VARCHAR,
   FOREIGN KEY (dep_id) REFERENCES departments (id),
   FOREIGN KEY (pos_id) REFERENCES positions (id)
@@ -52,21 +93,21 @@ CREATE UNIQUE INDEX employees_unique_emale_idx ON employees (email);
 
 CREATE TABLE action_types
 (
-  id SERIAL PRIMARY KEY,
-  action VARCHAR(50) UNIQUE NOT NULL,
+  id          SERIAL PRIMARY KEY,
+  action      VARCHAR(50) UNIQUE NOT NULL,
   description VARCHAR
 );
 
 CREATE TABLE week_days
 (
-  id INTEGER PRIMARY KEY,
+  id   INTEGER PRIMARY KEY,
   name VARCHAR UNIQUE NOT NULL
 );
 
 CREATE TABLE absence_reasons
 (
-  id SERIAL PRIMARY KEY,
-  reason VARCHAR(255) UNIQUE NOT NULL,
+  id          SERIAL PRIMARY KEY,
+  reason      VARCHAR(255) UNIQUE NOT NULL,
   description VARCHAR NOT NULL
 );
 
@@ -83,9 +124,9 @@ CREATE INDEX weekends_depid_idx ON weekends (dep_id);
 
 CREATE TABLE days_off
 (
-  id INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
+  id     INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
   dep_id INTEGER NOT NULL,
-  date DATE NOT NULL,
+  date   DATE NOT NULL,
   FOREIGN KEY (dep_id) REFERENCES departments (id) ON DELETE CASCADE,
   CONSTRAINT depid_daysoff_idx UNIQUE (dep_id, date)
 );
@@ -93,12 +134,12 @@ CREATE INDEX daysoff_depid_idx ON days_off (dep_id);
 
 CREATE TABLE absences
 (
-  id SERIAL PRIMARY KEY,
-  emp_id INTEGER NOT NULL,
-  reason_id INTEGER NOT NULL,
+  id            SERIAL PRIMARY KEY,
+  emp_id        INTEGER NOT NULL,
+  reason_id     INTEGER NOT NULL,
   start_absence DATE NOT NULL,
-  end_absence DATE NOT NULL,
-  description VARCHAR NOT NULL,
+  end_absence   DATE NOT NULL,
+  description   VARCHAR NOT NULL,
   FOREIGN KEY (emp_id) REFERENCES employees (id),
   FOREIGN KEY (reason_id) REFERENCES absence_reasons (id),
   CONSTRAINT abs_start_end_con CHECK (start_absence < end_absence)
@@ -107,22 +148,22 @@ CREATE INDEX abs_empid_idx ON absences (emp_id);
 
 CREATE TABLE edits
 (
-  id SERIAL PRIMARY KEY,
-  emp_id INTEGER NOT NULL,
-  edit_date TIMESTAMP DEFAULT now() NOT NULL,
-  edit_type VARCHAR(100) NOT NULL,
+  id          SERIAL PRIMARY KEY,
+  emp_id      INTEGER NOT NULL,
+  edit_date   TIMESTAMP DEFAULT now() NOT NULL,
+  edit_type   VARCHAR(100) NOT NULL,
   description VARCHAR NOT NULL,
   FOREIGN KEY (emp_id) REFERENCES employees (id)
 );
 
 CREATE TABLE emp_schedules
 (
-  id INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
-  emp_id INTEGER NOT NULL,
-  start_work TIME,
-  end_work TIME,
+  id          INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
+  emp_id      INTEGER NOT NULL,
+  start_work  TIME,
+  end_work    TIME,
   start_lunch TIME,
-  end_lunch TIME,
+  end_lunch   TIME,
   FOREIGN KEY (emp_id) REFERENCES employees (id),
   CONSTRAINT empsched_start_end_con CHECK (start_work < start_lunch
                                            AND start_lunch < end_lunch
@@ -132,12 +173,12 @@ CREATE UNIQUE INDEX empsched_unique_empid_idx ON emp_schedules (emp_id);
 
 CREATE TABLE dep_schedules
 (
-  id INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
-  dep_id INTEGER NOT NULL,
-  start_work TIME,
-  end_work TIME,
+  id          INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
+  dep_id      INTEGER NOT NULL,
+  start_work  TIME,
+  end_work    TIME,
   start_lunch TIME,
-  end_lunch TIME,
+  end_lunch   TIME,
   FOREIGN KEY (dep_id) REFERENCES departments (id) ON DELETE CASCADE,
   CONSTRAINT depsched_start_end_con CHECK (start_work < start_lunch
                                            AND start_lunch < end_lunch
@@ -147,10 +188,10 @@ CREATE UNIQUE INDEX depsched_unique_depid_idx ON dep_schedules (dep_id);
 
 CREATE TABLE actions
 (
-  id SERIAL PRIMARY KEY,
-  emp_id INTEGER NOT NULL,
+  id         SERIAL PRIMARY KEY,
+  emp_id     INTEGER NOT NULL,
   acttype_id INTEGER NOT NULL,
-  time TIMESTAMP DEFAULT now() NOT NULL,
+  time       TIMESTAMP DEFAULT now() NOT NULL,
   FOREIGN KEY (emp_id) REFERENCES employees (id),
   FOREIGN KEY (acttype_id) REFERENCES action_types (id),
   CONSTRAINT act_emp_time_con UNIQUE (emp_id, time)
@@ -161,20 +202,45 @@ CREATE INDEX act_time_idx ON actions (time);
 CREATE TABLE employee_roles
 (
   emp_id INTEGER NOT NULL,
-  role VARCHAR(255) NOT NULL,
+  role   VARCHAR(255) NOT NULL,
   FOREIGN KEY (emp_id) REFERENCES employees (id),
   CONSTRAINT employee_roles_con UNIQUE (emp_id, role)
 );
 
 CREATE TABLE visitors
 (
-  id INTEGER PRIMARY KEY DEFAULT nextval('PERS_SEQ'),
-  temp_num VARCHAR(255) UNIQUE NOT NULL,
+  id          INTEGER PRIMARY KEY DEFAULT nextval('PERS_SEQ'),
+  temp_num    VARCHAR(255) UNIQUE NOT NULL,
   last_name   VARCHAR(255) NOT NULL,
   first_name  VARCHAR(255) NOT NULL,
   second_name VARCHAR(255) NOT NULL,
   description VARCHAR NOT NULL,
-  enter_time TIMESTAMP,
-  exit_time TIMESTAMP
+  enter_time  TIMESTAMP,
+  exit_time   TIMESTAMP
 );
 CREATE INDEX visitors_names_idx ON visitors (last_name, first_name, second_name);
+
+CREATE FUNCTION new_absence()
+  RETURNS TRIGGER AS
+$chek_abs$
+  BEGIN
+  IF EXISTS(
+            SELECT *
+            FROM absences a
+            WHERE a.emp_id = NEW.emp_id
+              AND
+            ((NEW.start_absence >= a.start_absence AND NEW.start_absence <= a.end_absence)
+            OR (NEW.end_absence >= a.start_absence AND NEW.end_absence <= a.end_absence)
+            ))
+    THEN
+    RAISE EXCEPTION 'Impossible insert, because new data intesepts with old data!';
+  END IF;
+  RETURN NEW;
+  END
+$chek_abs$ LANGUAGE plpgsql;
+
+CREATE TRIGGER chek_abs
+  BEFORE INSERT
+  ON absences
+  FOR EACH ROW
+  EXECUTE PROCEDURE new_absence();
