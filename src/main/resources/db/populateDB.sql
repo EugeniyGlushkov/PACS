@@ -21,7 +21,7 @@ INSERT INTO departments (name) VALUES
   ('ООО "Рога и копыта"');
 
 INSERT INTO positions (position, description) VALUES
-  ('Дректор', 'Глава департамента.');
+  ('Директор', 'Глава департамента.');
 
 INSERT INTO employees (dep_id, pos_id, card_num, last_name, first_name, second_name, email) VALUES
   (1, 1, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru');
@@ -33,4 +33,4 @@ INSERT INTO absences (emp_id, reason_id, start_absence, end_absence, description
   (10000, 1, '2018-05-03', '2018-05-12', 'больничный лист №12345.');
 
 INSERT INTO absences (emp_id, reason_id, start_absence, end_absence, description) VALUES
-  (10000, 1, '2018-05-09', '2018-05-31', 'больничный лист №12345.');
+  (10000, 1, '2018-05-13', '2018-05-31', 'больничный лист №12345.');

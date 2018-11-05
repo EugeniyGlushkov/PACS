@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS absences;
 DROP TABLE IF EXISTS days_off;
 DROP TABLE IF EXISTS weekends;
 DROP TABLE IF EXISTS absence_reasons;
+DROP TABLE IF EXISTS edit_types;
 DROP TABLE IF EXISTS week_days;
 DROP TABLE IF EXISTS action_types;
 DROP TABLE IF EXISTS employees;
@@ -37,7 +38,7 @@ CREATE SEQUENCE SCHEDULES_SEQ START 10000;
 
 /*
 Отношение "Департаменты"
-содержит:
+содержит соответственно:
 -первичный ключ;
 -название департамента, должно быть уникальным.
 */
@@ -50,10 +51,10 @@ CREATE UNIQUE INDEX departments_unique_name_idx ON departments (name);
 
 /*
 Отношение "Должности"
-содержит:
+содержит соответственно:
 -первичный ключ;
--название должности: должно быть уникальным и существовать;
--комментарий: описание должности, должно существовать.
+-название должности: должно быть уникальным;
+-комментарий: описание должности.
  */
 CREATE TABLE positions
 (
@@ -64,11 +65,11 @@ CREATE TABLE positions
 
 /*
 Отношение "Сотрудники"
-содержит:
+содержит соответственно:
 -первичный ключ;
--id департамента в котором работатет, должно существовать;
--id занимаемой должности, должно существовать;
--серийный номер ключ-карты, должно существовать и быть уникальным;
+-id департамента в котором работатет;
+-id занимаемой должности;
+-серийный номер ключ-карты, должен быть уникальным;
 -фамилия;
 -имя;
 -отчество;
@@ -91,6 +92,13 @@ CREATE TABLE employees
 CREATE UNIQUE INDEX employees_unique_card_num_idx ON employees (card_num);
 CREATE UNIQUE INDEX employees_unique_emale_idx ON employees (email);
 
+/*
+Отношение "Тип действия" (вход, выход и т.п.)
+содержит соответственно:
+-первичный ключ;
+-название действия;
+-описание действия.
+ */
 CREATE TABLE action_types
 (
   id          SERIAL PRIMARY KEY,
@@ -98,12 +106,40 @@ CREATE TABLE action_types
   description VARCHAR
 );
 
+/*
+Отношение-справочник "Дни недели"
+содержит соответственно:
+-первичный ключ;
+-навание дня недели, должно быть уникальным.
+ */
 CREATE TABLE week_days
 (
   id   INTEGER PRIMARY KEY,
   name VARCHAR UNIQUE NOT NULL
 );
 
+/*
+Отношение "Типы правок", типы которые могут принимать правки в соответствующем отношении
+(добавление, удаление, обносление)
+содержит соответственно:
+-первичный ключ;
+-тип правки;
+-описание правки.
+ */
+CREATE TABLE edit_types
+(
+  id          SERIAL PRIMARY KEY,
+  edit_type   VARCHAR(255) UNIQUE NOT NULL,
+  description VARCHAR NOT NULL
+);
+
+/*
+Отношение "Причины отсутствия" (больничный, командировка и т.п.)
+содержит соответственно:
+-первичный ключ;
+-название причины, должно быть уникальным;
+-описание причины.
+ */
 CREATE TABLE absence_reasons
 (
   id          SERIAL PRIMARY KEY,
@@ -111,6 +147,14 @@ CREATE TABLE absence_reasons
   description VARCHAR NOT NULL
 );
 
+/*
+Отношение "Выходные", определяет выходные дни для конкретного департамента
+содержит соответственно:
+-первичный ключ;
+-id департамента;
+-id дня недели.
+сочетания департамента и дня недели должны быть уникальны.
+ */
 CREATE TABLE weekends
 (
   id         INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
@@ -122,6 +166,15 @@ CREATE TABLE weekends
 );
 CREATE INDEX weekends_depid_idx ON weekends (dep_id);
 
+/*
+Отношение "Нерабочие и праздничные дни", определяет непериодические нерабочие дни.
+Заполняется отдельно для каждго департамента.
+содержит соответственно:
+-первичный ключ;
+-id департамента;
+-дата.
+Сочетание даты и отдела должно быть уникальным.
+ */
 CREATE TABLE days_off
 (
   id     INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
@@ -132,6 +185,18 @@ CREATE TABLE days_off
 );
 CREATE INDEX daysoff_depid_idx ON days_off (dep_id);
 
+/*
+Отношение "Отсутствие", период отсутствия на работе по какой-либо причине.
+Отсутствие вне существующих периодовж считаются прогулом.
+содержит соответственно:
+-первичный ключ;
+-id сотрудника:
+-id причины отсутствия;
+-дата начала отсутствия;
+-дата окончания отсутствия;
+-описание;
+дата начала должна быть раньше даты окончания.
+ */
 CREATE TABLE absences
 (
   id            SERIAL PRIMARY KEY,
@@ -146,16 +211,41 @@ CREATE TABLE absences
 );
 CREATE INDEX abs_empid_idx ON absences (emp_id);
 
+/*
+Отошение "Правки", хранит историю изменений (редактирование, удаление, добавление)
+содержит соответственно:
+-первичный ключ;
+-id типа правки;
+-id сотрудника осуществившего изменение;
+-дата изменения;
+-описание изменения.
+ */
 CREATE TABLE edits
 (
   id          SERIAL PRIMARY KEY,
+  type_id   INTEGER NOT NULL,
   emp_id      INTEGER NOT NULL,
   edit_date   TIMESTAMP DEFAULT now() NOT NULL,
-  edit_type   VARCHAR(100) NOT NULL,
   description VARCHAR NOT NULL,
+  FOREIGN KEY (type_id) REFERENCES edit_types (id),
   FOREIGN KEY (emp_id) REFERENCES employees (id)
 );
 
+/*
+Отношение "Расписания сотрудников", хранит расписание для конкретного
+сотрудника, если для какого либо сотрудника расписание отсутствует, то\
+оно соответствует общему расписанию для департамента из отношения "Расписания
+департаментов"
+содержит соответственно:
+-первичный ключ;
+-id сотрудника;
+-время начала работы;
+-время окончания работы;
+-время начала обеда;
+-время окончания обеда.
+ограничение: начало работы раньше начала обеда, начало обеда раньше конца обеда,
+конец обеда раньше конца рабочего дня.
+ */
 CREATE TABLE emp_schedules
 (
   id          INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
@@ -171,6 +261,19 @@ CREATE TABLE emp_schedules
 );
 CREATE UNIQUE INDEX empsched_unique_empid_idx ON emp_schedules (emp_id);
 
+/*
+Отношение "Расписание департамента", действует для всех сотрудников у когторых
+отсутствует индивидуальное раписание.
+содержит соответственно:
+-первичный ключ;
+-id департамента;
+-время начала работы;
+-время окончания работы;
+-время начала обеда;
+-время окончания обеда.
+ограничение: начало работы раньше начала обеда, начало обеда раньше конца обеда,
+конец обеда раньше конца рабочего дня.
+ */
 CREATE TABLE dep_schedules
 (
   id          INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
@@ -186,6 +289,16 @@ CREATE TABLE dep_schedules
 );
 CREATE UNIQUE INDEX depsched_unique_depid_idx ON dep_schedules (dep_id);
 
+/*
+Отношение "События", хранит действия совершенные сотрудниками
+содержит соответственно:
+-первичный ключ;
+-id сотрудника, произвёвшего действие;
+-тип действия (вход, выход и т.п.);
+-время, когда было произведено действие.
+Ограничение: одному времени не может соответствовать несколько действий для
+одного сотрудника.
+ */
 CREATE TABLE actions
 (
   id         SERIAL PRIMARY KEY,
@@ -199,6 +312,14 @@ CREATE TABLE actions
 CREATE INDEX act_empid_idx ON actions (emp_id);
 CREATE INDEX act_time_idx ON actions (time);
 
+/*
+Отношение "Роли сотрудников", хранит роли определяющие права доступа к системе
+содержит соответственно:
+-id сотрудника которому соответствует роль (одному сотруднику может
+соответствовать несколько ролей)
+-наименование роли (обычный пользователь, одминистратор и т.п.)
+Ограничение: одному сотруднику не может соответствовать две одинаковые роли.
+ */
 CREATE TABLE employee_roles
 (
   emp_id INTEGER NOT NULL,
@@ -207,6 +328,19 @@ CREATE TABLE employee_roles
   CONSTRAINT employee_roles_con UNIQUE (emp_id, role)
 );
 
+/*
+Отношение "Посетители", хранит информацию о посетителях, которые
+не имеют пропусков
+содержит соответственно:
+-первичный ключ;
+-временный номер, используется для нумерации временный пропусков;
+-фамилия;
+-имя;
+-отчество;
+-описание, содержит дополнительную информацию: цель визита и т.п.
+-время входа, если отсутствует - посетитель ещё не вошёл;
+-время выхода, если отсутствует - посетитель ещё не вышел;
+ */
 CREATE TABLE visitors
 (
   id          INTEGER PRIMARY KEY DEFAULT nextval('PERS_SEQ'),
@@ -220,6 +354,11 @@ CREATE TABLE visitors
 );
 CREATE INDEX visitors_names_idx ON visitors (last_name, first_name, second_name);
 
+/*
+Функция для проверки того, что добавляемый интервал времени отсутствия не пересекается
+интервалами уже существующих отсутствий: работник не может одновременно быть в отпуске и командировке.
+При выявлении пересечения выбрасывается исключение.
+ */
 CREATE FUNCTION new_absence()
   RETURNS TRIGGER AS
 $chek_abs$
@@ -239,6 +378,10 @@ $chek_abs$
   END
 $chek_abs$ LANGUAGE plpgsql;
 
+/*
+Триггер, срабатывающий перед добавлением новых данных в отношение "Отсутствия"
+и вызывающий функцию new_absence().
+ */
 CREATE TRIGGER chek_abs
   BEFORE INSERT
   ON absences
