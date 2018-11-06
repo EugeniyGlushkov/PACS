@@ -1,6 +1,5 @@
 package ru.alvisid.pacs.util;
 
-import org.acs.util.exceptions.NotFoundException;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
 import java.util.Objects;

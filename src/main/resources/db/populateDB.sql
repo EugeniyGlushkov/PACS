@@ -1,6 +1,7 @@
 DELETE FROM visitors;
 DELETE FROM employee_roles;
 DELETE FROM actions;
+DELETE FROM point_permits;
 DELETE FROM dep_schedules;
 DELETE FROM emp_schedules;
 DELETE FROM edits;
@@ -8,8 +9,10 @@ DELETE FROM absences;
 DELETE FROM days_off;
 DELETE FROM weekends;
 DELETE FROM absence_reasons;
+DELETE FROM edit_types;
 DELETE FROM week_days;
 DELETE FROM action_types;
+DELETE FROM control_points;
 DELETE FROM employees;
 DELETE FROM positions;
 DELETE FROM departments;
@@ -17,7 +20,7 @@ DELETE FROM departments;
 ALTER SEQUENCE PERS_SEQ RESTART WITH 10000;
 ALTER SEQUENCE SCHEDULES_SEQ RESTART WITH 10000;
 
-INSERT INTO departments (name) VALUES
+INSERT INTO departments (name, description) VALUES
   ('ООО "Рога и копыта"', 'Компания по произвдству субпродуктов.');
 
 INSERT INTO positions (position, description) VALUES

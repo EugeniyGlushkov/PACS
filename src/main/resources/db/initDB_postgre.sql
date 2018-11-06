@@ -4,6 +4,7 @@ DROP FUNCTION IF EXISTS new_absence();
 DROP TABLE IF EXISTS visitors;
 DROP TABLE IF EXISTS employee_roles;
 DROP TABLE IF EXISTS actions;
+DROP TABLE IF EXISTS point_permits;
 DROP TABLE IF EXISTS dep_schedules;
 DROP TABLE IF EXISTS emp_schedules;
 DROP TABLE IF EXISTS edits;
@@ -14,6 +15,7 @@ DROP TABLE IF EXISTS absence_reasons;
 DROP TABLE IF EXISTS edit_types;
 DROP TABLE IF EXISTS week_days;
 DROP TABLE IF EXISTS action_types;
+DROP TABLE IF EXISTS control_points;
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS positions;
 DROP TABLE IF EXISTS departments;
@@ -95,6 +97,20 @@ CREATE UNIQUE INDEX employees_unique_card_num_idx ON employees (card_num);
 CREATE UNIQUE INDEX employees_unique_emale_idx ON employees (email);
 
 /*
+Отношение "Контрольная точка" (турникет, электронный замок и т.п.)
+содержит соответственно:
+-первичный ключ;
+-серийный номер контрольной точки;
+-описание контрольной точки.
+ */
+CREATE TABLE control_points
+(
+  id          SERIAL PRIMARY KEY,
+  serial_id   VARCHAR(50) UNIQUE NOT NULL,
+  description VARCHAR NOT NULL
+);
+
+/*
 Отношение "Тип действия" (вход, выход и т.п.)
 содержит соответственно:
 -первичный ключ;
@@ -105,7 +121,7 @@ CREATE TABLE action_types
 (
   id          SERIAL PRIMARY KEY,
   action      VARCHAR(50) UNIQUE NOT NULL,
-  description VARCHAR
+  description VARCHAR NOT NULL
 );
 
 /*
@@ -116,7 +132,7 @@ CREATE TABLE action_types
  */
 CREATE TABLE week_days
 (
-  id   INTEGER PRIMARY KEY,
+  id   SMALLINT PRIMARY KEY,
   name VARCHAR UNIQUE NOT NULL
 );
 
@@ -188,8 +204,8 @@ CREATE TABLE days_off
 CREATE INDEX daysoff_depid_idx ON days_off (dep_id);
 
 /*
-Отношение "Отсутствие", период отсутствия на работе по какой-либо причине.
-Отсутствие вне существующих периодовж считаются прогулом.
+Отношение "Отсутствия", периоды отсутствия на работе по какой-либо причине.
+Отсутствие вне существующих периодов считаются прогулом.
 содержит соответственно:
 -первичный ключ;
 -id сотрудника:
@@ -225,7 +241,7 @@ CREATE INDEX abs_empid_idx ON absences (emp_id);
 CREATE TABLE edits
 (
   id          SERIAL PRIMARY KEY,
-  type_id   INTEGER NOT NULL,
+  type_id     INTEGER NOT NULL,
   emp_id      INTEGER NOT NULL,
   edit_date   TIMESTAMP DEFAULT now() NOT NULL,
   description VARCHAR NOT NULL,
@@ -235,7 +251,7 @@ CREATE TABLE edits
 
 /*
 Отношение "Расписания сотрудников", хранит расписание для конкретного
-сотрудника, если для какого либо сотрудника расписание отсутствует, то\
+сотрудника, если для какого либо сотрудника расписание отсутствует, то
 оно соответствует общему расписанию для департамента из отношения "Расписания
 департаментов"
 содержит соответственно:
@@ -292,9 +308,29 @@ CREATE TABLE dep_schedules
 CREATE UNIQUE INDEX depsched_unique_depid_idx ON dep_schedules (dep_id);
 
 /*
+Отношение "Разрешения для контрольных точек", каким сотрудникам разрешено иметь доступ к определенным
+контрольным точкам
+содержит соответственно:
+-первичный ключ;
+-id контрольной точки;
+-id сотрудника;
+Ограничение: одному сотруднику не может соответствовать несколько одинаковых контрольных точек.
+ */
+CREATE TABLE point_permits
+(
+  id         SERIAL PRIMARY KEY,
+  controlpoint_id     INTEGER NOT NULL,
+  emp_id INTEGER NOT NULL,
+  FOREIGN KEY (controlpoint_id) REFERENCES control_points (id),
+  FOREIGN KEY (emp_id) REFERENCES employees (id),
+  CONSTRAINT permits_copoint_emp_con UNIQUE (controlpoint_id, emp_id)
+);
+
+/*
 Отношение "События", хранит действия совершенные сотрудниками
 содержит соответственно:
 -первичный ключ;
+-id контрольной точки, на которой совершено действие;
 -id сотрудника, произвёвшего действие;
 -тип действия (вход, выход и т.п.);
 -время, когда было произведено действие.
@@ -303,10 +339,12 @@ CREATE UNIQUE INDEX depsched_unique_depid_idx ON dep_schedules (dep_id);
  */
 CREATE TABLE actions
 (
-  id         SERIAL PRIMARY KEY,
-  emp_id     INTEGER NOT NULL,
-  acttype_id INTEGER NOT NULL,
-  time       TIMESTAMP DEFAULT now() NOT NULL,
+  id              SERIAL PRIMARY KEY,
+  controlpoint_id INTEGER NOT NULL,
+  emp_id          INTEGER NOT NULL,
+  acttype_id      INTEGER NOT NULL,
+  time            TIMESTAMP DEFAULT now() NOT NULL,
+  FOREIGN KEY (controlpoint_id) REFERENCES control_points (id),
   FOREIGN KEY (emp_id) REFERENCES employees (id),
   FOREIGN KEY (acttype_id) REFERENCES action_types (id),
   CONSTRAINT act_emp_time_con UNIQUE (emp_id, time)
