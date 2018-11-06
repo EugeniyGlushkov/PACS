@@ -41,11 +41,13 @@ CREATE SEQUENCE SCHEDULES_SEQ START 10000;
 содержит соответственно:
 -первичный ключ;
 -название департамента, должно быть уникальным.
+-описание департамента.
 */
 CREATE TABLE departments
 (
-  id    SERIAL PRIMARY KEY,
-  name  VARCHAR(255) NOT NULL
+  id          SERIAL PRIMARY KEY,
+  name        VARCHAR(255) NOT NULL,
+  description VARCHAR NOT NULL
 );
 CREATE UNIQUE INDEX departments_unique_name_idx ON departments (name);
 

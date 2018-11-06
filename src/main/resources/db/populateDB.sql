@@ -18,7 +18,7 @@ ALTER SEQUENCE PERS_SEQ RESTART WITH 10000;
 ALTER SEQUENCE SCHEDULES_SEQ RESTART WITH 10000;
 
 INSERT INTO departments (name) VALUES
-  ('ООО "Рога и копыта"');
+  ('ООО "Рога и копыта"', 'Компания по произвдству субпродуктов.');
 
 INSERT INTO positions (position, description) VALUES
   ('Директор', 'Глава департамента.');
