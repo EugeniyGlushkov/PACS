@@ -15,7 +15,7 @@ import java.util.Objects;
 @Access(AccessType.FIELD)
 public abstract class AbstractEntity {
     /**
-     * The cpecifiec idetifier for each entity.
+     * The cpecifiec identifier for each entity.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
