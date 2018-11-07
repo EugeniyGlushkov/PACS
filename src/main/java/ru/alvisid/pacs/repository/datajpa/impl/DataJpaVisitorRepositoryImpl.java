@@ -11,6 +11,9 @@ import java.util.List;
 
 /**
  * DataJpa implementation of the VisitorRepository.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 @Repository
 public class DataJpaVisitorRepositoryImpl implements VisitorRepository {

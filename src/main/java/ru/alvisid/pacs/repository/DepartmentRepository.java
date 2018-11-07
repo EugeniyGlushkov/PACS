@@ -1,7 +1,7 @@
 package ru.alvisid.pacs.repository;
 
 
-import org.acs.domain.model.Department;
+import ru.alvisid.pacs.model.Department;
 
 import java.util.List;
 

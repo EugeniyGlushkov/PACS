@@ -12,6 +12,9 @@ import java.util.List;
 
 /**
  * JpaRepository interface for schedule.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 public interface CrudScheduleRepository extends JpaRepository<Schedule, Long> {
     /**

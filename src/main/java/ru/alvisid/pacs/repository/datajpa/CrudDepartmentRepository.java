@@ -12,6 +12,9 @@ import java.util.List;
 
 /**
  * JpaRepository interface for department.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 public interface CrudDepartmentRepository extends JpaRepository<Department, Long> {
     /**

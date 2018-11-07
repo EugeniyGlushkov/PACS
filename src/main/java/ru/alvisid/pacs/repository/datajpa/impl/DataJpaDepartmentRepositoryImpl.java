@@ -1,8 +1,8 @@
 package ru.alvisid.pacs.repository.datajpa.impl;
 
-import org.acs.domain.model.Department;
-import org.acs.domain.repository.DepartmentRepository;
-import org.acs.domain.repository.datajpa.CrudDepartmentRepository;
+import ru.alvisid.pacs.model.Department;
+import ru.alvisid.pacs.repository.DepartmentRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudDepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
@@ -11,6 +11,9 @@ import java.util.List;
 
 /**
  * DataJpa implementation of the DepartmentRepository.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 @Repository
 public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {

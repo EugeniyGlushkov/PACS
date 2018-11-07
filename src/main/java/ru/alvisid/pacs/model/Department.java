@@ -1,6 +1,16 @@
 package ru.alvisid.pacs.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "departments", uniqueConstraints =
+@UniqueConstraint(columnNames = "name", name = "departments_unique_name_idx"))
 public class Department extends AbstractEntity {
+    @NotBlank
+    @Size(min = 1, max = 255)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     public String getName() {
@@ -27,18 +37,20 @@ public class Department extends AbstractEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o instanceof Department) {
-            Department that = (Department) o;
-
-            if (!name.equals(that.name)) {
-                return false;
-            }
-
-            return super.equals(o);
+        if (this == o) {
+            return true;
         }
 
-        return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        Department that = (Department) o;
+
+        return name.equals(that.name);
     }
 }

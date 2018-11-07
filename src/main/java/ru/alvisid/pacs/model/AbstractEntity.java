@@ -1,11 +1,39 @@
 package ru.alvisid.pacs.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Abstraction for entities wich have id and description.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ */
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractEntity {
+    /**
+     * The cpecifiec idetifier for each entity.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Integer id;
+
+    /**
+     * The description of the entity.
+     */
+    @NotBlank
+    @Size(min = 2)
+    @Column(name = "description", nullable = false)
     protected String description;
 
+    /**
+     * A getter for the cpecifiec id.
+     *
+     * @return the value of the cpecifiec id.
+     */
     public Integer getId() {
         return id;
     }
@@ -58,5 +86,11 @@ public abstract class AbstractEntity {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Entity %s (%s, '%s')",
+                getClass().getName(), id, description);
     }
 }

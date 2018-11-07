@@ -12,6 +12,9 @@ import java.util.List;
 
 /**
  * JpaRepository interface for visitor.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 public interface CrudVisitorRepository extends JpaRepository<Visitor, Long> {
     /**

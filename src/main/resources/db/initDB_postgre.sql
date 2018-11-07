@@ -86,9 +86,9 @@ CREATE TABLE employees
   dep_id      INTEGER NOT NULL,
   pos_id      INTEGER NOT NULL,
   card_num    INTEGER NOT NULL,
-  last_name   VARCHAR(255) NOT NULL,
-  first_name  VARCHAR(255) NOT NULL,
-  second_name VARCHAR(255) NOT NULL,
+  last_name   VARCHAR(100) NOT NULL,
+  first_name  VARCHAR(100) NOT NULL,
+  second_name VARCHAR(100) NOT NULL,
   email       VARCHAR,
   FOREIGN KEY (dep_id) REFERENCES departments (id),
   FOREIGN KEY (pos_id) REFERENCES positions (id)
@@ -384,10 +384,10 @@ CREATE TABLE employee_roles
 CREATE TABLE visitors
 (
   id          INTEGER PRIMARY KEY DEFAULT nextval('PERS_SEQ'),
-  temp_num    VARCHAR(255) UNIQUE NOT NULL,
-  last_name   VARCHAR(255) NOT NULL,
-  first_name  VARCHAR(255) NOT NULL,
-  second_name VARCHAR(255) NOT NULL,
+  temp_num    VARCHAR(20) UNIQUE NOT NULL,
+  last_name   VARCHAR(100) NOT NULL,
+  first_name  VARCHAR(100) NOT NULL,
+  second_name VARCHAR(100) NOT NULL,
   description VARCHAR NOT NULL,
   enter_time  TIMESTAMP,
   exit_time   TIMESTAMP

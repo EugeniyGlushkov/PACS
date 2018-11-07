@@ -12,6 +12,9 @@ import java.util.List;
 
 /**
  * JpaRepository interface for worker.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 public interface CrudWorkerRepository extends JpaRepository<Worker, Long> {
     /**

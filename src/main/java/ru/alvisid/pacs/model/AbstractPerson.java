@@ -1,13 +1,33 @@
 package ru.alvisid.pacs.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractPerson {
     public static final int START_SEQ = 10000;
 
+    @Id
+    @SequenceGenerator(name = "PERS_SEQ", sequenceName = "PERS_SEQ", allocationSize = 1, initialValue = START_SEQ)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PERS_SEQ")
     protected Integer id;
+
+    @NotBlank
+    @Size(min = 2, max = 100)
+    @Column(name = "last_name", nullable = false)
     protected String lastName;
+
+    @NotBlank
+    @Size(min = 2, max = 100)
+    @Column(name = "first_name", nullable = false)
     protected String firstName;
+
+    @NotBlank
+    @Size(min = 2, max = 100)
+    @Column(name = "second_name", nullable = false)
     protected String secondtName;
 
     public Integer getId() {
@@ -86,5 +106,11 @@ public abstract class AbstractPerson {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Person %s (%s, '%s %s %s')",
+                getClass().getName(), id, lastName, firstName, secondtName);
     }
 }

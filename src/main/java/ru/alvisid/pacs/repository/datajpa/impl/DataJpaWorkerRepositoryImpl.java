@@ -11,6 +11,9 @@ import java.util.List;
 
 /**
  * DataJpa implementation of the WorkerRepository.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 @Repository
 public class DataJpaWorkerRepositoryImpl implements WorkerRepository {

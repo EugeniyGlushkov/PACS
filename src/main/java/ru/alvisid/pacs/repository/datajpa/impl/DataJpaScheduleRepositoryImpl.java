@@ -10,6 +10,9 @@ import java.util.List;
 
 /**
  * DataJpa implementation of the ScheduleRepository.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 @Repository
 public class DataJpaScheduleRepositoryImpl implements ScheduleRepository {
