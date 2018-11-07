@@ -10,20 +10,6 @@ public abstract class AbstractPerson {
     protected String firstName;
     protected String secondtName;
 
-    public AbstractPerson() {
-    }
-
-    public AbstractPerson(String lastName, String firstName, String secondtName) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.secondtName = secondtName;
-    }
-
-    public AbstractPerson(Integer id, String lastName, String firstName, String secondtName) {
-        this(lastName, firstName, secondtName);
-        this.id = id;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -60,17 +46,41 @@ public abstract class AbstractPerson {
         return Objects.isNull(id);
     }
 
+    public AbstractPerson() {
+    }
+
+    public AbstractPerson(String lastName, String firstName, String secondtName) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.secondtName = secondtName;
+    }
+
+    public AbstractPerson(Integer id, String lastName, String firstName, String secondtName) {
+        this(lastName, firstName, secondtName);
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        AbstractPerson that = (AbstractPerson) o;
+        if (o instanceof AbstractPerson) {
+            AbstractPerson that = (AbstractPerson) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        return secondtName != null ? secondtName.equals(that.secondtName) : that.secondtName == null;
+            if (id != null ? !id.equals(that.id) : that.id != null) {
+                return false;
+            }
+            if (!lastName.equals(that.lastName)) {
+                return false;
+            }
+            if (!firstName.equals(that.firstName)) {
+                return false;
+            }
+
+            return secondtName.equals(that.secondtName);
+        }
+
+        return false;
     }
 
     @Override
