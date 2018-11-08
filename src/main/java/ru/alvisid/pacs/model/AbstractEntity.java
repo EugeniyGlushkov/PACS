@@ -15,7 +15,7 @@ import java.util.Objects;
 @Access(AccessType.FIELD)
 public abstract class AbstractEntity {
     /**
-     * The cpecifiec identifier for each entity.
+     * The cpecifiec identifier for each entity in database.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,42 +30,93 @@ public abstract class AbstractEntity {
     protected String description;
 
     /**
-     * A getter for the cpecifiec id.
+     * Gets the cpecifiec id.
      *
-     * @return the value of the cpecifiec id.
+     * @return the cpecifiec id.
      */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * Gets the description of the entity.
+     *
+     * @return the description of the entity.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets the cpecifiec id.
+     *
+     * @param id the cpecifiec id.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Sets the description of the entity.
+     *
+     * @param description the description of the entity.
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Returnes {@code true} if id is null.
+     *
+     * @return {@code true} if id is null.
+     */
     public boolean isNew() {
         return Objects.isNull(id);
     }
 
+    /**
+     * Default constructor.
+     *
+     * @see AbstractEntity#AbstractEntity(String)
+     * @see AbstractEntity#AbstractEntity(Integer, String)
+     */
     public AbstractEntity() {
     }
 
+    /**
+     * Constructs entity and sets description. Id will be null.
+     *
+     * @param description the description of the entity.
+     * @see AbstractEntity#AbstractEntity()
+     * @see AbstractEntity#AbstractEntity(Integer, String)
+     */
     public AbstractEntity(String description) {
         this.description = description;
     }
 
+    /**
+     * Constructs entity and sets description, id.
+     *
+     * @param id the cpecifiec id.
+     * @param description the description of the entity.
+     * @see AbstractEntity#AbstractEntity()
+     * @see AbstractEntity#AbstractEntity(String)
+     */
     public AbstractEntity(Integer id, String description) {
         this(description);
         this.id = id;
     }
 
+    /**
+     * Compares this object to the specified object.
+     * The result is {@code true} if and only if the argument is not null
+     * and is an AbstractEntity object or its heir
+     * that contains the same id and description values as this object.
+     *
+     *
+     * @param o the specified object.
+     * @return {@code true} if the objects are the same; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,11 +134,21 @@ public abstract class AbstractEntity {
         return false;
     }
 
+    /**
+     * Returns a hash code for this Entity.
+     *
+     * @return the hash code for this Entity.
+     */
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
 
+    /**
+     * Returns a String object representing this entity's value.
+     *
+     * @return the String object representing this entity's value.
+     */
     @Override
     public String toString() {
         return String.format("Entity %s (%s, '%s')",
