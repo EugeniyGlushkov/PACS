@@ -30,9 +30,9 @@ public abstract class AbstractEntity {
     protected String description;
 
     /**
-     * Gets the cpecifiec id.
+     * Gets the specifiec id.
      *
-     * @return the cpecifiec id.
+     * @return the specifiec id.
      */
     public Integer getId() {
         return id;
@@ -48,9 +48,9 @@ public abstract class AbstractEntity {
     }
 
     /**
-     * Sets the cpecifiec id.
+     * Sets the specifiec id.
      *
-     * @param id the cpecifiec id.
+     * @param id the specifiec id.
      */
     public void setId(Integer id) {
         this.id = id;
@@ -75,7 +75,7 @@ public abstract class AbstractEntity {
     }
 
     /**
-     * Default constructor.
+     * Initializes a newly created object with null id and description values.
      *
      * @see AbstractEntity#AbstractEntity(String)
      * @see AbstractEntity#AbstractEntity(Integer, String)
@@ -97,7 +97,7 @@ public abstract class AbstractEntity {
     /**
      * Constructs entity and sets description, id.
      *
-     * @param id the cpecifiec id.
+     * @param id the specifiec id.
      * @param description the description of the entity.
      * @see AbstractEntity#AbstractEntity()
      * @see AbstractEntity#AbstractEntity(String)
