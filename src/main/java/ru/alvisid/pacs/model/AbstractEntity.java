@@ -23,6 +23,8 @@ public abstract class AbstractEntity {
 
     /**
      * The description of the entity.
+     * Min value is 2 character.
+     * Must be non null and has least one non space symbol.
      */
     @NotBlank
     @Size(min = 2)

@@ -1,6 +1,6 @@
 package ru.alvisid.pacs.repository.datajpa;
 
-import org.acs.domain.model.Department;
+import ru.alvisid.pacs.model.Department;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * JpaRepository interface for department.
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface CrudDepartmentRepository extends JpaRepository<Department, Long> {
+public interface CrudDepartmentRepository extends JpaRepository <Department, Integer> {
     /**
      * Saves a given department.
      *
@@ -36,16 +37,16 @@ public interface CrudDepartmentRepository extends JpaRepository<Department, Long
     @Transactional
     @Modifying
     @Query("DELETE FROM Department d WHERE d.id =: id")
-    int delete(@Param("id") long id);
+    int delete(@Param("id") int id);
 
     /**
      * Returnes a department by given id.
      *
-     * @param aLong id of the department to return.
+     * @param integer id of the department to return.
      * @return a department by given id.
      */
     @Override
-    Department findOne(Long aLong);
+    Optional <Department> findById(Integer integer);
 
     /**
      * Returnes all departments sorted with given sort.
@@ -54,5 +55,5 @@ public interface CrudDepartmentRepository extends JpaRepository<Department, Long
      * @return list of all departments.
      */
     @Override
-    List<Department> findAll(Sort sort);
+    List <Department> findAll(Sort sort);
 }

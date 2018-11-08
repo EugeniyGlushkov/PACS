@@ -57,7 +57,7 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
      */
     @Override
     public Department get(long id) {
-        return crudRepository.getOne(id);
+        return crudRepository.findById(id).orElse(null);
     }
 
     /**

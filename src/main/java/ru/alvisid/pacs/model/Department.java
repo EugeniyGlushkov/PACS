@@ -116,8 +116,8 @@ public class Department extends AbstractEntity {
     public String toString() {
         return "Department{" +
                 "id=" + id +
-                ", description='" + description + '\'' +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
