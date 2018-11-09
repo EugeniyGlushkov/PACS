@@ -1,10 +1,12 @@
-DROP TRIGGER IF EXISTS chek_abs ON absences;
+DROP TRIGGER IF EXISTS chek_abs
+ON absences;
 DROP FUNCTION IF EXISTS new_absence();
 
 DROP TABLE IF EXISTS visitors;
 DROP TABLE IF EXISTS employee_roles;
 DROP TABLE IF EXISTS actions;
 DROP TABLE IF EXISTS point_permits;
+DROP TABLE IF EXISTS point_actions;
 DROP TABLE IF EXISTS dep_schedules;
 DROP TABLE IF EXISTS emp_schedules;
 DROP TABLE IF EXISTS edits;
@@ -49,9 +51,10 @@ CREATE TABLE departments
 (
   id          SERIAL PRIMARY KEY,
   name        VARCHAR(255) NOT NULL,
-  description VARCHAR NOT NULL
+  description VARCHAR      NOT NULL
 );
-CREATE UNIQUE INDEX departments_unique_name_idx ON departments (name);
+CREATE UNIQUE INDEX departments_unique_name_idx
+  ON departments (name);
 
 /*
 Отношение "Должности"
@@ -64,7 +67,7 @@ CREATE TABLE positions
 (
   id          SERIAL PRIMARY KEY,
   position    VARCHAR(100) UNIQUE NOT NULL,
-  description VARCHAR NOT NULL
+  description VARCHAR             NOT NULL
 );
 
 /*
@@ -82,10 +85,10 @@ CREATE TABLE positions
  */
 CREATE TABLE employees
 (
-  id          INTEGER PRIMARY KEY  DEFAULT  nextval('PERS_SEQ'),
-  dep_id      INTEGER NOT NULL,
-  pos_id      INTEGER NOT NULL,
-  card_num    INTEGER NOT NULL,
+  id          INTEGER PRIMARY KEY  DEFAULT nextval('PERS_SEQ'),
+  dep_id      INTEGER      NOT NULL,
+  pos_id      INTEGER      NOT NULL,
+  card_num    INTEGER      NOT NULL,
   last_name   VARCHAR(100) NOT NULL,
   first_name  VARCHAR(100) NOT NULL,
   second_name VARCHAR(100) NOT NULL,
@@ -93,8 +96,10 @@ CREATE TABLE employees
   FOREIGN KEY (dep_id) REFERENCES departments (id),
   FOREIGN KEY (pos_id) REFERENCES positions (id)
 );
-CREATE UNIQUE INDEX employees_unique_card_num_idx ON employees (card_num);
-CREATE UNIQUE INDEX employees_unique_emale_idx ON employees (email);
+CREATE UNIQUE INDEX employees_unique_card_num_idx
+  ON employees (card_num);
+CREATE UNIQUE INDEX employees_unique_emale_idx
+  ON employees (email);
 
 /*
 Отношение "Контрольная точка" (турникет, электронный замок и т.п.)
@@ -107,7 +112,7 @@ CREATE TABLE control_points
 (
   id          SERIAL PRIMARY KEY,
   serial_id   VARCHAR(50) UNIQUE NOT NULL,
-  description VARCHAR NOT NULL
+  description VARCHAR            NOT NULL
 );
 
 /*
@@ -121,7 +126,26 @@ CREATE TABLE action_types
 (
   id          SERIAL PRIMARY KEY,
   action      VARCHAR(50) UNIQUE NOT NULL,
-  description VARCHAR NOT NULL
+  description VARCHAR            NOT NULL
+);
+
+/*
+Отношение "Действия на точке", допустимые действия для
+каждой конкретной точки.
+содержит соответственно:
+-первичный ключ;
+-id контрольной точки;
+-id действия.
+Ограничение: каждой точке может соответствовать только один тип действия.
+ */
+CREATE TABLE point_actions
+(
+  id              SERIAL PRIMARY KEY,
+  controlpoint_id INTEGER NOT NULL,
+  acttype_id      INTEGER NOT NULL,
+  FOREIGN KEY (controlpoint_id) REFERENCES control_points (id),
+  FOREIGN KEY (acttype_id) REFERENCES action_types (id),
+  CONSTRAINT conpoint_acttype_idx UNIQUE (controlpoint_id, acttype_id)
 );
 
 /*
@@ -148,7 +172,7 @@ CREATE TABLE edit_types
 (
   id          SERIAL PRIMARY KEY,
   edit_type   VARCHAR(255) UNIQUE NOT NULL,
-  description VARCHAR NOT NULL
+  description VARCHAR             NOT NULL
 );
 
 /*
@@ -162,7 +186,7 @@ CREATE TABLE absence_reasons
 (
   id          SERIAL PRIMARY KEY,
   reason      VARCHAR(255) UNIQUE NOT NULL,
-  description VARCHAR NOT NULL
+  description VARCHAR             NOT NULL
 );
 
 /*
@@ -182,7 +206,8 @@ CREATE TABLE weekends
   FOREIGN KEY (weekday_id) REFERENCES week_days (id),
   CONSTRAINT depid_weekdayid_idx UNIQUE (dep_id, weekday_id)
 );
-CREATE INDEX weekends_depid_idx ON weekends (dep_id);
+CREATE INDEX weekends_depid_idx
+  ON weekends (dep_id);
 
 /*
 Отношение "Нерабочие и праздничные дни", определяет непериодические нерабочие дни.
@@ -197,11 +222,12 @@ CREATE TABLE days_off
 (
   id     INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
   dep_id INTEGER NOT NULL,
-  date   DATE NOT NULL,
+  date   DATE    NOT NULL,
   FOREIGN KEY (dep_id) REFERENCES departments (id) ON DELETE CASCADE,
   CONSTRAINT depid_daysoff_idx UNIQUE (dep_id, date)
 );
-CREATE INDEX daysoff_depid_idx ON days_off (dep_id);
+CREATE INDEX daysoff_depid_idx
+  ON days_off (dep_id);
 
 /*
 Отношение "Отсутствия", периоды отсутствия на работе по какой-либо причине.
@@ -220,14 +246,15 @@ CREATE TABLE absences
   id            SERIAL PRIMARY KEY,
   emp_id        INTEGER NOT NULL,
   reason_id     INTEGER NOT NULL,
-  start_absence DATE NOT NULL,
-  end_absence   DATE NOT NULL,
+  start_absence DATE    NOT NULL,
+  end_absence   DATE    NOT NULL,
   description   VARCHAR NOT NULL,
   FOREIGN KEY (emp_id) REFERENCES employees (id),
   FOREIGN KEY (reason_id) REFERENCES absence_reasons (id),
   CONSTRAINT abs_start_end_con CHECK (start_absence < end_absence)
 );
-CREATE INDEX abs_empid_idx ON absences (emp_id);
+CREATE INDEX abs_empid_idx
+  ON absences (emp_id);
 
 /*
 Отошение "Правки", хранит историю изменений (редактирование, удаление, добавление)
@@ -241,10 +268,10 @@ CREATE INDEX abs_empid_idx ON absences (emp_id);
 CREATE TABLE edits
 (
   id          SERIAL PRIMARY KEY,
-  type_id     INTEGER NOT NULL,
-  emp_id      INTEGER NOT NULL,
+  type_id     INTEGER                 NOT NULL,
+  emp_id      INTEGER                 NOT NULL,
   edit_date   TIMESTAMP DEFAULT now() NOT NULL,
-  description VARCHAR NOT NULL,
+  description VARCHAR                 NOT NULL,
   FOREIGN KEY (type_id) REFERENCES edit_types (id),
   FOREIGN KEY (emp_id) REFERENCES employees (id)
 );
@@ -277,7 +304,8 @@ CREATE TABLE emp_schedules
                                            AND start_lunch < end_lunch
                                            AND end_lunch < end_work)
 );
-CREATE UNIQUE INDEX empsched_unique_empid_idx ON emp_schedules (emp_id);
+CREATE UNIQUE INDEX empsched_unique_empid_idx
+  ON emp_schedules (emp_id);
 
 /*
 Отношение "Расписание департамента", действует для всех сотрудников у когторых
@@ -305,52 +333,49 @@ CREATE TABLE dep_schedules
                                            AND start_lunch < end_lunch
                                            AND end_lunch < end_work)
 );
-CREATE UNIQUE INDEX depsched_unique_depid_idx ON dep_schedules (dep_id);
+CREATE UNIQUE INDEX depsched_unique_depid_idx
+  ON dep_schedules (dep_id);
 
 /*
-Отношение "Разрешения для контрольных точек", каким сотрудникам разрешено иметь доступ к определенным
-контрольным точкам
+Отношение "Разрешения для контрольных точек", какие действия разрешены
+данному сотруднику на данной точке
 содержит соответственно:
 -первичный ключ;
--id контрольной точки;
+-id действия, допустимого на данной точке;
 -id сотрудника;
 Ограничение: одному сотруднику не может соответствовать несколько одинаковых контрольных точек.
  */
 CREATE TABLE point_permits
 (
-  id         SERIAL PRIMARY KEY,
-  controlpoint_id     INTEGER NOT NULL,
-  emp_id INTEGER NOT NULL,
-  FOREIGN KEY (controlpoint_id) REFERENCES control_points (id),
+  id          SERIAL PRIMARY KEY,
+  pointact_id INTEGER NOT NULL,
+  emp_id      INTEGER NOT NULL,
+  FOREIGN KEY (pointact_id) REFERENCES point_actions (id),
   FOREIGN KEY (emp_id) REFERENCES employees (id),
-  CONSTRAINT permits_copoint_emp_con UNIQUE (controlpoint_id, emp_id)
+  CONSTRAINT permits_copoint_emp_con UNIQUE (pointact_id, emp_id)
 );
 
 /*
 Отношение "События", хранит действия совершенные сотрудниками
 содержит соответственно:
 -первичный ключ;
--id контрольной точки, на которой совершено действие;
--id сотрудника, произвёвшего действие;
--тип действия (вход, выход и т.п.);
+-id разрешенного сотруднику действия на данной точке;
 -время, когда было произведено действие.
-Ограничение: одному времени не может соответствовать несколько действий для
+Ограничение: одному времени не может соответствовать несколько одинаковых действий для
 одного сотрудника.
  */
 CREATE TABLE actions
 (
-  id              SERIAL PRIMARY KEY,
-  controlpoint_id INTEGER NOT NULL,
-  emp_id          INTEGER NOT NULL,
-  acttype_id      INTEGER NOT NULL,
-  time            TIMESTAMP DEFAULT now() NOT NULL,
-  FOREIGN KEY (controlpoint_id) REFERENCES control_points (id),
-  FOREIGN KEY (emp_id) REFERENCES employees (id),
-  FOREIGN KEY (acttype_id) REFERENCES action_types (id),
-  CONSTRAINT act_emp_time_con UNIQUE (emp_id, time)
+  id             SERIAL PRIMARY KEY,
+  pointpermit_id INTEGER                 NOT NULL,
+  time           TIMESTAMP DEFAULT now() NOT NULL,
+  FOREIGN KEY (pointpermit_id) REFERENCES point_permits (id),
+  CONSTRAINT act_emp_time_con UNIQUE (pointpermit_id, time)
 );
-CREATE INDEX act_empid_idx ON actions (emp_id);
-CREATE INDEX act_time_idx ON actions (time);
+CREATE INDEX act_pointpermit_id_idx
+  ON actions (pointpermit_id);
+CREATE INDEX act_time_idx
+  ON actions (time);
 
 /*
 Отношение "Роли сотрудников", хранит роли определяющие права доступа к системе
@@ -362,7 +387,7 @@ CREATE INDEX act_time_idx ON actions (time);
  */
 CREATE TABLE employee_roles
 (
-  emp_id INTEGER NOT NULL,
+  emp_id INTEGER      NOT NULL,
   role   VARCHAR(255) NOT NULL,
   FOREIGN KEY (emp_id) REFERENCES employees (id),
   CONSTRAINT employee_roles_con UNIQUE (emp_id, role)
@@ -385,14 +410,15 @@ CREATE TABLE visitors
 (
   id          INTEGER PRIMARY KEY DEFAULT nextval('PERS_SEQ'),
   temp_num    VARCHAR(20) UNIQUE NOT NULL,
-  last_name   VARCHAR(100) NOT NULL,
-  first_name  VARCHAR(100) NOT NULL,
-  second_name VARCHAR(100) NOT NULL,
-  description VARCHAR NOT NULL,
+  last_name   VARCHAR(100)       NOT NULL,
+  first_name  VARCHAR(100)       NOT NULL,
+  second_name VARCHAR(100)       NOT NULL,
+  description VARCHAR            NOT NULL,
   enter_time  TIMESTAMP,
   exit_time   TIMESTAMP
 );
-CREATE INDEX visitors_names_idx ON visitors (last_name, first_name, second_name);
+CREATE INDEX visitors_names_idx
+  ON visitors (last_name, first_name, second_name);
 
 /*
 Функция для проверки того, что добавляемый интервал времени отсутствия не пересекается
@@ -402,20 +428,20 @@ CREATE INDEX visitors_names_idx ON visitors (last_name, first_name, second_name)
 CREATE FUNCTION new_absence()
   RETURNS TRIGGER AS
 $chek_abs$
-  BEGIN
+BEGIN
   IF EXISTS(
-            SELECT *
-            FROM absences a
-            WHERE a.emp_id = NEW.emp_id
-              AND
+      SELECT *
+      FROM absences a
+      WHERE a.emp_id = NEW.emp_id
+            AND
             ((NEW.start_absence >= a.start_absence AND NEW.start_absence <= a.end_absence)
-            OR (NEW.end_absence >= a.start_absence AND NEW.end_absence <= a.end_absence)
+             OR (NEW.end_absence >= a.start_absence AND NEW.end_absence <= a.end_absence)
             ))
-    THEN
+  THEN
     RAISE EXCEPTION 'Impossible insert, because new data intesepts with old data!';
   END IF;
   RETURN NEW;
-  END
+END
 $chek_abs$ LANGUAGE plpgsql;
 
 /*
@@ -423,7 +449,7 @@ $chek_abs$ LANGUAGE plpgsql;
 и вызывающий функцию new_absence().
  */
 CREATE TRIGGER chek_abs
-  BEFORE INSERT
+BEFORE INSERT
   ON absences
-  FOR EACH ROW
-  EXECUTE PROCEDURE new_absence();
+FOR EACH ROW
+EXECUTE PROCEDURE new_absence();
