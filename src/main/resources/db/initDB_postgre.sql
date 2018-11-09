@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS positions;
 DROP TABLE IF EXISTS departments;
 
 DROP SEQUENCE IF EXISTS PERS_SEQ;
+DROP SEQUENCE IF EXISTS FREEDAYS_SEQ;
 DROP SEQUENCE IF EXISTS SCHEDULES_SEQ;
 
 /*
@@ -35,10 +36,15 @@ CREATE SEQUENCE PERS_SEQ START 10000;
 Последовательность для первичных ключей отношений
 -"Расписание департаментов"
 -"Расписание сотрудников"
+ */
+CREATE SEQUENCE SCHEDULES_SEQ START 10000;
+
+/**
+Последовательность для первичных ключей отношений
 -"Выходные"
 -"Нерабочие и праздничные дни"
  */
-CREATE SEQUENCE SCHEDULES_SEQ START 10000;
+CREATE SEQUENCE FREEDAYS_SEQ START 10000;
 
 /*
 Отношение "Департаменты"
@@ -199,7 +205,7 @@ CREATE TABLE absence_reasons
  */
 CREATE TABLE weekends
 (
-  id         INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
+  id         INTEGER PRIMARY KEY DEFAULT nextval('FREEDAYS_SEQ'),
   dep_id     INTEGER NOT NULL,
   weekday_id INTEGER NOT NULL,
   FOREIGN KEY (dep_id) REFERENCES departments (id) ON DELETE CASCADE,
@@ -220,7 +226,7 @@ CREATE INDEX weekends_depid_idx
  */
 CREATE TABLE days_off
 (
-  id     INTEGER PRIMARY KEY DEFAULT nextval('SCHEDULES_SEQ'),
+  id     INTEGER PRIMARY KEY DEFAULT nextval('FREEDAYS_SEQ'),
   dep_id INTEGER NOT NULL,
   date   DATE    NOT NULL,
   FOREIGN KEY (dep_id) REFERENCES departments (id) ON DELETE CASCADE,

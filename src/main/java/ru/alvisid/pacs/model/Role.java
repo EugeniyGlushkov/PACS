@@ -2,6 +2,9 @@ package ru.alvisid.pacs.model;
 
 /**
  *Roles by which users get rights.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 public enum Role {
     /**
