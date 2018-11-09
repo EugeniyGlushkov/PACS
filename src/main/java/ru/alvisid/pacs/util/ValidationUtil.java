@@ -30,7 +30,7 @@ public class ValidationUtil {
     /**
      * Returns a checked object, throws the NotFoundException if the checked object is null.
      *
-     * @param object the checked object.
+     * @param object  the checked object.
      * @param message message for thrown NotFoundException..
      * @return the checked object.
      * @throws NotFoundException if the checked object is null.
@@ -45,7 +45,7 @@ public class ValidationUtil {
      * Throws the NotFoundException if a found is false.
      *
      * @param found shows availability the entity in the DB.
-     * @param id specific id of the entity.
+     * @param id    specific id of the entity.
      * @throws NotFoundException the exception is thrown when entity is not found.
      * @see ValidationUtil#checkNotFoundWithId(Object, int).
      */
@@ -57,7 +57,7 @@ public class ValidationUtil {
      * Returns a checked object, throws the NotFoundException if the checked object is null.
      *
      * @param object the checked object.
-     * @param id specific id of the entity.
+     * @param id     specific id of the entity.
      * @return the checked object.
      * @throws NotFoundException if the checked object is null.
      * @see ValidationUtil#checkNotFoundWithId(boolean, int).

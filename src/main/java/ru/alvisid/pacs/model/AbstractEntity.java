@@ -99,7 +99,7 @@ public abstract class AbstractEntity {
     /**
      * Constructs entity and sets description, id.
      *
-     * @param id the specifiec id.
+     * @param id          the specifiec id.
      * @param description the description of the entity.
      * @see AbstractEntity#AbstractEntity()
      * @see AbstractEntity#AbstractEntity(String)
@@ -114,7 +114,6 @@ public abstract class AbstractEntity {
      * The result is {@code true} if and only if the argument is not null
      * and is an AbstractEntity object or its heir
      * that contains the same id and description values as this object.
-     *
      *
      * @param o the specified object.
      * @return {@code true} if the objects are the same; {@code false} otherwise.
@@ -147,9 +146,9 @@ public abstract class AbstractEntity {
     }
 
     /**
-     * Returns a String object representing this entity's value.
+     * Returns a String object representing this entity's object.
      *
-     * @return the String object representing this entity's value.
+     * @return the String object representing this entity's object.
      */
     @Override
     public String toString() {

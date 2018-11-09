@@ -17,7 +17,7 @@ public class Department extends AbstractEntity {
     /**
      * The name of the department.
      * Min value is 1 character, max value is 255 characters.
-     * Must be non null and has least one non space symbol.
+     * Must be non null, unique and has least one non space symbol.
      */
     @NotBlank
     @Size(min = 1, max = 255)
@@ -56,7 +56,7 @@ public class Department extends AbstractEntity {
      * Constructs a <b>Department</b> object with specified desciption, name and null id value.
      *
      * @param description the departmen's description.
-     * @param name the department's name.
+     * @param name        the department's name.
      * @see Department#Department()
      * @see Department#Department(Integer, String, String)
      */
@@ -68,9 +68,9 @@ public class Department extends AbstractEntity {
     /**
      * Constructs a <b>Department</b> object with specified id, desciption and name values.
      *
-     * @param id the specifiec identifier.
+     * @param id          the specifiec identifier.
      * @param description the departmen's description.
-     * @param name the department's name.
+     * @param name        the department's name.
      * @see Department#Department()
      * @see Department#Department(String, String)
      */
@@ -108,9 +108,9 @@ public class Department extends AbstractEntity {
     }
 
     /**
-     * Returns a String object representing this <b>Department</b>'s value.
+     * Returns a String object representing this <b>Department</b>'s object.
      *
-     * @return the String object representing this <b>Department</b>'s value.
+     * @return the String object representing this <b>Department</b>'s object.
      */
     @Override
     public String toString() {
