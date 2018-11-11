@@ -63,9 +63,10 @@ public class Employee extends AbstractPerson {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
 
         Employee employee = (Employee) o;
+
+        if (!super.equals(o)) return false;
 
         if (!department.equals(employee.department)) return false;
         if (!position.equals(employee.position)) return false;

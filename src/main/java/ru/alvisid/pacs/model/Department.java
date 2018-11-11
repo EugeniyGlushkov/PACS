@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -94,15 +96,15 @@ public class Department extends AbstractEntity {
             return true;
         }
 
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
+        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
             return false;
         }
 
         Department that = (Department) o;
+
+        if (!super.equals(that)) {
+            return false;
+        }
 
         return name.equals(that.name);
     }

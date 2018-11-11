@@ -99,13 +99,13 @@ public class Position extends AbstractEntity {
             return false;
         }
 
-        if (!super.equals(o)) {
+        Position position = (Position) o;
+
+        if (!super.equals(position)) {
             return false;
         }
 
-        Position position1 = (Position) o;
-
-        return position.equals(position1.position);
+        return position.equals(position.position);
     }
 
     /**
