@@ -150,12 +150,12 @@ CREATE TABLE point_actions
 Отношение-справочник "Дни недели"
 содержит соответственно:
 -первичный ключ;
--навание дня недели, должно быть уникальным.
+-код (навание дня недели), должно быть уникальным.
  */
 CREATE TABLE week_days
 (
   id   SMALLINT PRIMARY KEY,
-  name VARCHAR UNIQUE NOT NULL
+  code VARCHAR UNIQUE NOT NULL
 );
 
 /*

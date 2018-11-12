@@ -140,7 +140,7 @@ public abstract class AbstractPerson {
     }
 
     /**
-     * Initializes a newly created object with null null fields.
+     * Initializes a newly created object with null fields.
      *
      * @see AbstractPerson#AbstractPerson(String, String, String)
      * @see AbstractPerson#AbstractPerson(Integer, String, String, String)
@@ -179,7 +179,7 @@ public abstract class AbstractPerson {
     /**
      * Compares this object to the specified object.
      * The result is {@code true} if and only if the argument is not null
-     * and is an AbstractPerson object or its heir
+     * and is an <b>AbstractPerson</b>'s heir
      * that contains the same id, last name, first name
      * and second name values as this object.
      *

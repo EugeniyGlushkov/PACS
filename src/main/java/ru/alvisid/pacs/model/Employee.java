@@ -64,9 +64,9 @@ public class Employee extends AbstractPerson {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Employee employee = (Employee) o;
-
         if (!super.equals(o)) return false;
+
+        Employee employee = (Employee) o;
 
         if (!department.equals(employee.department)) return false;
         if (!position.equals(employee.position)) return false;

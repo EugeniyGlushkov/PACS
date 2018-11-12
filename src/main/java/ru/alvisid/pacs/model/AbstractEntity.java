@@ -112,7 +112,7 @@ public abstract class AbstractEntity {
     /**
      * Compares this object to the specified object.
      * The result is {@code true} if and only if the argument is not null
-     * and is an AbstractEntity object or its heir
+     * and is an <b>AbstractEntity</b>'s heir
      * that contains the same id and description values as this object.
      *
      * @param o the specified object.

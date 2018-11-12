@@ -6690,7 +6690,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+name: VARCHAR",
+											"text": "+code: VARCHAR",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7009,7 +7009,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+\"pkey\" id: INTEGER",
+											"text": "+\"pkey\" id: SERIAL",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7807,7 +7807,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+\"pkey\" id: INTEGER",
+											"text": "+\"pkey\" id: SERIAL",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17866,7 +17866,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFmyKdVisiEcVI="
 							},
-							"name": "name",
+							"name": "code",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18040,7 +18040,7 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "INTEGER",
+							"type": "SERIAL",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -18156,7 +18156,7 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "INTEGER",
+							"type": "SERIAL",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,

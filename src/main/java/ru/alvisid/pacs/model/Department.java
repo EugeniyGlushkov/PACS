@@ -136,11 +136,11 @@ public class Department extends AbstractEntity {
             return false;
         }
 
-        Department that = (Department) o;
-
-        if (!super.equals(that)) {
+        if (!super.equals(o)) {
             return false;
         }
+
+        Department that = (Department) o;
 
         return name.equals(that.name);
     }
