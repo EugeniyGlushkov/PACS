@@ -3,6 +3,7 @@ package ru.alvisid.pacs.model;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * A day when certain department don't work.
@@ -78,6 +79,15 @@ public class DayOff {
      */
     public void setDateOff(LocalDate dateOff) {
         this.dateOff = dateOff;
+    }
+
+    /**
+     * Returnes {@code true} if id is null.
+     *
+     * @return {@code true} if id is null.
+     */
+    public boolean isNew() {
+        return Objects.isNull(id);
     }
 
     /**

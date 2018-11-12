@@ -67,52 +67,125 @@ public abstract class AbstractPerson {
         return id;
     }
 
+    /**
+     * Gets the person's last name.
+     *
+     * @return the person's last name.
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Gets the person's first name.
+     *
+     * @return the person's first name.
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Gets the person's second name.
+     *
+     * @return the person's second name.
+     */
     public String getSecondtName() {
         return secondtName;
     }
 
+    /**
+     * Sets the specifiec id.
+     *
+     * @param id the specifiec id.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Sets the person's last name.
+     *
+     * @param lastName the person's last name.
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Sets the person's first name.
+     *
+     * @param firstName the person's first name.
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Sets the person's second name.
+     *
+     * @param secondtName the person's second name.
+     */
     public void setSecondtName(String secondtName) {
         this.secondtName = secondtName;
     }
 
+    /**
+     * Returnes {@code true} if id is null.
+     *
+     * @return {@code true} if id is null.
+     */
     public boolean isNew() {
         return Objects.isNull(id);
     }
 
+    /**
+     * Initializes a newly created object with null null fields.
+     *
+     * @see AbstractPerson#AbstractPerson(String, String, String)
+     * @see AbstractPerson#AbstractPerson(Integer, String, String, String)
+     */
     public AbstractPerson() {
     }
 
+    /**
+     * Constructs a <b>AbstractPerson</b> object whith null-id
+     * and sets last name, first name, second name.
+     *
+     * @param lastName    the person's last name.
+     * @param firstName   the person's first name.
+     * @param secondtName the person's second name.
+     */
     public AbstractPerson(String lastName, String firstName, String secondtName) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.secondtName = secondtName;
     }
 
+    /**
+     * Constructs a <b>AbstractPerson</b> object and
+     * sets id, last name, first name, second name.
+     *
+     * @param id          the specifiec id.
+     * @param lastName    the person's last name.
+     * @param firstName   the person's first name.
+     * @param secondtName the person's second name.
+     */
     public AbstractPerson(Integer id, String lastName, String firstName, String secondtName) {
         this(lastName, firstName, secondtName);
         this.id = id;
     }
 
+    /**
+     * Compares this object to the specified object.
+     * The result is {@code true} if and only if the argument is not null
+     * and is an AbstractPerson object or its heir
+     * that contains the same id, last name, first name
+     * and second name values as this object.
+     *
+     * @param o the specified object.
+     * @return {@code true} if the objects are the same; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -136,11 +209,21 @@ public abstract class AbstractPerson {
         return false;
     }
 
+    /**
+     * Returns a hash code for this Entity.
+     *
+     * @return the hash code for this Entity.
+     */
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
 
+    /**
+     * Returns a String object representing this entity's object.
+     *
+     * @return the String object representing this entity's object.
+     */
     @Override
     public String toString() {
         return String.format("Person %s (%s, '%s %s %s')",
