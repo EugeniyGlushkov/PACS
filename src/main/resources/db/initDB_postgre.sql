@@ -297,7 +297,7 @@ CREATE TABLE emp_schedules
   end_work    TIME,
   start_lunch TIME,
   end_lunch   TIME,
-  FOREIGN KEY (emp_id) REFERENCES employees (id),
+  FOREIGN KEY (emp_id) REFERENCES employees (id) ON DELETE CASCADE,
   CONSTRAINT empsched_start_end_con CHECK (start_work < start_lunch
                                            AND start_lunch < end_lunch
                                            AND end_lunch < end_work)

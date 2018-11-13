@@ -1,5 +1,11 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 /**
@@ -8,11 +14,21 @@ import java.time.LocalTime;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
+@Entity
+@Table(name = "emp_schedules", uniqueConstraints =
+@UniqueConstraint(columnNames = "emp_id", name = "empsched_unique_empid_idx"))
+@Check(constraints = "start_work < start_lunch\n" +
+        "AND start_lunch < end_lunch\n" +
+        "AND end_lunch < end_work")
 public class EmpSchedule extends AbstractSchedule {
     /**
      * The specific employee.
      * Must be non null.
      */
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "emp_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
     private Employee employee;
 
     /**
