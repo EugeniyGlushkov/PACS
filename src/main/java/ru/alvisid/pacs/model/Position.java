@@ -44,7 +44,8 @@ public class Position extends AbstractEntity {
     }
 
     /**
-     * Initializes a newly created <b>Position</b> object with null position value and null fiels of the superclass.
+     * Initializes a newly created <b>Position</b> object with null position value
+     * and null fiels of the superclass.
      *
      * @see Position#Position(String, String)
      * @see Position#Position(Integer, String, String)
@@ -54,7 +55,7 @@ public class Position extends AbstractEntity {
     }
 
     /**
-     * Constructs a <b>Position</b> object with specified desciption, position and null id value.
+     * Constructs a <b>Position</b> object with specified desciption, position and null id values.
      *
      * @param description the position's description.
      * @param position    the text identifier of the position.
@@ -67,7 +68,7 @@ public class Position extends AbstractEntity {
     }
 
     /**
-     * Constructs a <b>Position</b> object with specified id, desciption and position values.
+     * Constructs a <b>Position</b> object with specified id, description and position values.
      *
      * @param id          the specifiec identifier.
      * @param description the position's description.
