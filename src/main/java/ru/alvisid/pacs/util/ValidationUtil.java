@@ -31,10 +31,11 @@ public class ValidationUtil {
      * Returns a checked object, throws the NotFoundException if the checked object is null.
      *
      * @param object  the checked object.
-     * @param message message for thrown NotFoundException..
+     * @param message message for thrown NotFoundException.
+     * @param <T> the type of the checked object.
      * @return the checked object.
      * @throws NotFoundException if the checked object is null.
-     * @see ValidationUtil#checkNotFound(boolean, String).
+     * @see ValidationUtil#checkNotFound(boolean, String)
      */
     public static <T> T checkNotFound(T object, String message) {
         checkNotFound(!Objects.isNull(object), message);
@@ -47,7 +48,7 @@ public class ValidationUtil {
      * @param found shows availability the entity in the DB.
      * @param id    specific id of the entity.
      * @throws NotFoundException the exception is thrown when entity is not found.
-     * @see ValidationUtil#checkNotFoundWithId(Object, int).
+     * @see ValidationUtil#checkNotFound(Object, String)
      */
     public static void checkNotFoundWithId(boolean found, int id) {
         checkNotFound(found, "Not found entity with id=" + id);
@@ -58,9 +59,10 @@ public class ValidationUtil {
      *
      * @param object the checked object.
      * @param id     specific id of the entity.
+     * @param <T> the type of the checked object.
      * @return the checked object.
      * @throws NotFoundException if the checked object is null.
-     * @see ValidationUtil#checkNotFoundWithId(boolean, int).
+     * @see ValidationUtil#checkNotFoundWithId(boolean, int)
      */
     public static <T> T checkNotFoundWithId(T object, int id) {
         return checkNotFound(object, "Not found entity with id=" + id);

@@ -5,6 +5,7 @@ public class Employee extends AbstractPerson {
     private Position position;
     private Integer cardNum;
     private String email;
+    private EmpSchedule schedule;
 
     public Department getDepartment() {
         return department;
@@ -22,6 +23,10 @@ public class Employee extends AbstractPerson {
         return email;
     }
 
+    public EmpSchedule getSchedule() {
+        return schedule;
+    }
+
     public void setDepartment(Department department) {
         this.department = department;
     }
@@ -36,6 +41,10 @@ public class Employee extends AbstractPerson {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setSchedule(EmpSchedule schedule) {
+        this.schedule = schedule;
     }
 
     public Employee(){
