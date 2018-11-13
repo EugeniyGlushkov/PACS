@@ -87,7 +87,6 @@ public class Department extends AbstractEntity {
      * @see Department#Department(Integer, String, String)
      */
     public Department() {
-        super();
     }
 
     /**

@@ -56,7 +56,6 @@ public class DeptSchedule extends AbstractSchedule {
      * @see DeptSchedule#DeptSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Department)
      */
     public DeptSchedule() {
-        super();
     }
 
     /**

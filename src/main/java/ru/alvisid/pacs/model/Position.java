@@ -51,7 +51,6 @@ public class Position extends AbstractEntity {
      * @see Position#Position(Integer, String, String)
      */
     public Position() {
-        super();
     }
 
     /**
