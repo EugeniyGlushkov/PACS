@@ -1,6 +1,7 @@
-DROP TRIGGER IF EXISTS chek_abs
-ON absences;
+DROP TRIGGER IF EXISTS chek_abs ON absences;
+DROP TRIGGER IF EXISTS chek_act ON actions;
 DROP FUNCTION IF EXISTS new_absence();
+DROP FUNCTION IF EXISTS new_action();
 
 DROP TABLE IF EXISTS visitors;
 DROP TABLE IF EXISTS employee_roles;
@@ -357,21 +358,24 @@ CREATE TABLE point_permits
 Отношение "События", хранит действия совершенные сотрудниками
 содержит соответственно:
 -первичный ключ;
--id разрешенного сотруднику действия на данной точке;
+-id сотрудника, совершившего действие;
+-id действия на данной точке;
 -время, когда было произведено действие.
 Ограничение: одному времени не может соответствовать несколько одинаковых действий для
 одного сотрудника.
  */
 CREATE TABLE actions
 (
-  id             SERIAL PRIMARY KEY,
-  pointpermit_id INTEGER                 NOT NULL,
-  time           TIMESTAMP DEFAULT now() NOT NULL,
-  FOREIGN KEY (pointpermit_id) REFERENCES point_permits (id),
-  CONSTRAINT act_emp_time_con UNIQUE (pointpermit_id, time)
+  id          SERIAL PRIMARY KEY,
+  emp_id      INTEGER                 NOT NULL,
+  pointact_id INTEGER                 NOT NULL,
+  time        TIMESTAMP DEFAULT now() NOT NULL,
+  FOREIGN KEY (emp_id) REFERENCES employees (id),
+  FOREIGN KEY (pointact_id) REFERENCES point_actions (id),
+  CONSTRAINT act_emp_time_con UNIQUE (emp_id, time)
 );
 CREATE INDEX act_pointpermit_id_idx
-  ON actions (pointpermit_id);
+  ON actions (emp_id);
 CREATE INDEX act_time_idx
   ON actions (time);
 
@@ -443,6 +447,29 @@ END
 $chek_abs$ LANGUAGE plpgsql;
 
 /*
+Функция для проверки того, что выбранный сотрудник имеет право производить
+действие указанное в добавляемом событии. Проверяется наличие записи
+добавляемого действия в списке разрешенных событий для данного работника.
+ */
+CREATE FUNCTION new_action()
+  RETURNS TRIGGER AS
+$chek_act$
+BEGIN
+  IF NOT EXISTS(
+      SELECT *
+      FROM point_permits pp
+      WHERE pp.emp_id = NEW.emp_id
+            AND pp.pointact_id = NEW.pointact_id
+  )
+  THEN
+    RAISE EXCEPTION 'Impossible insert, because eployee with id=% has not point action with id=% !',
+    NEW.emp_id, NEW.pointact_id;
+  END IF;
+  RETURN NEW;
+END;
+$chek_act$ LANGUAGE plpgsql;
+
+/*
 Триггер, срабатывающий перед добавлением новых данных в отношение "Отсутствия"
 и вызывающий функцию new_absence().
  */
@@ -452,7 +479,17 @@ BEFORE INSERT
 FOR EACH ROW
 EXECUTE PROCEDURE new_absence();
 
-INSERT INTO week_days (id, name) VALUES
+/*
+Триггер, срабатывающий перед добавлением новых данных в отношение "События"
+и вызывающий функцию new_action().
+ */
+CREATE TRIGGER chek_act
+  BEFORE INSERT
+  ON actions
+  FOR EACH ROW
+  EXECUTE PROCEDURE new_action();
+
+INSERT INTO week_days (id, code) VALUES
   (1, 'MONDAY'),
   (2, 'TUESDAY'),
   (3, 'WEDNESDAY'),
