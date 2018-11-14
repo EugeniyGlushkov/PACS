@@ -1,7 +1,11 @@
 package ru.alvisid.pacs.model;
 
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -11,20 +15,32 @@ import java.util.Objects;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
+@Entity
+@Access(AccessType.FIELD)
+@Table(name = "days_off", uniqueConstraints =
+@UniqueConstraint(columnNames = "dep_id, date", name = "depid_daysoff_idx"))
 public class DayOff {
     /**
      * The cpecifiec identifier of the day off.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     /**
-     * The department.
+     * The department to which the day off.
      */
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dep_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Department department;
 
     /**
      * A date of the day off.
      */
+    @NotNull
+    @Column(name = "date", nullable = false)
     LocalDate dateOff;
 
     /**
