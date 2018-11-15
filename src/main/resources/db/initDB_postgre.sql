@@ -164,14 +164,12 @@ CREATE TABLE week_days
 (добавление, удаление, обносление)
 содержит соответственно:
 -первичный ключ;
--тип правки;
--описание правки.
+-код правки;
  */
 CREATE TABLE edit_types
 (
   id          SERIAL PRIMARY KEY,
-  edit_type   VARCHAR(255) UNIQUE NOT NULL,
-  description VARCHAR             NOT NULL
+  code   VARCHAR(255) UNIQUE NOT NULL
 );
 
 /*
@@ -497,3 +495,8 @@ INSERT INTO week_days (id, code) VALUES
   (5, 'FRIDAY'),
   (6, 'SATURDAY'),
   (7, 'SUNDAY');
+
+INSERT INTO edit_types (id, code) VALUES
+  (1, 'CREATE'),
+  (2, 'UPDATE'),
+  (3, 'DELETE');
