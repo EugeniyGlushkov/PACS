@@ -1,5 +1,7 @@
-DROP TRIGGER IF EXISTS chek_abs ON absences;
-DROP TRIGGER IF EXISTS chek_act ON actions;
+DROP TRIGGER IF EXISTS chek_abs
+ON absences;
+DROP TRIGGER IF EXISTS chek_act
+ON actions;
 DROP FUNCTION IF EXISTS new_absence();
 DROP FUNCTION IF EXISTS new_action();
 
@@ -135,15 +137,15 @@ CREATE TABLE action_types
 -первичный ключ;
 -id контрольной точки;
 -id действия.
-Ограничение: каждой точке может соответствовать только один тип действия.
+Ограничение: каждой точке yt может соответствовать два одинаковых типа действия.
  */
 CREATE TABLE point_actions
 (
   id              SERIAL PRIMARY KEY,
   controlpoint_id INTEGER NOT NULL,
   acttype_id      INTEGER NOT NULL,
-  FOREIGN KEY (controlpoint_id) REFERENCES control_points (id),
-  FOREIGN KEY (acttype_id) REFERENCES action_types (id),
+  FOREIGN KEY (controlpoint_id) REFERENCES control_points (id) ON DELETE CASCADE,
+  FOREIGN KEY (acttype_id) REFERENCES action_types (id) ON DELETE CASCADE,
   CONSTRAINT conpoint_acttype_idx UNIQUE (controlpoint_id, acttype_id)
 );
 
@@ -168,8 +170,8 @@ CREATE TABLE week_days
  */
 CREATE TABLE edit_types
 (
-  id          SERIAL PRIMARY KEY,
-  code   VARCHAR(255) UNIQUE NOT NULL
+  id   SERIAL PRIMARY KEY,
+  code VARCHAR(255) UNIQUE NOT NULL
 );
 
 /*
@@ -482,10 +484,10 @@ EXECUTE PROCEDURE new_absence();
 и вызывающий функцию new_action().
  */
 CREATE TRIGGER chek_act
-  BEFORE INSERT
+BEFORE INSERT
   ON actions
-  FOR EACH ROW
-  EXECUTE PROCEDURE new_action();
+FOR EACH ROW
+EXECUTE PROCEDURE new_action();
 
 INSERT INTO week_days (id, code) VALUES
   (1, 'MONDAY'),
