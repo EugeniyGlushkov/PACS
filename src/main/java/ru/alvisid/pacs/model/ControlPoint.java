@@ -65,8 +65,7 @@ public class ControlPoint extends AbstractEntity {
      * @see ControlPoint#ControlPoint(Integer, String, String)
      */
     public ControlPoint(String description, String serialCode) {
-        super(description);
-        this.serialCode = serialCode;
+        this(null, description, serialCode);
     }
 
     /**

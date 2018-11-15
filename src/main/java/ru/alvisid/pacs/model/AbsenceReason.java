@@ -60,8 +60,7 @@ public class AbsenceReason extends AbstractEntity {
      * @see AbsenceReason#AbsenceReason(Integer, String, String)
      */
     public AbsenceReason(String description, String reason) {
-        super(description);
-        this.reason = reason;
+        this(null, description, reason);
     }
 
     /**

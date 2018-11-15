@@ -3,7 +3,6 @@ package ru.alvisid.pacs.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 /**
  * Abstraction for entities wich have id and description.
@@ -13,14 +12,7 @@ import java.util.Objects;
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractEntity {
-    /**
-     * The cpecifiec identifier for each entity in a database.
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Integer id;
-
+public abstract class AbstractEntity extends AbstractId {
     /**
      * The description of the entity.
      * Min value is 2 character.
@@ -32,15 +24,6 @@ public abstract class AbstractEntity {
     protected String description;
 
     /**
-     * Gets the specifiec id.
-     *
-     * @return the specifiec id.
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
      * Gets the description of the entity.
      *
      * @return the description of the entity.
@@ -50,30 +33,12 @@ public abstract class AbstractEntity {
     }
 
     /**
-     * Sets the specifiec id.
-     *
-     * @param id the specifiec id.
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
      * Sets the description of the entity.
      *
      * @param description the description of the entity.
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * Returnes {@code true} if id is null.
-     *
-     * @return {@code true} if id is null.
-     */
-    public boolean isNew() {
-        return Objects.isNull(id);
     }
 
     /**
@@ -93,7 +58,7 @@ public abstract class AbstractEntity {
      * @see AbstractEntity#AbstractEntity(Integer, String)
      */
     public AbstractEntity(String description) {
-        this.description = description;
+        this(null, description);
     }
 
     /**
@@ -105,15 +70,16 @@ public abstract class AbstractEntity {
      * @see AbstractEntity#AbstractEntity(String)
      */
     public AbstractEntity(Integer id, String description) {
-        this(description);
-        this.id = id;
+        super(id);
+        this.description = description;
     }
 
     /**
      * Compares this object to the specified object.
      * The result is {@code true} if and only if the argument is not null
      * and is an <b>AbstractEntity</b>'s heir
-     * that contains the same id and description values as this object.
+     * that contains the same description value as this object
+     * and superclass is equals the specified object.
      *
      * @param o the specified object.
      * @return {@code true} if the objects are the same; {@code false} otherwise.
@@ -123,26 +89,16 @@ public abstract class AbstractEntity {
         if (this == o) return true;
 
         if (o instanceof AbstractEntity) {
-            AbstractEntity that = (AbstractEntity) o;
-
-            if (id != null ? !id.equals(that.id) : that.id != null) {
+            if (!super.equals(o)) {
                 return false;
             }
+
+            AbstractEntity that = (AbstractEntity) o;
 
             return description.equals(that.description);
         }
 
         return false;
-    }
-
-    /**
-     * Returns a hash code for this Entity.
-     *
-     * @return the hash code for this Entity.
-     */
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
     }
 
     /**

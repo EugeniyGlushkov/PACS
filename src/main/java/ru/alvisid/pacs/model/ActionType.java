@@ -61,8 +61,7 @@ public class ActionType extends AbstractEntity {
      * @see ActionType#ActionType(Integer, String, String)
      */
     public ActionType(String description, String type) {
-        super(description);
-        this.type = type;
+        this(null, description, type);
     }
 
     /**

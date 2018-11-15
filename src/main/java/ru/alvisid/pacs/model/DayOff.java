@@ -7,7 +7,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * A day when certain department don't work.
@@ -19,13 +18,7 @@ import java.util.Objects;
 @Access(AccessType.FIELD)
 @Table(name = "days_off", uniqueConstraints =
 @UniqueConstraint(columnNames = "dep_id, date", name = "depid_daysoff_idx"))
-public class DayOff {
-    /**
-     * The cpecifiec identifier of the day off.
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+public class DayOff extends AbstractId{
 
     /**
      * The department to which the day off.
@@ -44,15 +37,6 @@ public class DayOff {
     LocalDate dateOff;
 
     /**
-     * Gets the specifiec id.
-     *
-     * @return the specifiec id.
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
      * Gets the current department.
      *
      * @return the current department.
@@ -68,15 +52,6 @@ public class DayOff {
      */
     public LocalDate getDateOff() {
         return dateOff;
-    }
-
-    /**
-     * Sets the specifiec id.
-     *
-     * @param id the specified identifier.
-     */
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     /**
@@ -98,15 +73,6 @@ public class DayOff {
     }
 
     /**
-     * Returnes {@code true} if id is null.
-     *
-     * @return {@code true} if id is null.
-     */
-    public boolean isNew() {
-        return Objects.isNull(id);
-    }
-
-    /**
      * Initializes a newly created object with null id, department and date off.
      *
      * @see DayOff#DayOff(Department, LocalDate)
@@ -124,8 +90,7 @@ public class DayOff {
      * @see DayOff#DayOff(Integer, Department, LocalDate)
      */
     public DayOff(Department department, LocalDate dateOff) {
-        this.department = department;
-        this.dateOff = dateOff;
+        this(null, department, dateOff);
     }
 
     /**
@@ -138,7 +103,7 @@ public class DayOff {
      * @see DayOff#DayOff(Department, LocalDate)
      */
     public DayOff(Integer id, Department department, LocalDate dateOff) {
-        this.id = id;
+        super(id);
         this.department = department;
         this.dateOff = dateOff;
     }
@@ -147,7 +112,8 @@ public class DayOff {
      * Compares this object to the specified object.
      * The result is {@code true} if and only if the argument is not null
      * and is an <b>DayOff</b> object
-     * that contains the same id, department and date off values as this object.
+     * that contains the department and date off values as this object
+     * and superclass is equals the specified object.
      *
      * @param o the specified object.
      * @return {@code true} if the objects are the same; {@code false} otherwise.
@@ -162,27 +128,17 @@ public class DayOff {
             return false;
         }
 
-        DayOff dayOff = (DayOff) o;
-
-        if (id != null ? !id.equals(dayOff.id) : dayOff.id != null) {
+        if (!super.equals(o)) {
             return false;
         }
+
+        DayOff dayOff = (DayOff) o;
 
         if (!department.equals(dayOff.department)) {
             return false;
         }
 
         return dateOff.equals(dayOff.dateOff);
-    }
-
-    /**
-     * Returns a hash code for this Entity.
-     *
-     * @return the hash code for this Entity.
-     */
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
     }
 
     /**
