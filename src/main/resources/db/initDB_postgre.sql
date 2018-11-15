@@ -170,7 +170,7 @@ CREATE TABLE week_days
  */
 CREATE TABLE edit_types
 (
-  id   SERIAL PRIMARY KEY,
+  id   SMALLINT PRIMARY KEY,
   code VARCHAR(255) UNIQUE NOT NULL
 );
 

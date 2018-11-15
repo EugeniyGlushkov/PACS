@@ -10736,7 +10736,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+\"pkey\" id: SERIAL",
+											"text": "+\"pkey\" id: SMALLINT",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18940,7 +18940,7 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "SERIAL",
+							"type": "SMALLINT",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
