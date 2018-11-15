@@ -51,7 +51,7 @@ public abstract class AbstractEntity extends AbstractId {
     }
 
     /**
-     * Constructs entity and sets description. Id will be null.
+     * Constructs a new <b>AbstractEntity</b> object and sets description. Id will be null.
      *
      * @param description the description of the entity.
      * @see AbstractEntity#AbstractEntity()
@@ -62,7 +62,7 @@ public abstract class AbstractEntity extends AbstractId {
     }
 
     /**
-     * Constructs entity and sets description, id.
+     * Constructs a new <b>AbstractEntity</b> object and sets description, id.
      *
      * @param id          the specifiec id.
      * @param description the description of the entity.
@@ -102,9 +102,9 @@ public abstract class AbstractEntity extends AbstractId {
     }
 
     /**
-     * Returns a String object representing this entity's object.
+     * Returns a String object representing this object.
      *
-     * @return the String object representing this entity's object.
+     * @return the String object representing this object.
      */
     @Override
     public String toString() {

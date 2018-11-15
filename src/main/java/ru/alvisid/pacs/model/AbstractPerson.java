@@ -210,9 +210,9 @@ public abstract class AbstractPerson {
     }
 
     /**
-     * Returns a hash code for this Entity.
+     * Returns a hash code for this object.
      *
-     * @return the hash code for this Entity.
+     * @return the hash code for this object.
      */
     @Override
     public int hashCode() {
@@ -220,9 +220,9 @@ public abstract class AbstractPerson {
     }
 
     /**
-     * Returns a String object representing this entity's object.
+     * Returns a String object representing this object.
      *
-     * @return the String object representing this entity's object.
+     * @return the String object representing this object.
      */
     @Override
     public String toString() {

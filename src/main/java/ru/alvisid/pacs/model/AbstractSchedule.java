@@ -170,7 +170,7 @@ public abstract class AbstractSchedule {
     }
 
     /**
-     * Constructs <b>AbstractSchedule</b> entity with null-id,
+     * Constructs <b>AbstractSchedule</b> object with null-id,
      * and initializes fields with start work time, end work time,
      * start lunch time and end lunch time.
      *
@@ -190,7 +190,7 @@ public abstract class AbstractSchedule {
     }
 
     /**
-     * Constructs <b>AbstractSchedule</b> entity
+     * Constructs <b>AbstractSchedule</b> object
      * and initializes fields with id, start work time, end work time,
      * start lunch time and end lunch time.
      *
@@ -254,9 +254,9 @@ public abstract class AbstractSchedule {
     }
 
     /**
-     * Returns a hash code for this Entity.
+     * Returns a hash code for this object.
      *
-     * @return the hash code for this Entity.
+     * @return the hash code for this object.
      */
     @Override
     public int hashCode() {
@@ -264,9 +264,9 @@ public abstract class AbstractSchedule {
     }
 
     /**
-     * Returns a String object representing this entity's object.
+     * Returns a String object representing this object.
      *
-     * @return the String object representing this entity's object.
+     * @return the String object representing this object.
      */
     @Override
     public String toString() {

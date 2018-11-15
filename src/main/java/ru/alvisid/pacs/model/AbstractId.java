@@ -56,7 +56,7 @@ public abstract class AbstractId {
     }
 
     /**
-     * Constructs entity and sets id.
+     * Constructs a new <b>AbstractId</b> object and sets id.
      *
      * @param id the specifiec id.
      */
@@ -87,9 +87,9 @@ public abstract class AbstractId {
     }
 
     /**
-     * Returns a hash code for this Entity.
+     * Returns a hash code for this object.
      *
-     * @return the hash code for this Entity.
+     * @return the hash code for this object.
      */
     @Override
     public int hashCode() {
@@ -97,9 +97,9 @@ public abstract class AbstractId {
     }
 
     /**
-     * Returns a String object representing this entity's object.
+     * Returns a String object representing this object.
      *
-     * @return the String object representing this entity's object.
+     * @return the String object representing this object.
      */
     @Override
     public String toString() {

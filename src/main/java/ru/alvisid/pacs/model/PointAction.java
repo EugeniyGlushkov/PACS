@@ -81,7 +81,7 @@ public class PointAction extends AbstractId {
     }
 
     /**
-     * Constructs entity and sets the controlPoint and actionType.
+     * Constructs a new <b>PointAction</b> object and sets the controlPoint and actionType.
      *
      * @param controlPoint the specified control point.
      * @param actionType   the specified action type.
@@ -93,7 +93,7 @@ public class PointAction extends AbstractId {
     }
 
     /**
-     * Constructs entity and sets the id, controlPoint and actionType.
+     * Constructs a new <b>PointAction</b> object and sets the id, controlPoint and actionType.
      *
      * @param id           the specifiec id.
      * @param controlPoint the specified control point.

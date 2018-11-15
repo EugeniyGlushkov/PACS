@@ -82,7 +82,7 @@ public class DayOff extends AbstractId{
     }
 
     /**
-     * Constructs entity and sets the department and date off.
+     * Constructs a new <b>DayOff</b> object and sets the department and date off.
      *
      * @param department the current department.
      * @param dateOff    the date of the day off.
@@ -94,7 +94,7 @@ public class DayOff extends AbstractId{
     }
 
     /**
-     * Constructs entity and sets the id, department and date off.
+     * Constructs a new <b>DayOff</b> object and sets the id, department and date off.
      *
      * @param id         the specifiec id.
      * @param department the current department.
