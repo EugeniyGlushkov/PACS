@@ -24,7 +24,7 @@ public class AbsenceReason extends AbstractEntity {
     private String reason;
 
     /**
-     * Returnes the absence reason.
+     * Returns the absence reason.
      *
      * @return the absence reason.
      */
@@ -104,9 +104,9 @@ public class AbsenceReason extends AbstractEntity {
     }
 
     /**
-     * Returns a String object representing this <b>AbsenceReason</b>'s object.
+     * Returns a String object representing this <b>AbsenceReason</b> object.
      *
-     * @return the String object representing this <b>AbsenceReason</b>'s object.
+     * @return the String object representing this <b>AbsenceReason</b> object.
      */
     @Override
     public String toString() {

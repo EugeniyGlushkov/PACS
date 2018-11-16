@@ -45,7 +45,7 @@ public class Department extends AbstractEntity {
     private List<WeekDay> weekEnds;
 
     /**
-     * Returnes the department's name.
+     * Returns the department's name.
      *
      * @return the department's name.
      */
@@ -54,7 +54,7 @@ public class Department extends AbstractEntity {
     }
 
     /**
-     * Returnes list of days off of the department.
+     * Returns list of days off of the department.
      *
      * @return list of days off of the department.
      */
@@ -145,9 +145,9 @@ public class Department extends AbstractEntity {
     }
 
     /**
-     * Returns a String object representing this <b>Department</b>'s object.
+     * Returns a String object representing this <b>Department</b> object.
      *
-     * @return the String object representing this <b>Department</b>'s object.
+     * @return the String object representing this <b>Department</b> object.
      */
     @Override
     public String toString() {

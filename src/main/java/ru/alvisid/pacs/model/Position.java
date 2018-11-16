@@ -26,7 +26,7 @@ public class Position extends AbstractEntity {
     private String position;
 
     /**
-     * Returnes the position string value.
+     * Returns the position string value.
      *
      * @return the position string value.
      */
@@ -108,9 +108,9 @@ public class Position extends AbstractEntity {
     }
 
     /**
-     * Returns a String object representing this <b>Position</b>'s object.
+     * Returns a String object representing this <b>Position</b> object.
      *
-     * @return the String object representing this <b>Position</b>'s object.
+     * @return the String object representing this <b>Position</b> object.
      */
     @Override
     public String toString() {

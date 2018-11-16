@@ -36,7 +36,7 @@ public class PointPermit extends AbstractId {
     private Employee employee;
 
     /**
-     * Returnes the certain point action.
+     * Returns the certain point action.
      *
      * @return the certain point action.
      */
@@ -45,7 +45,7 @@ public class PointPermit extends AbstractId {
     }
 
     /**
-     * Returnes the employee.
+     * Returns the employee.
      *
      * @return the employee.
      */
@@ -141,9 +141,9 @@ public class PointPermit extends AbstractId {
     }
 
     /**
-     * Returns a String object representing this <b>PointPermit</b>'s object.
+     * Returns a String object representing this <b>PointPermit</b> object.
      *
-     * @return the String object representing this <b>PointPermit</b>'s object.
+     * @return the String object representing this <b>PointPermit</b> object.
      */
     @Override
     public String toString() {

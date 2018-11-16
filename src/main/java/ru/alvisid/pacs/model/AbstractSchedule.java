@@ -152,7 +152,7 @@ public abstract class AbstractSchedule {
     }
 
     /**
-     * Returnes {@code true} if id is null.
+     * Returns {@code true} if id is null.
      *
      * @return {@code true} if id is null.
      */

@@ -25,7 +25,7 @@ public class ActionType extends AbstractEntity {
     private String type;
 
     /**
-     * Returnes the ${@code type} value.
+     * Returns the ${@code type} value.
      *
      * @return the ${@code type} value.
      */
@@ -107,9 +107,9 @@ public class ActionType extends AbstractEntity {
     }
 
     /**
-     * Returns a String object representing this <b>ActionType</b>'s object.
+     * Returns a String object representing this <b>ActionType</b> object.
      *
-     * @return the String object representing this <b>ActionType</b>'s object.
+     * @return the String object representing this <b>ActionType</b> object.
      */
     @Override
     public String toString() {

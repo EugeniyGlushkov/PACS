@@ -126,9 +126,9 @@ public class EmpSchedule extends AbstractSchedule {
     }
 
     /**
-     * Returns a String object representing this <b>EmpSchedule</b>'s object.
+     * Returns a String object representing this <b>EmpSchedule</b> object.
      *
-     * @return the String object representing this <b>EmpSchedule</b>'s object.
+     * @return the String object representing this <b>EmpSchedule</b> object.
      */
     @Override
     public String toString() {

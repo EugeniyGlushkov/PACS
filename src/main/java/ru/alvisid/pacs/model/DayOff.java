@@ -142,9 +142,9 @@ public class DayOff extends AbstractId{
     }
 
     /**
-     * Returns a String object representing this <b>DayOff</b>'s object.
+     * Returns a String object representing this <b>DayOff</b> object.
      *
-     * @return the String object representing this <b>DayOff</b>'s object.
+     * @return the String object representing this <b>DayOff</b> object.
      */
     @Override
     public String toString() {

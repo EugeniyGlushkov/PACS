@@ -130,9 +130,9 @@ public class DeptSchedule extends AbstractSchedule {
     }
 
     /**
-     * Returns a String object representing this <b>DeptSchedule</b>'s object.
+     * Returns a String object representing this <b>DeptSchedule</b> object.
      *
-     * @return the String object representing this <b>DeptSchedule</b>'s object.
+     * @return the String object representing this <b>DeptSchedule</b> object.
      */
     @Override
     public String toString() {

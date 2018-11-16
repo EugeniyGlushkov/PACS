@@ -36,7 +36,7 @@ public class PointAction extends AbstractId {
     private ActionType actionType;
 
     /**
-     * Returnes the control point value.
+     * Returns the control point value.
      *
      * @return the control point value.
      */
@@ -45,7 +45,7 @@ public class PointAction extends AbstractId {
     }
 
     /**
-     * Returnes the action value.
+     * Returns the action value.
      *
      * @return the action value.
      */
@@ -141,9 +141,9 @@ public class PointAction extends AbstractId {
     }
 
     /**
-     * Returns a String object representing this <b>PointAction</b>'s object.
+     * Returns a String object representing this <b>PointAction</b> object.
      *
-     * @return the String object representing this <b>PointAction</b>'s object.
+     * @return the String object representing this <b>PointAction</b> object.
      */
     @Override
     public String toString() {

@@ -29,7 +29,7 @@ public class ControlPoint extends AbstractEntity {
     private String serialCode;
 
     /**
-     * Returnes the identifier of the control point.
+     * Returns the identifier of the control point.
      *
      * @return the identifier of the control point.
      */
@@ -111,9 +111,9 @@ public class ControlPoint extends AbstractEntity {
     }
 
     /**
-     * Returns a String object representing this <b>ControlPoint</b>'s object.
+     * Returns a String object representing this <b>ControlPoint</b> object.
      *
-     * @return the String object representing this <b>ControlPoint</b>'s object.
+     * @return the String object representing this <b>ControlPoint</b> object.
      */
     @Override
     public String toString() {
