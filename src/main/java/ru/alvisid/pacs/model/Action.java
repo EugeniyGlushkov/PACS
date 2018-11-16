@@ -1,12 +1,53 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+/**
+ * An action which done by the employee in a certain point at a certain time.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ */
+@Entity
+@Access(AccessType.FIELD)
+@Table(name = "actions", uniqueConstraints =
+@UniqueConstraint(columnNames = "emp_id, time", name = "act_emp_time_con"))
 public class Action extends AbstractId {
+    /**
+     * The employee which did the action.
+     */
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "emp_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Employee employee;
+
+    /**
+     * The point action wich did
+     */
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pointact_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private PointAction pointAction;
+
+    /**
+     * The time when the action was done.
+     */
+    @NotNull
+    @Column(name = "time", nullable = false)
     private LocalDateTime actionTime;
 
+    /**
+     *
+     *
+     * @return
+     */
     public Employee getEmployee() {
         return employee;
     }
