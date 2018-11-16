@@ -63,7 +63,7 @@ public class PointAction extends AbstractId {
     }
 
     /**
-     * Sets specified action.
+     * Sets the specified action.
      *
      * @param actionType the specified action type.
      */
