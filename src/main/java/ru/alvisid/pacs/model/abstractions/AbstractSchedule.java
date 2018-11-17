@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model.abstractions;
 
+import org.hibernate.annotations.Check;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
@@ -13,6 +15,9 @@ import java.util.Objects;
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
+@Check(constraints = "start_work < start_lunch" +
+        " AND start_lunch < end_lunch" +
+        " AND end_lunch < end_work")
 public abstract class AbstractSchedule {
     /**
      * Sequence's start value.

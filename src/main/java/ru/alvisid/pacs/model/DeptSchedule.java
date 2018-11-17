@@ -18,9 +18,6 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "dep_schedules", uniqueConstraints =
 @UniqueConstraint(columnNames = "dep_id", name = "depsched_unique_depid_idx"))
-@Check(constraints = "start_work < start_lunch\n" +
-        "AND start_lunch < end_lunch\n" +
-        "AND end_lunch < end_work")
 public class DeptSchedule extends AbstractSchedule {
     /**
      * The specific department.
