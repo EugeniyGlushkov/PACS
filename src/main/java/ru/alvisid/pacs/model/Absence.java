@@ -161,7 +161,7 @@ public class Absence extends AbstractHasEmpEntity {
      * Compares this object to the specified object.
      * The result is {@code true} if and only if the argument is not null
      * and is an <b>Absence</b> object that contains the same
-     * {@code absenceReason}, {@code startAbsenceDate}, {@code endAbsenceDate} value as this object,
+     * {@code absenceReason}, {@code startAbsenceDate}, {@code endAbsenceDate} values as this object,
      * and superclass is equals the specified object.
      *
      * @param o the specified object.
