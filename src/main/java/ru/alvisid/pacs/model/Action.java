@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
  * @version 1.0
  */
 @Entity
-@Access(AccessType.FIELD)
 @Table(name = "actions", uniqueConstraints =
 @UniqueConstraint(columnNames = "emp_id, time", name = "act_emp_time_con"))
 public class Action extends AbstractId {

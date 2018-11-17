@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
  * @version 1.0
  */
 @Entity
-@Access(AccessType.FIELD)
 @Table(name = "point_actions", uniqueConstraints =
 @UniqueConstraint(columnNames = "controlpoint_id, acttype_id", name = "conpoint_acttype_idx"))
 public class PointAction extends AbstractId {

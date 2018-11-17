@@ -15,7 +15,6 @@ import java.time.LocalDate;
  * @version 1.0
  */
 @Entity
-@Access(AccessType.FIELD)
 @Table(name = "days_off", uniqueConstraints =
 @UniqueConstraint(columnNames = "dep_id, date", name = "depid_daysoff_idx"))
 public class DayOff extends AbstractId{
