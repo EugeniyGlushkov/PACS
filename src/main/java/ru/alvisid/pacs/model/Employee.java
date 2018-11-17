@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model;
 
+import ru.alvisid.pacs.model.abstractions.AbstractPerson;
+
 public class Employee extends AbstractPerson {
     private Department department;
     private Position position;

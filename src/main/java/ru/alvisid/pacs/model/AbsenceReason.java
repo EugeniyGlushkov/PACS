@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model;
 
+import ru.alvisid.pacs.model.abstractions.AbstractEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -42,7 +44,7 @@ public class AbsenceReason extends AbstractEntity {
     }
 
     /**
-     * Initializes a newly created <b>AbsenceReason</b> object with null ${@code reason} value
+     * Initializes a newly created <b>AbsenceReason</b> object with null {@code reason} value
      * and null fiels of the superclass.
      *
      * @see AbsenceReason#AbsenceReason(String, String)
@@ -78,7 +80,7 @@ public class AbsenceReason extends AbstractEntity {
     /**
      * Compares this object to the specified object.
      * The result is {@code true} if and only if the argument is not null
-     * and is an <b>AbsenceReason</b> object that contains the same ${@code reason} value as this object,
+     * and is an <b>AbsenceReason</b> object that contains the same {@code reason} value as this object,
      * and superclass is equals the specified object.
      *
      * @param o the specified object.

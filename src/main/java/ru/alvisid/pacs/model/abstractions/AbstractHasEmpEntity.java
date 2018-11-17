@@ -1,4 +1,6 @@
-package ru.alvisid.pacs.model;
+package ru.alvisid.pacs.model.abstractions;
+
+import ru.alvisid.pacs.model.Employee;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -64,7 +66,7 @@ public abstract class AbstractHasEmpEntity extends AbstractEntity {
      *
      * @param id          the specifiec id.
      * @param description the description of the entity.
-     * @param employee    the pecified parameter of the employee.
+     * @param employee    the specified parameter of the employee.
      * @see AbstractHasEmpEntity#AbstractHasEmpEntity()
      * @see AbstractHasEmpEntity#AbstractHasEmpEntity(String, Employee)
      */

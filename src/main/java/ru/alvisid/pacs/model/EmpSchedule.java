@@ -3,6 +3,7 @@ package ru.alvisid.pacs.model;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import ru.alvisid.pacs.model.abstractions.AbstractSchedule;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -50,7 +51,8 @@ public class EmpSchedule extends AbstractSchedule {
     }
 
     /**
-     * Initializes a newly created <b>EmpSchedule</b> object with null employee value and null fiels of the superclass.
+     * Initializes a newly created <b>EmpSchedule</b> object with null employee value
+     * and null fields of the superclass.
      *
      * @see EmpSchedule#EmpSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Employee)
      * @see EmpSchedule#EmpSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Employee)

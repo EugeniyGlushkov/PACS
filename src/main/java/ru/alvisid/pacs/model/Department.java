@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.model;
 
 import org.hibernate.Hibernate;
+import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -39,7 +40,7 @@ public class Department extends AbstractEntity {
      */
     @Enumerated(EnumType.ORDINAL)
     @CollectionTable(name = "weekends", joinColumns = @JoinColumn(name = "dep_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = "dep_id, weekday_id", name = "depid_weekdayid_idx"))
+            uniqueConstraints = @UniqueConstraint(columnNames = {"dep_id", "weekday_id"}, name = "depid_weekdayid_idx"))
     @Column(name = "weekday_id")
     @ElementCollection(fetch = FetchType.LAZY)
     private List<WeekDay> weekEnds;

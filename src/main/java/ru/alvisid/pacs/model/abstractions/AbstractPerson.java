@@ -1,4 +1,4 @@
-package ru.alvisid.pacs.model;
+package ru.alvisid.pacs.model.abstractions;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

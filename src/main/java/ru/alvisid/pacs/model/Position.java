@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model;
 
+import ru.alvisid.pacs.model.abstractions.AbstractEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;

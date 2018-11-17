@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model;
 
+import ru.alvisid.pacs.model.abstractions.AbstractEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,18 +27,18 @@ public class ActionType extends AbstractEntity {
     private String type;
 
     /**
-     * Returns the ${@code type} value.
+     * Returns the {@code type} value.
      *
-     * @return the ${@code type} value.
+     * @return the {@code type} value.
      */
     public String getType() {
         return type;
     }
 
     /**
-     * Sets the ${@code type} value.
+     * Sets the {@code type} value.
      *
-     * @param type the ${@code type} value.
+     * @param type the $@code type} value.
      */
     public void setType(String type) {
         this.type = type;

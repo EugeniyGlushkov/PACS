@@ -2,6 +2,7 @@ package ru.alvisid.pacs.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import ru.alvisid.pacs.model.abstractions.AbstractId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "actions", uniqueConstraints =
-@UniqueConstraint(columnNames = "emp_id, time", name = "act_emp_time_con"))
+@UniqueConstraint(columnNames = {"emp_id", "time"}, name = "act_emp_time_con"))
 public class Action extends AbstractId {
     /**
      * The employee which did the action.
@@ -98,7 +99,7 @@ public class Action extends AbstractId {
 
     /**
      * Initializes a newly created <b>Action</b> object
-     * with null ${@code employee}, ${@code pointAction}, ${@code actionTime} values
+     * with null {@code employee}, {@code pointAction}, {@code actionTime} values
      * and null fiels of the superclass.
      *
      * @see Action#Action(Employee, PointAction, LocalDateTime)
@@ -142,7 +143,7 @@ public class Action extends AbstractId {
      * Compares this object to the specified object.
      * The result is {@code true} if and only if the argument is not null
      * and is an <b>Action</b> object that contains the same
-     * ${@code employee}, ${@code pointAction}, ${@code actionTime} values as this object,
+     * {@code employee}, {@code pointAction}, {@code actionTime} values as this object,
      * and superclass is equals the specified object.
      *
      * @param o the specified object.

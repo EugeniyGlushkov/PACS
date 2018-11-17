@@ -254,6 +254,10 @@ CREATE TABLE absences
 );
 CREATE INDEX abs_empid_idx
   ON absences (emp_id);
+CREATE UNIQUE INDEX abs_empid_start_idx
+  ON absences (emp_id, start_absence);
+CREATE UNIQUE INDEX abs_empid_end_idx
+  ON absences (emp_id, end_absence);
 
 /*
 Отошение "Правки", хранит историю изменений (редактирование, удаление, добавление)

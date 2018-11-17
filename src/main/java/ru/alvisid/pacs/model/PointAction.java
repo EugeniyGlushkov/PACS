@@ -2,6 +2,7 @@ package ru.alvisid.pacs.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import ru.alvisid.pacs.model.abstractions.AbstractId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "point_actions", uniqueConstraints =
-@UniqueConstraint(columnNames = "controlpoint_id, acttype_id", name = "conpoint_acttype_idx"))
+@UniqueConstraint(columnNames = {"controlpoint_id", "acttype_id"}, name = "conpoint_acttype_idx"))
 public class PointAction extends AbstractId {
     /**
      * The control point where the action able to be done.
