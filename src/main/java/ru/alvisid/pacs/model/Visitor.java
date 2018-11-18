@@ -1,10 +1,12 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.Check;
 import ru.alvisid.pacs.model.abstractions.AbstractPerson;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.Constraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "visitors")
+@Check(constraints = "(NOT (enter_time IS NULL AND exit_time IS NOT NULL))")
 public class Visitor extends AbstractPerson {
     /**
      * A person temporary number which given everyone visitor.

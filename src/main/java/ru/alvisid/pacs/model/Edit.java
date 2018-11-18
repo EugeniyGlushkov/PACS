@@ -1,21 +1,36 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.abstractions.AbstractHasEmpEntity;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
  * An edit which done by current employee at current time.
  */
+@Entity
+@Table(name = "edits", uniqueConstraints =
+@UniqueConstraint(columnNames = {"emp_id", "edit_date"}, name = "edits_emp_date_idx"))
 public class Edit extends AbstractHasEmpEntity {
     /**
      * Type of the edit.
      */
+    @NotNull
+    @JoinColumn(name = "type_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private EditType editType;
 
     /**
      * Time when the edit was done.
      */
+    @NotNull
+    @Column(name = "edit_date", nullable = false)
+    @Immutable
     private LocalDateTime editDateTime;
 
     /**

@@ -267,6 +267,7 @@ CREATE UNIQUE INDEX abs_empid_end_idx
 -id сотрудника осуществившего изменение;
 -дата изменения;
 -описание изменения.
+Один работник не может иметь несколько правок одновременно.
  */
 CREATE TABLE edits
 (
@@ -278,6 +279,8 @@ CREATE TABLE edits
   FOREIGN KEY (type_id) REFERENCES edit_types (id),
   FOREIGN KEY (emp_id) REFERENCES employees (id)
 );
+CREATE UNIQUE INDEX edits_emp_date_idx
+  ON edits (emp_id, edit_date);
 
 /*
 Отношение "Расписания сотрудников", хранит расписание для конкретного

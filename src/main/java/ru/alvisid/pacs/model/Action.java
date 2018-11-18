@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.abstractions.AbstractId;
@@ -41,6 +42,7 @@ public class Action extends AbstractId {
      */
     @NotNull
     @Column(name = "time", nullable = false)
+    @Immutable
     private LocalDateTime actionTime;
 
     /**
