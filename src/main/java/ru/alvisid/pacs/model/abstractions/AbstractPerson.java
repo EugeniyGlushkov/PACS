@@ -56,7 +56,7 @@ public abstract class AbstractPerson {
     @NotBlank
     @Size(min = 2, max = 100)
     @Column(name = "second_name", nullable = false)
-    protected String secondtName;
+    protected String secondName;
 
     /**
      * Gets the specifiec id.
@@ -91,7 +91,7 @@ public abstract class AbstractPerson {
      * @return the person's second name.
      */
     public String getSecondtName() {
-        return secondtName;
+        return secondName;
     }
 
     /**
@@ -124,10 +124,10 @@ public abstract class AbstractPerson {
     /**
      * Sets the person's second name.
      *
-     * @param secondtName the person's second name.
+     * @param secondName the person's second name.
      */
-    public void setSecondtName(String secondtName) {
-        this.secondtName = secondtName;
+    public void setSecondtName(String secondName) {
+        this.secondName = secondName;
     }
 
     /**
@@ -152,27 +152,27 @@ public abstract class AbstractPerson {
      * Constructs a <b>AbstractPerson</b> object whith null-id
      * and sets last name, first name, second name.
      *
-     * @param lastName    the person's last name.
-     * @param firstName   the person's first name.
-     * @param secondtName the person's second name.
+     * @param lastName   the person's last name.
+     * @param firstName  the person's first name.
+     * @param secondName the person's second name.
      */
-    public AbstractPerson(String lastName, String firstName, String secondtName) {
+    public AbstractPerson(String lastName, String firstName, String secondName) {
         this.lastName = lastName;
         this.firstName = firstName;
-        this.secondtName = secondtName;
+        this.secondName = secondName;
     }
 
     /**
      * Constructs a <b>AbstractPerson</b> object and
      * sets id, last name, first name, second name.
      *
-     * @param id          the specifiec id.
-     * @param lastName    the person's last name.
-     * @param firstName   the person's first name.
-     * @param secondtName the person's second name.
+     * @param id         the specifiec id.
+     * @param lastName   the person's last name.
+     * @param firstName  the person's first name.
+     * @param secondName the person's second name.
      */
-    public AbstractPerson(Integer id, String lastName, String firstName, String secondtName) {
-        this(lastName, firstName, secondtName);
+    public AbstractPerson(Integer id, String lastName, String firstName, String secondName) {
+        this(lastName, firstName, secondName);
         this.id = id;
     }
 
@@ -203,7 +203,7 @@ public abstract class AbstractPerson {
                 return false;
             }
 
-            return secondtName.equals(that.secondtName);
+            return secondName.equals(that.secondName);
         }
 
         return false;
@@ -227,6 +227,6 @@ public abstract class AbstractPerson {
     @Override
     public String toString() {
         return String.format("Person %s (%s, '%s %s %s')",
-                getClass().getName(), id, lastName, firstName, secondtName);
+                getClass().getName(), id, lastName, firstName, secondName);
     }
 }

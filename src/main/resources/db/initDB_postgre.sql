@@ -421,10 +421,11 @@ CREATE TABLE visitors
   second_name VARCHAR(100)       NOT NULL,
   description VARCHAR            NOT NULL,
   enter_time  TIMESTAMP,
-  exit_time   TIMESTAMP
+  exit_time   TIMESTAMP,
+  CONSTRAINT visitors_times_con CHECK (NOT (enter_time IS NULL AND exit_time IS NOT NULL))
 );
 CREATE INDEX visitors_names_idx
-  ON visitors (last_name, first_name, second_name);
+  ON visitors (temp_num, last_name, first_name, second_name);
 
 /*
 Функция для проверки того, что добавляемый интервал времени отсутствия не пересекается

@@ -49,21 +49,21 @@ public class Employee extends AbstractPerson {
         this.schedule = schedule;
     }
 
-    public Employee(){
+    public Employee() {
     }
 
-    public Employee(String lastName, String firstName, String secondtName,
+    public Employee(String lastName, String firstName, String secondName,
                     Department department, Position position, Integer cardNum, String email) {
-        super(lastName, firstName, secondtName);
+        super(lastName, firstName, secondName);
         this.department = department;
         this.position = position;
         this.cardNum = cardNum;
         this.email = email;
     }
 
-    public Employee(Integer id, String lastName, String firstName, String secondtName,
+    public Employee(Integer id, String lastName, String firstName, String secondName,
                     Department department, Position position, Integer cardNum, String email) {
-        super(id, lastName, firstName, secondtName);
+        super(id, lastName, firstName, secondName);
         this.department = department;
         this.position = position;
         this.cardNum = cardNum;
