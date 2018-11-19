@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * A person who works at certain department.
@@ -54,6 +55,17 @@ public class Employee extends AbstractPerson {
      */
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")
     private EmpSchedule schedule;
+
+    /**
+     * The roles of the employee.
+     */
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "employee_roles", joinColumns = @JoinColumn(name = "emp_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"emp_id", "role"}, name = "employee_roles_con"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Size(max = 255)
+    private Set <Role> roles;
 
     /**
      * Returns the employee's department.

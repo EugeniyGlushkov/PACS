@@ -3526,7 +3526,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "visitors",
+											"text": "visitors*",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4048,7 +4048,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "actions",
+											"text": "actions*",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4454,7 +4454,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "edits",
+											"text": "edits*",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5687,7 +5687,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "absences",
+											"text": "absences*",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -12231,7 +12231,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "point_permits",
+											"text": "point_permits*",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17135,7 +17135,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "visitors",
+					"name": "visitors*",
 					"visibility": "public",
 					"attributes": [
 						{
@@ -17294,7 +17294,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "actions",
+					"name": "actions*",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -17704,7 +17704,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "edits",
+					"name": "edits*",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -18062,7 +18062,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "absences",
+					"name": "absences*",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -19094,7 +19094,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "point_permits",
+					"name": "point_permits*",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
