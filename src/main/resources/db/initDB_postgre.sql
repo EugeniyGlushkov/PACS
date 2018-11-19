@@ -93,7 +93,7 @@ CREATE TABLE employees
   last_name   VARCHAR(100) NOT NULL,
   first_name  VARCHAR(100) NOT NULL,
   second_name VARCHAR(100) NOT NULL,
-  email       VARCHAR,
+  email       VARCHAR(100) NOT NULL,
   FOREIGN KEY (dep_id) REFERENCES departments (id),
   FOREIGN KEY (pos_id) REFERENCES positions (id)
 );
@@ -430,6 +430,13 @@ CREATE TABLE visitors
 CREATE INDEX visitors_names_idx
   ON visitors (temp_num, last_name, first_name, second_name);
 
+CREATE FUNCTION getScheduleTime(DEP_ID, PART)
+  RETURNS TIME AS
+$part_time$
+BEGIN
+  RETURN SELECT PART FROM dep_shcedules D WHERE D.dep_id = DEP_ID;
+END;
+$part_time$ LANGUAGE plpgsql;
 /*
 Функция для проверки того, что добавляемый интервал времени отсутствия не пересекается
 интервалами уже существующих отсутствий: работник не может одновременно быть в отпуске и командировке.

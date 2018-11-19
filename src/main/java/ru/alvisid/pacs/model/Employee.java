@@ -1,11 +1,39 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.OnDelete;
 import ru.alvisid.pacs.model.abstractions.AbstractPerson;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "employees", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "card_num", name = "employees_unique_card_num_idx"),
+        @UniqueConstraint(columnNames = "email", name = "employees_unique_emale_idx")
+})
 public class Employee extends AbstractPerson {
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "dep_id", nullable = false)
     private Department department;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "pos_id", nullable = false)
     private Position position;
+
+    @NotNull
+    @Column(name = "card_num", nullable = false, unique = true)
     private Integer cardNum;
+
+    @NotBlank
+    @Column(name = "email", nullable = false, unique = true)
+    @Size(max = 100)
+    @Email
     private String email;
     private EmpSchedule schedule;
 
