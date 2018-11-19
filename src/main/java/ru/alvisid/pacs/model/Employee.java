@@ -124,7 +124,7 @@ public class Employee extends AbstractPerson {
     /**
      * Sets the specified value to the {@code department} field.
      *
-     * @param department
+     * @param department the specified value to the {@code department} field.
      */
     public void setDepartment(Department department) {
         this.department = department;
