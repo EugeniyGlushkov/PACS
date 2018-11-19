@@ -1,7 +1,5 @@
 package ru.alvisid.pacs.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.OnDelete;
 import ru.alvisid.pacs.model.abstractions.AbstractPerson;
 
 import javax.persistence.*;
