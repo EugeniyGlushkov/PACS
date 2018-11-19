@@ -430,13 +430,30 @@ CREATE TABLE visitors
 CREATE INDEX visitors_names_idx
   ON visitors (temp_num, last_name, first_name, second_name);
 
-CREATE FUNCTION getScheduleTime(DEP_ID, PART)
-  RETURNS TIME AS
-$part_time$
+/*
+Функция добавляет расписание работника со значениями из расписания его отдела.
+ */
+CREATE FUNCTION new_employee()
+  RETURNS TRIGGER AS
+$new_emp$
 BEGIN
-  RETURN SELECT PART FROM dep_shcedules D WHERE D.dep_id = DEP_ID;
+  INSERT INTO emp_schedules (emp_id, start_work, end_work, start_lunch, end_lunch) VALUES
+    (NEW.id,
+     (SELECT start_work
+      FROM dep_schedules
+      WHERE dep_schedules.id = NEW.dep_id),
+     (SELECT end_work
+      FROM dep_schedules
+      WHERE dep_schedules.id = NEW.dep_id),
+     (SELECT start_lunch
+      FROM dep_schedules
+      WHERE dep_schedules.id = NEW.dep_id),
+     (SELECT end_lunch
+      FROM dep_schedules
+      WHERE dep_schedules.id = NEW.dep_id));
 END;
-$part_time$ LANGUAGE plpgsql;
+$new_emp$ LANGUAGE plpgsql;
+
 /*
 Функция для проверки того, что добавляемый интервал времени отсутствия не пересекается
 интервалами уже существующих отсутствий: работник не может одновременно быть в отпуске и командировке.
@@ -483,6 +500,15 @@ BEGIN
   RETURN NEW;
 END;
 $chek_act$ LANGUAGE plpgsql;
+
+/*
+Триггер срабатывает после добавления нового работника и вызывает функцию new_employee().
+ */
+CREATE TRIGGER new_emp
+AFTER INSERT
+  ON employees
+FOR EACH ROW
+EXECUTE PROCEDURE new_employee();
 
 /*
 Триггер, срабатывающий перед добавлением новых данных в отношение "Отсутствия"
