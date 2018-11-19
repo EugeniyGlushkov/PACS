@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
  * @version 1.0
  */
 @MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractEntity extends AbstractId {
     /**
      * The description of the entity.

@@ -4,7 +4,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * An annotation for mark a classes with mapped enumeration.
+ * An annotation for mark a class which is mapped enumeration.
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MappedEnum {
