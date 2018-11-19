@@ -33,7 +33,7 @@ public class Department extends AbstractEntity {
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy("department, dateOff DESC")
-    private List<DayOff> daysOff;
+    private List <DayOff> daysOff;
 
     /**
      * List of the holydays: week days when the department don't work constantly.
@@ -43,7 +43,7 @@ public class Department extends AbstractEntity {
             uniqueConstraints = @UniqueConstraint(columnNames = {"dep_id", "weekday_id"}, name = "depid_weekdayid_idx"))
     @Column(name = "weekday_id")
     @ElementCollection(fetch = FetchType.LAZY)
-    private List<WeekDay> weekEnds;
+    private List <WeekDay> weekEnds;
 
     /**
      * Returns the department's name.
@@ -59,8 +59,17 @@ public class Department extends AbstractEntity {
      *
      * @return list of days off of the department.
      */
-    public List<DayOff> getDaysOff() {
+    public List <DayOff> getDaysOff() {
         return daysOff;
+    }
+
+    /**
+     * Returns the list of the departmet's weekends.
+     *
+     * @return the list of the departmet's weekends.
+     */
+    public List <WeekDay> getWeekEnds() {
+        return weekEnds;
     }
 
     /**
@@ -77,8 +86,17 @@ public class Department extends AbstractEntity {
      *
      * @param daysOff list of days off of the department.
      */
-    public void setDaysOff(List<DayOff> daysOff) {
+    public void setDaysOff(List <DayOff> daysOff) {
         this.daysOff = daysOff;
+    }
+
+    /**
+     * Sets the list of the departmet's weekends.
+     *
+     * @param weekEnds the list of the departmet's weekends.
+     */
+    public void setWeekEnds(List <WeekDay> weekEnds) {
+        this.weekEnds = weekEnds;
     }
 
     /**

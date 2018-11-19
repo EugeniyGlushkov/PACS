@@ -20,9 +20,9 @@ public class Edit extends AbstractHasEmpEntity {
      * Type of the edit.
      */
     @NotNull
-    @JoinColumn(name = "type_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Column(name = "type_id", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    @Immutable
     private EditType editType;
 
     /**

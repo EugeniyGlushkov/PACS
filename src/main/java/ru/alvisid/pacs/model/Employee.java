@@ -113,6 +113,15 @@ public class Employee extends AbstractPerson {
     }
 
     /**
+     * Returns the roles of the employee.
+     *
+     * @return the roles of the employee.
+     */
+    public Set <Role> getRoles() {
+        return roles;
+    }
+
+    /**
      * Sets the specified value to the {@code department} field.
      *
      * @param department
@@ -155,6 +164,15 @@ public class Employee extends AbstractPerson {
      */
     public void setSchedule(EmpSchedule schedule) {
         this.schedule = schedule;
+    }
+
+    /**
+     * Sets the spesified value to the {@code roles} field.
+     *
+     * @param roles the spesified value to the {@code roles} field.
+     */
+    public void setRoles(Set <Role> roles) {
+        this.roles = roles;
     }
 
     /**
