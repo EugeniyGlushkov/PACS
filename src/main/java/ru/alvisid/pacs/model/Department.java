@@ -82,7 +82,7 @@ public class Department extends AbstractEntity {
     }
 
     /**
-     * Initializes a newly created <b>Department</b> object with null name value and null fiels of the superclass.
+     * Initializes a newly created <b>Department</b> object with null name value and null fields of the superclass.
      *
      * @see Department#Department(String, String)
      * @see Department#Department(Integer, String, String)
