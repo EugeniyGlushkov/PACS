@@ -1,6 +1,5 @@
 package ru.alvisid.pacs.model;
 
-import org.hibernate.annotations.Check;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.abstractions.AbstractSchedule;

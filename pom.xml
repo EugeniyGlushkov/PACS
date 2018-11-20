@@ -37,6 +37,7 @@
         <!--ORM-->
         <hibernate.version>5.2.15.Final</hibernate.version>
         <hibernate.validator.version>6.0.8.Final</hibernate.validator.version>
+        <hibernate.ehcache.version>5.2.11.Final</hibernate.ehcache.version>
     </properties>
 
     <dependencies>
@@ -57,6 +58,11 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate.ehcache.version}</version>
         </dependency>
 
     </dependencies>
