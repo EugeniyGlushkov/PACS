@@ -34,8 +34,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:2.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.0.7.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.0.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.0.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.0.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.0.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.6.RELEASE" level="project" />
@@ -61,5 +59,15 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:5.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.0.4.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish:javax.el:3.0.1-b10" level="project" />
+    <orderEntry type="library" name="Maven: org.ehcache.modules:ehcache-107:3.6.2" level="project" />
+    <orderEntry type="library" name="Maven: org.ehcache.modules:ehcache-api:3.6.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.ehcache.modules:ehcache-impl:3.6.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.ehcache.modules:ehcache-core:3.6.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.terracotta:offheap-store:2.4.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.ehcache:sizeof:0.3.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.ehcache.modules:ehcache-xml:3.6.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.terracotta:statistics:2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.1.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.1.0.RELEASE" level="project" />
   </component>
 </module>

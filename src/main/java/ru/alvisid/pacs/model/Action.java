@@ -42,7 +42,6 @@ public class Action extends AbstractId {
      */
     @NotNull
     @Column(name = "time", nullable = false)
-    @Immutable
     private LocalDateTime actionTime;
 
     /**

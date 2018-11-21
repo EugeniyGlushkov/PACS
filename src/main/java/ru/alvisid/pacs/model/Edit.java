@@ -22,7 +22,6 @@ public class Edit extends AbstractHasEmpEntity {
     @NotNull
     @Column(name = "type_id", nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    @Immutable
     private EditType editType;
 
     /**
@@ -30,7 +29,6 @@ public class Edit extends AbstractHasEmpEntity {
      */
     @NotNull
     @Column(name = "edit_date", nullable = false)
-    @Immutable
     private LocalDateTime editDateTime;
 
     /**
