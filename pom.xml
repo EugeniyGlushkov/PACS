@@ -39,6 +39,7 @@
 
         <!--DataBase-->
         <spring-data-jpa.version>2.0.7.RELEASE</spring-data-jpa.version>
+        <postgresql.version>42.2.5</postgresql.version>
 
         <!--ORM-->
         <hibernate.version>5.2.15.Final</hibernate.version>
@@ -73,6 +74,11 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data-jpa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
 
         <!--ORM-->
