@@ -24,7 +24,7 @@ public class Main {
         log.debug("In method Main");
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         Configuration configuration = factoryBean.getConfiguration();
-        SessionFactory sessionFactory = factoryBean.f;
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
         Set<javax.persistence.metamodel.EntityType<?>> entities = sessionFactory.getMetamodel().getEntities();
         List<?> classess = entities.stream().map(javax.persistence.metamodel.EntityType::getJavaType).filter(Objects::nonNull)
                 .collect(Collectors.toList());
