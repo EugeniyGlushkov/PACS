@@ -2,8 +2,11 @@ DROP TRIGGER IF EXISTS chek_abs
 ON absences;
 DROP TRIGGER IF EXISTS chek_act
 ON actions;
+DROP TRIGGER IF EXISTS new_emp
+ON employees;
 DROP FUNCTION IF EXISTS new_absence();
 DROP FUNCTION IF EXISTS new_action();
+DROP FUNCTION IF EXISTS new_employee();
 
 DROP TABLE IF EXISTS visitors;
 DROP TABLE IF EXISTS employee_roles;
@@ -495,11 +498,11 @@ BEGIN
   )
   THEN
     RAISE EXCEPTION 'Impossible insert, because eployee with id=% has not point action with id=% !',
-    NEW.emp_id, NEW.pointact_id;
-  END IF;
-  RETURN NEW;
-END;
-$chek_act$ LANGUAGE plpgsql;
+    NEW.emp_id, NEW.pointact_id;\
+  END IF;\
+  RETURN NEW;\
+END;\
+$chek_act$ LANGUAGE plpgsql;\
 
 /*
 Триггер срабатывает после добавления нового работника и вызывает функцию new_employee().
