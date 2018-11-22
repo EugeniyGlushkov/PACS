@@ -1,9 +1,7 @@
-DROP TRIGGER IF EXISTS chek_abs
-ON absences;
-DROP TRIGGER IF EXISTS chek_act
-ON actions;
-DROP TRIGGER IF EXISTS new_emp
-ON employees;
+DROP TRIGGER IF EXISTS chek_abs ON absences;
+DROP TRIGGER IF EXISTS chek_act ON actions;
+DROP TRIGGER IF EXISTS new_emp ON employees;
+
 DROP FUNCTION IF EXISTS new_absence();
 DROP FUNCTION IF EXISTS new_action();
 DROP FUNCTION IF EXISTS new_employee();
@@ -478,7 +476,7 @@ BEGIN
     RAISE EXCEPTION 'Impossible insert, because new data intesepts with old data!';
   END IF;
   RETURN NEW;
-END
+END;
 $chek_abs$ LANGUAGE plpgsql;
 
 /*
@@ -498,11 +496,11 @@ BEGIN
   )
   THEN
     RAISE EXCEPTION 'Impossible insert, because eployee with id=% has not point action with id=% !',
-    NEW.emp_id, NEW.pointact_id;\
-  END IF;\
-  RETURN NEW;\
-END;\
-$chek_act$ LANGUAGE plpgsql;\
+    NEW.emp_id, NEW.pointact_id;
+  END IF;
+  RETURN NEW;
+END;
+$chek_act$ LANGUAGE plpgsql;
 
 /*
 Триггер срабатывает после добавления нового работника и вызывает функцию new_employee().
@@ -545,4 +543,7 @@ INSERT INTO week_days (id, code) VALUES
 INSERT INTO edit_types (id, code) VALUES
   (1, 'CREATE'),
   (2, 'UPDATE'),
-  (3, 'DELETE');
+  (3, 'DELETE');;
+
+
+
