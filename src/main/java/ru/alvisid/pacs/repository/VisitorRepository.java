@@ -1,6 +1,8 @@
 package ru.alvisid.pacs.repository;
 
-import org.acs.domain.model.Visitor;
+
+
+import ru.alvisid.pacs.model.Visitor;
 
 import java.util.List;
 

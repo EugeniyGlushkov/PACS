@@ -1,6 +1,8 @@
 package ru.alvisid.pacs.repository;
 
-import org.acs.domain.model.Schedule;
+
+
+import ru.alvisid.pacs.model.DeptSchedule;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface ScheduleRepository {
+public interface DepScheduleRepository {
     /**
      * Saves or updates a given schedule.
      *
@@ -18,7 +20,7 @@ public interface ScheduleRepository {
      * @return a saved or update schedule,
      * null - if there aren't updated schedule in the repository.
      */
-    Schedule save(Schedule schedule);
+    DeptSchedule save(DeptSchedule schedule);
 
     /**
      * Deletes the schedule with specifiec id.
@@ -36,12 +38,12 @@ public interface ScheduleRepository {
      * @return a schedule with the cpecifiec id,
      * null - if there aren't schedule with cpecifiec id  in the DB.
      */
-    Schedule get(long id);
+    DeptSchedule get(long id);
 
     /**
      * Returnes list with all schedules.
      *
      * @return list with all schedules.
      */
-    List<Schedule> getAll();
+    List<DeptSchedule> getAll();
 }

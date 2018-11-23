@@ -1,5 +1,7 @@
 package ru.alvisid.pacs;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -10,6 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.slf4j.LoggerFactory.getLogger;
+import static ru.alvisid.pacs.model.WeekDay.*;
 
 public class Main {
     private static final Logger log = getLogger(Main.class);
@@ -26,5 +29,13 @@ public class Main {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         classes.forEach(System.out::println);
+        Session session = (Session)em.getDelegate();
+        System.out.println(session);
+        SessionFactory sf = session.getSessionFactory();
+        Session newSession = sf.openSession();
+        System.out.println(newSession);
+        Session altSession = em.unwrap(Session.class);
+        System.out.println(altSession == session);
+        System.out.println(MONDAY.ordinal());
     }
 }

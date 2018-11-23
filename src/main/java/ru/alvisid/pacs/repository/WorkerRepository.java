@@ -1,7 +1,7 @@
 package ru.alvisid.pacs.repository;
 
 
-import org.acs.domain.model.Worker;
+import ru.alvisid.pacs.model.Employee;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface WorkerRepository {
      * @return a saved or update worker,
      * null - if there aren't updated worker in the repository.
      */
-    Worker save(Worker worker);
+    Employee save(Employee emp);
 
     /**
      * Deletes the worker with specifiec id.
@@ -37,19 +37,19 @@ public interface WorkerRepository {
      * @return a worker with the cpecifiec id,
      * null - if there aren't worker with cpecifiec id  in the DB.
      */
-    Worker get(long id);
+    Employee get(long id);
 
     /**
      * Returnes list with all workers.
      *
      * @return list with all workers.
      */
-    List<Worker> getAll();
+    List<Employee> getAll();
 
     /**
      * Returnes list with all workers by deparmetnt's id.
      *
      * @return list with all workers by deparmetnt's id.
      */
-    List<Worker> getAllByDepId(long depId);
+    List<Employee> getAllByDepId(long depId);
 }
