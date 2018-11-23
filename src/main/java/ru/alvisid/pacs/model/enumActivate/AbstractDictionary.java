@@ -58,4 +58,12 @@ public abstract class AbstractDictionary {
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return "AbstractDictionary{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }
