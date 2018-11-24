@@ -3,6 +3,7 @@ package ru.alvisid.pacs.repository.loader;
 import org.springframework.stereotype.Component;
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.model.enumActivate.MappedEnum;
+import ru.alvisid.pacs.util.ValidationUtil;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -16,13 +17,30 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Contains methods to synchronize the enum classes with dictionaries classes
+ * which represents dictionary tables from data base.
+ * We don't need keep enums like entity and can save enums by ordinal values.
+ * Dictionaries classes have to be heir of the AbstractDictionary
+ * and be annotated with @MappedEnum which contains enum Class
+ * to mark the dictionary class that is represented by the enum. *
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ */
 @Component
 public class EnumLoader {
+    /**
+     *
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     @PostConstruct
-    public void init() {
+    private void init() {
         Set <EntityType <?>> entities = em.getMetamodel().getEntities();
 
         List <?> entityClasses = entities.stream()
@@ -50,8 +68,16 @@ public class EnumLoader {
         String sql = "FROM " + dictClass.getSimpleName();
         List <AbstractDictionary> valueList = em.createQuery(sql).getResultList();
 
+        ValidationUtil.checkDictionary(enumClass, valueList);
+
         for (AbstractDictionary dict : valueList) {
-            setEnumOrdinal(Enum.valueOf(enumClass, dict.getCode()), dict.getId());
+            String code = dict.getCode();
+
+            if (!ValidationUtil.checkDictCode(code, enumClass)) {
+                continue;
+            }
+
+            setEnumOrdinal(Enum.valueOf(enumClass, code), dict.getId());
         }
     }
 

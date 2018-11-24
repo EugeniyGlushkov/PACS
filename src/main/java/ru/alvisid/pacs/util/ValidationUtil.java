@@ -1,8 +1,12 @@
 package ru.alvisid.pacs.util;
 
+import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * This class consists exclusively of static methods wich helps
@@ -32,7 +36,7 @@ public class ValidationUtil {
      *
      * @param object  the checked object.
      * @param message message for thrown NotFoundException.
-     * @param <T> the type of the checked object.
+     * @param <T>     the type of the checked object.
      * @return the checked object.
      * @throws NotFoundException if the checked object is null.
      * @see ValidationUtil#checkNotFound(boolean, String)
@@ -59,12 +63,36 @@ public class ValidationUtil {
      *
      * @param object the checked object.
      * @param id     specific id of the entity.
-     * @param <T> the type of the checked object.
+     * @param <T>    the type of the checked object.
      * @return the checked object.
      * @throws NotFoundException if the checked object is null.
      * @see ValidationUtil#checkNotFoundWithId(boolean, int)
      */
     public static <T> T checkNotFoundWithId(T object, int id) {
         return checkNotFound(object, "Not found entity with id=" + id);
+    }
+
+    public static void checkDictionary(Class<? extends Enum> enumDict, List<? extends AbstractDictionary> dict) {
+        List<Enum> constants = Arrays.asList(enumDict.getEnumConstants());
+        List<String> dictStrs = dict.stream()
+                .map(AbstractDictionary::getCode)
+                .collect(Collectors.toList());
+
+        constants.forEach(e -> {
+            if (!dictStrs.contains(e.name())) {
+                throw new RuntimeException(String.format("Can not synchronize %s with dictionary, "
+                                + "because there are not %s in the data base dictionary",
+                        e.getClass().getName(), e.name()));
+            }
+        });
+    }
+
+    public static boolean checkDictCode(String code, Class<? extends Enum> enumClass) {
+        List<String> enumStrConsts = Arrays.asList(enumClass.getEnumConstants())
+                .stream()
+                .map(Enum::name)
+                .collect(Collectors.toList());
+
+        return enumStrConsts.contains(code);
     }
 }

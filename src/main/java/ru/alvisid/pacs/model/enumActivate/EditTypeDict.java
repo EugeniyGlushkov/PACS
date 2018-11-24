@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * An edit type from the edit_types dictionary in the data base.
+ * An edit type dictionary from the edit_types dictionary in the data base.
  */
 @Entity
 @Table(name = "edit_types")

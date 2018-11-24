@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * A week day from the week_days dictionary in the data base.
+ * A week day from dictionary the week_days dictionary in the data base.
  */
 @Entity
 @Table(name = "week_days")
