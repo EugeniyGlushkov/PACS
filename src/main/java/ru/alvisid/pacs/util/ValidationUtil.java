@@ -78,10 +78,16 @@ public class ValidationUtil {
                 .map(AbstractDictionary::getCode)
                 .collect(Collectors.toList());
 
+        if (constants.size() != dictStrs.size()) {
+            throw new RuntimeException(String.format("Enum %s constants amount=%d is not equal"
+                            + " dictionary members amount=%d in the data base!",
+                    enumDict.getName(), constants.size(), dictStrs.size()));
+        }
+
         constants.forEach(e -> {
             if (!dictStrs.contains(e.name())) {
                 throw new RuntimeException(String.format("Can not synchronize %s with dictionary, "
-                                + "because there are not %s in the data base dictionary",
+                                + "because there are not code = '%s' in the data base dictionary!",
                         e.getClass().getName(), e.name()));
             }
         });
