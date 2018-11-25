@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
  * Contains methods to synchronize the enum classes with dictionaries classes
  * which represents dictionary tables from data base.
  * We don't need keep enums like entity and can save enums by ordinal values.
- * Dictionaries classes have to be heir of the AbstractDictionary
+ * Dictionaries classes have to be heir of the {@code AbstractDictionary}
  * and be annotated with @MappedEnum which contains enum Class
- * to mark the dictionary class that is represented by the enum. *
+ * to mark the dictionary class that is represented by the enum.
  *
  * @author Glushkov Evgeniy
  * @version 1.0
@@ -31,25 +31,28 @@ import java.util.stream.Collectors;
 @Component
 public class EnumLoader {
     /**
-     *
+     * An instance is associated with a persistence context.
      */
     @PersistenceContext
     private EntityManager em;
 
     /**
-     *
+     * Initializes a synchronization enums which represent dictionaries
+     * with corresponding dictionaries in the data base.
      */
     @PostConstruct
     private void init() {
-        Set <EntityType <?>> entities = em.getMetamodel().getEntities();
+        //Get all mapped entity types.
+        Set<EntityType<?>> entities = em.getMetamodel().getEntities();
 
-        List <?> entityClasses = entities.stream()
+        //Get all mapped classes.
+        List<?> entityClasses = entities.stream()
                 .map(EntityType::getJavaType)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
         for (Object obj : entityClasses) {
-            if (!AbstractDictionary.class.isAssignableFrom((Class <AbstractDictionary>) obj)) {
+            if (!AbstractDictionary.class.isAssignableFrom((Class<AbstractDictionary>) obj)) {
                 continue;
             }
 
@@ -57,31 +60,41 @@ public class EnumLoader {
                 continue;
             }
 
-            MappedEnum mappedEnum = ((Class <MappedEnum>) obj).getAnnotation(MappedEnum.class);
-            updateEnumIdentifiers(mappedEnum.enumClass(), (Class <AbstractDictionary>) obj);
+            //Get MappedEnum object of the carrent entity.
+            MappedEnum mappedEnum = ((Class<?>) obj).getAnnotation(MappedEnum.class);
+            updateEnumIdentifiers(mappedEnum.enumClass(), (Class<AbstractDictionary>) obj);
             updateEnumValues(mappedEnum.enumClass());
         }
     }
 
-    private void updateEnumIdentifiers(Class <? extends Enum> enumClass,
-                                       Class <? extends AbstractDictionary> dictClass) {
+    /**
+     * Syncs fields <b>ordinal</b> of the specified enum's constants
+     * with the corresponding dictionary in the data base mapped by <b>AbstractDictionary</b> class.
+     * A constants name corresponds to the id attribute in the dictionary table.
+     * A constants field ordinal corresponds to the code attribute in the
+     *
+     * @param enumClass the identified enum class represents dictionary from data base.
+     * @param dictClass the dictionary mapped class.
+     */
+    private void updateEnumIdentifiers(Class<? extends Enum> enumClass,
+                                       Class<? extends AbstractDictionary> dictClass) {
+        //Create SQL query and get list of the dictionary values.
         String sql = "FROM " + dictClass.getSimpleName();
-        List <AbstractDictionary> valueList = em.createQuery(sql).getResultList();
+        List<AbstractDictionary> valueList = em.createQuery(sql).getResultList();
 
         ValidationUtil.checkDictionary(enumClass, valueList);
 
-        for (AbstractDictionary dict : valueList) {
-            String code = dict.getCode();
-
-            if (!ValidationUtil.checkDictCode(code, enumClass)) {
-                continue;
-            }
-
-            setEnumOrdinal(Enum.valueOf(enumClass, code), dict.getId());
-        }
+        valueList.forEach(dict -> setEnumOrdinal(Enum.valueOf(enumClass, dict.getCode()), dict.getId()));
     }
 
-    private void updateEnumValues(Class <? extends Enum> enumClass) {
+    /**
+     * Updates array field {@code $VALUES} of the constants in the specified enum class
+     * so that array index of the enum constant equals appropriate id
+     * from the dictionary table.
+     *
+     * @param enumClass the enum class to apdate array field {@code $VALUES}.
+     */
+    private void updateEnumValues(Class<? extends Enum> enumClass) {
         Enum[] enumConstants = enumClass.getEnumConstants();
 
         Object valuesArray = Array.newInstance(enumClass, enumConstants.length + 1);
@@ -107,6 +120,13 @@ public class EnumLoader {
         }
     }
 
+    /**
+     * Changes ordinal field of the specified enum object
+     * to the specified value.
+     *
+     * @param object     the enum object to change ordinal field.
+     * @param newOrdinal the new ordinal value.
+     */
     private void setEnumOrdinal(Enum object, int newOrdinal) {
         Field field;
 

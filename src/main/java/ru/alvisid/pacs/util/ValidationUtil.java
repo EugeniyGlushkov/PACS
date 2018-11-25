@@ -72,6 +72,14 @@ public class ValidationUtil {
         return checkNotFound(object, "Not found entity with id=" + id);
     }
 
+    /**
+     * Checks that enum dictionary matches to dictionary in the data base.
+     * Number enum constants is equal to number members of the table dictionary.
+     * Every enum constant has appropriate member in the table dictionary.
+     *
+     * @param enumDict enum class represents dictionary.
+     * @param dict     list of the dictionary members.
+     */
     public static void checkDictionary(Class<? extends Enum> enumDict, List<? extends AbstractDictionary> dict) {
         List<Enum> constants = Arrays.asList(enumDict.getEnumConstants());
         List<String> dictStrs = dict.stream()
@@ -91,14 +99,5 @@ public class ValidationUtil {
                         e.getClass().getName(), e.name()));
             }
         });
-    }
-
-    public static boolean checkDictCode(String code, Class<? extends Enum> enumClass) {
-        List<String> enumStrConsts = Arrays.asList(enumClass.getEnumConstants())
-                .stream()
-                .map(Enum::name)
-                .collect(Collectors.toList());
-
-        return enumStrConsts.contains(code);
     }
 }
