@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.model.enumActivate.MappedEnum;
 import ru.alvisid.pacs.util.ValidationUtil;
+import ru.alvisid.pacs.util.exceptions.EnumLoaderException;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -116,7 +117,7 @@ public class EnumLoader {
 
             field.set(null, valuesArray);
         } catch (Exception exc) {
-            throw new RuntimeException("Can't update values array: ", exc);
+            throw new EnumLoaderException("Can't update values array: ", exc);
         }
     }
 
@@ -135,7 +136,7 @@ public class EnumLoader {
             field.setAccessible(true);
             field.set(object, newOrdinal);
         } catch (Exception exc) {
-            throw new RuntimeException("Can't update enum ordinal: ", exc);
+            throw new EnumLoaderException("Can't update enum ordinal: ", exc);
         }
     }
 }

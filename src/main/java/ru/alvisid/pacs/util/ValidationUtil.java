@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.util;
 
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
+import ru.alvisid.pacs.util.exceptions.EnumLoaderException;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
 import java.util.Arrays;
@@ -87,14 +88,14 @@ public class ValidationUtil {
                 .collect(Collectors.toList());
 
         if (constants.size() != dictStrs.size()) {
-            throw new RuntimeException(String.format("Enum %s constants amount=%d is not equal"
+            throw new EnumLoaderException(String.format("Enum %s constants amount=%d is not equal"
                             + " dictionary members amount=%d in the data base!",
                     enumDict.getName(), constants.size(), dictStrs.size()));
         }
 
         constants.forEach(e -> {
             if (!dictStrs.contains(e.name())) {
-                throw new RuntimeException(String.format("Can not synchronize %s with dictionary, "
+                throw new EnumLoaderException(String.format("Can not synchronize %s with dictionary, "
                                 + "because there are not code = '%s' in the data base dictionary!",
                         e.getClass().getName(), e.name()));
             }
