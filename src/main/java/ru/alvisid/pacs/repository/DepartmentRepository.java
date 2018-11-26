@@ -1,6 +1,5 @@
 package ru.alvisid.pacs.repository;
 
-
 import ru.alvisid.pacs.model.Department;
 
 import java.util.List;
@@ -44,5 +43,5 @@ public interface DepartmentRepository {
      *
      * @return list with all departments.
      */
-    List<Department> getAll();
+    List <Department> getAll();
 }

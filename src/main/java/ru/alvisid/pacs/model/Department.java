@@ -5,6 +5,7 @@ import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -46,6 +47,13 @@ public class Department extends AbstractEntity {
     private List <WeekDay> weekEnds;
 
     /**
+     * The department's schedule
+     */
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @NotNull
+    private DeptSchedule deptSchedule;
+
+    /**
      * Returns the department's name.
      *
      * @return the department's name.
@@ -73,6 +81,15 @@ public class Department extends AbstractEntity {
     }
 
     /**
+     * Returns the department's schedule;
+     *
+     * @return the department's schedule;
+     */
+    public DeptSchedule getDeptSchedule() {
+        return deptSchedule;
+    }
+
+    /**
      * Sets the department's name.
      *
      * @param name the department's name.
@@ -97,6 +114,15 @@ public class Department extends AbstractEntity {
      */
     public void setWeekEnds(List <WeekDay> weekEnds) {
         this.weekEnds = weekEnds;
+    }
+
+    /**
+     * Sets the department's schedule.
+     *
+     * @param deptSchedule the department's schedule.
+     */
+    public void setDeptSchedule(DeptSchedule deptSchedule) {
+        this.deptSchedule = deptSchedule;
     }
 
     /**

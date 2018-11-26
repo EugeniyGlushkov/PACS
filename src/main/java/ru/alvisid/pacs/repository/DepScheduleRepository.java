@@ -1,7 +1,5 @@
 package ru.alvisid.pacs.repository;
 
-
-
 import ru.alvisid.pacs.model.DeptSchedule;
 
 import java.util.List;
