@@ -44,4 +44,11 @@ public interface DepScheduleRepository {
      * @return list with all schedules.
      */
     List<DeptSchedule> getAll();
+
+    /**
+     * Returnes list with schedules by department {@code id}.
+     *
+     * @return llist with schedules by department {@code id}.
+     */
+    List<DeptSchedule> getAllByDeptId();
 }

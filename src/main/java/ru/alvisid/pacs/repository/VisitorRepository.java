@@ -4,6 +4,7 @@ package ru.alvisid.pacs.repository;
 
 import ru.alvisid.pacs.model.Visitor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -46,4 +47,18 @@ public interface VisitorRepository {
      * @return list with all visitors.
      */
     List<Visitor> getAll();
+
+    /**
+     *
+     *
+     * @param lastName
+     * @param firstName
+     * @param secondName
+     * @return
+     */
+    List<Visitor> getAllByName(String lastName, String firstName, String secondName);
+
+    List<Visitor> getAllByEnterTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
+
+    List<Visitor> getAllByExitTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 }
