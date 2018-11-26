@@ -1,7 +1,6 @@
 package ru.alvisid.pacs.repository;
 
 
-
 import ru.alvisid.pacs.model.Visitor;
 
 import java.time.LocalDateTime;
@@ -33,32 +32,32 @@ public interface VisitorRepository {
     boolean delete(long id);
 
     /**
-     * Returnes a visitor with the cpecifiec id.
+     * Returns a visitor with the cpecifiec id.
      *
-     * @param id the specifiec id of visitor to get.
+     * @param id the specified id of visitor to get.
      * @return a visitor with the cpecifiec id,
      * null - if there aren't visitor with cpecifiec id  in the DB.
      */
     Visitor get(long id);
 
     /**
-     * Returnes list with all visitors.
+     * Returns list with all visitors.
      *
      * @return list with all visitors.
      */
-    List<Visitor> getAll();
+    List <Visitor> getAll();
 
     /**
+     * Returns a visitors list by last name, first name and second name.
      *
-     *
-     * @param lastName
-     * @param firstName
-     * @param secondName
-     * @return
+     * @param lastName   the last name.
+     * @param firstName  the first name.
+     * @param secondName the second name.
+     * @return the visitors list by last name, first name and second name.
      */
-    List<Visitor> getAllByName(String lastName, String firstName, String secondName);
+    List <Visitor> getAllByName(String lastName, String firstName, String secondName);
 
-    List<Visitor> getAllByEnterTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
+    List <Visitor> getAllByEnterTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 
-    List<Visitor> getAllByExitTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
+    List <Visitor> getAllByExitTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 }
