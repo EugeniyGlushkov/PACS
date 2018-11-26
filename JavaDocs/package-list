@@ -1,0 +1,8 @@
+ru.alvisid.pacs
+ru.alvisid.pacs.model
+ru.alvisid.pacs.model.abstractions
+ru.alvisid.pacs.model.enumActivate
+ru.alvisid.pacs.repository
+ru.alvisid.pacs.repository.loader
+ru.alvisid.pacs.util
+ru.alvisid.pacs.util.exceptions
