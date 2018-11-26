@@ -1,17 +1,17 @@
 # PACS
 Physical access control system
 
-##Логгирование
+## Логгирование
 Логгирование: Установить переменную окружения на PACS_ROOT на корень проекта.
 
-##Настройки PostgreSQL
+## Настройки PostgreSQL
 - Host: localhost
 - Port: 5432
 - Database: pacs
 - User: postgres
 - Password: root
 
-##Настройки HSQLDB
+## Настройки HSQLDB
 - Path: D:/temp
 - Database: pacs
 - User: sa
