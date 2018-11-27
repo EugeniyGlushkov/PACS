@@ -48,6 +48,7 @@ public interface DeptScheduleRepository {
     /**
      * Returns department schedule by department {@code id}.
      *
+     * @param deptId the department's id.
      * @return department schedule by department {@code id}.
      */
     DeptSchedule getByDeptId(int deptId);

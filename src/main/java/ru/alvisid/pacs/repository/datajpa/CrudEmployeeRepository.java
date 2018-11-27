@@ -37,7 +37,7 @@ public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer
     @Transactional
     @Modifying
     @Query("DELETE FROM Eployee e WHERE e.id =: id")
-    int delete(@Param("id") long id);
+    int delete(@Param("id") int id);
 
     /**
      * Returns a container with an employee by the given id inside.
@@ -51,7 +51,7 @@ public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer
     /**
      * Returns all employees sorted with a given sort.
      *
-     * @param sort sort for employees list.
+     * @param sort the sort for employees list.
      * @return list of all employees sorted with a given sort.
      */
     @Override
@@ -60,11 +60,12 @@ public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer
     /**
      * Returns all employees by department id sorted with a given sort.
      *
-     * @param sort sort for employees list.
+     * @param deptId the department's id.
+     * @param sort the sort for employees list.
      * @return list of all employees by department id sorted with a given sort.
      */
     @Query("SELECT e FROM employee e WHERE e.department.id=:deptId")
-    List <Employee> findAllByDeptId(@Param("deptId") long deptId, Sort sort);
+    List <Employee> findAllByDeptId(@Param("deptId") int deptId, Sort sort);
 
     /**
      * Returns an employee by the given email.
