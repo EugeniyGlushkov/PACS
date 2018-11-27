@@ -68,19 +68,19 @@ public class DataJpaWorkerRepositoryImpl implements WorkerRepository {
      * @see DataJpaVisitorRepositoryImpl#SORT_FNAME_MNAME_LNAME
      */
     @Override
-    public List<Worker> getAll() {
+    public List <Worker> getAll() {
         return crudRepository.findAll(SORT_FNAME_MNAME_LNAME);
     }
 
     /**
      * Returns all workers by department id sorted with cpecifiec sort.
      *
-     * @param depId the department id.
+     * @param deptId the department id.
      * @return list of all workers by department id.
      * @see DataJpaVisitorRepositoryImpl#SORT_FNAME_MNAME_LNAME
      */
     @Override
-    public List<Worker> getAllByDepId(long depId) {
-        return crudRepository.findAllByDepId(depId, SORT_FNAME_MNAME_LNAME);
+    public List <Worker> getAllByDeptId(long deptId) {
+        return crudRepository.findAllByDeptId(deptId, SORT_FNAME_MNAME_LNAME);
     }
 }

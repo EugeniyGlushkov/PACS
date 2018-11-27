@@ -62,6 +62,6 @@ public interface CrudWorkerRepository extends JpaRepository<Worker, Long> {
      * @param sort sort fo workers list.
      * @return list of all workers by department id sorted with given sort.
      */
-    @Query("SELECT w FROM Worker w WHERE w.department.id =: depId")
-    List<Worker> findAllByDepId(@Param("depId") long depId, Sort sort);
+    @Query("SELECT w FROM Worker w WHERE w.department.id=:deptId")
+    List<Worker> findAllByDeptId(@Param("deptId") long deptId, Sort sort);
 }

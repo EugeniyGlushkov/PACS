@@ -10,7 +10,7 @@ import java.util.List;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface DepScheduleRepository {
+public interface DeptScheduleRepository {
     /**
      * Saves or updates a given schedule.
      *
@@ -27,7 +27,7 @@ public interface DepScheduleRepository {
      * @return true - if a schedule with the specifiec id are deleted,
      * false - if there aren't the schedule with the cpecifiec id in the DB.
      */
-    boolean delete(long id);
+    boolean delete(int id);
 
     /**
      * Returns a schedule with the cpecifiec id.
@@ -36,7 +36,7 @@ public interface DepScheduleRepository {
      * @return a schedule with the cpecifiec id,
      * null - if there aren't schedule with cpecifiec id  in the DB.
      */
-    DeptSchedule get(long id);
+    DeptSchedule get(int id);
 
     /**
      * Returns list with all schedules.
@@ -46,9 +46,9 @@ public interface DepScheduleRepository {
     List<DeptSchedule> getAll();
 
     /**
-     * Returns list with schedules by department {@code id}.
+     * Returns department schedule by department {@code id}.
      *
-     * @return llist with schedules by department {@code id}.
+     * @return department schedule by department {@code id}.
      */
-    List<DeptSchedule> getAllByDeptId();
+    DeptSchedule getByDeptId(int deptId);
 }

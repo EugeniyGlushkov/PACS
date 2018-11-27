@@ -21,9 +21,8 @@ public class Employee extends AbstractPerson {
     /**
      * The department where the person works.
      */
-    @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "dep_id", nullable = false)
+    @JoinColumn(name = "dep_id")
     private Department department;
 
     /**

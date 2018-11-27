@@ -49,8 +49,8 @@ public interface EmployeeRepository {
     /**
      * Returns list with all employees by deparmetnt's id.
      *
-     * @param depId the department's id.
+     * @param deptId the department's id.
      * @return list with all employees by deparmetnt's id.
      */
-    List<Employee> getAllByDepId(long depId);
+    List<Employee> getAllByDeptId(long deptId);
 }
