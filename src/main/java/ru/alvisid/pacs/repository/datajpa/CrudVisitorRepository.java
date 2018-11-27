@@ -8,7 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.alvisid.pacs.model.Visitor;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * JpaRepository interface for visitor.
@@ -16,7 +18,7 @@ import java.util.List;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface CrudVisitorRepository extends JpaRepository<Visitor, Long> {
+public interface CrudVisitorRepository extends JpaRepository <Visitor, Integer> {
     /**
      * Saves a given visitor.
      *
@@ -41,18 +43,32 @@ public interface CrudVisitorRepository extends JpaRepository<Visitor, Long> {
     /**
      * Returns a visitor by given id.
      *
-     * @param aLong id of the visitor to return.
+     * @param integer id of the visitor to return.
      * @return a visitor by given id.
      */
     @Override
-    Visitor findOne(Long aLong);
+    Optional <Visitor> findById(Integer integer);
 
     /**
-     * Returns all visitors sorted with given sort.
+     * Returns all visitors sorted with a given sort.
      *
-     * @param sort sort fo visitors list.
-     * @return list of all visitors.
+     * @param sort the sort for visitors list.
+     * @return the list of all visitors.
      */
     @Override
-    List<Visitor> findAll(Sort sort);
+    List <Visitor> findAll(Sort sort);
+
+    /**
+     * Returns a visitors list which contains visitors
+     * with enter time in a specified time interval sorted with a given sort.
+     *
+     * @param startTime the start of the time interval.
+     * @param endTime   the end of the time interval.
+     * @param sort      the sort for visitors list.
+     * @return the visitors list which contains visitors with enter time in a specified time interval.
+     */
+    @Query("SELECT v FROM Visitor v WHERE v.enterTime>=:startTime AND v.enterTime<=:endTime")
+    List <Visitor> getAllByEnterTimeBetween(@Param("startTime") LocalDateTime startTime,
+                                            @Param("endTime") LocalDateTime endTime,
+                                            Sort sort);
 }

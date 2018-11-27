@@ -1,12 +1,13 @@
 package ru.alvisid.pacs.repository.datajpa.impl;
 
-import org.acs.domain.model.Visitor;
-import org.acs.domain.repository.VisitorRepository;
-import org.acs.domain.repository.datajpa.CrudVisitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import ru.alvisid.pacs.model.Visitor;
+import ru.alvisid.pacs.repository.VisitorRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudVisitorRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -18,9 +19,10 @@ import java.util.List;
 @Repository
 public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
     /**
-     * Sort by first name, middle name, last name.
+     * Sort by last name, first name, second name.
      */
-    private static final Sort SORT_FNAME_MNAME_LNAME = new Sort(Sort.Direction.ASC, "firstName", "middleName", "lastName");
+    private static final Sort SORT_LNAME_FNAME_SNAME =
+            new Sort(Sort.Direction.ASC, "lastName", "firstName", "secondName");
 
     /**
      * An interface for visitor which extends JpaRepository.
@@ -46,7 +48,7 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
      * @return true - the entity is deleted, false - the entity isn't found.
      */
     @Override
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         return crudRepository.delete(id) != 0;
     }
 
@@ -57,18 +59,31 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
      * @return a visitor by given id.
      */
     @Override
-    public Visitor get(long id) {
-        return crudRepository.findOne(id);
+    public Visitor get(int id) {
+        return crudRepository.findById(id).orElse(null);
     }
 
     /**
      * Returns all visitors sorted with cpecifiec sort.
      *
      * @return list of all visitors.
-     * @see DataJpaVisitorRepositoryImpl#SORT_FNAME_MNAME_LNAME
+     * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
     public List<Visitor> getAll() {
-        return crudRepository.findAll(SORT_FNAME_MNAME_LNAME);
+        return crudRepository.findAll(SORT_LNAME_FNAME_SNAME);
+    }
+
+    /**
+     * Returns a visitors list which contains visitors
+     * with enter time in a specified time interval.
+     *
+     * @param startTime the start of the time interval.
+     * @param endTime   the end of the time interval.
+     * @return the visitors list which contains visitors with enter time in a specified time interval.
+     */
+    @Override
+    public List <Visitor> getAllByEnterTimeBetween(LocalDateTime startTime, LocalDateTime endTime) {
+        return crudRepository.getAllByEnterTimeBetween(startTime, endTime, SORT_LNAME_FNAME_SNAME);
     }
 }

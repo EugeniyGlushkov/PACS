@@ -40,37 +40,37 @@ public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer
     int delete(@Param("id") long id);
 
     /**
-     * Returns a container with an employee by given id inside.
+     * Returns a container with an employee by the given id inside.
      *
      * @param integer id of the employee to return.
-     * @return a container with an employee by given id inside.
+     * @return a container with an employee by the given id inside.
      */
     @Override
     Optional <Employee> findById(Integer integer);
 
     /**
-     * Returns all employees sorted with given sort.
+     * Returns all employees sorted with a given sort.
      *
-     * @param sort sort fo employees list.
-     * @return list of all employees sorted with given sort.
+     * @param sort sort for employees list.
+     * @return list of all employees sorted with a given sort.
      */
     @Override
     List <Employee> findAll(Sort sort);
 
     /**
-     * Returns all employees by department id sorted with given sort.
+     * Returns all employees by department id sorted with a given sort.
      *
-     * @param sort sort fo employees list.
-     * @return list of all employees by department id sorted with given sort.
+     * @param sort sort for employees list.
+     * @return list of all employees by department id sorted with a given sort.
      */
     @Query("SELECT e FROM employee e WHERE e.department.id=:deptId")
     List <Employee> findAllByDeptId(@Param("deptId") long deptId, Sort sort);
 
     /**
-     * Returns an employee by given email.
+     * Returns an employee by the given email.
      *
      * @param email the specified email.
-     * @return the employee by given email.
+     * @return the employee by the given email.
      */
     Employee getByEmail(String email);
 }

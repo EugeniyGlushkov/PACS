@@ -29,7 +29,7 @@ public interface VisitorRepository {
      * @return true - if a visitor with the specifiec id are deleted,
      * false - if there aren't the visitor with the cpecifiec id in the DB.
      */
-    boolean delete(long id);
+    boolean delete(int id);
 
     /**
      * Returns a visitor with the cpecifiec id.
@@ -38,7 +38,7 @@ public interface VisitorRepository {
      * @return a visitor with the cpecifiec id,
      * null - if there aren't visitor with cpecifiec id  in the DB.
      */
-    Visitor get(long id);
+    Visitor get(int id);
 
     /**
      * Returns list with all visitors.
@@ -48,22 +48,12 @@ public interface VisitorRepository {
     List <Visitor> getAll();
 
     /**
-     * Returns a visitors list by last name, first name and second name.
-     *
-     * @param lastName   the last name.
-     * @param firstName  the first name.
-     * @param secondName the second name.
-     * @return the visitors list by last name, first name and second name.
-     */
-    List <Visitor> getAllByName(String lastName, String firstName, String secondName);
-
-    /**
      * Returns a visitors list which contains visitors
      * with enter time in a specified time interval.
      *
      * @param startTime the start of the time interval.
-     * @param endTime the end of the time interval.
-     * @return the isitors list which contains visitors with enter time in a specified time interval.
+     * @param endTime   the end of the time interval.
+     * @return the visitors list which contains visitors with enter time in a specified time interval.
      */
     List <Visitor> getAllByEnterTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 }

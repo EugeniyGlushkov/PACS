@@ -66,7 +66,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      * Returns all employees sorted with cpecifiec sort.
      *
      * @return list of all employees.
-     * @see DataJpaVisitorRepositoryImpl#SORT_FNAME_MNAME_LNAME
+     * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
     public List <Employee> getAll() {
@@ -78,7 +78,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      *
      * @param deptId the department id.
      * @return list of all employees by department id.
-     * @see DataJpaVisitorRepositoryImpl#SORT_FNAME_MNAME_LNAME
+     * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
     public List <Employee> getAllByDeptId(int deptId) {
