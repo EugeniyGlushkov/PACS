@@ -28,16 +28,16 @@ public interface EmployeeRepository {
      * @return true - if a employee with the specifiec id are deleted,
      * false - if there aren't the employee with the cpecifiec id in the DB.
      */
-    boolean delete(long id);
+    boolean delete(int id);
 
     /**
-     * Returns a employee with the cpecifiec id.
+     * Returns an employee with the cpecifiec id.
      *
      * @param id the specifiec id of employee to get.
      * @return a employee with the cpecifiec id,
      * null - if there aren't employee with cpecifiec id  in the DB.
      */
-    Employee get(long id);
+    Employee get(int id);
 
     /**
      * Returns list with all employees.
@@ -52,5 +52,13 @@ public interface EmployeeRepository {
      * @param deptId the department's id.
      * @return list with all employees by deparmetnt's id.
      */
-    List<Employee> getAllByDeptId(long deptId);
+    List<Employee> getAllByDeptId(int deptId);
+
+    /**
+     * Returns an employee by given email.
+     *
+     * @param email the specified email.
+     * @return the employee by given email.
+     */
+    Employee getByEmail(String email);
 }

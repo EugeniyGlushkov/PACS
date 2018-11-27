@@ -36,7 +36,7 @@ public interface CrudDeptScheduleRepository extends JpaRepository<DeptSchedule, 
      */
     @Transactional
     @Modifying
-    @Query("DELETE FROM Schedule s WHERE s.id =: id")
+    @Query("DELETE FROM DeptSchedule ds WHERE ds.id =: id")
     int delete(@Param("id") int id);
 
     /**

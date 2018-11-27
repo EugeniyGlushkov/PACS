@@ -34,7 +34,7 @@ public interface DeptScheduleRepository {
      *
      * @param id the specifiec id of schedule to get.
      * @return a schedule with the cpecifiec id,
-     * null - if there aren't schedule with cpecifiec id  in the DB.
+     * null - if there aren't department schedule with cpecifiec id  in the DB.
      */
     DeptSchedule get(int id);
 

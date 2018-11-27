@@ -53,7 +53,8 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
      * Returns a department by given id.
      *
      * @param id id of the department to return.
-     * @return a department by given id.
+     * @return a department by given id,
+     * null - if there aren't department with cpecifiec id in the DB.
      */
     @Override
     public Department get(int id) {

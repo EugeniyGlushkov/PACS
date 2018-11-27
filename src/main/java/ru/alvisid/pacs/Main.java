@@ -27,5 +27,6 @@ public class Main {
         for (Enum e : days) {
             System.out.println(e == null ? 0 : e.ordinal() );
         }
+
     }
 }

@@ -26,8 +26,8 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
     /**
      * Saves a given department schedule.
      *
-     * @param schedule a schedule to save.
-     * @return the saved schedule.
+     * @param schedule a department schedule to save.
+     * @return the saved department schedule.
      */
     @Override
     public DeptSchedule save(DeptSchedule schedule) {
@@ -49,11 +49,12 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
      * Returns a department schedule by given id.
      *
      * @param id the id of the department schedule to return.
-     * @return a department schedule by given id.
+     * @return a department schedule by given id,
+     * null - if there aren't department schedule with cpecifiec id  in the DB.
      */
     @Override
     public DeptSchedule get(int id) {
-        return crudRepository.getOne(id);
+        return crudRepository.findById(id).orElse(null);
     }
 
     /**
