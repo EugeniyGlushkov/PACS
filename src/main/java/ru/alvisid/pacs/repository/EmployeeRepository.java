@@ -31,7 +31,7 @@ public interface EmployeeRepository {
     boolean delete(long id);
 
     /**
-     * Returnes a employee with the cpecifiec id.
+     * Returns a employee with the cpecifiec id.
      *
      * @param id the specifiec id of employee to get.
      * @return a employee with the cpecifiec id,
@@ -40,14 +40,14 @@ public interface EmployeeRepository {
     Employee get(long id);
 
     /**
-     * Returnes list with all employees.
+     * Returns list with all employees.
      *
      * @return list with all employees.
      */
     List<Employee> getAll();
 
     /**
-     * Returnes list with all employees by deparmetnt's id.
+     * Returns list with all employees by deparmetnt's id.
      *
      * @param depId the department's id.
      * @return list with all employees by deparmetnt's id.

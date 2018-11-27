@@ -63,9 +63,9 @@ public class PointPermit extends AbstractId {
     }
 
     /**
-     * Sets the spesified employee.
+     * Sets the specified employee.
      *
-     * @param employee the spesified employee.
+     * @param employee the specified employee.
      */
     public void setEmployee(Employee employee) {
         this.employee = employee;

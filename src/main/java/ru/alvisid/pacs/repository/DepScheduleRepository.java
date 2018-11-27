@@ -30,7 +30,7 @@ public interface DepScheduleRepository {
     boolean delete(long id);
 
     /**
-     * Returnes a schedule with the cpecifiec id.
+     * Returns a schedule with the cpecifiec id.
      *
      * @param id the specifiec id of schedule to get.
      * @return a schedule with the cpecifiec id,
@@ -39,14 +39,14 @@ public interface DepScheduleRepository {
     DeptSchedule get(long id);
 
     /**
-     * Returnes list with all schedules.
+     * Returns list with all schedules.
      *
      * @return list with all schedules.
      */
     List<DeptSchedule> getAll();
 
     /**
-     * Returnes list with schedules by department {@code id}.
+     * Returns list with schedules by department {@code id}.
      *
      * @return llist with schedules by department {@code id}.
      */

@@ -140,7 +140,7 @@ public class Employee extends AbstractPerson {
     }
 
     /**
-     * Sets the spesified value to the {@code cardNum} field.
+     * Sets the specified value to the {@code cardNum} field.
      *
      * @param cardNum the specified value of the cardNum.
      */
@@ -149,7 +149,7 @@ public class Employee extends AbstractPerson {
     }
 
     /**
-     * Sets the spesified value to the {@code email} field.
+     * Sets the specified value to the {@code email} field.
      *
      * @param email the specified value of the email.
      */
@@ -158,7 +158,7 @@ public class Employee extends AbstractPerson {
     }
 
     /**
-     * Sets the spesified value to the {@code schedule} field.
+     * Sets the specified value to the {@code schedule} field.
      *
      * @param schedule the specified value of the schedule.
      */
@@ -167,9 +167,9 @@ public class Employee extends AbstractPerson {
     }
 
     /**
-     * Sets the spesified value to the {@code roles} field.
+     * Sets the specified value to the {@code roles} field.
      *
-     * @param roles the spesified value to the {@code roles} field.
+     * @param roles the specified value to the {@code roles} field.
      */
     public void setRoles(Set <Role> roles) {
         this.roles = roles;

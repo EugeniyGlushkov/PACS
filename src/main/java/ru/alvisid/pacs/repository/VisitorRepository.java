@@ -57,7 +57,13 @@ public interface VisitorRepository {
      */
     List <Visitor> getAllByName(String lastName, String firstName, String secondName);
 
+    /**
+     * Returns a visitors list which contains visitors
+     * with enter time in a specified time interval.
+     *
+     * @param startTime the start of the time interval.
+     * @param endTime the end of the time interval.
+     * @return the isitors list which contains visitors with enter time in a specified time interval.
+     */
     List <Visitor> getAllByEnterTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
-
-    List <Visitor> getAllByExitTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 }

@@ -45,23 +45,23 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
      * @return true - the entity is deleted, false - the entity isn't found.
      */
     @Override
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         return crudRepository.delete(id) != 0;
     }
 
     /**
-     * Returnes a department by given id.
+     * Returns a department by given id.
      *
      * @param id id of the department to return.
      * @return a department by given id.
      */
     @Override
-    public Department get(long id) {
+    public Department get(int id) {
         return crudRepository.findById(id).orElse(null);
     }
 
     /**
-     * Returnes all departments sorted with specifiec sort.
+     * Returns all departments sorted with specifiec sort.
      *
      * @return list of all departments.
      * @see DataJpaDepartmentRepositoryImpl#SORT_NAME

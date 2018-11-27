@@ -51,7 +51,7 @@ public class DataJpaWorkerRepositoryImpl implements WorkerRepository {
     }
 
     /**
-     * Returnes a worker by given id.
+     * Returns a worker by given id.
      *
      * @param id id of the worker to return.
      * @return a worker by given id.
@@ -62,7 +62,7 @@ public class DataJpaWorkerRepositoryImpl implements WorkerRepository {
     }
 
     /**
-     * Returnes all workers sorted with cpecifiec sort.
+     * Returns all workers sorted with cpecifiec sort.
      *
      * @return list of all workers.
      * @see DataJpaVisitorRepositoryImpl#SORT_FNAME_MNAME_LNAME
@@ -73,7 +73,7 @@ public class DataJpaWorkerRepositoryImpl implements WorkerRepository {
     }
 
     /**
-     * Returnes all workers by department id sorted with cpecifiec sort.
+     * Returns all workers by department id sorted with cpecifiec sort.
      *
      * @param depId the department id.
      * @return list of all workers by department id.

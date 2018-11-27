@@ -45,7 +45,7 @@ public class DataJpaScheduleRepositoryImpl implements ScheduleRepository {
     }
 
     /**
-     * Returnes a schedule by given id.
+     * Returns a schedule by given id.
      *
      * @param id id of the schedule to return.
      * @return a schedule by given id.
@@ -56,7 +56,7 @@ public class DataJpaScheduleRepositoryImpl implements ScheduleRepository {
     }
 
     /**
-     * Returnes all schedules sorted.
+     * Returns all schedules sorted.
      *
      * @return list of all schedules.
      */

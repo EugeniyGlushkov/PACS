@@ -39,7 +39,7 @@ public interface CrudWorkerRepository extends JpaRepository<Worker, Long> {
     int delete(@Param("id") long id);
 
     /**
-     * Returnes a worker by given id.
+     * Returns a worker by given id.
      *
      * @param aLong id of the worker to return.
      * @return a worker by given id.
@@ -48,7 +48,7 @@ public interface CrudWorkerRepository extends JpaRepository<Worker, Long> {
     Worker findOne(Long aLong);
 
     /**
-     * Returnes all workers sorted with given sort.
+     * Returns all workers sorted with given sort.
      *
      * @param sort sort fo workers list.
      * @return list of all workers sorted with given sort.
@@ -57,7 +57,7 @@ public interface CrudWorkerRepository extends JpaRepository<Worker, Long> {
     List<Worker> findAll(Sort sort);
 
     /**
-     * Returnes all workers by department id sorted with given sort.
+     * Returns all workers by department id sorted with given sort.
      *
      * @param sort sort fo workers list.
      * @return list of all workers by department id sorted with given sort.

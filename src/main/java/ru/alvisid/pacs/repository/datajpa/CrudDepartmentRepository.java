@@ -40,16 +40,16 @@ public interface CrudDepartmentRepository extends JpaRepository <Department, Int
     int delete(@Param("id") int id);
 
     /**
-     * Returnes a department by given id.
+     * Returns a container with department by given id inside..
      *
      * @param integer id of the department to return.
-     * @return a department by given id.
+     * @return a container with department by given id inside.
      */
     @Override
     Optional <Department> findById(Integer integer);
 
     /**
-     * Returnes all departments sorted with given sort.
+     * Returns all departments sorted with given sort.
      *
      * @param sort sort fo departments list.
      * @return list of all departments.

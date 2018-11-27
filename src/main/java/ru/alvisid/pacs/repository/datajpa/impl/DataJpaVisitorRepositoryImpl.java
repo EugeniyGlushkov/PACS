@@ -51,7 +51,7 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
     }
 
     /**
-     * Returnes a visitor by given id.
+     * Returns a visitor by given id.
      *
      * @param id id of the visitor to return.
      * @return a visitor by given id.
@@ -62,7 +62,7 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
     }
 
     /**
-     * Returnes all visitors sorted with cpecifiec sort.
+     * Returns all visitors sorted with cpecifiec sort.
      *
      * @return list of all visitors.
      * @see DataJpaVisitorRepositoryImpl#SORT_FNAME_MNAME_LNAME

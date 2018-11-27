@@ -36,34 +36,30 @@ public abstract class AbstractSchedule {
 
     /**
      * Start work time.
-     * Must be non null.
+     * If value is {@code null} then start work time is not regulated.
      */
-    @Column(name = "start_work", nullable = false)
-    @NotNull
+    @Column(name = "start_work")
     protected LocalTime startWorkTime;
 
     /**
      * End work time.
-     * Must be non null.
+     * If value is {@code null} then end work time is not regulated.
      */
-    @Column(name = "end_work", nullable = false)
-    @NotNull
+    @Column(name = "end_work")
     protected LocalTime endWorkTime;
 
     /**
      * Start lunch time.
-     * Must be non null.
+     * If value is {@code null} then start lunch time is not regulated.
      */
-    @Column(name = "start_lunch", nullable = false)
-    @NotNull
+    @Column(name = "start_lunch")
     protected LocalTime startLunchTime;
 
     /**
      * End lunch time.
-     * Must be non null.
+     * If value is {@code null} then end  lunch time is not regulated.
      */
-    @Column(name = "end_lunch", nullable = false)
-    @NotNull
+    @Column(name = "end_lunch")
     protected LocalTime endLunchTime;
 
     /**

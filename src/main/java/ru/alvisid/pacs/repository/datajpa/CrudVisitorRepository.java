@@ -39,7 +39,7 @@ public interface CrudVisitorRepository extends JpaRepository<Visitor, Long> {
     int delete(@Param("id") long id);
 
     /**
-     * Returnes a visitor by given id.
+     * Returns a visitor by given id.
      *
      * @param aLong id of the visitor to return.
      * @return a visitor by given id.
@@ -48,7 +48,7 @@ public interface CrudVisitorRepository extends JpaRepository<Visitor, Long> {
     Visitor findOne(Long aLong);
 
     /**
-     * Returnes all visitors sorted with given sort.
+     * Returns all visitors sorted with given sort.
      *
      * @param sort sort fo visitors list.
      * @return list of all visitors.
