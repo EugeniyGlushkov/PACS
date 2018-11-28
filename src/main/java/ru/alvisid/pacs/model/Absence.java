@@ -102,6 +102,7 @@ public class Absence extends AbstractHasEmpEntity {
      *
      * @see Absence#Absence(String, Employee, AbsenceReason, LocalDate, LocalDate)
      * @see Absence#Absence(Integer, String, Employee, AbsenceReason, LocalDate, LocalDate)
+     * @see Absence#Absence(Absence)
      */
     public Absence() {
     }
@@ -118,6 +119,7 @@ public class Absence extends AbstractHasEmpEntity {
      * @param endAbsenceDate   the value of the endAbsenceDate.
      * @see Absence#Absence()
      * @see Absence#Absence(Integer, String, Employee, AbsenceReason, LocalDate, LocalDate)
+     * @see Absence#Absence(Absence)
      */
     public Absence(String description,
                    Employee employee,
@@ -144,6 +146,7 @@ public class Absence extends AbstractHasEmpEntity {
      * @param endAbsenceDate   the value of the endAbsenceDate.
      * @see Absence#Absence()
      * @see Absence#Absence(String, Employee, AbsenceReason, LocalDate, LocalDate)
+     * @see Absence#Absence(Absence)
      */
     public Absence(Integer id,
                    String description,
@@ -155,6 +158,24 @@ public class Absence extends AbstractHasEmpEntity {
         this.absenceReason = absenceReason;
         this.startAbsenceDate = startAbsenceDate;
         this.endAbsenceDate = endAbsenceDate;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param absence the specified object to copying.
+     * @see Absence#Absence()
+     * @see Absence#Absence(String, Employee, AbsenceReason, LocalDate, LocalDate)
+     * @see Absence#Absence(Integer, String, Employee, AbsenceReason, LocalDate, LocalDate)
+     */
+    public Absence(Absence absence) {
+        this(absence.getId(),
+                absence.getDescription(),
+                absence.getEmployee(),
+                absence.getAbsenceReason(),
+                absence.getStartAbsenceDate(),
+                absence.getEndAbsenceDate());
     }
 
     /**

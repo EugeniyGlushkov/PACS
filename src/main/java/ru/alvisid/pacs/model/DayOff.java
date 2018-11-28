@@ -77,6 +77,7 @@ public class DayOff extends AbstractId {
      *
      * @see DayOff#DayOff(Department, LocalDate)
      * @see DayOff#DayOff(Integer, Department, LocalDate)
+     * @see DayOff#DayOff(DayOff)
      */
     public DayOff() {
     }
@@ -88,6 +89,7 @@ public class DayOff extends AbstractId {
      * @param dateOff    the date of the day off.
      * @see DayOff#DayOff()
      * @see DayOff#DayOff(Integer, Department, LocalDate)
+     * @see DayOff#DayOff(DayOff)
      */
     public DayOff(Department department, LocalDate dateOff) {
         this(null, department, dateOff);
@@ -101,11 +103,27 @@ public class DayOff extends AbstractId {
      * @param dateOff    the date of the day off.
      * @see DayOff#DayOff()
      * @see DayOff#DayOff(Department, LocalDate)
+     * @see DayOff#DayOff(DayOff)
      */
     public DayOff(Integer id, Department department, LocalDate dateOff) {
         super(id);
         this.department = department;
         this.dateOff = dateOff;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param dayOff the specified object to copying.
+     * @see DayOff#DayOff()
+     * @see DayOff#DayOff(Department, LocalDate)
+     * @see DayOff#DayOff(Integer, Department, LocalDate)
+     */
+    public DayOff(DayOff dayOff) {
+        this(dayOff.getId(),
+                dayOff.getDepartment(),
+                dayOff.getDateOff());
     }
 
     /**

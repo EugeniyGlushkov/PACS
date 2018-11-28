@@ -49,6 +49,7 @@ public class AbsenceReason extends AbstractEntity {
      *
      * @see AbsenceReason#AbsenceReason(String, String)
      * @see AbsenceReason#AbsenceReason(Integer, String, String)
+     * @see AbsenceReason#AbsenceReason(AbsenceReason)
      */
     public AbsenceReason() {
     }
@@ -60,6 +61,7 @@ public class AbsenceReason extends AbstractEntity {
      * @param reason      the reason value.
      * @see AbsenceReason#AbsenceReason()
      * @see AbsenceReason#AbsenceReason(Integer, String, String)
+     * @see AbsenceReason#AbsenceReason(AbsenceReason)
      */
     public AbsenceReason(String description, String reason) {
         this(null, description, reason);
@@ -71,10 +73,28 @@ public class AbsenceReason extends AbstractEntity {
      * @param id          the specifiec identifier.
      * @param description the action type's description.
      * @param reason      the reason value.
+     * @see AbsenceReason#AbsenceReason()
+     * @see AbsenceReason#AbsenceReason(String, String)
+     * @see AbsenceReason#AbsenceReason(AbsenceReason)
      */
     public AbsenceReason(Integer id, String description, String reason) {
         super(id, description);
         this.reason = reason;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param absenceReason the specified object to copying.
+     * @see AbsenceReason#AbsenceReason()
+     * @see AbsenceReason#AbsenceReason(String, String)
+     * @see AbsenceReason#AbsenceReason(Integer, String, String)
+     */
+    public AbsenceReason(AbsenceReason absenceReason) {
+        this(absenceReason.getId(),
+                absenceReason.getDescription(),
+                absenceReason.getReason());
     }
 
     /**

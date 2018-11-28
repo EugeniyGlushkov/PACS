@@ -54,6 +54,7 @@ public class ControlPoint extends AbstractEntity {
      *
      * @see ControlPoint#ControlPoint(String, String)
      * @see ControlPoint#ControlPoint(Integer, String, String)
+     * @see ControlPoint#ControlPoint(ControlPoint)
      */
     public ControlPoint() {
     }
@@ -65,6 +66,7 @@ public class ControlPoint extends AbstractEntity {
      * @param serialCode  the identifier of the control point.
      * @see ControlPoint#ControlPoint()
      * @see ControlPoint#ControlPoint(Integer, String, String)
+     * @see ControlPoint#ControlPoint(ControlPoint)
      */
     public ControlPoint(String description, String serialCode) {
         this(null, description, serialCode);
@@ -78,10 +80,26 @@ public class ControlPoint extends AbstractEntity {
      * @param serialCode  the identifier of the control point.
      * @see ControlPoint#ControlPoint()
      * @see ControlPoint#ControlPoint(String, String)
+     * @see ControlPoint#ControlPoint(ControlPoint)
      */
     public ControlPoint(Integer id, String description, String serialCode) {
         super(id, description);
         this.serialCode = serialCode;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param controlPoint the specified object to copying.
+     * @see ControlPoint#ControlPoint()
+     * @see ControlPoint#ControlPoint(String, String)
+     * @see ControlPoint#ControlPoint(Integer, String, String)
+     */
+    public ControlPoint(ControlPoint controlPoint) {
+        this(controlPoint.getId(),
+                controlPoint.getDescription(),
+                controlPoint.getSerialCode());
     }
 
     /**

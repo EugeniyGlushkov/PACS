@@ -29,24 +29,15 @@ public class Department extends AbstractEntity {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    //del
-/*
-    *//**
-     * A list of days off of the department.
-     *//*
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @OrderBy("department, dateOff DESC")
-    private List <DayOff> daysOff;*/
-
     /**
-     * List of the holydays: week days when the department don't work constantly.
+     * List of the outputs: week days when the department don't work constantly.
      */
     @Enumerated(EnumType.ORDINAL)
     @CollectionTable(name = "weekends", joinColumns = @JoinColumn(name = "dep_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"dep_id", "weekday_id"}, name = "depid_weekdayid_idx"))
     @Column(name = "weekday_id")
     @ElementCollection(fetch = FetchType.LAZY)
-    private List <WeekDay> weekEnds;
+    private List<WeekDay> weekEnds;
 
     /**
      * The department's schedule
@@ -64,23 +55,12 @@ public class Department extends AbstractEntity {
         return name;
     }
 
-    //del
-/*
-    *//**
-     * Returns list of days off of the department.
-     *
-     * @return list of days off of the department.
-     *//*
-    public List <DayOff> getDaysOff() {
-        return daysOff;
-    }*/
-
     /**
      * Returns the list of the departmet's weekends.
      *
      * @return the list of the departmet's weekends.
      */
-    public List <WeekDay> getWeekEnds() {
+    public List<WeekDay> getWeekEnds() {
         return weekEnds;
     }
 
@@ -102,23 +82,12 @@ public class Department extends AbstractEntity {
         this.name = name;
     }
 
-    //del
-/*
-    *//**
-     * Sets the list of days off of the department.
-     *
-     * @param daysOff list of days off of the department.
-     *//*
-    public void setDaysOff(List <DayOff> daysOff) {
-        this.daysOff = daysOff;
-    }*/
-
     /**
      * Sets the list of the departmet's weekends.
      *
      * @param weekEnds the list of the departmet's weekends.
      */
-    public void setWeekEnds(List <WeekDay> weekEnds) {
+    public void setWeekEnds(List<WeekDay> weekEnds) {
         this.weekEnds = weekEnds;
     }
 
@@ -132,21 +101,27 @@ public class Department extends AbstractEntity {
     }
 
     /**
-     * Initializes a newly created <b>Department</b> object with null name value and null fields of the superclass.
+     * Initializes a newly created <b>Department</b> object with null name,
+     * weekends, department's schedule values and null fields of the superclass.
      *
      * @see Department#Department(String, String)
      * @see Department#Department(Integer, String, String)
+     * @see Department#Department(Integer, String, String, List, DeptSchedule)
+     * @see Department#Department(Department)
      */
     public Department() {
     }
 
     /**
-     * Constructs a <b>Department</b> object with specified desciption, name and null id value.
+     * Constructs a <b>Department</b> object with specified description, name
+     * and null id, weekends, department's schedule values.
      *
      * @param description the departmen's description.
      * @param name        the department's name.
      * @see Department#Department()
      * @see Department#Department(Integer, String, String)
+     * @see Department#Department(Integer, String, String, List, DeptSchedule)
+     * @see Department#Department(Department)
      */
     public Department(String description, String name) {
         super(description);
@@ -154,17 +129,58 @@ public class Department extends AbstractEntity {
     }
 
     /**
-     * Constructs a <b>Department</b> object with specified id, desciption and name values.
+     * Constructs a <b>Department</b> object with specified id, description, name values
+     * and null weekends, department's schedule values.
      *
      * @param id          the specifiec identifier.
-     * @param description the departmen's description.
+     * @param description the department's description.
      * @param name        the department's name.
      * @see Department#Department()
      * @see Department#Department(String, String)
+     * @see Department#Department(Integer, String, String, List, DeptSchedule)
+     * @see Department#Department(Department)
      */
     public Department(Integer id, String description, String name) {
+        this(id, description, name, null, null);
+    }
+
+    /**
+     * Constructs a <b>Department</b> object with specified id, description, name,
+     * weekends department's and schedule values.
+     *
+     * @param id           the specifiec identifier.
+     * @param description  the department's description.
+     * @param name         the department's name.
+     * @param weekEnds     the weekends.
+     * @param deptSchedule the department's schedule.
+     * @see Department#Department()
+     * @see Department#Department(String, String)
+     * @see Department#Department(Integer, String, String)
+     * @see Department#Department(Department)
+     */
+    public Department(Integer id, String description, String name, List<WeekDay> weekEnds, DeptSchedule deptSchedule) {
         super(id, description);
         this.name = name;
+        this.weekEnds = weekEnds;
+        this.deptSchedule = deptSchedule;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param department the specified object to copying.
+     * @see Department#Department()
+     * @see Department#Department(String, String)
+     * @see Department#Department(Integer, String, String)
+     * @see Department#Department(Integer, String, String, List, DeptSchedule)
+     */
+    public Department(Department department) {
+        this(department.getId(),
+                department.getDescription(),
+                department.getName(),
+                department.getWeekEnds(),
+                department.getDeptSchedule());
     }
 
     /**

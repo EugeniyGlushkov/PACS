@@ -50,6 +50,7 @@ public class ActionType extends AbstractEntity {
      *
      * @see ActionType#ActionType(String, String)
      * @see ActionType#ActionType(Integer, String, String)
+     * @see ActionType#ActionType(ActionType)
      */
     public ActionType() {
     }
@@ -61,6 +62,7 @@ public class ActionType extends AbstractEntity {
      * @param type        the identifier of the action type.
      * @see ActionType#ActionType()
      * @see ActionType#ActionType(Integer, String, String)
+     * @see ActionType#ActionType(ActionType)
      */
     public ActionType(String description, String type) {
         this(null, description, type);
@@ -74,10 +76,26 @@ public class ActionType extends AbstractEntity {
      * @param type        the identifier of the action type.
      * @see ActionType#ActionType()
      * @see ActionType#ActionType(String, String)
+     * @see ActionType#ActionType(ActionType)
      */
     public ActionType(Integer id, String description, String type) {
         super(id, description);
         this.type = type;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param actionType the specified object to copying.
+     * @see ActionType#ActionType()
+     * @see ActionType#ActionType(String, String)
+     * @see ActionType#ActionType(Integer, String, String)
+     */
+    public ActionType(ActionType actionType) {
+        this(actionType.getId(),
+                actionType.getDescription(),
+                actionType.getType());
     }
 
     /**

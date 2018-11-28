@@ -105,6 +105,7 @@ public class Action extends AbstractId {
      *
      * @see Action#Action(Employee, PointAction, LocalDateTime)
      * @see Action#Action(Integer, Employee, PointAction, LocalDateTime)
+     * @see Action#Action(Action)
      */
     public Action() {
     }
@@ -118,6 +119,7 @@ public class Action extends AbstractId {
      * @param actionTime  the specified time when the action was done.
      * @see Action#Action()
      * @see Action#Action(Integer, Employee, PointAction, LocalDateTime)
+     * @see Action#Action(Action)
      */
     public Action(Employee employee, PointAction pointAction, LocalDateTime actionTime) {
         this(null, employee, pointAction, actionTime);
@@ -132,12 +134,29 @@ public class Action extends AbstractId {
      * @param actionTime  the specified time when the action was done.
      * @see Action#Action()
      * @see Action#Action(Employee, PointAction, LocalDateTime)
+     * @see Action#Action(Action)
      */
     public Action(Integer id, Employee employee, PointAction pointAction, LocalDateTime actionTime) {
         super(id);
         this.employee = employee;
         this.pointAction = pointAction;
         this.actionTime = actionTime;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param action the specified object to copying.
+     * @see Action#Action()
+     * @see Action#Action(Employee, PointAction, LocalDateTime)
+     * @see Action#Action(Integer, Employee, PointAction, LocalDateTime)
+     */
+    public Action(Action action) {
+        this(action.getId(),
+                action.getEmployee(),
+                action.getPointAction(),
+                action.getActionTime());
     }
 
     /**
