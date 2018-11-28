@@ -22,6 +22,9 @@ import java.util.Optional;
 public interface CrudEmployeeRepository extends JpaRepository<Employee, Integer> {
     /**
      * Saves a given employee.
+     * If there are a given object in the data base then the given object will be update.
+     * If there aren't a given object in the data base then a new object
+     * with new id (data base set default value) will be saved.
      *
      * @param employee a employee to save.
      * @return the saved employee.
@@ -30,6 +33,19 @@ public interface CrudEmployeeRepository extends JpaRepository<Employee, Integer>
     @Transactional
     Employee save(Employee employee);
 
+    /**
+     * Updates a given Employee and it's specified parameters.
+     *
+     * @param emp the updated employee.
+     * @param dept the employee's department.
+     * @param pos the employee's position.
+     * @param cardNum the employee's card number.
+     * @param lastName the employee's last name.
+     * @param firstName the employee's first name.
+     * @param secondName the employee's second name.
+     * @param email the employee's email.
+     * @return a number of the updated records.
+     */
     @Transactional
     @Modifying
     @Query("UPDATE Employee e SET" +
@@ -40,8 +56,8 @@ public interface CrudEmployeeRepository extends JpaRepository<Employee, Integer>
             ", e.firstName=:fname" +
             ", e.secondName=:sname" +
             ", e.email=:email" +
-            " WHERE e.id=:id")
-    int update(@Param("id") int idEmp,
+            " WHERE e=:emp")
+    int update(@Param("emp") Employee emp,
                @Param("dept") Department dept,
                @Param("pos") Position pos,
                @Param("cnum") int cardNum,

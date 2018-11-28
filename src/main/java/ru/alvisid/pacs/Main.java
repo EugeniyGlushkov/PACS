@@ -34,12 +34,12 @@ public class Main {
         EmployeeRepository employeeRepository = (DataJpaEmployeeRepositoryImpl)appCtx.getBean(DataJpaEmployeeRepositoryImpl.class);
         Employee employee = employeeRepository.getByEmail("ivanov@mail.ru");
         System.out.println(employee);
-        //employee.setId(12223);
+        employee.setId(12223);
         employee.setCardNum(3334455);
         employee.setEmail("sdsd@mail.ru");
         System.out.println(employee);
         System.out.println(employeeRepository.save(employee));
-        employee = employeeRepository.getByEmail("sdsd@mail.ru");
-        System.out.println(employee);
+        //employee = employeeRepository.getByEmail("ivanov@mail.ru");
+        //System.out.println(employee);
     }
 }

@@ -16,7 +16,7 @@ public interface EmployeeRepository {
      * Saves or updates a given employee.
      *
      * @param employee employee to save or update.
-     * @return a saved or update employee,
+     * @return a saved or updated employee,
      * null - if there aren't updated employee in the repository.
      */
     Employee save(Employee employee);

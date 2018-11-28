@@ -33,7 +33,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
     /**
      * Saves a given employee.
      *
-     * @param employee a employee to save.
+     * @param employee an employee to save.
      * @return the saved or updated employee,
      * null - if there aren't updating value in the data base.
      */
@@ -44,7 +44,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
         }
 
         return crudRepository.update(
-                employee.getId(),
+                employee,
                 employee.getDepartment(),
                 employee.getPosition(),
                 employee.getCardNum(),
