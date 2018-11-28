@@ -37,7 +37,7 @@ public interface CrudVisitorRepository extends JpaRepository <Visitor, Integer> 
      */
     @Transactional
     @Modifying
-    @Query("DELETE FROM Visitor v WHERE v.id =: id")
+    @Query("DELETE FROM Visitor v WHERE v.id=:id")
     int delete(@Param("id") int id);
 
     /**

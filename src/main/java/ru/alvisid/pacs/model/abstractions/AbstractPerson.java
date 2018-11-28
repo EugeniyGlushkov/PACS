@@ -90,7 +90,7 @@ public abstract class AbstractPerson {
      *
      * @return the person's second name.
      */
-    public String getSecondtName() {
+    public String getSecondName() {
         return secondName;
     }
 

@@ -1,4 +1,4 @@
-package ru.alvisid.pacs.repository.datajpa.impl;
+package ru.alvisid.pacs.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Employee;
 import ru.alvisid.pacs.repository.EmployeeRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
+import ru.alvisid.pacs.repository.datajpa.DataJpaVisitorRepositoryImpl;
 
 import java.util.List;
 
@@ -33,11 +34,24 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      * Saves a given employee.
      *
      * @param employee a employee to save.
-     * @return the saved employee.
+     * @return the saved or updated employee,
+     * null - if there aren't updating value in the data base.
      */
     @Override
     public Employee save(Employee employee) {
-        return crudRepository.save(employee);
+        if (employee.isNew()) {
+            return crudRepository.save(employee);
+        }
+
+        return crudRepository.update(
+                employee.getId(),
+                employee.getDepartment(),
+                employee.getPosition(),
+                employee.getCardNum(),
+                employee.getLastName(),
+                employee.getFirstName(),
+                employee.getSecondName(),
+                employee.getEmail()) == 0 ? null : employee;
     }
 
     /**
@@ -46,6 +60,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      * @param id id of the employee that must be deleted.
      * @return true - the entity is deleted, false - the entity isn't found.
      */
+
     @Override
     public boolean delete(int id) {
         return crudRepository.delete(id) != 0;
@@ -69,7 +84,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
-    public List <Employee> getAll() {
+    public List<Employee> getAll() {
         return crudRepository.findAll(SORT_LNAME_FNAME_SNAME);
     }
 
@@ -81,7 +96,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
-    public List <Employee> getAllByDeptId(int deptId) {
+    public List<Employee> getAllByDeptId(int deptId) {
         return crudRepository.findAllByDeptId(deptId, SORT_LNAME_FNAME_SNAME);
     }
 

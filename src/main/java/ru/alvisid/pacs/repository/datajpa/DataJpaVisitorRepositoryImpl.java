@@ -1,11 +1,10 @@
-package ru.alvisid.pacs.repository.datajpa.impl;
+package ru.alvisid.pacs.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Visitor;
 import ru.alvisid.pacs.repository.VisitorRepository;
-import ru.alvisid.pacs.repository.datajpa.CrudVisitorRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

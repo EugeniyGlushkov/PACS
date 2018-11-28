@@ -1,4 +1,4 @@
-package ru.alvisid.pacs.repository.datajpa.impl;
+package ru.alvisid.pacs.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;

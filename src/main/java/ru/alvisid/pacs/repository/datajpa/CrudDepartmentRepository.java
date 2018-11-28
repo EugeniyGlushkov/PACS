@@ -36,7 +36,7 @@ public interface CrudDepartmentRepository extends JpaRepository <Department, Int
      */
     @Transactional
     @Modifying
-    @Query("DELETE FROM Department d WHERE d.id =: id")
+    @Query("DELETE FROM Department d WHERE d.id=:id")
     int delete(@Param("id") int id);
 
     /**

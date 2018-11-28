@@ -3,7 +3,6 @@ package ru.alvisid.pacs.model.abstractions;
 import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 import java.util.Objects;
 

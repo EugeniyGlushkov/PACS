@@ -1,6 +1,9 @@
-DROP TRIGGER IF EXISTS chek_abs ON absences;
-DROP TRIGGER IF EXISTS chek_act ON actions;
-DROP TRIGGER IF EXISTS new_emp ON employees;
+DROP TRIGGER IF EXISTS chek_abs
+ON absences;
+DROP TRIGGER IF EXISTS chek_act
+ON actions;
+DROP TRIGGER IF EXISTS new_emp
+ON employees;
 
 DROP FUNCTION IF EXISTS new_absence();
 DROP FUNCTION IF EXISTS new_action();
@@ -442,16 +445,17 @@ BEGIN
     (NEW.id,
      (SELECT start_work
       FROM dep_schedules
-      WHERE dep_schedules.id = NEW.dep_id),
+      WHERE dep_schedules.dep_id = NEW.dep_id),
      (SELECT end_work
       FROM dep_schedules
-      WHERE dep_schedules.id = NEW.dep_id),
+      WHERE dep_schedules.dep_id = NEW.dep_id),
      (SELECT start_lunch
       FROM dep_schedules
-      WHERE dep_schedules.id = NEW.dep_id),
+      WHERE dep_schedules.dep_id = NEW.dep_id),
      (SELECT end_lunch
       FROM dep_schedules
-      WHERE dep_schedules.id = NEW.dep_id));
+      WHERE dep_schedules.dep_id = NEW.dep_id));
+  RETURN NEW;
 END;
 $new_emp$ LANGUAGE plpgsql;
 

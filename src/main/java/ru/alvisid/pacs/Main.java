@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.alvisid.pacs.model.EditType;
+import ru.alvisid.pacs.model.Employee;
 import ru.alvisid.pacs.model.WeekDay;
+import ru.alvisid.pacs.repository.EmployeeRepository;
+import ru.alvisid.pacs.repository.datajpa.DataJpaEmployeeRepositoryImpl;
 
 import java.util.*;
 
@@ -28,5 +31,15 @@ public class Main {
             System.out.println(e == null ? 0 : e.ordinal() );
         }
 
+        EmployeeRepository employeeRepository = (DataJpaEmployeeRepositoryImpl)appCtx.getBean(DataJpaEmployeeRepositoryImpl.class);
+        Employee employee = employeeRepository.getByEmail("ivanov@mail.ru");
+        System.out.println(employee);
+        //employee.setId(12223);
+        employee.setCardNum(3334455);
+        employee.setEmail("sdsd@mail.ru");
+        System.out.println(employee);
+        System.out.println(employeeRepository.save(employee));
+        employee = employeeRepository.getByEmail("sdsd@mail.ru");
+        System.out.println(employee);
     }
 }

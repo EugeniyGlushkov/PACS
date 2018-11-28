@@ -1,8 +1,7 @@
-package ru.alvisid.pacs.repository.datajpa.impl;
+package ru.alvisid.pacs.repository.datajpa;
 
 import ru.alvisid.pacs.model.Department;
 import ru.alvisid.pacs.repository.DepartmentRepository;
-import ru.alvisid.pacs.repository.datajpa.CrudDepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
@@ -25,7 +24,7 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
      * An interface for department which extends JpaRepository.
      */
     @Autowired
-    CrudDepartmentRepository crudRepository;
+    private CrudDepartmentRepository crudRepository;
 
     /**
      * Saves a given department.

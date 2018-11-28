@@ -29,12 +29,14 @@ public class Department extends AbstractEntity {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    /**
+    //del
+/*
+    *//**
      * A list of days off of the department.
-     */
+     *//*
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy("department, dateOff DESC")
-    private List <DayOff> daysOff;
+    private List <DayOff> daysOff;*/
 
     /**
      * List of the holydays: week days when the department don't work constantly.
@@ -62,14 +64,16 @@ public class Department extends AbstractEntity {
         return name;
     }
 
-    /**
+    //del
+/*
+    *//**
      * Returns list of days off of the department.
      *
      * @return list of days off of the department.
-     */
+     *//*
     public List <DayOff> getDaysOff() {
         return daysOff;
-    }
+    }*/
 
     /**
      * Returns the list of the departmet's weekends.
@@ -98,14 +102,16 @@ public class Department extends AbstractEntity {
         this.name = name;
     }
 
-    /**
+    //del
+/*
+    *//**
      * Sets the list of days off of the department.
      *
      * @param daysOff list of days off of the department.
-     */
+     *//*
     public void setDaysOff(List <DayOff> daysOff) {
         this.daysOff = daysOff;
-    }
+    }*/
 
     /**
      * Sets the list of the departmet's weekends.
