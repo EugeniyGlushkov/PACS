@@ -30,7 +30,7 @@ public class EmpSchedule extends AbstractSchedule {
     private Employee employee;
 
     /**
-     * Gets the specific employee.
+     * Returns the specific employee.
      *
      * @return the specific employee.
      */

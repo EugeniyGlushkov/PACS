@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractPerson {
+public abstract class AbstractPerson implements HasId {
     /**
      * Sequence's start value.
      */
@@ -59,16 +59,17 @@ public abstract class AbstractPerson {
     protected String secondName;
 
     /**
-     * Gets the specifiec id.
+     * Returns the specifiec id.
      *
      * @return the specifiec id.
      */
+    @Override
     public Integer getId() {
         return id;
     }
 
     /**
-     * Gets the person's last name.
+     * Returns the person's last name.
      *
      * @return the person's last name.
      */
@@ -77,7 +78,7 @@ public abstract class AbstractPerson {
     }
 
     /**
-     * Gets the person's first name.
+     * Returns the person's first name.
      *
      * @return the person's first name.
      */
@@ -86,7 +87,7 @@ public abstract class AbstractPerson {
     }
 
     /**
-     * Gets the person's second name.
+     * Returns the person's second name.
      *
      * @return the person's second name.
      */
@@ -99,6 +100,7 @@ public abstract class AbstractPerson {
      *
      * @param id the specifiec id.
      */
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }

@@ -37,7 +37,7 @@ public class DayOff extends AbstractId {
     LocalDate dateOff;
 
     /**
-     * Gets the current department.
+     * Returns the current department.
      *
      * @return the current department.
      */
@@ -46,7 +46,7 @@ public class DayOff extends AbstractId {
     }
 
     /**
-     * Gets the date of the day off.
+     * Returns the date of the day off.
      *
      * @return the date of the day off.
      */

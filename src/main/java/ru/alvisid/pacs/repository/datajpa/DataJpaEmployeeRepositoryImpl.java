@@ -5,10 +5,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Employee;
 import ru.alvisid.pacs.repository.EmployeeRepository;
-import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
-import ru.alvisid.pacs.repository.datajpa.DataJpaVisitorRepositoryImpl;
 
 import java.util.List;
+
+import static ru.alvisid.pacs.util.ValidationUtil.*;
 
 /**
  * DataJpa implementation of the EmployeeRepository.
@@ -45,7 +45,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
 
         Employee newEmplyee = crudRepository.save(employee);
 
-        if (newEmplyee.getId() != employee.getId()) {
+        if (!equalIdChek(newEmplyee, employee)) {
             delete(newEmplyee.getId());
             return null;
         }

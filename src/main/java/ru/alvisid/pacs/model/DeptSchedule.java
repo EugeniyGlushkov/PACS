@@ -29,7 +29,7 @@ public class DeptSchedule extends AbstractSchedule {
     private Department department;
 
     /**
-     * Gets the specific department.
+     * Returns the specific department.
      *
      * @return the specific department.
      */

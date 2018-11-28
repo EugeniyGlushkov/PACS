@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.util;
 
+import ru.alvisid.pacs.model.abstractions.HasId;
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.util.exceptions.EnumLoaderException;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
@@ -100,5 +101,9 @@ public class ValidationUtil {
                         e.getClass().getName(), e.name()));
             }
         });
+    }
+
+    public static <T extends HasId> boolean equalIdChek (T objOne, T objTwo) {
+        return objOne.getId().equals(objTwo.getId());
     }
 }

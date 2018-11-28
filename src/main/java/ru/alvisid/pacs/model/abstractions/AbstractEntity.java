@@ -23,7 +23,7 @@ public abstract class AbstractEntity extends AbstractId {
     protected String description;
 
     /**
-     * Gets the description of the entity.
+     * Returns the description of the entity.
      *
      * @return the description of the entity.
      */

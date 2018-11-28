@@ -35,17 +35,25 @@ public class Main {
         EmployeeRepository employeeRepository = (DataJpaEmployeeRepositoryImpl)appCtx.getBean(DataJpaEmployeeRepositoryImpl.class);
         Employee employee = employeeRepository.getByEmail("ivanov@mail.ru");
         System.out.println(employee);
-        //employee.setId(12223);
         employee.setCardNum(3334455);
         employee.setEmail("sdsd@mail.ru");
         employee.getRoles().add(Role.ROLE_DEPSREAD);
         System.out.println(employee);
-        System.out.println(employeeRepository.save(employee));
+        long start1 = System.nanoTime();
+        employeeRepository.save(employee);
+        long end1 = System.nanoTime();
         System.out.println(employee);
-        System.out.println(employee.getSchedule());
+        /*System.out.println(employee.getSchedule());
         employee = employeeRepository.getByEmail("sdsd@mail.ru");
-        System.out.println(employee.getSchedule());
+        System.out.println(employee.getSchedule());*/
         employee.setLastName("Петров");
-        System.out.println(employeeRepository.save(employee));
+        employee.setId(10003);
+        employee.setCardNum(3344455);
+        employee.setEmail("dfdgf@mail.ru");
+        long start2 = System.nanoTime();
+        employeeRepository.save(employee);
+        long end2 = System.nanoTime();
+        System.out.println(end1 - start1);
+        System.out.println(end2 - start2);
     }
 }
