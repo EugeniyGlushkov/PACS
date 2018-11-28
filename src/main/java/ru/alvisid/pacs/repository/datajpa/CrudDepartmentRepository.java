@@ -20,6 +20,9 @@ import java.util.Optional;
 public interface CrudDepartmentRepository extends JpaRepository <Department, Integer> {
     /**
      * Saves a given department.
+     * If there are a given object in the data base then the given object will be update.
+     * If there aren't a given object in the data base then a new object
+     * with new id (data base set default value) will be saved.
      *
      * @param department a department to save.
      * @return the saved department.
@@ -27,6 +30,13 @@ public interface CrudDepartmentRepository extends JpaRepository <Department, Int
     @Override
     @Transactional
     Department save(Department department);
+
+   /* @Transactional
+    @Modifying
+    @Query
+    int update(Department dept,
+               String name,
+               )*/
 
     /**
      * Deletes a department by given id.

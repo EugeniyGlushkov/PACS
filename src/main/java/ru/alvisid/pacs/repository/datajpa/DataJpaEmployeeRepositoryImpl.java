@@ -31,7 +31,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
     CrudEmployeeRepository crudRepository;
 
     /**
-     * Saves a given employee.
+     * Saves or updates a given employee.
      *
      * @param employee an employee to save.
      * @return the saved or updated employee,
@@ -43,15 +43,14 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
             return crudRepository.save(employee);
         }
 
-        return crudRepository.update(
-                employee,
-                employee.getDepartment(),
-                employee.getPosition(),
-                employee.getCardNum(),
-                employee.getLastName(),
-                employee.getFirstName(),
-                employee.getSecondName(),
-                employee.getEmail()) == 0 ? null : employee;
+        Employee newEmplyee = crudRepository.save(employee);
+
+        if (newEmplyee.getId() != employee.getId()) {
+            delete(newEmplyee.getId());
+            return null;
+        }
+
+        return newEmplyee;
     }
 
     /**

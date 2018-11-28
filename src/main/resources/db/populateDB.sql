@@ -31,6 +31,9 @@ INSERT INTO dep_schedules (dep_id, start_work, end_work, start_lunch, end_lunch)
 INSERT INTO employees (dep_id, pos_id, card_num, last_name, first_name, second_name, email) VALUES
   (1, 1, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru');
 
+INSERT INTO employee_roles (emp_id, role) VALUES
+  (10000, 'ROLE_USER');
+
 INSERT INTO absence_reasons (reason, description) VALUES
   ('больничный', 'отсутствие по болезни.');
 

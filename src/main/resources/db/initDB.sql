@@ -402,7 +402,7 @@ CREATE TABLE employee_roles
 (
   emp_id INTEGER      NOT NULL,
   role   VARCHAR(255) NOT NULL,
-  FOREIGN KEY (emp_id) REFERENCES employees (id),
+  FOREIGN KEY (emp_id) REFERENCES employees (id) ON DELETE CASCADE,
   CONSTRAINT employee_roles_con UNIQUE (emp_id, role)
 );
 

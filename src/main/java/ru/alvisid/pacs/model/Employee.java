@@ -269,7 +269,11 @@ public class Employee extends AbstractPerson {
             return false;
         }
 
-        return email.equals(employee.email);
+        if (!email.equals(employee.email)) {
+            return false;
+        }
+
+        return roles.equals(employee.roles);
     }
 
     /**
@@ -288,6 +292,7 @@ public class Employee extends AbstractPerson {
                 ", position=" + position +
                 ", cardNum=" + cardNum +
                 ", email='" + email + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }

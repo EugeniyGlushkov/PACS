@@ -5,6 +5,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.alvisid.pacs.model.EditType;
 import ru.alvisid.pacs.model.Employee;
+import ru.alvisid.pacs.model.Role;
 import ru.alvisid.pacs.model.WeekDay;
 import ru.alvisid.pacs.repository.EmployeeRepository;
 import ru.alvisid.pacs.repository.datajpa.DataJpaEmployeeRepositoryImpl;
@@ -34,12 +35,17 @@ public class Main {
         EmployeeRepository employeeRepository = (DataJpaEmployeeRepositoryImpl)appCtx.getBean(DataJpaEmployeeRepositoryImpl.class);
         Employee employee = employeeRepository.getByEmail("ivanov@mail.ru");
         System.out.println(employee);
-        employee.setId(12223);
+        //employee.setId(12223);
         employee.setCardNum(3334455);
         employee.setEmail("sdsd@mail.ru");
+        employee.getRoles().add(Role.ROLE_DEPSREAD);
         System.out.println(employee);
         System.out.println(employeeRepository.save(employee));
-        //employee = employeeRepository.getByEmail("ivanov@mail.ru");
-        //System.out.println(employee);
+        System.out.println(employee);
+        System.out.println(employee.getSchedule());
+        employee = employeeRepository.getByEmail("sdsd@mail.ru");
+        System.out.println(employee.getSchedule());
+        employee.setLastName("Петров");
+        System.out.println(employeeRepository.save(employee));
     }
 }
