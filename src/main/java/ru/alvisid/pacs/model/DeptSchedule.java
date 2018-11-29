@@ -51,6 +51,7 @@ public class DeptSchedule extends AbstractSchedule {
      *
      * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Department)
      * @see DeptSchedule#DeptSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Department)
+     * @see DeptSchedule#DeptSchedule(DeptSchedule)
      */
     public DeptSchedule() {
     }
@@ -67,6 +68,7 @@ public class DeptSchedule extends AbstractSchedule {
      * @param department     the department who has the schedule.
      * @see DeptSchedule#DeptSchedule()
      * @see DeptSchedule#DeptSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Department)
+     * @see DeptSchedule#DeptSchedule(DeptSchedule)
      */
     public DeptSchedule(LocalTime startWorkTime, LocalTime endWorkTime,
                         LocalTime startLunchTime, LocalTime endLunchTime,
@@ -89,6 +91,7 @@ public class DeptSchedule extends AbstractSchedule {
      * @param department     the department who has the schedule.
      * @see DeptSchedule#DeptSchedule()
      * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Department)
+     * @see DeptSchedule#DeptSchedule(DeptSchedule)
      */
     public DeptSchedule(Integer id,
                         LocalTime startWorkTime, LocalTime endWorkTime,
@@ -96,6 +99,24 @@ public class DeptSchedule extends AbstractSchedule {
                         Department department) {
         super(id, startWorkTime, endWorkTime, startLunchTime, endLunchTime);
         this.department = department;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param schedule the specified object to copying.
+     * @see DeptSchedule#DeptSchedule()
+     * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Department)
+     * @see DeptSchedule#DeptSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Department)
+     */
+    public DeptSchedule(DeptSchedule schedule) {
+        this(schedule.getId(),
+                schedule.getStartWorkTime(),
+                schedule.getEndWorkTime(),
+                schedule.getStartLunchTime(),
+                schedule.getEndLunchTime(),
+                schedule.getDepartment());
     }
 
     /**
