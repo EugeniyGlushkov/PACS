@@ -37,23 +37,35 @@ public class Main {
         System.out.println(employee);
         employee.setCardNum(3334455);
         employee.setEmail("sdsd@mail.ru");
+        employee = employeeRepository.save(employee);
+        System.out.println(employee);
         employee.getRoles().add(Role.ROLE_DEPSREAD);
         System.out.println(employee);
         long start1 = System.nanoTime();
+        employeeRepository.save(employee);
+        //employee=employeeRepository.get(10000);
+        employee.setEmail("ssss@ya.ru");
         employeeRepository.save(employee);
         long end1 = System.nanoTime();
         System.out.println(employee);
         /*System.out.println(employee.getSchedule());
         employee = employeeRepository.getByEmail("sdsd@mail.ru");
         System.out.println(employee.getSchedule());*/
-        employee.setLastName("Петров");
-        employee.setId(10003);
-        employee.setCardNum(3344455);
-        employee.setEmail("dfdgf@mail.ru");
+        Employee employee1 = employeeRepository.getByEmail("sdsd@mail.ru");
+        System.out.println(employee1);
+        employee1.setLastName("Петров");
+        //employee.setId(10003);
+        employee1.setCardNum(3344455);
+        employee1.setEmail("dfdgf@mail.ru");
         long start2 = System.nanoTime();
         employeeRepository.save(employee);
         long end2 = System.nanoTime();
         System.out.println(end1 - start1);
         System.out.println(end2 - start2);
+        //employee.getSchedule().setEmployee(employee1);
+        employee = employeeRepository.save(employee);
+        System.out.println(employee);
+        System.out.println(employee.getSchedule());
+
     }
 }
