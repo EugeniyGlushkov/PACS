@@ -76,6 +76,7 @@ public class PointPermit extends AbstractId {
      *
      * @see PointPermit#PointPermit(PointAction, Employee)
      * @see PointPermit#PointPermit(Integer, PointAction, Employee)
+     * @see PointPermit#PointPermit(PointPermit)
      */
     public PointPermit() {
     }
@@ -87,6 +88,7 @@ public class PointPermit extends AbstractId {
      * @param employee    the specified employee.
      * @see PointPermit#PointPermit()
      * @see PointPermit#PointPermit(Integer, PointAction, Employee)
+     * @see PointPermit#PointPermit(PointPermit)
      */
     public PointPermit(PointAction pointAction, Employee employee) {
         this(null, pointAction, employee);
@@ -100,11 +102,27 @@ public class PointPermit extends AbstractId {
      * @param employee    the specified employee.
      * @see PointPermit#PointPermit()
      * @see PointPermit#PointPermit(PointAction, Employee)
+     * @see PointPermit#PointPermit(PointPermit)
      */
     public PointPermit(Integer id, PointAction pointAction, Employee employee) {
         super(id);
         this.pointAction = pointAction;
         this.employee = employee;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param pointPermit the specified object to copying.
+     * @see PointPermit#PointPermit()
+     * @see PointPermit#PointPermit(PointAction, Employee)
+     * @see PointPermit#PointPermit(Integer, PointAction, Employee)
+     */
+    public PointPermit(PointPermit pointPermit) {
+        this(pointPermit.getId(),
+                pointPermit.getPointAction(),
+                pointPermit.getEmployee());
     }
 
     /**

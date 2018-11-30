@@ -37,7 +37,7 @@ public class Department extends AbstractEntity {
             uniqueConstraints = @UniqueConstraint(columnNames = {"dep_id", "weekday_id"}, name = "depid_weekdayid_idx"))
     @Column(name = "weekday_id")
     @ElementCollection(fetch = FetchType.LAZY)
-    private List<WeekDay> weekEnds;
+    private List <WeekDay> weekEnds;
 
     /**
      * The department's schedule
@@ -60,7 +60,7 @@ public class Department extends AbstractEntity {
      *
      * @return the list of the departmet's weekends.
      */
-    public List<WeekDay> getWeekEnds() {
+    public List <WeekDay> getWeekEnds() {
         return weekEnds;
     }
 
@@ -87,7 +87,7 @@ public class Department extends AbstractEntity {
      *
      * @param weekEnds the list of the departmet's weekends.
      */
-    public void setWeekEnds(List<WeekDay> weekEnds) {
+    public void setWeekEnds(List <WeekDay> weekEnds) {
         this.weekEnds = weekEnds;
     }
 
@@ -158,7 +158,7 @@ public class Department extends AbstractEntity {
      * @see Department#Department(Integer, String, String)
      * @see Department#Department(Department)
      */
-    public Department(Integer id, String description, String name, List<WeekDay> weekEnds, DeptSchedule deptSchedule) {
+    public Department(Integer id, String description, String name, List <WeekDay> weekEnds, DeptSchedule deptSchedule) {
         super(id, description);
         this.name = name;
         this.weekEnds = weekEnds;

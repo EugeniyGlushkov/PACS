@@ -51,6 +51,7 @@ public class Position extends AbstractEntity {
      *
      * @see Position#Position(String, String)
      * @see Position#Position(Integer, String, String)
+     * @see Position#Position(Position)
      */
     public Position() {
     }
@@ -62,6 +63,7 @@ public class Position extends AbstractEntity {
      * @param position    the text identifier of the position.
      * @see Position#Position()
      * @see Position#Position(Integer, String, String)
+     * @see Position#Position(Position)
      */
     public Position(String description, String position) {
         this(null, description, position);
@@ -75,10 +77,26 @@ public class Position extends AbstractEntity {
      * @param position    the text identifier of the position.
      * @see Position#Position()
      * @see Position#Position(String, String)
+     * @see Position#Position(Position)
      */
     public Position(Integer id, String description, String position) {
         super(id, description);
         this.position = position;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param position the specified object to copying.
+     * @see Position#Position()
+     * @see Position#Position(String, String)
+     * @see Position#Position(Integer, String, String)
+     */
+    public Position(Position position) {
+        this(position.getId(),
+                position.getDescription(),
+                position.getPosition());
     }
 
     /**

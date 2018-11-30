@@ -129,6 +129,7 @@ public class Visitor extends AbstractPerson {
      *
      * @see Visitor#Visitor(String, String, String, String, String, LocalDateTime, LocalDateTime)
      * @see Visitor#Visitor(Integer, String, String, String, String, String, LocalDateTime, LocalDateTime)
+     * @see Visitor#Visitor(Visitor)
      */
     public Visitor() {
     }
@@ -147,6 +148,7 @@ public class Visitor extends AbstractPerson {
      * @param exitTime    the new exit time value.
      * @see Visitor#Visitor()
      * @see Visitor#Visitor(Integer, String, String, String, String, String, LocalDateTime, LocalDateTime)
+     * @see Visitor#Visitor(Visitor)
      */
     public Visitor(String lastName, String firstName, String secondName,
                    String tempNum, String description,
@@ -168,6 +170,7 @@ public class Visitor extends AbstractPerson {
      * @param exitTime    the new exit time value.
      * @see Visitor#Visitor()
      * @see Visitor#Visitor(String, String, String, String, String, LocalDateTime, LocalDateTime)
+     * @see Visitor#Visitor(Visitor)
      */
     public Visitor(Integer id,
                    String lastName, String firstName, String secondName,
@@ -178,6 +181,26 @@ public class Visitor extends AbstractPerson {
         this.description = description;
         this.enterTime = enterTime;
         this.exitTime = exitTime;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param visitor the specified object to copying.
+     * @see Visitor#Visitor()
+     * @see Visitor#Visitor(String, String, String, String, String, LocalDateTime, LocalDateTime)
+     * @see Visitor#Visitor(Integer, String, String, String, String, String, LocalDateTime, LocalDateTime)
+     */
+    public Visitor(Visitor visitor) {
+        this(visitor.getId(),
+                visitor.getLastName(),
+                visitor.getFirstName(),
+                visitor.getSecondName(),
+                visitor.getTempNum(),
+                visitor.getDescription(),
+                visitor.getEnterTime(),
+                visitor.getExitTime());
     }
 
     /**
