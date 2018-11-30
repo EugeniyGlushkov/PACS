@@ -1,6 +1,5 @@
 package ru.alvisid.pacs.util;
 
-import ru.alvisid.pacs.model.abstractions.HasId;
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.util.exceptions.EnumLoaderException;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
@@ -101,19 +100,5 @@ public class ValidationUtil {
                         e.getClass().getName(), e.name()));
             }
         });
-    }
-
-    /**
-     * Returns {@code true} if the first specified object's id is equal
-     * to the second specified object's id, {@code false} - or else.
-     *
-     * @param objOne the first object.
-     * @param objTwo the second object.
-     * @param <T> the type of the checked object.
-     * @return {@code true} if the first specified object's id is equal
-     * to the second specified object's id, {@code false} - or else.
-     */
-    public static <T extends HasId> boolean equalIdChek (T objOne, T objTwo) {
-        return objOne.getId().equals(objTwo.getId());
     }
 }

@@ -17,9 +17,9 @@ import java.util.Optional;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface CrudDeptScheduleRepository extends JpaRepository<DeptSchedule, Integer> {
+public interface CrudDeptScheduleRepository extends JpaRepository <DeptSchedule, Integer> {
     /**
-     * Saves a given department schedule.
+     * Saves or updates a given department schedule.
      *
      * @param schedule a department schedule to save.
      * @return the saved department schedule.
@@ -46,7 +46,7 @@ public interface CrudDeptScheduleRepository extends JpaRepository<DeptSchedule, 
      * @return a container with  department schedule by given id inside.
      */
     @Override
-    Optional<DeptSchedule> findById(Integer integer);
+    Optional <DeptSchedule> findById(Integer integer);
 
     /**
      * Returns all department schedules sorted with given sort.
@@ -55,7 +55,7 @@ public interface CrudDeptScheduleRepository extends JpaRepository<DeptSchedule, 
      * @return list of all department schedules.
      */
     @Override
-    List<DeptSchedule> findAll(Sort sort);
+    List <DeptSchedule> findAll(Sort sort);
 
     /**
      * Returns a list of the all department schedules by specified department id.
@@ -64,5 +64,5 @@ public interface CrudDeptScheduleRepository extends JpaRepository<DeptSchedule, 
      * @return the list of the all department schedules by department id.
      */
     @Query("SELECT ds FROM DeptSchedule ds WHERE ds.department.id=:depId")
-    List<DeptSchedule> fintAllByDeptId (@Param("depId") int depId);
+    List <DeptSchedule> fintAllByDeptId(@Param("depId") int depId);
 }

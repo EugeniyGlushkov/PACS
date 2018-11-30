@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractPerson implements HasId {
+public abstract class AbstractPerson {
     /**
      * Sequence's start value.
      */
@@ -63,7 +63,6 @@ public abstract class AbstractPerson implements HasId {
      *
      * @return the specifiec id.
      */
-    @Override
     public Integer getId() {
         return id;
     }
@@ -100,7 +99,6 @@ public abstract class AbstractPerson implements HasId {
      *
      * @param id the specifiec id.
      */
-    @Override
     public void setId(Integer id) {
         this.id = id;
     }

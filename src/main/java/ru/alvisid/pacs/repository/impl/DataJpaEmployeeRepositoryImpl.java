@@ -1,12 +1,14 @@
-package ru.alvisid.pacs.repository.datajpa;
+package ru.alvisid.pacs.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Employee;
 import ru.alvisid.pacs.repository.EmployeeRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 import static ru.alvisid.pacs.util.ValidationUtil.*;
 
@@ -32,6 +34,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
 
     /**
      * Saves or updates a given employee.
+     * Returns null if there aren't updating value in the data base.
      *
      * @param employee an employee to save.
      * @return the saved or updated employee,
@@ -39,18 +42,11 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      */
     @Override
     public Employee save(Employee employee) {
-        if (employee.isNew()) {
+        if (employee.isNew() || !Objects.isNull(crudRepository.findById(employee.getId()))) {
             return crudRepository.save(employee);
         }
 
-        Employee newEmplyee = crudRepository.save(employee);
-
-        if (!equalIdChek(newEmplyee, employee)) {
-            delete(newEmplyee.getId());
-            return null;
-        }
-
-        return newEmplyee;
+        return null;
     }
 
     /**
@@ -83,7 +79,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
-    public List<Employee> getAll() {
+    public List <Employee> getAll() {
         return crudRepository.findAll(SORT_LNAME_FNAME_SNAME);
     }
 
@@ -95,7 +91,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
-    public List<Employee> getAllByDeptId(int deptId) {
+    public List <Employee> getAllByDeptId(int deptId) {
         return crudRepository.findAllByDeptId(deptId, SORT_LNAME_FNAME_SNAME);
     }
 

@@ -67,7 +67,7 @@ public interface CrudVisitorRepository extends JpaRepository <Visitor, Integer> 
      * @param sort      the sort for visitors list.
      * @return the visitors list which contains visitors with enter time in a specified time interval.
      */
-    @Query("SELECT v FROM Visitor v WHERE v.enterTime>=:startTime AND v.enterTime<=:endTime")
+    @Query("SELECT v FROM Visitor v WHERE v.enterTime>=:startTime AND v.enterTime<:endTime")
     List <Visitor> getAllByEnterTimeBetween(@Param("startTime") LocalDateTime startTime,
                                             @Param("endTime") LocalDateTime endTime,
                                             Sort sort);

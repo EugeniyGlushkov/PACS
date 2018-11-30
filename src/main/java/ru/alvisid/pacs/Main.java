@@ -5,11 +5,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.alvisid.pacs.model.EditType;
 import ru.alvisid.pacs.model.Employee;
-import ru.alvisid.pacs.model.Role;
 import ru.alvisid.pacs.model.WeekDay;
 import ru.alvisid.pacs.repository.EmployeeRepository;
-import ru.alvisid.pacs.repository.datajpa.DataJpaEmployeeRepositoryImpl;
+import ru.alvisid.pacs.repository.impl.DataJpaEmployeeRepositoryImpl;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -34,6 +36,7 @@ public class Main {
 
         EmployeeRepository employeeRepository = (DataJpaEmployeeRepositoryImpl)appCtx.getBean(DataJpaEmployeeRepositoryImpl.class);
         Employee employee = employeeRepository.getByEmail("ivanov@mail.ru");
+        System.out.println(LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0)));
 
     }
 }

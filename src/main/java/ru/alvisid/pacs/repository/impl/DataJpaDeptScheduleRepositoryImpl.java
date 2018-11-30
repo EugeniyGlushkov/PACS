@@ -1,4 +1,4 @@
-package ru.alvisid.pacs.repository.datajpa;
+package ru.alvisid.pacs.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
@@ -8,6 +8,9 @@ import ru.alvisid.pacs.repository.DeptScheduleRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudDeptScheduleRepository;
 
 import java.util.List;
+import java.util.Objects;
+
+import static ru.alvisid.pacs.util.ValidationUtil.*;
 
 /**
  * DataJpa implementation of the DeptScheduleRepository.
@@ -24,14 +27,20 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
     CrudDeptScheduleRepository crudRepository;
 
     /**
-     * Saves a given department schedule.
+     * Saves or updates a given department schedule.
+     * Returns null if there aren't updating value in the data base.
      *
      * @param schedule a department schedule to save.
      * @return the saved department schedule.
+     * null - if there aren't updating value in the data base.
      */
     @Override
     public DeptSchedule save(DeptSchedule schedule) {
-        return crudRepository.save(schedule);
+        if (schedule.isNew() || !Objects.isNull(crudRepository.findById(schedule.getId()))) {
+            return crudRepository.save(schedule);
+        }
+
+        return null;
     }
 
     /**
@@ -63,7 +72,7 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
      * @return the list of all department schedules.
      */
     @Override
-    public List<DeptSchedule> getAll() {
+    public List <DeptSchedule> getAll() {
         return crudRepository.findAll();
     }
 

@@ -17,7 +17,7 @@ import java.util.Objects;
 @Check(constraints = "start_work < start_lunch" +
         " AND start_lunch < end_lunch" +
         " AND end_lunch < end_work")
-public abstract class AbstractSchedule implements HasId {
+public abstract class AbstractSchedule {
     /**
      * Sequence's start value.
      */
@@ -66,7 +66,6 @@ public abstract class AbstractSchedule implements HasId {
      *
      * @return the specifiec id.
      */
-    @Override
     public Integer getId() {
         return id;
     }
@@ -112,7 +111,6 @@ public abstract class AbstractSchedule implements HasId {
      *
      * @param id the specifiec id.
      */
-    @Override
     public void setId(Integer id) {
         this.id = id;
     }

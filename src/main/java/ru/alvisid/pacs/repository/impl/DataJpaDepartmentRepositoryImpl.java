@@ -1,12 +1,16 @@
-package ru.alvisid.pacs.repository.datajpa;
+package ru.alvisid.pacs.repository.impl;
 
 import ru.alvisid.pacs.model.Department;
 import ru.alvisid.pacs.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import ru.alvisid.pacs.repository.datajpa.CrudDepartmentRepository;
 
 import java.util.List;
+import java.util.Objects;
+
+import static ru.alvisid.pacs.util.ValidationUtil.*;
 
 /**
  * DataJpa implementation of the DepartmentRepository.
@@ -27,14 +31,20 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
     private CrudDepartmentRepository crudRepository;
 
     /**
-     * Saves a given department.
+     * Saves or updates a given department.
+     * Returns null if there aren't updating value in the data base.
      *
      * @param department a department to save.
      * @return the saved department.
+     * null - if there aren't updating value in the data base.
      */
     @Override
     public Department save(Department department) {
-        return crudRepository.save(department);
+        if (department.isNew() || !Objects.isNull(crudRepository.findById(department.getId()))) {
+            return crudRepository.save(department);
+        }
+
+        return null;
     }
 
     /**
@@ -67,7 +77,7 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
      * @see DataJpaDepartmentRepositoryImpl#SORT_NAME
      */
     @Override
-    public List<Department> getAll() {
+    public List <Department> getAll() {
         return crudRepository.findAll(SORT_NAME);
     }
 }

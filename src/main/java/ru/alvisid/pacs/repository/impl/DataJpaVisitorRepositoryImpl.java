@@ -1,13 +1,17 @@
-package ru.alvisid.pacs.repository.datajpa;
+package ru.alvisid.pacs.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Visitor;
 import ru.alvisid.pacs.repository.VisitorRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudVisitorRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * DataJpa implementation of the VisitorRepository.
@@ -30,14 +34,20 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
     CrudVisitorRepository crudRepository;
 
     /**
-     * Saves a given visitor.
+     * Saves or updates a given visitor.
+     * Returns null if there aren't updating value in the data base.
      *
      * @param visitor a visitor to save.
      * @return the saved visitor.
+     * null - if there aren't updating value in the data base.
      */
     @Override
     public Visitor save(Visitor visitor) {
-        return crudRepository.save(visitor);
+        if (visitor.isNew() || !Objects.isNull(crudRepository.findById(visitor.getId()))) {
+            return crudRepository.save(visitor);
+        }
+
+        return null;
     }
 
     /**
@@ -69,20 +79,21 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
      * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
-    public List<Visitor> getAll() {
+    public List <Visitor> getAll() {
         return crudRepository.findAll(SORT_LNAME_FNAME_SNAME);
     }
 
     /**
-     * Returns a visitors list which contains visitors
-     * with enter time in a specified time interval.
+     * Returns a visitors list which contains visitors with specified visit's date.
      *
-     * @param startTime the start of the time interval.
-     * @param endTime   the end of the time interval.
-     * @return the visitors list which contains visitors with enter time in a specified time interval.
+     * @param localDate the visit's date.
+     * @return the visitors list which contains visitors with specified visit's date.
      */
     @Override
-    public List <Visitor> getAllByEnterTimeBetween(LocalDateTime startTime, LocalDateTime endTime) {
+    public List <Visitor> getAllByVisitDate(LocalDate localDate) {
+        LocalDateTime startTime = LocalDateTime.of(localDate, LocalTime.of(0, 0));
+        LocalDateTime endTime = startTime.plusDays(1);
+
         return crudRepository.getAllByEnterTimeBetween(startTime, endTime, SORT_LNAME_FNAME_SNAME);
     }
 }

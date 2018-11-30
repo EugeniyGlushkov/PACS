@@ -24,6 +24,9 @@ import java.util.Set;
 public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer> {
     /**
      * Saves or updates a given employee.
+     * If there are a given object in the data base then the given object will be update.
+     * If there aren't a given object in the data base then a new object
+     * with new id (data base set default value) will be saved.
      *
      * @param employee a employee to save.
      * @return the saved employee.
