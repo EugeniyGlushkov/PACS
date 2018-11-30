@@ -76,6 +76,7 @@ public class PointAction extends AbstractId {
      *
      * @see PointAction#PointAction(ControlPoint, ActionType)
      * @see PointAction#PointAction(Integer, ControlPoint, ActionType)
+     * @see PointAction#PointAction(PointAction)
      */
     public PointAction() {
     }
@@ -87,6 +88,7 @@ public class PointAction extends AbstractId {
      * @param actionType   the specified action type.
      * @see PointAction#PointAction()
      * @see PointAction#PointAction(Integer, ControlPoint, ActionType)
+     * @see PointAction#PointAction(PointAction)
      */
     public PointAction(ControlPoint controlPoint, ActionType actionType) {
         this(null, controlPoint, actionType);
@@ -100,11 +102,27 @@ public class PointAction extends AbstractId {
      * @param actionType   the specified action type.
      * @see PointAction#PointAction()
      * @see PointAction#PointAction(ControlPoint, ActionType)
+     * @see PointAction#PointAction(PointAction)
      */
     public PointAction(Integer id, ControlPoint controlPoint, ActionType actionType) {
         super(id);
         this.controlPoint = controlPoint;
         this.actionType = actionType;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param pointAction the specified object to copying.
+     * @see PointAction#PointAction()
+     * @see PointAction#PointAction(ControlPoint, ActionType)
+     * @see PointAction#PointAction(Integer, ControlPoint, ActionType)
+     */
+    public PointAction(PointAction pointAction) {
+        this(pointAction.getId(),
+                pointAction.getControlPoint(),
+                pointAction.getActionType());
     }
 
     /**

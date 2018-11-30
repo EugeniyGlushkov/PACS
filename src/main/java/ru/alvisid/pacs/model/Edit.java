@@ -73,6 +73,7 @@ public class Edit extends AbstractHasEmpEntity {
      *
      * @see Edit#Edit(String, Employee, EditType, LocalDateTime)
      * @see Edit#Edit(Integer, String, Employee, EditType, LocalDateTime)
+     * @see Edit#Edit(Edit)
      */
     public Edit() {
     }
@@ -88,6 +89,7 @@ public class Edit extends AbstractHasEmpEntity {
      * @param editDateTime the specified value of the time when the edit was done.
      * @see Edit#Edit()
      * @see Edit#Edit(Integer, String, Employee, EditType, LocalDateTime)
+     * @see Edit#Edit(Edit)
      */
     public Edit(String description,
                 Employee employee,
@@ -111,6 +113,7 @@ public class Edit extends AbstractHasEmpEntity {
      * @param editDateTime the specified value of the time when the edit was done.
      * @see Edit#Edit()
      * @see Edit#Edit(String, Employee, EditType, LocalDateTime)
+     * @see Edit#Edit(Edit)
      */
     public Edit(Integer id,
                 String description,
@@ -120,6 +123,23 @@ public class Edit extends AbstractHasEmpEntity {
         super(id, description, employee);
         this.editType = editType;
         this.editDateTime = editDateTime;
+    }
+
+    /**
+     * Constructs new object which is copy of the specified object.
+     * new object is equals to specified object.
+     *
+     * @param edit the specified object to copying.
+     * @see Edit#Edit()
+     * @see Edit#Edit(String, Employee, EditType, LocalDateTime)
+     * @see Edit#Edit(Integer, String, Employee, EditType, LocalDateTime)
+     */
+    public Edit(Edit edit) {
+        this(edit.getId(),
+                edit.getDescription(),
+                edit.getEmployee(),
+                edit.getEditType(),
+                edit.getEditDateTime());
     }
 
     /**
