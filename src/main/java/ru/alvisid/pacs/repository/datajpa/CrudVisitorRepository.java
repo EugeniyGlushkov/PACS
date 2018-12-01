@@ -41,10 +41,10 @@ public interface CrudVisitorRepository extends JpaRepository <Visitor, Integer> 
     int delete(@Param("id") int id);
 
     /**
-     * Returns a visitor by given id.
+     * Returns a container with visitor by given id inside.
      *
      * @param integer id of the visitor to return.
-     * @return a visitor by given id.
+     * @return a container with visitor by given id inside.
      */
     @Override
     Optional <Visitor> findById(Integer integer);

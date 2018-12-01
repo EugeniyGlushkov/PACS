@@ -17,7 +17,7 @@ import java.util.Optional;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface CrudDepartmentRepository extends JpaRepository <Department, Integer> {
+public interface CrudDepartmentRepository extends JpaRepository<Department, Integer> {
     /**
      * Saves or updates a given department.
      * If there are a given object in the data base then the given object will be update.
@@ -43,7 +43,7 @@ public interface CrudDepartmentRepository extends JpaRepository <Department, Int
     int delete(@Param("id") int id);
 
     /**
-     * Returns a container with department by given id inside..
+     * Returns a container with department by given id inside.
      *
      * @param integer id of the department to return.
      * @return a container with department by given id inside.

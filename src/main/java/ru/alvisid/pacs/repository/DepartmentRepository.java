@@ -5,7 +5,7 @@ import ru.alvisid.pacs.model.Department;
 import java.util.List;
 
 /**
- * The interface with a generalized functional for departmet's repository.
+ * The interface with a generalized functional for department's repository.
  *
  * @author Glushkov Evgeniy
  * @version 1.0
@@ -14,7 +14,7 @@ public interface DepartmentRepository {
     /**
      * Saves or updates a given department.
      *
-     * @param department department to save or update.
+     * @param department the department to save or update.
      * @return a saved or update department,
      * null - if there aren't updated department in the repository.
      */
@@ -24,7 +24,7 @@ public interface DepartmentRepository {
      * Deletes the department with specifiec id.
      *
      * @param id the specifiec id of a deleted department.
-     * @return true - if a department with the specifiec id are deleted,
+     * @return true - if a department with the specifiec id is deleted,
      * false - if there aren't the department with the cpecifiec id in the DB.
      */
     boolean delete(int id);
@@ -39,9 +39,9 @@ public interface DepartmentRepository {
     Department get(int id);
 
     /**
-     * Returns list with all departments.
+     * Returns the list with all departments.
      *
-     * @return list with all departments.
+     * @return the list with all departments.
      */
-    List <Department> getAll();
+    List<Department> getAll();
 }

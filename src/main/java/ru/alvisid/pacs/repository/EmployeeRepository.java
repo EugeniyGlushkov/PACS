@@ -15,7 +15,7 @@ public interface EmployeeRepository {
     /**
      * Saves or updates a given employee.
      *
-     * @param employee employee to save or update.
+     * @param employee the employee to save or update.
      * @return a saved or updated employee,
      * null - if there aren't updated employee in the repository.
      */
@@ -25,7 +25,7 @@ public interface EmployeeRepository {
      * Deletes the employee with specifiec id.
      *
      * @param id the specifiec id of a deleted employee.
-     * @return true - if a employee with the specifiec id are deleted,
+     * @return true - if a employee with the specifiec id is deleted,
      * false - if there aren't the employee with the cpecifiec id in the DB.
      */
     boolean delete(int id);
@@ -34,23 +34,23 @@ public interface EmployeeRepository {
      * Returns an employee with the cpecifiec id.
      *
      * @param id the specifiec id of employee to get.
-     * @return a employee with the cpecifiec id,
+     * @return an employee with the cpecifiec id,
      * null - if there aren't employee with cpecifiec id  in the DB.
      */
     Employee get(int id);
 
     /**
-     * Returns list with all employees.
+     * Returns the list with all employees.
      *
-     * @return list with all employees.
+     * @return the list with all employees.
      */
     List<Employee> getAll();
 
     /**
-     * Returns list with all employees by deparmetnt's id.
+     * Returns the list with all employees by deparmetnt's id.
      *
      * @param deptId the department's id.
-     * @return list with all employees by deparmetnt's id.
+     * @return the list with all employees by deparmetnt's id.
      */
     List<Employee> getAllByDeptId(int deptId);
 

@@ -16,7 +16,7 @@ public interface VisitorRepository {
     /**
      * Saves or updates a given visitor.
      *
-     * @param visitor visitor to save or update.
+     * @param visitor the visitor to save or update.
      * @return a saved or update visitor,
      * null - if there aren't updated visitor in the repository.
      */
@@ -26,7 +26,7 @@ public interface VisitorRepository {
      * Deletes the visitor with specifiec id.
      *
      * @param id the specifiec id of a deleted visitor.
-     * @return true - if a visitor with the specifiec id are deleted,
+     * @return true - if a visitor with the specifiec id is deleted,
      * false - if there aren't the visitor with the cpecifiec id in the DB.
      */
     boolean delete(int id);
@@ -41,11 +41,11 @@ public interface VisitorRepository {
     Visitor get(int id);
 
     /**
-     * Returns list with all visitors.
+     * Returns the list with all visitors.
      *
-     * @return list with all visitors.
+     * @return the list with all visitors.
      */
-    List <Visitor> getAll();
+    List<Visitor> getAll();
 
     /**
      * Returns a visitors list which contains visitors with specified visit's date.
@@ -53,5 +53,5 @@ public interface VisitorRepository {
      * @param localDate the visit's date.
      * @return the visitors list which contains visitors with specified visit's date.
      */
-    List <Visitor> getAllByVisitDate(LocalDate localDate);
+    List<Visitor> getAllByVisitDate(LocalDate localDate);
 }
