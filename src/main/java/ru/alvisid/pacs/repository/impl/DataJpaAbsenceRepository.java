@@ -41,7 +41,7 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
      * Saves or updates a given absence.
      * Returns null if there aren't updating value in the data base.
      *
-     * @param absence a absence to save.
+     * @param absence an absence to save.
      * @return the saved absence.
      * null - if there aren't updating value in the data base.
      */
@@ -55,7 +55,7 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
     }
 
     /**
-     * Deletes a absence by given id.
+     * Deletes an absence by given id.
      *
      * @param id the specifiec id of the deleted absence.
      * @return true - the entity is deleted, false - the entity isn't found.
@@ -66,10 +66,10 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
     }
 
     /**
-     * Returns a absence by given id.
+     * Returns an absence by given id.
      *
      * @param id the specifiec id of absence to get.
-     * @return a absence by the given id,
+     * @return an absence by the given id,
      * null - if there aren't absence with cpecifiec id in the DB.
      */
     @Override
@@ -78,10 +78,10 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
     }
 
     /**
-     * Returns all departments sorted with specifiec sort.
+     * Returns all absences sorted with specified sort.
      * List is sorted by employee's last name, first name, second name and absence's start date.
      *
-     * @return list of all departments.
+     * @return list of all absences.
      * @see DataJpaAbsenceRepository#SORT_STARTDATE
      * @see DataJpaAbsenceRepository#getAllByEmplId(int)
      * @see DataJpaAbsenceRepository#getAllByEmplDeptId(int)

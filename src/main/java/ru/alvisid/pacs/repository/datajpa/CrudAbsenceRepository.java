@@ -24,8 +24,8 @@ public interface CrudAbsenceRepository extends JpaRepository<Absence, Integer> {
      * If there aren't a given object in the data base then a new object
      * with new id (data base set default value) will be saved.
      *
-     * @param absence
-     * @return
+     * @param absence an absence to save.
+     * @return the saved absence.
      */
     @Transactional
     @Override
@@ -54,7 +54,7 @@ public interface CrudAbsenceRepository extends JpaRepository<Absence, Integer> {
     /**
      * Returns all absences sorted with given sort.
      *
-     * @param sort sort fo absences list.
+     * @param sort sort for absences list.
      * @return list of all absences.
      */
     @Override

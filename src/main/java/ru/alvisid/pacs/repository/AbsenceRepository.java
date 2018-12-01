@@ -24,7 +24,7 @@ public interface AbsenceRepository {
      * Deletes the absence with specifiec id.
      *
      * @param id the specifiec id of a deleted absence.
-     * @return true - if a absence with the specifiec id is deleted,
+     * @return true - if an absence with the specifiec id is deleted,
      * false - if there aren't the absence with the cpecifiec id in the DB.
      */
     boolean delete(int id);
@@ -34,7 +34,7 @@ public interface AbsenceRepository {
      *
      * @param id the specifiec id of absence to get.
      * @return a absence with the cpecifiec id,
-     * null - if there aren't absence with cpecifiec id in the DB.
+     * null - if there aren't absence with the cpecifiec id in the DB.
      */
     Absence get(int id);
 
