@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * The interface with a generalized functional for visitor's repository.
+ * The generalized functional for visitor's repository.
  *
  * @author Glushkov Evgeniy
  * @version 1.0

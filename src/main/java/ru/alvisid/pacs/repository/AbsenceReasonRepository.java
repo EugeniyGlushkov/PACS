@@ -5,7 +5,7 @@ import ru.alvisid.pacs.model.AbsenceReason;
 import java.util.List;
 
 /**
- * The interface with a generalized functional for absence reason's repository.
+ * The generalized functional for absence reason's repository.
  *
  * @author Glushkov Evgeniy
  * @version 1.0

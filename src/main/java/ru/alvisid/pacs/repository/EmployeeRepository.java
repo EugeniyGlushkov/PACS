@@ -6,7 +6,7 @@ import ru.alvisid.pacs.model.Employee;
 import java.util.List;
 
 /**
- * The interface with a generalized functional for employee's repository.
+ * The generalized functional for employee's repository.
  *
  * @author Glushkov Evgeniy
  * @version 1.0

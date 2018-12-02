@@ -5,7 +5,7 @@ import ru.alvisid.pacs.model.DeptSchedule;
 import java.util.List;
 
 /**
- * The interface with a generalized functional for schedule's repository.
+ * The generalized functional for schedule's repository.
  *
  * @author Glushkov Evgeniy
  * @version 1.0

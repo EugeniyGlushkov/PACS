@@ -5,7 +5,7 @@ import ru.alvisid.pacs.model.Absence;
 import java.util.List;
 
 /**
- * The interface with a generalized functional for absence's repository.
+ * The generalized functional for absence's repository.
  *
  * @author Glushkov Evgeniy
  * @version 1.0
@@ -33,7 +33,7 @@ public interface AbsenceRepository {
      * Returns a absence with the cpecifiec id.
      *
      * @param id the specifiec id of absence to get.
-     * @return a absence with the cpecifiec id,
+     * @return an absence with the cpecifiec id,
      * null - if there aren't absence with the cpecifiec id in the DB.
      */
     Absence get(int id);

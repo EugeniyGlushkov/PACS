@@ -5,7 +5,7 @@ import ru.alvisid.pacs.model.Department;
 import java.util.List;
 
 /**
- * The interface with a generalized functional for department's repository.
+ * The generalized functional for department's repository.
  *
  * @author Glushkov Evgeniy
  * @version 1.0
