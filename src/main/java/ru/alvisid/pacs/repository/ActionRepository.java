@@ -24,7 +24,7 @@ public interface ActionRepository extends TypicalRepository<Action> {
      * Returns
      *
      * @param start the start of the time interval.
-     * @param end the end of the time interval.
+     * @param end   the end of the time interval.
      * @return the list with all actions in the specified time interval.
      */
     List<Action> getAllBetween(LocalDateTime start, LocalDateTime end);

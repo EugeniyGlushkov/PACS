@@ -32,7 +32,7 @@ public interface CrudAbsenceRepository extends JpaRepository<Absence, Integer> {
     Absence save(Absence absence);
 
     /**
-     * Deletes a absence by given id.
+     * Deletes an absence by given id.
      *
      * @param id id of the absence that must be deleted.
      * @return amount of the deleted entities.
@@ -52,7 +52,7 @@ public interface CrudAbsenceRepository extends JpaRepository<Absence, Integer> {
     Optional<Absence> findById(Integer integer);
 
     /**
-     * Returns all absences sorted with given sort.
+     * Returns all absences sorted with a given sort.
      *
      * @param sort sort for absences list.
      * @return list of all absences.
