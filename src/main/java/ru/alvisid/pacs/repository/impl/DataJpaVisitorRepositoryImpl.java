@@ -30,8 +30,17 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
     /**
      * An interface for visitor which extends JpaRepository.
      */
+    private final CrudVisitorRepository crudRepository;
+
+    /**
+     * Constructs a new DataJpaVisitorRepositoryImpl with the specified CrudVisitorRepository.
+     *
+     * @param crudRepository the specified CrudVisitorRepository.
+     */
     @Autowired
-    CrudVisitorRepository crudRepository;
+    public DataJpaVisitorRepositoryImpl(CrudVisitorRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
 
     /**
      * Saves or updates a given visitor.

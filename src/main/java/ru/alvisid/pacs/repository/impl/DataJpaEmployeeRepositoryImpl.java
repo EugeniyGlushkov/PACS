@@ -29,8 +29,17 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
     /**
      * An interface for employee which extends JpaRepository.
      */
+    private final CrudEmployeeRepository crudRepository;
+
+    /**
+     * Constructs a new DataJpaEmployeeRepositoryImpl with the specified CrudEmployeeRepository.
+     *
+     * @param crudRepository the specified CrudEmployeeRepository.
+     */
     @Autowired
-    CrudEmployeeRepository crudRepository;
+    public DataJpaEmployeeRepositoryImpl(CrudEmployeeRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
 
     /**
      * Saves or updates a given employee.

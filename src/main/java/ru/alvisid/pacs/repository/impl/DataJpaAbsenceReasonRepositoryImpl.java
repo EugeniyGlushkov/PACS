@@ -2,6 +2,7 @@ package ru.alvisid.pacs.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.AbsenceReason;
 import ru.alvisid.pacs.repository.AbsenceReasonRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudAbsenceReasonRepository;
@@ -15,7 +16,8 @@ import java.util.Objects;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public class DataJpaAbsenceReasonRepository implements AbsenceReasonRepository {
+@Repository
+public class DataJpaAbsenceReasonRepositoryImpl implements AbsenceReasonRepository {
     /**
      * Sort by absence's reason.
      */
@@ -24,8 +26,17 @@ public class DataJpaAbsenceReasonRepository implements AbsenceReasonRepository {
     /**
      * An interface for absence's reason which extends JpaRepository.
      */
+    private final CrudAbsenceReasonRepository crudRepository;
+
+    /**
+     * Constructs a new DataJpaAbsenceReasonRepositoryImpl with the specified CrudAbsenceReasonRepository.
+     *
+     * @param crudRepository the specified CrudAbsenceReasonRepository.
+     */
     @Autowired
-    CrudAbsenceReasonRepository crudRepository;
+    public DataJpaAbsenceReasonRepositoryImpl(CrudAbsenceReasonRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
 
     /**
      * Saves or updates a given absence's reason.

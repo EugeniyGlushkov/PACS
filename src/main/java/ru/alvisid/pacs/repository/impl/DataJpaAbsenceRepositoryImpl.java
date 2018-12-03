@@ -2,6 +2,7 @@ package ru.alvisid.pacs.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Absence;
 import ru.alvisid.pacs.repository.AbsenceRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudAbsenceRepository;
@@ -15,7 +16,8 @@ import java.util.Objects;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public class DataJpaAbsenceRepository implements AbsenceRepository {
+@Repository
+public class DataJpaAbsenceRepositoryImpl implements AbsenceRepository {
     /**
      * Sort by employee's last name, first name, second name and absence's start date.
      */
@@ -34,8 +36,17 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
     /**
      * An interface for absence which extends JpaRepository.
      */
+    private final CrudAbsenceRepository crudRepository;
+
+    /**
+     * Constructs a new DataJpaAbsenceRepositoryImpl with the specified CrudAbsenceRepository.
+     *
+     * @param crudRepository the specified CrudAbsenceRepository.
+     */
     @Autowired
-    CrudAbsenceRepository crudRepository;
+    public DataJpaAbsenceRepositoryImpl(CrudAbsenceRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
 
     /**
      * Saves or updates a given absence.
@@ -82,9 +93,9 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
      * List is sorted by employee's last name, first name, second name and absence's start date.
      *
      * @return list of all absences.
-     * @see DataJpaAbsenceRepository#SORT_STARTDATE
-     * @see DataJpaAbsenceRepository#getAllByEmplId(int)
-     * @see DataJpaAbsenceRepository#getAllByEmplDeptId(int)
+     * @see DataJpaAbsenceRepositoryImpl#SORT_STARTDATE
+     * @see DataJpaAbsenceRepositoryImpl#getAllByEmplId(int)
+     * @see DataJpaAbsenceRepositoryImpl#getAllByEmplDeptId(int)
      */
     @Override
     public List <Absence> getAll() {
@@ -97,9 +108,9 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
      *
      * @param id the employee's id.
      * @return the list with all absences by employee's id.
-     * @see DataJpaAbsenceRepository#SORT_LNAME_FNAME_SNAME_STARTDATE
-     * @see DataJpaAbsenceRepository#getAll()
-     * @see DataJpaAbsenceRepository#getAllByEmplDeptId(int)
+     * @see DataJpaAbsenceRepositoryImpl#SORT_LNAME_FNAME_SNAME_STARTDATE
+     * @see DataJpaAbsenceRepositoryImpl#getAll()
+     * @see DataJpaAbsenceRepositoryImpl#getAllByEmplDeptId(int)
      */
     @Override
     public List <Absence> getAllByEmplId(int id) {
@@ -112,9 +123,9 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
      *
      * @param id the department's id.
      * @return the list with all absences by id of the employee's department.
-     * @see DataJpaAbsenceRepository#SORT_STARTDATE
-     * @see DataJpaAbsenceRepository#getAll()
-     * @see DataJpaAbsenceRepository#getAllByEmplId(int)
+     * @see DataJpaAbsenceRepositoryImpl#SORT_STARTDATE
+     * @see DataJpaAbsenceRepositoryImpl#getAll()
+     * @see DataJpaAbsenceRepositoryImpl#getAllByEmplId(int)
      */
     @Override
     public List <Absence> getAllByEmplDeptId(int id) {

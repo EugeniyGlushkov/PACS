@@ -130,7 +130,7 @@ CREATE TABLE control_points
 CREATE TABLE action_types
 (
   id          SERIAL PRIMARY KEY,
-  action      VARCHAR(50) UNIQUE NOT NULL,
+  type        VARCHAR(50) UNIQUE NOT NULL,
   description VARCHAR            NOT NULL
 );
 

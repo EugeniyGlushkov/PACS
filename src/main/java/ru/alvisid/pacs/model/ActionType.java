@@ -23,7 +23,7 @@ public class ActionType extends AbstractEntity {
      */
     @NotBlank
     @Size(min = 2, max = 50)
-    @Column(name = "action", nullable = false, unique = true)
+    @Column(name = "type", nullable = false, unique = true)
     private String type;
 
     /**

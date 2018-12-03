@@ -28,8 +28,17 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
     /**
      * An interface for department which extends JpaRepository.
      */
+    private final CrudDepartmentRepository crudRepository;
+
+    /**
+     * Constructs a new DataJpaDepartmentRepositoryImpl with the specified CrudDepartmentRepository.
+     *
+     * @param crudRepository the specified CrudDepartmentRepository.
+     */
     @Autowired
-    private CrudDepartmentRepository crudRepository;
+    public DataJpaDepartmentRepositoryImpl(CrudDepartmentRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
 
     /**
      * Saves or updates a given department.

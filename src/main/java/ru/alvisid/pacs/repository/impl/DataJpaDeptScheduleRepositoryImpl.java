@@ -23,8 +23,17 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
     /**
      * An interface for department schedule which extends JpaRepository.
      */
+    private final CrudDeptScheduleRepository crudRepository;
+
+    /**
+     * Constructs a new DataJpaDeptScheduleRepositoryImpl with the specified CrudDeptScheduleRepository.
+     *
+     * @param crudRepository the specified CrudDeptScheduleRepository.
+     */
     @Autowired
-    CrudDeptScheduleRepository crudRepository;
+    public DataJpaDeptScheduleRepositoryImpl(CrudDeptScheduleRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
 
     /**
      * Saves or updates a given department schedule.

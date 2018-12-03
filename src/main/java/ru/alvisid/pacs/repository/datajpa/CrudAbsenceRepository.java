@@ -17,7 +17,7 @@ import java.util.Optional;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface CrudAbsenceRepository extends JpaRepository<Absence, Integer> {
+public interface CrudAbsenceRepository extends JpaRepository <Absence, Integer> {
     /**
      * Saves or updates a given absence.
      * If there are a given object in the data base then the given object will be update.
@@ -49,7 +49,7 @@ public interface CrudAbsenceRepository extends JpaRepository<Absence, Integer> {
      * @return a container with absence by given id inside.
      */
     @Override
-    Optional<Absence> findById(Integer integer);
+    Optional <Absence> findById(Integer integer);
 
     /**
      * Returns all absences sorted with a given sort.
@@ -58,7 +58,7 @@ public interface CrudAbsenceRepository extends JpaRepository<Absence, Integer> {
      * @return list of all absences.
      */
     @Override
-    List<Absence> findAll(Sort sort);
+    List <Absence> findAll(Sort sort);
 
     /**
      * Returns the list with all absences by employee's id and sorted by specified sort.
@@ -68,7 +68,7 @@ public interface CrudAbsenceRepository extends JpaRepository<Absence, Integer> {
      * @return the list with all absences by employee's id and sorted by specified sort.
      */
     @Query("SELECT a FROM Absence a WHERE a.employee.id=:empId")
-    List<Absence> findAllByEmployeeId(@Param("empId") int empId, Sort sort);
+    List <Absence> findAllByEmployeeId(@Param("empId") int empId, Sort sort);
 
     /**
      * Returns the list with all absences by id of the employee's department
@@ -80,5 +80,5 @@ public interface CrudAbsenceRepository extends JpaRepository<Absence, Integer> {
      * and sorted by specified sort.
      */
     @Query("SELECT a FROM Absence a WHERE a.employee.department.id = deptId")
-    List<Absence> findAllByEmployeeDepartmentId(@Param("deptId") int deptId, Sort sort);
+    List <Absence> findAllByEmployeeDepartmentId(@Param("deptId") int deptId, Sort sort);
 }

@@ -2,6 +2,7 @@ package ru.alvisid.pacs.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Action;
 import ru.alvisid.pacs.repository.ActionRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudActionRepository;
@@ -16,7 +17,8 @@ import java.util.Objects;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public class DataJpaActionRepository implements ActionRepository {
+@Repository
+public class DataJpaActionRepositoryImpl implements ActionRepository {
     /**
      * Sort by action's time, employee's last name, first name and second name.
      */
@@ -36,21 +38,30 @@ public class DataJpaActionRepository implements ActionRepository {
     /**
      * An interface for action which extends JpaRepository.
      */
+    private final CrudActionRepository crudRepository;
+
+    /**
+     * Constructs a new DataJpaActionRepositoryImpl with the specified CrudActionRepository.
+     *
+     * @param crudRepository the specified CrudActionRepository.
+     */
     @Autowired
-    CrudActionRepository crudRepository;
+    public DataJpaActionRepositoryImpl(CrudActionRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
 
     /**
      * Saves or updates a given action.
      * Returns null if there aren't updating value in the data base.
      *
-     * @param obj an action to save.
+     * @param action an action to save.
      * @return the saved action.
      * null - if there aren't updating value in the data base.
      */
     @Override
-    public Action save(Action obj) {
-        if (obj.isNew() || !Objects.isNull(crudRepository.findById(obj.getId()))) {
-            return crudRepository.save(obj);
+    public Action save(Action action) {
+        if (action.isNew() || !Objects.isNull(crudRepository.findById(action.getId()))) {
+            return crudRepository.save(action);
         }
 
         return null;
@@ -84,9 +95,9 @@ public class DataJpaActionRepository implements ActionRepository {
      * List is sorted by action's time, employee's last name, first name and second name.
      *
      * @return list of all actions
-     * @see DataJpaActionRepository#SORT_TIME
-     * @see DataJpaActionRepository#getAllByEmplId(int)
-     * @see DataJpaActionRepository#getAllBetween(LocalDateTime, LocalDateTime)
+     * @see DataJpaActionRepositoryImpl#SORT_TIME
+     * @see DataJpaActionRepositoryImpl#getAllByEmplId(int)
+     * @see DataJpaActionRepositoryImpl#getAllBetween(LocalDateTime, LocalDateTime)
      */
     @Override
     public List <Action> getAll() {
@@ -99,9 +110,9 @@ public class DataJpaActionRepository implements ActionRepository {
      *
      * @param id the employee's id.
      * @return all actions which are done by specifiec employee sorted with specified sort.
-     * @see DataJpaActionRepository#SORT_TIME_LNAME_FNAME_SNAME
-     * @see DataJpaActionRepository#getAll()
-     * @see DataJpaActionRepository#getAllBetween(LocalDateTime, LocalDateTime)
+     * @see DataJpaActionRepositoryImpl#SORT_TIME_LNAME_FNAME_SNAME
+     * @see DataJpaActionRepositoryImpl#getAll()
+     * @see DataJpaActionRepositoryImpl#getAllBetween(LocalDateTime, LocalDateTime)
      */
     @Override
     public List <Action> getAllByEmplId(int id) {
@@ -115,9 +126,9 @@ public class DataJpaActionRepository implements ActionRepository {
      * @param start the start of the time interval.
      * @param end   the end of the time interval.
      * @return all actions in the specified time interval sorted with specified sort.
-     * @see DataJpaActionRepository#SORT_TIME
-     * @see DataJpaActionRepository#getAll()
-     * @see DataJpaActionRepository#getAllByEmplId(int)
+     * @see DataJpaActionRepositoryImpl#SORT_TIME
+     * @see DataJpaActionRepositoryImpl#getAll()
+     * @see DataJpaActionRepositoryImpl#getAllByEmplId(int)
      */
     @Override
     public List <Action> getAllBetween(LocalDateTime start, LocalDateTime end) {
