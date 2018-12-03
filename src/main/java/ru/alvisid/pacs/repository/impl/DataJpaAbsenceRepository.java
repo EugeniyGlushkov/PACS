@@ -87,7 +87,7 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
      * @see DataJpaAbsenceRepository#getAllByEmplDeptId(int)
      */
     @Override
-    public List<Absence> getAll() {
+    public List <Absence> getAll() {
         return crudRepository.findAll(SORT_LNAME_FNAME_SNAME_STARTDATE);
     }
 
@@ -102,7 +102,7 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
      * @see DataJpaAbsenceRepository#getAllByEmplDeptId(int)
      */
     @Override
-    public List<Absence> getAllByEmplId(int id) {
+    public List <Absence> getAllByEmplId(int id) {
         return crudRepository.findAllByEmployeeId(id, SORT_STARTDATE);
     }
 
@@ -117,7 +117,7 @@ public class DataJpaAbsenceRepository implements AbsenceRepository {
      * @see DataJpaAbsenceRepository#getAllByEmplId(int)
      */
     @Override
-    public List<Absence> getAllByEmplDeptId(int id) {
+    public List <Absence> getAllByEmplDeptId(int id) {
         return crudRepository.findAllByEmployeeDepartmentId(id, SORT_LNAME_FNAME_SNAME_STARTDATE);
     }
 }

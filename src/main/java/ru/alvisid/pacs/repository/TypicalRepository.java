@@ -23,8 +23,7 @@ public interface TypicalRepository<T> {
      * Deletes the object by specified id.
      *
      * @param id the specified id of a deleted object.
-     * @return the object with the cpecifiec id,
-     * null - if there aren't object with the cpecifiec id in the DB.
+     * @return {@code true} - the entity is deleted, {@code false} - the entity isn't found.
      */
     boolean delete(int id);
 

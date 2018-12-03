@@ -21,11 +21,11 @@ public class DataJpaActionRepository implements ActionRepository {
      * Sort by action's time, employee's last name, first name and second name.
      */
     private static final Sort SORT_TIME_LNAME_FNAME_SNAME =
-        new Sort(Sort.Direction.ASC,
-                "actionTime",
-                "employee.lastName",
-                "employee.firstName",
-                "employee.secondName");
+            new Sort(Sort.Direction.ASC,
+                    "actionTime",
+                    "employee.lastName",
+                    "employee.firstName",
+                    "employee.secondName");
 
     /**
      * Sort by action's time.
@@ -56,28 +56,71 @@ public class DataJpaActionRepository implements ActionRepository {
         return null;
     }
 
+    /**
+     * Deletes an action by given id.
+     *
+     * @param id the specified id of a deleted action.
+     * @return {@code true} - the entity is deleted, {@code false} - the entity isn't found.
+     */
     @Override
     public boolean delete(int id) {
         return crudRepository.delete(id) != 0;
     }
 
+    /**
+     * Returns an action by given id.
+     *
+     * @param id the specifiec id of the object to get.
+     * @return an action by the given id,
+     * null - if there aren't action with cpecifiec id in the DB.
+     */
     @Override
     public Action get(int id) {
         return crudRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Returns all actions sorted with specified sort.
+     * List is sorted by action's time, employee's last name, first name and second name.
+     *
+     * @return list of all actions
+     * @see DataJpaActionRepository#SORT_TIME
+     * @see DataJpaActionRepository#getAllByEmplId(int)
+     * @see DataJpaActionRepository#getAllBetween(LocalDateTime, LocalDateTime)
+     */
     @Override
-    public List<Action> getAll() {
+    public List <Action> getAll() {
         return crudRepository.findAll(SORT_TIME_LNAME_FNAME_SNAME);
     }
 
+    /**
+     * Returns all actions which are done by specifiec employee sorted with specified sort.
+     * List is sorted by action's time.
+     *
+     * @param id the employee's id.
+     * @return all actions which are done by specifiec employee sorted with specified sort.
+     * @see DataJpaActionRepository#SORT_TIME_LNAME_FNAME_SNAME
+     * @see DataJpaActionRepository#getAll()
+     * @see DataJpaActionRepository#getAllBetween(LocalDateTime, LocalDateTime)
+     */
     @Override
-    public List<Action> getAllByEmplId(int id) {
+    public List <Action> getAllByEmplId(int id) {
         return crudRepository.findAllByEmployeeId(id, SORT_TIME);
     }
 
+    /**
+     * Returns all actions in the specified time interval sorted with specified sort.
+     * List is sorted by action's time, employee's last name, first name and second name.
+     *
+     * @param start the start of the time interval.
+     * @param end   the end of the time interval.
+     * @return all actions in the specified time interval sorted with specified sort.
+     * @see DataJpaActionRepository#SORT_TIME
+     * @see DataJpaActionRepository#getAll()
+     * @see DataJpaActionRepository#getAllByEmplId(int)
+     */
     @Override
-    public List<Action> getAllBetween(LocalDateTime start, LocalDateTime end) {
+    public List <Action> getAllBetween(LocalDateTime start, LocalDateTime end) {
         return crudRepository.findAllBetween(start, end, SORT_TIME_LNAME_FNAME_SNAME);
     }
 }
