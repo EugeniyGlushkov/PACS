@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.repository.datajpa;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -57,5 +58,5 @@ public interface CrudDayOffRepository extends JpaRepository <DayOff, Integer> {
      * @return list of all days off.
      */
     @Override
-    List <DayOff> findAll();
+    List <DayOff> findAll(Sort sort);
 }
