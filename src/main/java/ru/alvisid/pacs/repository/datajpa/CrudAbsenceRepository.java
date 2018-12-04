@@ -43,10 +43,10 @@ public interface CrudAbsenceRepository extends JpaRepository <Absence, Integer> 
     int delete(@Param("id") int id);
 
     /**
-     * Returns a container with absence by given id inside.
+     * Returns a container with an absence by given id inside.
      *
      * @param integer id of the absence to return.
-     * @return a container with absence by given id inside.
+     * @return a container with an absence by given id inside.
      */
     @Override
     Optional <Absence> findById(Integer integer);

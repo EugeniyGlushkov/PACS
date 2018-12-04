@@ -2,6 +2,7 @@ package ru.alvisid.pacs.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.ControlPoint;
 import ru.alvisid.pacs.repository.ControlPointRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudControlPointRepository;
@@ -15,6 +16,7 @@ import java.util.Objects;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
+@Repository
 public class DataJpaControlPointRepositoryImpl implements ControlPointRepository {
     /**
      * Sort by control point's serial code.

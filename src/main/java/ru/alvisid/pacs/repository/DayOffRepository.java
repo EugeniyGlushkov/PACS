@@ -8,5 +8,5 @@ import ru.alvisid.pacs.model.DayOff;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface DayOffRepository extends TypicalRepository<DayOff> {
+public interface DayOffRepository extends TypicalRepository <DayOff> {
 }
