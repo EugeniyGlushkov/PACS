@@ -48,7 +48,7 @@ public class DataJpaAbsenceReasonRepositoryImpl implements AbsenceReasonReposito
      */
     @Override
     public AbsenceReason save(AbsenceReason reason) {
-        if (reason.isNew() || !Objects.isNull(crudRepository.findById(reason.getId()))) {
+        if (reason.isNew() || !Objects.isNull(get(reason.getId()))) {
             return crudRepository.save(reason);
         }
 

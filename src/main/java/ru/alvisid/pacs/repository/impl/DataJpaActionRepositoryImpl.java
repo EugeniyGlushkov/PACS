@@ -60,7 +60,7 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
      */
     @Override
     public Action save(Action action) {
-        if (action.isNew() || !Objects.isNull(crudRepository.findById(action.getId()))) {
+        if (action.isNew() || !Objects.isNull(get(action.getId()))) {
             return crudRepository.save(action);
         }
 

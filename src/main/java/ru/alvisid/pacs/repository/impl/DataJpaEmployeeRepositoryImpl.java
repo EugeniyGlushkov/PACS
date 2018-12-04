@@ -51,7 +51,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      */
     @Override
     public Employee save(Employee employee) {
-        if (employee.isNew() || !Objects.isNull(crudRepository.findById(employee.getId()))) {
+        if (employee.isNew() || !Objects.isNull(get(employee.getId()))) {
             return crudRepository.save(employee);
         }
 

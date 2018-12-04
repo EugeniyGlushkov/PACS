@@ -52,7 +52,7 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
      */
     @Override
     public Visitor save(Visitor visitor) {
-        if (visitor.isNew() || !Objects.isNull(crudRepository.findById(visitor.getId()))) {
+        if (visitor.isNew() || !Objects.isNull(get(visitor.getId()))) {
             return crudRepository.save(visitor);
         }
 

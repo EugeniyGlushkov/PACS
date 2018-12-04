@@ -45,7 +45,7 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
      */
     @Override
     public DeptSchedule save(DeptSchedule schedule) {
-        if (schedule.isNew() || !Objects.isNull(crudRepository.findById(schedule.getId()))) {
+        if (schedule.isNew() || !Objects.isNull(get(schedule.getId()))) {
             return crudRepository.save(schedule);
         }
 

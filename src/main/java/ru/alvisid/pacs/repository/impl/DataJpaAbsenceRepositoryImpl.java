@@ -58,7 +58,7 @@ public class DataJpaAbsenceRepositoryImpl implements AbsenceRepository {
      */
     @Override
     public Absence save(Absence absence) {
-        if (absence.isNew() || !Objects.isNull(crudRepository.findById(absence.getId()))) {
+        if (absence.isNew() || !Objects.isNull(get(absence.getId()))) {
             return crudRepository.save(absence);
         }
 

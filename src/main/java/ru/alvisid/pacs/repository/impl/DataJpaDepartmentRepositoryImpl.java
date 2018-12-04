@@ -50,7 +50,7 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
      */
     @Override
     public Department save(Department department) {
-        if (department.isNew() || !Objects.isNull(crudRepository.findById(department.getId()))) {
+        if (department.isNew() || !Objects.isNull(get(department.getId()))) {
             return crudRepository.save(department);
         }
 

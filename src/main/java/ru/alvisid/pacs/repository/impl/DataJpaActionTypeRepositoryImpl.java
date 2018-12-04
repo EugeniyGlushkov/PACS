@@ -48,7 +48,7 @@ public class DataJpaActionTypeRepositoryImpl implements ActionTypeRepository {
      */
     @Override
     public ActionType save(ActionType actionType) {
-        if (actionType.isNew() || !Objects.isNull(crudRepository.findById(actionType.getId()))) {
+        if (actionType.isNew() || !Objects.isNull(get(actionType.getId()))) {
             return crudRepository.save(actionType);
         }
 
