@@ -100,7 +100,7 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
      * @see DataJpaActionRepositoryImpl#getAllBetween(LocalDateTime, LocalDateTime)
      */
     @Override
-    public List <Action> getAll() {
+    public List<Action> getAll() {
         return crudRepository.findAll(SORT_TIME_LNAME_FNAME_SNAME);
     }
 
@@ -115,7 +115,7 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
      * @see DataJpaActionRepositoryImpl#getAllBetween(LocalDateTime, LocalDateTime)
      */
     @Override
-    public List <Action> getAllByEmplId(int id) {
+    public List<Action> getAllByEmplId(int id) {
         return crudRepository.findAllByEmployeeId(id, SORT_TIME);
     }
 
@@ -131,7 +131,7 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
      * @see DataJpaActionRepositoryImpl#getAllByEmplId(int)
      */
     @Override
-    public List <Action> getAllBetween(LocalDateTime start, LocalDateTime end) {
+    public List<Action> getAllBetween(LocalDateTime start, LocalDateTime end) {
         return crudRepository.findAllBetween(start, end, SORT_TIME_LNAME_FNAME_SNAME);
     }
 }

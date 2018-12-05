@@ -21,7 +21,7 @@ public interface ActionRepository extends TypicalRepository<Action> {
     List<Action> getAllByEmplId(int id);
 
     /**
-     * Returns
+     * Returns the list with all actions in the specified time interval.
      *
      * @param start the start of the time interval.
      * @param end   the end of the time interval.

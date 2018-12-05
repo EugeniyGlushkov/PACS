@@ -20,5 +20,12 @@ public interface EditRepository extends TypicalRepository <Edit> {
      */
     List<Edit> getAllByEmpId(int id);
 
-    List<Edit> getAllBBetween(LocalDateTime start, LocalDateTime end);
+    /**
+     * Returns the list with all edits in the specified time interval.
+     *
+     * @param start the start of the time interval.
+     * @param end   the end of the time interval.
+     * @return the list with all edits in the specified time interval.
+     */
+    List<Edit> getAllBetween(LocalDateTime start, LocalDateTime end);
 }
