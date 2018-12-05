@@ -12,8 +12,8 @@ public interface EmpScheduleRepository extends TypicalRepository<EmpSchedule> {
     /**
      * Returns the employee's schedule by employee {@code id}.
      *
-     * @param emplId the employee's id.
+     * @param empId the employee's id.
      * @return the employee's schedule by employee {@code id}.
      */
-    EmpSchedule getByEmplId(int emplId);
+    EmpSchedule getByEmpId(int empId);
 }

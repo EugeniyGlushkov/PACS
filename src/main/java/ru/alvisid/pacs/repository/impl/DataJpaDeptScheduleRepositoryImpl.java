@@ -2,6 +2,7 @@ package ru.alvisid.pacs.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.DeptSchedule;
 import ru.alvisid.pacs.repository.DeptScheduleRepository;
@@ -20,6 +21,11 @@ import static ru.alvisid.pacs.util.ValidationUtil.*;
  */
 @Repository
 public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository {
+    /**
+     * Sort by department's id.
+     */
+    private static final Sort SORT_DEPTID = new Sort(Sort.Direction.ASC, "department.id");
+
     /**
      * An interface for department schedule which extends JpaRepository.
      */
@@ -77,12 +83,13 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
 
     /**
      * Returns all department schedules sorted.
+     * List is sorted with department's id.
      *
      * @return the list of all department schedules.
      */
     @Override
     public List <DeptSchedule> getAll() {
-        return crudRepository.findAll();
+        return crudRepository.findAll(SORT_DEPTID);
     }
 
     /**
@@ -93,6 +100,6 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
      */
     @Override
     public DeptSchedule getByDeptId(int deptId) {
-        return DataAccessUtils.singleResult(crudRepository.fintAllByDeptId(deptId));
+        return DataAccessUtils.singleResult(crudRepository.findAllByDeptId(deptId));
     }
 }
