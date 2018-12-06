@@ -11,26 +11,75 @@ import ru.alvisid.pacs.model.PointPermit;
 import java.util.List;
 import java.util.Optional;
 
-public interface CrudPointPermitRepository extends JpaRepository<PointPermit, Integer> {
+/**
+ * JpaRepository interface for point permit.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ */
+public interface CrudPointPermitRepository extends JpaRepository <PointPermit, Integer> {
+    /**
+     * Saves or updates a given point permit.
+     * If there are a given object in the data base then the given object will be update.
+     * If there aren't a given object in the data base then a new object
+     * with new id (data base set default value) will be saved.
+     *
+     * @param pointPermit a point permit to save.
+     * @return the saved point permit.
+     */
     @Transactional
     @Override
     PointPermit save(PointPermit pointPermit);
 
+    /**
+     * Deletes a point permit by given id.
+     *
+     * @param id id of the point permit that must be deleted.
+     * @return amount of the deleted entities.
+     */
     @Transactional
     @Modifying
     @Query
     int delete(@Param("id") int id);
 
+    /**
+     * Returns a container with a point permit by given id inside.
+     *
+     * @param integer id of the point permit to return.
+     * @return a container with a point permit by given id inside.
+     */
     @Override
-    Optional<PointPermit> findById(Integer integer);
+    Optional <PointPermit> findById(Integer integer);
 
+    /**
+     * Returns all point permits sorted with a given sort.
+     *
+     * @param sort sort for point permits list.
+     * @return list of all point permits.
+     */
     @Override
-    List<PointPermit> findAll(Sort sort);
+    List <PointPermit> findAll(Sort sort);
 
+    /**
+     * Returns the list with all point permits by employee's id and sorted by
+     * control point's serial code and action's type of the point action.
+     *
+     * @param empId the employee's id.
+     * @return the sorted list with all point permits by employee's id.
+     */
     @Query("SELECT pp FROM PointPermit pp WHERE pp.employee.id=:empId " +
             "ORDER BY pp.pointAction.controlPoint.serialCode, pp.pointAction.actionType.type")
-    List<PointPermit> findAllByEmployeeId(@Param("empId") int empId);
+    List <PointPermit> findAllByEmployeeId(@Param("empId") int empId);
 
+    /**
+     * Returns the list with all point permits by the control point's id of the point permit
+     * and sorted by specified sort.
+     *
+     * @param cPointId the department's id.
+     * @param sort   the specified list's sort.
+     * @return the list with all point permits by the control point's id of the point permit
+     * and sorted by specified sort.
+     */
     @Query("SELECT pp FROM PointPermit pp WHERE pp.pointAction.controlPoint.id=:cPointId")
-    List<PointPermit> findAllByControlPointId(@Param("cPointId") int cPointId, Sort sort);
+    List <PointPermit> findAllByControlPointId(@Param("cPointId") int cPointId, Sort sort);
 }
