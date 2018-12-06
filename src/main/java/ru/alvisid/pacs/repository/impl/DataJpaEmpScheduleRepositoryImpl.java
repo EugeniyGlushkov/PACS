@@ -28,7 +28,7 @@ public class DataJpaEmpScheduleRepositoryImpl implements EmpScheduleRepository {
             "employee.secondName");
 
     /**
-     * An interface for employee schedule which extends JpaRepository.
+     * An interface for employee schedule repository which extends JpaRepository.
      */
     private final CrudEmpScheduleRepository crudRepository;
 

@@ -27,7 +27,7 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
     private static final Sort SORT_DEPTID = new Sort(Sort.Direction.ASC, "department.id");
 
     /**
-     * An interface for department schedule which extends JpaRepository.
+     * An interface for department schedule repository which extends JpaRepository.
      */
     private final CrudDeptScheduleRepository crudRepository;
 

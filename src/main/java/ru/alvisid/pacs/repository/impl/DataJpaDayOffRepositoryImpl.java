@@ -25,7 +25,7 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
             new Sort(Sort.Direction.ASC, "department.id,", "dateOff");
 
     /**
-     * An interface for day off which extends JpaRepository.
+     * An interface for day off repository which extends JpaRepository.
      */
     private final CrudDayOffRepository crudRepository;
 

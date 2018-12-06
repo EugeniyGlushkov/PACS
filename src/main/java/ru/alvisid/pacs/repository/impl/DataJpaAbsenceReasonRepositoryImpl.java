@@ -24,7 +24,7 @@ public class DataJpaAbsenceReasonRepositoryImpl implements AbsenceReasonReposito
     private static final Sort SORT_REASON = new Sort(Sort.Direction.ASC, "reason");
 
     /**
-     * An interface for absence's reason which extends JpaRepository.
+     * An interface for absence's reason repository which extends JpaRepository.
      */
     private final CrudAbsenceReasonRepository crudRepository;
 

@@ -24,7 +24,7 @@ public class DataJpaActionTypeRepositoryImpl implements ActionTypeRepository {
     private static final Sort SORT_TYPE = new Sort(Sort.Direction.ASC, "type");
 
     /**
-     * An interface for action type which extends JpaRepository.
+     * An interface for action type repository which extends JpaRepository.
      */
     private final CrudActionTypeRepository crudRepository;
 

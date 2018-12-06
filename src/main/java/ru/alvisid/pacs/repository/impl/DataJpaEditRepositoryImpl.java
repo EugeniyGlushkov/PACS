@@ -36,7 +36,7 @@ public class DataJpaEditRepositoryImpl implements EditRepository {
             "editDateTime", "editType");
 
     /**
-     * An interface for edit which extends JpaRepository.
+     * An interface for edit repository which extends JpaRepository.
      */
     private final CrudEditRepository crudRepository;
 

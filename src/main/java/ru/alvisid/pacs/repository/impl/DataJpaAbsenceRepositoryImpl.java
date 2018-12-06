@@ -34,7 +34,7 @@ public class DataJpaAbsenceRepositoryImpl implements AbsenceRepository {
     private static final Sort SORT_STARTDATE = new Sort(Sort.Direction.ASC, "startAbsenceDate");
 
     /**
-     * An interface for absence which extends JpaRepository.
+     * An interface for absence repository which extends JpaRepository.
      */
     private final CrudAbsenceRepository crudRepository;
 

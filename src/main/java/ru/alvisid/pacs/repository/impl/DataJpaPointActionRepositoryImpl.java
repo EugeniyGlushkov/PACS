@@ -26,7 +26,7 @@ public class DataJpaPointActionRepositoryImpl implements PointActionRepository {
             "actionType.type");
 
     /**
-     * An interface for point's action which extends JpaRepository.
+     * An interface for point's action repository which extends JpaRepository.
      */
     private final CrudPointActionRepository crudRepository;
 

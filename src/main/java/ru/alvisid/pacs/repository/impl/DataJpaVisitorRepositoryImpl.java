@@ -28,7 +28,7 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
             new Sort(Sort.Direction.ASC, "lastName", "firstName", "secondName");
 
     /**
-     * An interface for visitor which extends JpaRepository.
+     * An interface for visitor repository which extends JpaRepository.
      */
     private final CrudVisitorRepository crudRepository;
 

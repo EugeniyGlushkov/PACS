@@ -36,7 +36,7 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
             new Sort(Sort.Direction.ASC, "actionTime");
 
     /**
-     * An interface for action which extends JpaRepository.
+     * An interface for action repository which extends JpaRepository.
      */
     private final CrudActionRepository crudRepository;
 

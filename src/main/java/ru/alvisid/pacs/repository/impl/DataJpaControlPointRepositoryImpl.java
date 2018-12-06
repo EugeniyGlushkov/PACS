@@ -24,7 +24,7 @@ public class DataJpaControlPointRepositoryImpl implements ControlPointRepository
     private static final Sort SORT_CODE = new Sort(Sort.Direction.ASC, "serialCode");
 
     /**
-     * An interface for control point which extends JpaRepository.
+     * An interface for control point repository which extends JpaRepository.
      */
     private final CrudControlPointRepository crudRepository;
 

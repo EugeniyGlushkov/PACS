@@ -27,7 +27,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
             new Sort(Sort.Direction.ASC, "lastName", "firstName", "secondName");
 
     /**
-     * An interface for employee which extends JpaRepository.
+     * An interface for employee repository which extends JpaRepository.
      */
     private final CrudEmployeeRepository crudRepository;
 

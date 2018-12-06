@@ -31,7 +31,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
             "pointAction.actionType.type");
 
     /**
-     * An interface for point permit which extends JpaRepository.
+     * An interface for point permit repository which extends JpaRepository.
      */
     private final CrudPointPermitRepository crudRepository;
 

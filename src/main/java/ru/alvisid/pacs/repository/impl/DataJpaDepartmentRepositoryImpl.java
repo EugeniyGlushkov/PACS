@@ -26,7 +26,7 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
     private static final Sort SORT_NAME = new Sort(Sort.Direction.ASC, "name");
 
     /**
-     * An interface for department which extends JpaRepository.
+     * An interface for department repository which extends JpaRepository.
      */
     private final CrudDepartmentRepository crudRepository;
 
