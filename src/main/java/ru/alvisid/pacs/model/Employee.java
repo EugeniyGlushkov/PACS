@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -67,6 +68,13 @@ public class Employee extends AbstractPerson {
     private Set <Role> roles;
 
     /**
+     * The point permits of the employee.
+     */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OrderBy("pointAction.controlPoint.serialCode, pointAction.actionType.type ASC")
+    private List<PointPermit> pointPermits;
+
+    /**
      * Returns the employee's department.
      *
      * @return the employee's department.
@@ -118,6 +126,15 @@ public class Employee extends AbstractPerson {
      */
     public Set <Role> getRoles() {
         return roles;
+    }
+
+    /**
+     * Returns the point permits of the employee.
+     *
+     * @return the point permits of the employee.
+     */
+    public List <PointPermit> getPointPermits() {
+        return pointPermits;
     }
 
     /**
