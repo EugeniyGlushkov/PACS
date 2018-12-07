@@ -25,6 +25,14 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -49,6 +57,10 @@
         <hibernate.ehcache.version>5.2.11.Final</hibernate.ehcache.version>
         <spring.orm.version>5.0.4.RELEASE</spring.orm.version>
         <javax-el.version>3.0.1-b10</javax-el.version>
+
+        <!-- Tests -->
+        <junit.version>4.12</junit.version>
+        <assertj.version>3.11.1</assertj.version>
     </properties>
 
     <dependencies>
@@ -129,8 +141,22 @@
             <version>${spring.version}</version>
         </dependency>-->
 
-
-
+        <!-- Tests -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+        </dependency>
 
     </dependencies>
 </project>

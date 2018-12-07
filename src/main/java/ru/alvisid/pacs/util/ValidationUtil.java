@@ -79,7 +79,7 @@ public class ValidationUtil {
      * Every enum constant has appropriate member in the table dictionary.
      *
      * @param enumDict enum class represents dictionary.
-     * @param dict     list of the dictionary members.
+     * @param dict     list of the dictionary members from the data base.
      */
     public static void checkDictionary(Class<? extends Enum> enumDict, List<? extends AbstractDictionary> dict) {
         List<Enum> constants = Arrays.asList(enumDict.getEnumConstants());
