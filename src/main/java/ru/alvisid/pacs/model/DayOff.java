@@ -127,39 +127,6 @@ public class DayOff extends AbstractId {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>DayOff</b> object
-     * that contains the department and date off values as this object
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        DayOff dayOff = (DayOff) o;
-
-        if (!department.equals(dayOff.department)) {
-            return false;
-        }
-
-        return dateOff.equals(dayOff.dateOff);
-    }
-
-    /**
      * Returns a String object representing this <b>DayOff</b> object.
      *
      * @return the String object representing this <b>DayOff</b> object.

@@ -204,48 +204,6 @@ public class Visitor extends AbstractPerson {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>Visitor</b> object that contains the same
-     * {@code tempNum}, {@code description}, {@code enterTime},
-     * {@code exitTime} values as this object,
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        Visitor visitor = (Visitor) o;
-
-        if (!tempNum.equals(visitor.tempNum)) {
-            return false;
-        }
-
-        if (!description.equals(visitor.description)) {
-            return false;
-        }
-
-        if (!enterTime.equals(visitor.enterTime)) {
-            return false;
-        }
-
-        return exitTime.equals(visitor.exitTime);
-    }
-
-    /**
      * Returns a String object representing this <b>Visitor</b> object.
      *
      * @return the String object representing this <b>Visitor</b> object.

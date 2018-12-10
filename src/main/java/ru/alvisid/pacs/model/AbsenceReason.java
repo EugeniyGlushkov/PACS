@@ -98,34 +98,6 @@ public class AbsenceReason extends AbstractEntity {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>AbsenceReason</b> object that contains the same {@code reason} value as this object,
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        AbsenceReason that = (AbsenceReason) o;
-
-        return reason.equals(that.reason);
-    }
-
-    /**
      * Returns a String object representing this <b>AbsenceReason</b> object.
      *
      * @return the String object representing this <b>AbsenceReason</b> object.

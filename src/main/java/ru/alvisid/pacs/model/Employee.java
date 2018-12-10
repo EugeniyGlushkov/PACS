@@ -308,51 +308,6 @@ public class Employee extends AbstractPerson {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>Employee</b> object that contains the same {@code department},
-     * {@code position}, {@code cardNum}, {@code email} values as this object,
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        Employee employee = (Employee) o;
-
-        if (!department.equals(employee.department)) {
-            return false;
-        }
-
-        if (!position.equals(employee.position)) {
-            return false;
-        }
-
-        if (!cardNum.equals(employee.cardNum)) {
-            return false;
-        }
-
-        if (!email.equals(employee.email)) {
-            return false;
-        }
-
-        return roles.equals(employee.roles);
-    }
-
-    /**
      * Returns a String object representing this <b>Employee</b> object.
      *
      * @return the String object representing this <b>Employee</b> object.

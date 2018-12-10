@@ -19,8 +19,8 @@ DELETE FROM departments;
 ALTER SEQUENCE PERS_SEQ RESTART WITH 10000;
 ALTER SEQUENCE SCHEDULES_SEQ RESTART WITH 10000;
 
-INSERT INTO departments (name, description) VALUES
-  ('ООО "Рога и копыта"', 'Компания по произвдству субпродуктов.');
+INSERT INTO departments (id, name, description) VALUES
+  (1, 'ООО "Рога и копыта"', 'Компания по произвдству субпродуктов.');
 
 INSERT INTO positions (position, description) VALUES
   ('Директор', 'Глава департамента.');
@@ -28,14 +28,14 @@ INSERT INTO positions (position, description) VALUES
 INSERT INTO dep_schedules (dep_id, start_work, end_work, start_lunch, end_lunch) VALUES
   (1, '08:00', '17:00', '12:00', '13:00');
 
+INSERT INTO absence_reasons (reason, description) VALUES
+  ('больничный', 'отсутствие по болезни.');
+
 INSERT INTO employees (dep_id, pos_id, card_num, last_name, first_name, second_name, email) VALUES
   (1, 1, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru');
 
 INSERT INTO employee_roles (emp_id, role) VALUES
   (10000, 'ROLE_USER');
-
-INSERT INTO absence_reasons (reason, description) VALUES
-  ('больничный', 'отсутствие по болезни.');
 
 INSERT INTO absences (emp_id, reason_id, start_absence, end_absence, description) VALUES
   (10000, 1, '2018-05-03', '2018-05-12', 'больничный лист №12345.');

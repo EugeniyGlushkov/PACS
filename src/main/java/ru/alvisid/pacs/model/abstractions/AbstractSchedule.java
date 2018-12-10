@@ -217,42 +217,25 @@ public abstract class AbstractSchedule implements HasId {
     /**
      * Compares this object to the specified object.
      * The result is {@code true} if and only if the argument is not null
-     * and is an <b>AbstractSchedule</b>'s heir
-     * that contains the same id, start work time, end work time,
-     * start lunch time and end lunch time values as this object.
+     * and is the same class as this object,
+     * and that contains the same id value as this object.
      *
      * @param o the specified object.
      * @return {@code true} if the objects are the same; {@code false} otherwise.
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
+        if (this == o){
             return true;
         }
-        if (o instanceof AbstractPerson) {
-            AbstractSchedule that = (AbstractSchedule) o;
 
-            if (id != null ? !id.equals(that.id) : that.id != null) {
-                return false;
-            }
-
-            if (!startWorkTime.equals(that.startWorkTime)) {
-                return false;
-            }
-
-            if (!endWorkTime.equals(that.endWorkTime)) {
-                return false;
-            }
-
-            if (!startLunchTime.equals(that.startLunchTime)) {
-                return false;
-            }
-
-            return endLunchTime.equals(that.endLunchTime);
+        if (o == null || getClass() != o.getClass()) {
+            return false;
         }
 
-        return false;
+        AbstractId that = (AbstractId) o;
 
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     /**

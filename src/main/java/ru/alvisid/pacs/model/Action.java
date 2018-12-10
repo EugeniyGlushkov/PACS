@@ -160,43 +160,6 @@ public class Action extends AbstractId {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>Action</b> object that contains the same
-     * {@code employee}, {@code pointAction}, {@code actionTime} values as this object,
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        Action action = (Action) o;
-
-        if (!employee.equals(action.employee)) {
-            return false;
-        }
-
-        if (!pointAction.equals(action.pointAction)) {
-            return false;
-        }
-
-        return actionTime.equals(action.actionTime);
-    }
-
-    /**
      * Returns a String object representing this <b>Action</b> object.
      *
      * @return the String object representing this <b>Action</b> object.

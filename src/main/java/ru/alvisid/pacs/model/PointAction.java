@@ -126,39 +126,6 @@ public class PointAction extends AbstractId {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>PointAction</b> object
-     * that contains the controlPoint and actionType values as this object
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        PointAction that = (PointAction) o;
-
-        if (!controlPoint.equals(that.controlPoint)) {
-            return false;
-        }
-
-        return actionType.equals(that.actionType);
-    }
-
-    /**
      * Returns a String object representing this <b>PointAction</b> object.
      *
      * @return the String object representing this <b>PointAction</b> object.

@@ -21,10 +21,9 @@
         <appender-ref ref="result"/>
     </logger>
 
-    <!--<logger name="org.postgresql" level="debug"/>-->
-    <!--<logger name="org.springframework.jdbc" level="debug"/>-->
-
+    <logger name="org.springframework.jdbc" level="debug"/>
     <logger name="ru.alvisid.pacs" level="debug"/>
+
 
     <root level="INFO">
         <appender-ref ref="console"/>

@@ -122,34 +122,6 @@ public class EmpSchedule extends AbstractSchedule {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>EmpSchedule</b> object that contains the same {@code employee} value as this object,
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        EmpSchedule that = (EmpSchedule) o;
-
-        return employee.equals(that.employee);
-    }
-
-    /**
      * Returns a String object representing this <b>EmpSchedule</b> object.
      *
      * @return the String object representing this <b>EmpSchedule</b> object.

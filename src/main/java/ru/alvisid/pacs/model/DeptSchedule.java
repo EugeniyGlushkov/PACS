@@ -120,34 +120,6 @@ public class DeptSchedule extends AbstractSchedule {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>DeptSchedule</b> object that contains the same {@code department} value as this object,
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        DeptSchedule that = (DeptSchedule) o;
-
-        return department.equals(that.department);
-    }
-
-    /**
      * Returns a String object representing this <b>DeptSchedule</b> object.
      *
      * @return the String object representing this <b>DeptSchedule</b> object.

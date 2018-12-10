@@ -126,39 +126,6 @@ public class PointPermit extends AbstractId {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>PointPermit</b> object
-     * that contains the pointAction and employee values as this object
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        PointPermit that = (PointPermit) o;
-
-        if (!pointAction.equals(that.pointAction)) {
-            return false;
-        }
-
-        return employee.equals(that.employee);
-    }
-
-    /**
      * Returns a String object representing this <b>PointPermit</b> object.
      *
      * @return the String object representing this <b>PointPermit</b> object.

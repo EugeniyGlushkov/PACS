@@ -69,23 +69,25 @@ public abstract class AbstractId implements HasId {
     /**
      * Compares this object to the specified object.
      * The result is {@code true} if and only if the argument is not null
-     * and is an <b>AbstractId</b>'s heir
-     * that contains the same id value as this object.
+     * and is the same class as this object,
+     * and that contains the same id value as this object.
      *
      * @param o the specified object.
      * @return {@code true} if the objects are the same; {@code false} otherwise.
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o instanceof AbstractEntity) {
-            AbstractEntity that = (AbstractEntity) o;
-
-            return id != null ? !id.equals(that.id) : that.id != null;
+        if (this == o){
+            return true;
         }
 
-        return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        AbstractId that = (AbstractId) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     /**

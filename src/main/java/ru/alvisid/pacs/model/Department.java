@@ -184,34 +184,6 @@ public class Department extends AbstractEntity {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>Department</b> object that contains the same name value as this object,
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
-            return false;
-        }
-
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        Department that = (Department) o;
-
-        return name.equals(that.name);
-    }
-
-    /**
      * Returns a String object representing this <b>Department</b> object.
      *
      * @return the String object representing this <b>Department</b> object.
