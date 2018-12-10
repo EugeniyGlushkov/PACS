@@ -8,6 +8,8 @@ import ru.alvisid.pacs.model.Employee;
 import ru.alvisid.pacs.model.WeekDay;
 import ru.alvisid.pacs.repository.EmployeeRepository;
 import ru.alvisid.pacs.repository.impl.DataJpaEmployeeRepositoryImpl;
+import ru.alvisid.pacs.service.EmployeeService;
+import ru.alvisid.pacs.service.impl.EmployeeServiceImpl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,7 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
         log.debug("In method Main");
-        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-db.xml");
+        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-db.xml", "spring/spring-app.xml");
         System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
         Enum[] days = WeekDay.values();
         System.out.println(days.length + "\n");
@@ -37,6 +39,11 @@ public class Main {
         EmployeeRepository employeeRepository = (DataJpaEmployeeRepositoryImpl)appCtx.getBean(DataJpaEmployeeRepositoryImpl.class);
         Employee employee = employeeRepository.getByEmail("ivanov@mail.ru");
         System.out.println(LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0)));
+        EmployeeService employeeService = (EmployeeServiceImpl)appCtx.getBean(EmployeeServiceImpl.class);
+        System.out.println(employeeService);
+        Employee employeeN = employeeService.get(10000);
+        System.out.println(employee);
+        System.out.println(employeeN);
 
     }
 }

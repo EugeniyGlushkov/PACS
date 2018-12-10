@@ -39,7 +39,7 @@ public interface CrudPointPermitRepository extends JpaRepository <PointPermit, I
      */
     @Transactional
     @Modifying
-    @Query
+    @Query("DELETE FROM PointPermit pp WHERE pp.id=:id")
     int delete(@Param("id") int id);
 
     /**

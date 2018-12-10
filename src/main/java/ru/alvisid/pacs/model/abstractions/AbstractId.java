@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractId {
+public abstract class AbstractId implements HasId {
     /**
      * The cpecifiec identifier for each entity in a database.
      */
@@ -25,6 +25,7 @@ public abstract class AbstractId {
      *
      * @return the specifiec id.
      */
+    @Override
     public Integer getId() {
         return id;
     }
@@ -34,6 +35,7 @@ public abstract class AbstractId {
      *
      * @param id the specifiec id.
      */
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
