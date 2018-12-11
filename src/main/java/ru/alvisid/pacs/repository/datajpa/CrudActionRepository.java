@@ -79,6 +79,6 @@ public interface CrudActionRepository extends JpaRepository<Action, Integer> {
      * @param sort  the specified list's sort.
      * @return the list of the all actions in the specified time interval.
      */
-    @Query("SELECT a FROM Action a WHERE a.actionTime>=:start AND a.actionTime<=:end")
+    @Query("SELECT a FROM Action a WHERE a.actionTime BETWEEN :start AND :end")
     List<Action> findAllBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end, Sort sort);
 }

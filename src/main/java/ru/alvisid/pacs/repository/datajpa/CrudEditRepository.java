@@ -79,7 +79,7 @@ public interface CrudEditRepository extends JpaRepository <Edit, Integer> {
      * @param sort  the specified list's sort.
      * @return the list of the all edits in the specified time interval.
      */
-    @Query("SELECT e FROM Edit e WHERE e.editDateTime>=:start AND e.editDateTime<=:end")
+    @Query("SELECT e FROM Edit e WHERE e.editDateTime BETWEEN :start AND :end")
     List <Edit> findAllBetween(@Param("start") LocalDateTime start,
                                @Param("end") LocalDateTime end,
                                Sort sort);
