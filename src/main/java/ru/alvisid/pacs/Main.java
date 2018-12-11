@@ -23,7 +23,11 @@ public class Main {
 
     public static void main(String[] args) {
         log.debug("In method Main");
-        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-db.xml", "spring/spring-app.xml");
+        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext();
+        appCtx.getEnvironment().setActiveProfiles("hsqldb");
+        ((ClassPathXmlApplicationContext) appCtx).setConfigLocations("spring/spring-db.xml", "spring/spring-app.xml");
+        appCtx.refresh();
+        //ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext();
         System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
         Enum[] days = WeekDay.values();
         System.out.println(days.length + "\n");
@@ -41,7 +45,7 @@ public class Main {
         System.out.println(LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0)));
         EmployeeService employeeService = (EmployeeServiceImpl)appCtx.getBean(EmployeeServiceImpl.class);
         System.out.println(employeeService);
-        Employee employeeN = employeeService.get(10000);
+        Employee employeeN = employeeService.get(10003);
         System.out.println(employee);
         System.out.println(employeeN);
 
