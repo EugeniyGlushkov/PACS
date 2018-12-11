@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.model.abstractions;
 
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
@@ -229,7 +230,7 @@ public abstract class AbstractSchedule implements HasId {
             return true;
         }
 
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
             return false;
         }
 

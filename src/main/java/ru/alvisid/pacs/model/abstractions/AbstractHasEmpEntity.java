@@ -76,35 +76,6 @@ public abstract class AbstractHasEmpEntity extends AbstractEntity {
     }
 
     /**
-     * Compares this object to the specified object.
-     * The result is {@code true} if and only if the argument is not null
-     * and is an <b>AbstractHasEmpEntity</b>'s heir
-     * that contains the same employee value as this object
-     * and superclass is equals the specified object.
-     *
-     * @param o the specified object.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o instanceof AbstractHasEmpEntity) {
-            if (!super.equals(o)) {
-                return false;
-            }
-
-            AbstractHasEmpEntity that = (AbstractHasEmpEntity) o;
-
-            return employee.equals(that.employee);
-        }
-
-        return false;
-    }
-
-    /**
      * Returns a String object representing this object.
      *
      * @return the String object representing this object.
