@@ -1,7 +1,7 @@
 package ru.alvisid.pacs.util;
 
 /**
- *
+ * Miscellaneous utility methods.
  */
 public class Util {
     /**
@@ -20,4 +20,7 @@ public class Util {
         }
         return value.compareTo(min) >= 0 && value.compareTo(max) <= 0;
     }
+
+    // never instantiated
+    private Util(){};
 }

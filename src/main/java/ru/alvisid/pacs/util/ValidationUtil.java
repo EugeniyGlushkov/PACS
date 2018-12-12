@@ -11,12 +11,9 @@ import java.util.stream.Collectors;
 
 /**
  * This class consists exclusively of static methods wich helps
- * with checking the passed values.
+ * to check the passed values.
  */
 public class ValidationUtil {
-    private ValidationUtil() {
-
-    }
 
     /**
      * Throws the NotFoundException if a found is false.
@@ -100,5 +97,9 @@ public class ValidationUtil {
                         e.getClass().getName(), e.name()));
             }
         });
+    }
+
+    // never instantiated
+    private ValidationUtil() {
     }
 }
