@@ -37,12 +37,19 @@ public class EnumLoader {
     @PersistenceContext
     private EntityManager em;
 
+    public EnumLoader() {
+    }
+
+    public EnumLoader(EntityManager entityManager){
+        em = entityManager;
+    }
+
     /**
      * Initializes a synchronization enums which represent dictionaries
      * with corresponding dictionaries in the data base.
      */
     @PostConstruct
-    private void init() {
+    public void init() {
         //Get all mapped entity types.
         Set<EntityType<?>> entities = em.getMetamodel().getEntities();
 

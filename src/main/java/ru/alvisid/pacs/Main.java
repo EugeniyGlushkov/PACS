@@ -33,6 +33,7 @@ public class Main {
         //ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext();
         System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
         //EnumLoader enumLoader = (EnumLoader) appCtx.getBean(EnumLoader.class);
+
         Enum[] days = WeekDay.values();
         System.out.println(days.length + "\n");
         for (Enum e : days) {
@@ -43,7 +44,6 @@ public class Main {
         for (Enum e : days) {
             System.out.println(e == null ? 0 : e.ordinal() );
         }
-
         EmployeeRepository employeeRepository = (DataJpaEmployeeRepositoryImpl)appCtx.getBean(DataJpaEmployeeRepositoryImpl.class);
         Employee employee = employeeRepository.getByEmail("ivanov@mail.ru");
         System.out.println(LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0)));
