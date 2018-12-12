@@ -431,7 +431,7 @@ CREATE TABLE visitors
   CONSTRAINT visitors_times_con CHECK (NOT (enter_time IS NULL AND exit_time IS NOT NULL))
 );;
 CREATE INDEX visitors_names_idx
-  ON visitors (temp_num, last_name, first_name, second_name);;
+  ON visitors (temp_num, last_name, first_name, second_name);
 
 /*
 Триггер срабатывает после добавления нового работника.
@@ -458,7 +458,7 @@ BEGIN
    (SELECT end_lunch
     FROM dep_schedules
     WHERE dep_schedules.id = NEW.dep_id));
-END;;
+END;
 
 
 /*
@@ -482,7 +482,7 @@ BEGIN
   THEN
     SIGNAL SQLSTATE '22000' SET MESSAGE_TEXT = 'Impossible insert, because new data intesepts with old data!';
   END IF;
-END;;
+END;
 
 /*
 Триггер, срабатывающий перед добавлением новых данных в отношение "События".
@@ -504,7 +504,7 @@ BEGIN
     SIGNAL SQLSTATE '22000' SET MESSAGE_TEXT =
       'Impossible insert, because current eployee has not point inserting action!';
   END IF;
-END;;
+END;
 
 
 INSERT INTO week_days (id, code)
