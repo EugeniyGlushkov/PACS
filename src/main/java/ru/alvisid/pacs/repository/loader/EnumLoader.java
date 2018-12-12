@@ -37,9 +37,12 @@ public class EnumLoader {
     @PersistenceContext
     private EntityManager em;
 
-    public EnumLoader() {
-    }
-
+    /**
+     * Constructs an <b>EnumLoader</b> object with the specified entity manager.
+     * Used for synchronize the enum classes with dictionaries classes in the tests.
+     *
+     * @param entityManager the specified entity manager.
+     */
     public EnumLoader(EntityManager entityManager){
         em = entityManager;
     }

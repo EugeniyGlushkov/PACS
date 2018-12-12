@@ -28,7 +28,7 @@ public class Main {
         log.debug("In method Main");
         ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext();
         ((ClassPathXmlApplicationContext) appCtx).setConfigLocations("spring/spring-db.xml", "spring/spring-app.xml");
-        appCtx.getEnvironment().setActiveProfiles("postgres");
+        appCtx.getEnvironment().setActiveProfiles("hsqldb");
         appCtx.refresh();
         //ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext();
         System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
