@@ -16,7 +16,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFound;
 
 /**
- * Implementation of the EmployeeService interface.
+ * Implementation of the {@code EmployeeService} interface.
  * Extends <b>AbstractService</b>'s functionality.
  *
  * @see EmployeeService
@@ -39,11 +39,24 @@ public class EmployeeServiceImpl
         super(repository);
     }
 
+    /**
+     * Returns all employees by department id .
+     *
+     * @param deptId the department's id.
+     * @return list of all employees by department id.
+     */
     @Override
     public List<Employee> getAllByDeptId(int deptId) {
         return repository.getAllByDeptId(deptId);
     }
 
+    /**
+     * Returns an employee by given email.
+     *
+     * @param email the specified email.
+     * @return the employee by given email.
+     * @throws NotFoundException if an employee by the specified email is not found.
+     */
     @Override
     public Employee getByEmail(String email) throws NotFoundException {
         Assert.notNull(email, "email must not be null");

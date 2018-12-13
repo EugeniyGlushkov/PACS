@@ -93,7 +93,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     /**
-     * Returns all employees by department id sorted with cpecifiec sort.
+     * Returns all employees by department id sorted with specific sort.
      *
      * @param deptId the department id.
      * @return list of all employees by department id.
