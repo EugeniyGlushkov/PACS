@@ -17,7 +17,7 @@ public interface TypicalService<T> {
      * Creates and saves a given object in the data base.
      *
      * @param obj the object to create.
-     * @return a created object.
+     * @return the created object.
      */
     T create(T obj);
 
@@ -33,7 +33,7 @@ public interface TypicalService<T> {
      * Deletes the object by specified id.
      *
      * @param id the specified id of a deleted object.
-     * @throws NotFoundException the entity with the specified id isn't found.
+     * @throws NotFoundException if the entity with the specified id isn't found.
      */
     void delete(int id) throws NotFoundException;
 
@@ -41,8 +41,8 @@ public interface TypicalService<T> {
      * Returns the object by the specified id.
      *
      * @param id the specified id of the object to get.
-     * @return an object with the specified id.
-     * @throws NotFoundException the entity with the specified id isn't found.
+     * @return the object with the specified id.
+     * @throws NotFoundException if the entity with the specified id isn't found.
      */
     T get(int id) throws NotFoundException;
 
