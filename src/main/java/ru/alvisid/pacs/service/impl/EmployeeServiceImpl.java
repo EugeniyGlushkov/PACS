@@ -15,10 +15,25 @@ import java.util.List;
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFound;
 
+/**
+ * Implementation of the EmployeeService interface.
+ * Extends <b>AbstractService</b>'s functionality.
+ *
+ * @see EmployeeService
+ * @see AbstractService
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ */
 @Service
 public class EmployeeServiceImpl
         extends AbstractService<DataJpaEmployeeRepositoryImpl, Employee> implements EmployeeService{
 
+    /**
+     * Constructs new {@code EmployeeServiceImpl} and set a specified employee's repository implementation
+     * to the superclass's repository field.
+     *
+     * @param repository the specified employee's repository implementation.
+     */
     @Autowired
     public EmployeeServiceImpl(DataJpaEmployeeRepositoryImpl repository) {
         super(repository);

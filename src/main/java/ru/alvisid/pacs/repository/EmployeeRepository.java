@@ -13,10 +13,10 @@ import java.util.List;
  */
 public interface EmployeeRepository extends TypicalRepository<Employee> {
     /**
-     * Returns the list with all employees by deparmetnt's id.
+     * Returns the list with all employees by department's id.
      *
      * @param deptId the department's id.
-     * @return the list with all employees by deparmetnt's id.
+     * @return the list with all employees by department's id.
      */
     List<Employee> getAllByDeptId(int deptId);
 
