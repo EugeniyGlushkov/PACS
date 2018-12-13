@@ -13,6 +13,12 @@ import java.util.List;
 
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 
+/**
+ * The realization of the functionality which is common to all services.
+ *
+ * @param <T> the type of the repository which corresponds to the specified service's object: type {@code <S>}.
+ * @param <S> the type of the service's objects.
+ */
 public abstract class AbstractService<T extends TypicalRepository<S>, S extends HasId>
         implements TypicalService<S> {
     protected final T repository;
