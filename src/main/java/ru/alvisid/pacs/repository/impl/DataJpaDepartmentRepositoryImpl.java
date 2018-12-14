@@ -90,4 +90,16 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
     public List <Department> getAll() {
         return crudRepository.findAll(SORT_NAME);
     }
+
+    /**
+     * Returns a department with filled fields: {@code weekEnds} and {@code deptSchedule}
+     * by specified id.
+     *
+     * @param id the specified department's id.
+     * @return the department with filled fields: {@code weekEnds} and {@code deptSchedule}.
+     */
+    @Override
+    public Department getWithWeekEndsAndSched(int id) {
+        return null;
+    }
 }

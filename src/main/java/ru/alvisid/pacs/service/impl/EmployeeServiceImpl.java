@@ -27,7 +27,6 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFound;
 @Service
 public class EmployeeServiceImpl
         extends AbstractService<DataJpaEmployeeRepositoryImpl, Employee> implements EmployeeService{
-
     /**
      * Constructs new {@code EmployeeServiceImpl} and set a specified employee's repository implementation
      * to the superclass's repository field.

@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.repository.datajpa;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import ru.alvisid.pacs.model.Department;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -59,4 +60,15 @@ public interface CrudDepartmentRepository extends JpaRepository<Department, Inte
      */
     @Override
     List <Department> findAll(Sort sort);
+
+    /**
+     * Returns a department with filled fields: {@code weekEnds} and {@code deptSchedule}
+     * by specified id.
+     *
+     * @param id  the specified department's id.
+     * @return the department with filled fields: {@code weekEnds} and {@code deptSchedule}.
+     */
+    @EntityGraph(attributePaths = {"weekEnds", "deptSchedule"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT d FROM Department d WHERE d.id=?1")
+    Department getWithWeekEndsAndSched(int id);
 }
