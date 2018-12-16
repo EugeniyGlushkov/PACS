@@ -23,9 +23,9 @@ public enum Role {
     ROLE_DEPSREAD,
 
     /**
-     * Person who can add and edit his own department's data.
+     * Person who can add and edit employee's data.
      */
-    ROLE_DEPSWRIGHT,
+    ROLE_EMPSWRIGHT,
 
     /**
      * Person who can can add and edit system-wide data.

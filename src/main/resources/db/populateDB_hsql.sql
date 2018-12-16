@@ -31,14 +31,37 @@ ALTER SEQUENCE CONTROL_POINTS_SEQ RESTART WITH 1;
 ALTER SEQUENCE POSITIONS_SEQ RESTART WITH 1;
 ALTER SEQUENCE DEPARTMENTS_SEQ RESTART WITH 1;
 
-  INSERT INTO departments (name, description) VALUES
-  ('ООО "Рога и копыта"', 'Компания по произвдству субпродуктов.');
+INSERT INTO departments (name, description) VALUES
+  ('ООО "Рога и копыта"', 'Компания по производству субпродуктов.'), /*id 1*/
+  ('Отдел кадров', 'Управление персоналом.'),                        /*id 2*/
+  ('Бухгалтерия', 'Финансовые операции и отчетность');               /*id 3*/
 
 INSERT INTO positions (position, description) VALUES
-  ('Директор', 'Глава департамента.');
+  ('Директор', 'Глава предприятия.'),                       /*id 1*/
+  ('Начальник отдела кадров', 'Руководит отделом кадров.'), /*id 2*/
+  ('Главный бухгалтер', 'Руководит бухгалтерией.'),         /*id 3*/
+  ('Секретарь', 'Делопроизводство.'),                       /*id 4*/
+  ('Бухгалтер', 'Сотрудник бухгалтерии.');                  /*id 5*/
 
 INSERT INTO dep_schedules (dep_id, start_work, end_work, start_lunch, end_lunch) VALUES
-  (1, '08:00:00', '17:00:00', '12:00:00', '13:00:00');
+  (1, '09:00:00', '18:00:00', '12:00:00', '13:00:00'),  /*10001*/
+  (2, '08:00:00', '17:00:00', '11:00:00', '12:00:00'),  /*10002*/
+  (3, '09:00:00', '18:00:00', '12:30:00', '13:30:00');  /*10003*/
+
+INSERT INTO weekends (dep_id, weekday_id) VALUES
+  (1, 6), /*id 1*/
+  (1, 7), /*id 2*/
+  (2, 6), /*id 3*/
+  (2, 7), /*id 4*/
+  (3, 5), /*id 5*/
+  (3, 6), /*id 6*/
+  (3, 7); /*id 7*/
+
+INSERT INTO days_off (dep_id, date) VALUES
+(1, '2018-01-01'), /*id 1*/
+(2, '2018-01-01'), /*id 2*/
+(3, '2018-01-01'), /*id 3*/
+(1, '2018-01-02'); /*id 4*/
 
 INSERT INTO absence_reasons (reason, description) VALUES
   ('больничный', 'отсутствие по болезни.');
