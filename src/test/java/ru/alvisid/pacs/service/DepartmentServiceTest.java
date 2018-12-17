@@ -15,6 +15,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.alvisid.pacs.repository.loader.EnumLoader;
+import ru.alvisid.pacs.util.profileResolver.ActiveDbProfilesResolver;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,7 +28,7 @@ import static org.slf4j.LoggerFactory.getLogger;
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringRunner.class)
-@ActiveProfiles("hsqldb")
+@ActiveProfiles(resolver = ActiveDbProfilesResolver.class)
 @Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class DepartmentServiceTest {
     public static Logger log = getLogger("result");

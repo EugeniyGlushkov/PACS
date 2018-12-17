@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 /**
  * This class consists exclusively of static methods wich helps
  * to check the passed values.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 public class ValidationUtil {
 

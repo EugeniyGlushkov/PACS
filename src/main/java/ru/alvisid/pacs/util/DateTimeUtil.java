@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Miscellaneous utility methods and constants for work with date and time.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 public class DateTimeUtil {
     /**
