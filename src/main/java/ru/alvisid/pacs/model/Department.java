@@ -43,7 +43,7 @@ public class Department extends AbstractEntity {
      * The department's schedule
      */
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @NotNull
+    //@NotNull
     private DeptSchedule deptSchedule;
 
     /**

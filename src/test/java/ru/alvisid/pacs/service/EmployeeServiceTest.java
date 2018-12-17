@@ -79,7 +79,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void rrr() {
+    public void create() {
         Enum[] days = WeekDay.values();
         System.out.println(days.length + "\n");
         for (Enum e : days) {

@@ -18,6 +18,18 @@ DELETE FROM departments;
 
 ALTER SEQUENCE PERS_SEQ RESTART WITH 10000;
 ALTER SEQUENCE SCHEDULES_SEQ RESTART WITH 10000;
+ALTER SEQUENCE absence_reasons_id_seq RESTART WITH 1;
+ALTER SEQUENCE absences_id_seq RESTART WITH 1;
+ALTER SEQUENCE action_types_id_seq RESTART WITH 1;
+ALTER SEQUENCE actions_id_seq RESTART WITH 1;
+ALTER SEQUENCE control_points_id_seq RESTART WITH 1;
+ALTER SEQUENCE days_off_id_seq RESTART WITH 1;
+ALTER SEQUENCE departments_id_seq RESTART WITH 1;
+ALTER SEQUENCE edits_id_seq RESTART WITH 1;
+ALTER SEQUENCE point_actions_id_seq RESTART WITH 1;
+ALTER SEQUENCE point_permits_id_seq RESTART WITH 1;
+ALTER SEQUENCE positions_id_seq RESTART WITH 1;
+ALTER SEQUENCE weekends_id_seq RESTART WITH 1;
 
 INSERT INTO departments (name, description) VALUES
   ('ООО "Рога и копыта"', 'Компания по произвдству субпродуктов.');
@@ -25,8 +37,8 @@ INSERT INTO departments (name, description) VALUES
 INSERT INTO positions (position, description) VALUES
   ('Директор', 'Глава департамента.');
 
-INSERT INTO dep_schedules (dep_id, start_work, end_work, start_lunch, end_lunch) VALUES
-  (1, '08:00:00', '17:00:00', '12:00:00', '13:00:00');
+/*INSERT INTO dep_schedules (dep_id, start_work, end_work, start_lunch, end_lunch) VALUES
+  (1, '08:00:00', '17:00:00', '12:00:00', '13:00:00');*/
 
 INSERT INTO absence_reasons (reason, description) VALUES
   ('больничный', 'отсутствие по болезни.');

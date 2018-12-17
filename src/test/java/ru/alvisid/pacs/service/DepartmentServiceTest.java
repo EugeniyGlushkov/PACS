@@ -1,8 +1,6 @@
 package ru.alvisid.pacs.service;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
@@ -14,14 +12,21 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
+import ru.alvisid.pacs.model.Department;
+import ru.alvisid.pacs.model.DeptSchedule;
 import ru.alvisid.pacs.repository.loader.EnumLoader;
 import ru.alvisid.pacs.util.profileResolver.ActiveDbProfilesResolver;
+import util.DepartmentTestData;
+import util.TestUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import static org.slf4j.LoggerFactory.getLogger;
+import static util.DepartmentTestData.*;
+import static util.TestUtil.assertMatch;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
@@ -64,10 +69,19 @@ public class DepartmentServiceTest {
     EntityManager entityManager;
 
     @Before
-    public void before(){
+    public void before() {
         EnumLoader enumLoader = new EnumLoader(entityManager);
         enumLoader.init();
+        TestUtil.setIgnoringFields(DepartmentTestData.IGNORING_FIELDS);
     }
 
+    @Test
+    public void create() {
+        DeptSchedule deptSchedule = new DeptSchedule();
 
+        Department newDepartment = new Department(null, "Департамент для тестов", "Новый департамент");
+        Department created = service.create(newDepartment);
+        newDepartment.setId(created.getId());
+        assertMatch(service.getAll(), DEPARTMENT_3, newDepartment, DEPARTMENT_1, DEPARTMENT_2);
+    }
 }

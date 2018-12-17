@@ -24,6 +24,7 @@
     <logger name="org.springframework.jdbc" level="debug"/>
     <logger name="ru.alvisid.pacs" level="debug"/>
     <logger name="org.postgresql" level="debug"/>
+    <logger name="org.hibernate" level="debug"/>
 
 
     <root level="INFO">

@@ -19,7 +19,7 @@ public abstract class AbstractId implements HasId {
      * The cpecifiec identifier for each entity in a database.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
     /**
