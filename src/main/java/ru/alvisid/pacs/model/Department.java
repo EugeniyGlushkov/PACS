@@ -116,41 +116,40 @@ public class Department extends AbstractEntity {
      * Constructs a <b>Department</b> object with specified description, name
      * and null id, weekends, department's schedule values.
      *
-     * @param description the departmen's description.
      * @param name        the department's name.
+     * @param description the departmen's description.
      * @see Department#Department()
      * @see Department#Department(Integer, String, String)
      * @see Department#Department(Integer, String, String, List, DeptSchedule)
      * @see Department#Department(Department)
      */
-    public Department(String description, String name) {
-        super(description);
-        this.name = name;
+    public Department(String name, String description) {
+        this(null, name, description);
     }
 
     /**
      * Constructs a <b>Department</b> object with specified id, description, name values
      * and null weekends, department's schedule values.
      *
-     * @param id          the specifiec identifier.
-     * @param description the department's description.
+     * @param id          the specific identifier.
      * @param name        the department's name.
+     * @param description the department's description.
      * @see Department#Department()
      * @see Department#Department(String, String)
      * @see Department#Department(Integer, String, String, List, DeptSchedule)
      * @see Department#Department(Department)
      */
-    public Department(Integer id, String description, String name) {
-        this(id, description, name, null, null);
+    public Department(Integer id, String name, String description) {
+        this(id, name, description, null, null);
     }
 
     /**
      * Constructs a <b>Department</b> object with specified id, description, name,
      * weekends department's and schedule values.
      *
-     * @param id           the specifiec identifier.
-     * @param description  the department's description.
+     * @param id           the specific identifier.
      * @param name         the department's name.
+     * @param description  the department's description.
      * @param weekEnds     the weekends.
      * @param deptSchedule the department's schedule.
      * @see Department#Department()
@@ -158,7 +157,7 @@ public class Department extends AbstractEntity {
      * @see Department#Department(Integer, String, String)
      * @see Department#Department(Department)
      */
-    public Department(Integer id, String description, String name, List <WeekDay> weekEnds, DeptSchedule deptSchedule) {
+    public Department(Integer id, String name, String description, List <WeekDay> weekEnds, DeptSchedule deptSchedule) {
         super(id, description);
         this.name = name;
         this.weekEnds = weekEnds;
@@ -177,8 +176,8 @@ public class Department extends AbstractEntity {
      */
     public Department(Department department) {
         this(department.getId(),
-                department.getDescription(),
                 department.getName(),
+                department.getDescription(),
                 department.getWeekEnds(),
                 department.getDeptSchedule());
     }
