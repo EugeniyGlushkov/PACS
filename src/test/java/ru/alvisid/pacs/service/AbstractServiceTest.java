@@ -83,7 +83,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
                 "\n---------------------------------");
     }
 
-    protected T getUpdated(){
+    protected T getUpdated() {
         return testData.getUpdated();
     }
 
@@ -94,16 +94,17 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     @Test
     public void create() {
         T newObj = testData.getNew();
-        T created = service.create(newObj);
-        newObj.setId(created.getId());
+        T createdObj = service.create(newObj);
+        newObj.setId(createdObj.getId());
         assertMatch(service.getAll(), testData.getCreatedArray(newObj));
     }
 
     @Test
     public void update() {
-        T updated = testData.getUpdated();
-        service.update(updated);
-        assertMatch(service.get(updated.getId()), updated);
+        T expected = testData.getUpdated();
+        service.update(expected);
+        T actual = service.get(expected.getId());
+        assertMatch(actual, expected);
     }
 
     @Test
@@ -117,7 +118,8 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
 
     @Test
     public void delete() {
-        service.delete(testData.getDeletedId());
+        int deleteId = testData.getDeletedId();
+        service.delete(deleteId);
         assertMatch(service.getAll(), testData.getDeletedArray());
     }
 
@@ -144,7 +146,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
 
     @Test
     public void getAll() {
-        List <T> allObjects = service.getAll();
-        assertMatch(allObjects, testData.getAllArray());
+        List<T> actualAllObjects = service.getAll();
+        assertMatch(actualAllObjects, testData.getAllArray());
     }
 }

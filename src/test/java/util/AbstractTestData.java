@@ -1,5 +1,12 @@
 package util;
 
+/**
+ *
+ *
+ * @param <T> type of objects for tests that are contained in the class.
+ * @author Glushkov Evgeniy
+ * @version 1.0 *
+ */
 public abstract class AbstractTestData<T> {
     public final int NOT_FOUND_ID;
     public final String[] IGNORING_FIELDS;
