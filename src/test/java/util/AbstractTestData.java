@@ -36,7 +36,7 @@ public abstract class AbstractTestData<T> {
     /**
      * Returns a new entity from the test data.
      *
-     * @return the new entity from test data.
+     * @return the new entity from the test data.
      */
     public abstract T getNew();
 
