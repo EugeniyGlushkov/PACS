@@ -15,8 +15,7 @@ public abstract class AbstractTestData<T> {
     public final int NOT_FOUND_ID;
 
     /**
-     * Names of the fields which are excluding from matching
-     * because they have <em>LAZY</em> initialization.
+     * Names of the fields which are excluding from matching.
      * May be empty.
      */
     public final String[] IGNORING_FIELDS;

@@ -2,6 +2,9 @@ package ru.alvisid.pacs.util;
 
 /**
  * Miscellaneous utility methods.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 public class Util {
     /**

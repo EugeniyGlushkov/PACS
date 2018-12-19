@@ -9,20 +9,16 @@ import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.alvisid.pacs.model.Department;
 import ru.alvisid.pacs.model.abstractions.AbstractId;
 import ru.alvisid.pacs.repository.loader.EnumLoader;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import ru.alvisid.pacs.util.profileResolver.ActiveDbProfilesResolver;
 import util.AbstractTestData;
-import util.DepartmentTestData;
-import util.TestUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,7 +26,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.slf4j.LoggerFactory.getLogger;
-import static util.DepartmentTestData.*;
 import static util.TestUtil.assertMatch;
 
 @ContextConfiguration({
@@ -71,7 +66,6 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     public void before() {
         EnumLoader enumLoader = new EnumLoader(entityManager);
         enumLoader.init();
-        TestUtil.setIgnoringFields(testData.IGNORING_FIELDS);
     }
 
     @AfterClass
@@ -96,7 +90,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
         T newObj = testData.getNew();
         T createdObj = service.create(newObj);
         newObj.setId(createdObj.getId());
-        assertMatch(service.getAll(), testData.getCreatedArray(newObj));
+        assertMatch(testData.IGNORING_FIELDS, service.getAll(), testData.getCreatedArray(newObj));
     }
 
     @Test
@@ -104,7 +98,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
         T expected = testData.getUpdated();
         service.update(expected);
         T actual = service.get(expected.getId());
-        assertMatch(actual, expected);
+        assertMatch(testData.IGNORING_FIELDS, actual, expected);
     }
 
     @Test
@@ -120,7 +114,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     public void delete() {
         int deleteId = testData.getDeletedId();
         service.delete(deleteId);
-        assertMatch(service.getAll(), testData.getDeletedArray());
+        assertMatch(testData.IGNORING_FIELDS, service.getAll(), testData.getDeletedArray());
     }
 
     @Test
@@ -134,7 +128,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     public void get() {
         T expectedObj = testData.getGetted();
         T gettedObj = service.get(expectedObj.getId());
-        assertMatch(gettedObj, expectedObj);
+        assertMatch(testData.IGNORING_FIELDS, gettedObj, expectedObj);
     }
 
     @Test
@@ -147,6 +141,6 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     @Test
     public void getAll() {
         List<T> actualAllObjects = service.getAll();
-        assertMatch(actualAllObjects, testData.getAllArray());
+        assertMatch(testData.IGNORING_FIELDS, actualAllObjects, testData.getAllArray());
     }
 }
