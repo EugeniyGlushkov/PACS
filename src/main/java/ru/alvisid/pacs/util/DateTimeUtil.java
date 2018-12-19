@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class DateTimeUtil {
     /**
      * Formatter for printing and parsing date-time objects.
-     * Presents date in format: <li>"yyy-MM-dd"</li>
+     * Presents date in format: <b>"yyyy-MM-dd"</b>
      *
      * @see DateTimeFormatter
      */
@@ -22,7 +22,7 @@ public class DateTimeUtil {
 
     /**
      * Formatter for printing and parsing date-time objects.
-     * Presents time in format: <li>"HH:mm"</li>
+     * Presents time in format: <b>"HH:mm"</b>
      *
      * @see DateTimeFormatter
      */
@@ -30,7 +30,7 @@ public class DateTimeUtil {
 
     /**
      * Formatter for printing and parsing date-time objects.
-     * Presents date-time in format: <li>"yyyy-MM-dd HH:mm"</li>
+     * Presents date-time in format: <b>"yyyy-MM-dd HH:mm"</b>
      *
      * @see DateTimeFormatter
      */
