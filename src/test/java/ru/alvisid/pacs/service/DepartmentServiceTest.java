@@ -11,7 +11,7 @@ import static util.DepartmentTestData.*;
 /**
  * Department's specific tests.
  */
-public class DepartmentServiceTest extends AbstractServiceTest <Department, DepartmentService, DepartmentTestData> {
+public class DepartmentServiceTest extends AbstractServiceTest <Department, DepartmentService> {
     public DepartmentServiceTest() {
         super(new DepartmentTestData());
     }
