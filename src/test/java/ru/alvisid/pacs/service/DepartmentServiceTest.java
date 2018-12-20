@@ -11,7 +11,7 @@ import static util.DepartmentTestData.*;
 /**
  * Department's specific tests.
  */
-public class DepartmentServiceTest extends AbstractServiceTest<Department, DepartmentService, DepartmentTestData> {
+public class DepartmentServiceTest extends AbstractServiceTest <Department, DepartmentService, DepartmentTestData> {
     public DepartmentServiceTest() {
         super(new DepartmentTestData());
     }
@@ -28,7 +28,7 @@ public class DepartmentServiceTest extends AbstractServiceTest<Department, Depar
     }
 
     @Test
-    public void createDuplicateName(){
+    public void createDuplicateName() {
         thrown.expect(DataAccessException.class);
         Department newDepartment = testData.getNew();
         newDepartment.setName(DEPARTMENT_2.getName());
