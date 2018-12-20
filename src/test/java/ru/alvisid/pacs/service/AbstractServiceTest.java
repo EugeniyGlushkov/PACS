@@ -28,6 +28,15 @@ import java.util.concurrent.TimeUnit;
 import static org.slf4j.LoggerFactory.getLogger;
 import static util.TestUtil.assertMatch;
 
+/**
+ * Abstract class which contains common functional and fields for all <b>ServiceTest</b> classes.
+ *
+ * @param <T> the type of the test object, must extends {@code AbstractId}.
+ * @param <S> the type of the {@code Service} for objects T-type, must extends {@code TypicalService<T>}.
+ * @param <R> the type of the {@code TestData} with T-type data, must extends {@code AbstractTestData<T>}.
+ * @see TypicalService
+ * @see AbstractTestData
+ */
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
