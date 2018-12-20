@@ -45,19 +45,40 @@ import static util.TestUtil.assertMatch;
 @ActiveProfiles(resolver = ActiveDbProfilesResolver.class)
 @Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
 public abstract class AbstractServiceTest<T extends AbstractId, S extends TypicalService<T>, R extends AbstractTestData<T>> {
+    /**
+     * Logger.
+     */
     public static Logger log = getLogger("result");
 
+    /**
+     * The executing tests results.
+     */
     private static StringBuilder results = new StringBuilder();
 
     protected S service;
 
+    /**
+     * The keeper of the test data.
+     */
     protected R testData;
 
+    /**
+     * Sets the specified Service to the {@code service} field.
+     * Must be realized in the heir classes.
+     * @param service the specified Service.
+     */
     public abstract void setService(S service);
 
+    /**
+     * The {@code ExpectedException} rule allows to verify that a test method code
+     * throws a specific exception.
+     */
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    /**
+     * Rule - after every test method commits test method executing time to the {@code results} field.
+     */
     @Rule
     public Stopwatch stopwatch = new Stopwatch() {
         @Override
@@ -68,15 +89,24 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
         }
     };
 
+    /**
+     * {@code EntityManager} for enums activate enum's dictionaries.
+     */
     @PersistenceContext
     EntityManager entityManager;
 
+    /**
+     * Executes before every test and activate enum's dictionaries.
+     */
     @Before
     public void before() {
         EnumLoader enumLoader = new EnumLoader(entityManager);
         enumLoader.init();
     }
 
+    /**
+     * Executes after test class and print test results.
+     */
     @AfterClass
     public static void printResult() {
         log.info("\n---------------------------------" +
@@ -86,14 +116,21 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
                 "\n---------------------------------");
     }
 
-    protected T getUpdated() {
-        return testData.getUpdated();
-    }
-
+    /**
+     * Constructs new {@code AbstractServiceTest}
+     * and sets a specified value of the TestData to the testData field.
+     *
+     * @param testData the specified value of the TestData.
+     */
     public AbstractServiceTest(R testData) {
         this.testData = testData;
     }
 
+    /**
+     * Checks a matching the actual created value from DB to the expected created value from {@code testData}:
+     * add a new object to the DB;
+     * checks matching the actual list of all objects to the expected list of all objects after creating from {@code testData}.
+     */
     @Test
     public void create() {
         T newObj = testData.getNew();
@@ -102,6 +139,11 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
         assertMatch(testData.IGNORING_FIELDS, service.getAll(), testData.getCreatedArray(newObj));
     }
 
+    /**
+     * Checks a matching the actual updated value from DB to the expected updated value from {@code testData}:
+     * update an exiting object from DB;
+     * checks matching the actual list of all objects to the expected list of all objects from {@code testData}.
+     */
     @Test
     public void update() {
         T expected = testData.getUpdated();
@@ -110,15 +152,23 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
         assertMatch(testData.IGNORING_FIELDS, actual, expected);
     }
 
+    /**
+     * Checks the {@code NotFoundException} when there are no updated object's id in the DB.
+     */
     @Test
     public void updateNotFound() {
-        T updated = getUpdated();
+        T updated = testData.getUpdated();
         updated.setId(testData.NOT_FOUND_ID);
         thrown.expect(NotFoundException.class);
         thrown.expectMessage("Not found entity with id=" + testData.NOT_FOUND_ID);
         service.update(updated);
     }
 
+    /**
+     * Checks deletion object from DB by the specified id:
+     * deletes object by specified id;
+     * checks matching the actual list of all objects to the expected list of all objects after deletion from {@code testData}.
+     */
     @Test
     public void delete() {
         int deleteId = testData.getDeletedId();
@@ -126,6 +176,9 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
         assertMatch(testData.IGNORING_FIELDS, service.getAll(), testData.getDeletedArray());
     }
 
+    /**
+     * Checks the {@code NotFoundException} when there are no deleted object's id in the DB.
+     */
     @Test
     public void deleteNotFound() {
         thrown.expect(NotFoundException.class);
@@ -133,13 +186,19 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
         service.delete(testData.NOT_FOUND_ID);
     }
 
+    /**
+     * Checks matching the actual gotten value from DB to the expected gotten value from {@code testData}.
+     */
     @Test
     public void get() {
-        T expectedObj = testData.getGetted();
-        T gettedObj = service.get(expectedObj.getId());
-        assertMatch(testData.IGNORING_FIELDS, gettedObj, expectedObj);
+        T expectedObj = testData.getGotten();
+        T gottenObj = service.get(expectedObj.getId());
+        assertMatch(testData.IGNORING_FIELDS, gottenObj, expectedObj);
     }
 
+    /**
+     * Checks the {@code NotFoundException} when there are no object's id to getting in the DB.
+     */
     @Test
     public void getNotFound() {
         thrown.expect(NotFoundException.class);
@@ -147,6 +206,10 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
         service.get(testData.NOT_FOUND_ID);
     }
 
+    /**
+     * Checks the actual gotten list of the all objects from DB to
+     * the expected gotten list of the all objects from {@code testData}.
+     */
     @Test
     public void getAll() {
         List<T> actualAllObjects = service.getAll();

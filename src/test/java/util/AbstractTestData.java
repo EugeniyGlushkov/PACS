@@ -52,7 +52,7 @@ public abstract class AbstractTestData<T> {
      *
      * @return the object that is equals entity which will be get from DB.
      */
-    public abstract T getGetted();
+    public abstract T getGotten();
 
     /**
      * Returns an entity's id for delete.

@@ -70,7 +70,7 @@ public class DepartmentTestData extends AbstractTestData <Department> {
      * @return the {@code Department} that is equals entity which will be get from DB.
      */
     @Override
-    public Department getGetted() {
+    public Department getGotten() {
         return new Department(DEPARTMENT_2);
     }
 
