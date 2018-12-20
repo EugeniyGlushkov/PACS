@@ -8,11 +8,19 @@ import util.DepartmentTestData;
 
 import static util.DepartmentTestData.*;
 
+/**
+ * Department's specific tests.
+ */
 public class DepartmentServiceTest extends AbstractServiceTest<Department, DepartmentService, DepartmentTestData> {
     public DepartmentServiceTest() {
         super(new DepartmentTestData());
     }
 
+    /**
+     * Sets the {@code DepartmentService} to the superclass.
+     *
+     * @param service the specified Service.
+     */
     @Override
     @Autowired
     public void setService(DepartmentService service) {
