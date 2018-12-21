@@ -17,6 +17,7 @@ import java.util.Optional;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
+@Transactional(readOnly = true)
 public interface CrudAbsenceReasonRepository extends JpaRepository<AbsenceReason, Integer> {
     /**
      * Saves or updates a given absence reason.

@@ -21,6 +21,7 @@ import java.util.Set;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
+@Transactional(readOnly = true)
 public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer> {
     /**
      * Saves or updates a given employee.

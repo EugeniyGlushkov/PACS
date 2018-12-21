@@ -17,6 +17,7 @@ import java.util.Optional;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
+@Transactional(readOnly = true)
 public interface CrudDeptScheduleRepository extends JpaRepository <DeptSchedule, Integer> {
     /**
      * Saves or updates a given department schedule.

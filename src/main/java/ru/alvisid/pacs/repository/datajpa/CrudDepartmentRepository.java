@@ -18,6 +18,7 @@ import java.util.Optional;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
+@Transactional(readOnly = true)
 public interface CrudDepartmentRepository extends JpaRepository<Department, Integer> {
     /**
      * Saves or updates a given department.

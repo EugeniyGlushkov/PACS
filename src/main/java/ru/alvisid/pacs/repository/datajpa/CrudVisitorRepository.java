@@ -18,6 +18,7 @@ import java.util.Optional;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
+@Transactional(readOnly = true)
 public interface CrudVisitorRepository extends JpaRepository <Visitor, Integer> {
     /**
      * Saves a given visitor.
