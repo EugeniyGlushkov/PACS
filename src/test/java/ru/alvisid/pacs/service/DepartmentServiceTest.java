@@ -27,6 +27,9 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
         super.service = service;
     }
 
+    /**
+     * Checks the {@code DataAccessException} when {@code Department} with duplicate name creating.
+     */
     @Test
     public void createDuplicateName() {
         thrown.expect(DataAccessException.class);
@@ -35,6 +38,9 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
         service.create(newDepartment);
     }
 
+    /**
+     * Checks the {@code DataAccessException} when {@code Department} with duplicate name updating.
+     */
     @Test
     public void updateDuplicateName() {
         thrown.expect(DataAccessException.class);

@@ -8,7 +8,6 @@ import java.util.List;
  * The functionality that all services have.
  *
  * @param <T> the type of the service's objects.
- *
  * @author Glushkov Evgeniy
  * @version 1.0
  */
