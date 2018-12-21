@@ -77,7 +77,7 @@ public interface CrudPointPermitRepository extends JpaRepository <PointPermit, I
      * and sorted by specified sort.
      *
      * @param cPointId the department's id.
-     * @param sort   the specified list's sort.
+     * @param sort     the specified list's sort.
      * @return the list with all point permits by the control point's id of the point permit
      * and sorted by specified sort.
      */

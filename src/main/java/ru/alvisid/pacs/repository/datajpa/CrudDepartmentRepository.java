@@ -19,7 +19,7 @@ import java.util.Optional;
  * @version 1.0
  */
 @Transactional(readOnly = true)
-public interface CrudDepartmentRepository extends JpaRepository<Department, Integer> {
+public interface CrudDepartmentRepository extends JpaRepository <Department, Integer> {
     /**
      * Saves or updates a given department.
      * If there are a given object in the data base then the given object will be update.
@@ -66,7 +66,7 @@ public interface CrudDepartmentRepository extends JpaRepository<Department, Inte
      * Returns a department with filled fields: {@code weekEnds} and {@code deptSchedule}
      * by specified id.
      *
-     * @param id  the specified department's id.
+     * @param id the specified department's id.
      * @return the department with filled fields: {@code weekEnds} and {@code deptSchedule}.
      */
     @EntityGraph(attributePaths = {"weekEnds", "deptSchedule"}, type = EntityGraph.EntityGraphType.LOAD)

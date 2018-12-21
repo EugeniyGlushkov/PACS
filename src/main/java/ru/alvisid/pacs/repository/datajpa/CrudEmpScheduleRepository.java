@@ -18,7 +18,7 @@ import java.util.Optional;
  * @version 1.0
  */
 @Transactional(readOnly = true)
-public interface CrudEmpScheduleRepository extends JpaRepository<EmpSchedule, Integer> {
+public interface CrudEmpScheduleRepository extends JpaRepository <EmpSchedule, Integer> {
     /**
      * Saves or updates a given employee schedule.
      *
@@ -47,7 +47,7 @@ public interface CrudEmpScheduleRepository extends JpaRepository<EmpSchedule, In
      * @return a container with  employee schedule by given id inside.
      */
     @Override
-    Optional<EmpSchedule> findById(Integer integer);
+    Optional <EmpSchedule> findById(Integer integer);
 
     /**
      * Returns all employee schedules sorted with given sort.
@@ -56,7 +56,7 @@ public interface CrudEmpScheduleRepository extends JpaRepository<EmpSchedule, In
      * @return list of all employee schedules.
      */
     @Override
-    List<EmpSchedule> findAll(Sort sort);
+    List <EmpSchedule> findAll(Sort sort);
 
     /**
      * Returns a list of the all employee schedules by specified employee id.
@@ -65,5 +65,5 @@ public interface CrudEmpScheduleRepository extends JpaRepository<EmpSchedule, In
      * @return the list of the all employee schedules by employee id.
      */
     @Query("SELECT es FROM EmpSchedule es WHERE es.employee.id=:empId")
-    List<EmpSchedule> findAllByEmployeeId(@Param("empId") int empId);
+    List <EmpSchedule> findAllByEmployeeId(@Param("empId") int empId);
 }

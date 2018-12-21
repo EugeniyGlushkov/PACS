@@ -43,7 +43,7 @@ import static util.TestUtil.assertMatch;
 @RunWith(SpringRunner.class)
 @ActiveProfiles(resolver = ActiveDbProfilesResolver.class)
 @Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
-public abstract class AbstractServiceTest<T extends AbstractId, S extends TypicalService<T>> {
+public abstract class AbstractServiceTest<T extends AbstractId, S extends TypicalService <T>> {
     /**
      * Logger.
      */
@@ -59,11 +59,12 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     /**
      * The keeper of the test data.
      */
-    protected AbstractTestData<T> testData;
+    protected AbstractTestData <T> testData;
 
     /**
      * Sets the specified Service to the {@code service} field.
      * Must be realized in the heir classes for initialization of the {@code service} field.
+     *
      * @param service the specified Service.
      */
     public abstract void setService(S service);
@@ -121,7 +122,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
      *
      * @param testData the specified value of the TestData.
      */
-    public AbstractServiceTest(AbstractTestData<T> testData) {
+    public AbstractServiceTest(AbstractTestData <T> testData) {
         this.testData = testData;
     }
 
@@ -211,7 +212,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
      */
     @Test
     public void getAll() {
-        List<T> actualAllObjects = service.getAll();
+        List <T> actualAllObjects = service.getAll();
         assertMatch(testData.IGNORING_FIELDS, actualAllObjects, testData.getAllArray());
     }
 }

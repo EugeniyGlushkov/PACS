@@ -50,7 +50,7 @@ public interface CrudPositionRepository extends JpaRepository <Position, Integer
      * @return a container with a position by given id inside.
      */
     @Override
-    Optional<Position> findById(Integer integer);
+    Optional <Position> findById(Integer integer);
 
     /**
      * Returns all positions sorted with a given sort.
@@ -59,5 +59,5 @@ public interface CrudPositionRepository extends JpaRepository <Position, Integer
      * @return list of all positions.
      */
     @Override
-    List<Position> findAll(Sort sort);
+    List <Position> findAll(Sort sort);
 }
