@@ -19,7 +19,7 @@ import java.util.Optional;
  * @version 1.0
  */
 @Transactional(readOnly = true)
-public interface CrudActionRepository extends JpaRepository<Action, Integer> {
+public interface CrudActionRepository extends JpaRepository <Action, Integer> {
     /**
      * Saves or updates a given action.
      * If there are a given object in the data base then the given object will be update.
@@ -51,7 +51,7 @@ public interface CrudActionRepository extends JpaRepository<Action, Integer> {
      * @return a container with action by given id inside.
      */
     @Override
-    Optional<Action> findById(Integer integer);
+    Optional <Action> findById(Integer integer);
 
     /**
      * Returns all actions sorted with a given sort.
@@ -60,7 +60,7 @@ public interface CrudActionRepository extends JpaRepository<Action, Integer> {
      * @return list of all actions.
      */
     @Override
-    List<Action> findAll(Sort sort);
+    List <Action> findAll(Sort sort);
 
     /**
      * Returns the list with all actions by employee's id and sorted by specified sort.
@@ -70,7 +70,7 @@ public interface CrudActionRepository extends JpaRepository<Action, Integer> {
      * @return the list with all actions by employee's id and sorted by specified sort.
      */
     @Query("SELECT a FROM Action a WHERE a.employee.id=:empId")
-    List<Action> findAllByEmployeeId(@Param("empId") int empId, Sort sort);
+    List <Action> findAllByEmployeeId(@Param("empId") int empId, Sort sort);
 
     /**
      * Returns the list of the all actions in the specified time interval.
@@ -81,5 +81,5 @@ public interface CrudActionRepository extends JpaRepository<Action, Integer> {
      * @return the list of the all actions in the specified time interval.
      */
     @Query("SELECT a FROM Action a WHERE a.actionTime BETWEEN :start AND :end")
-    List<Action> findAllBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end, Sort sort);
+    List <Action> findAllBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end, Sort sort);
 }
