@@ -33,7 +33,6 @@ import static util.TestUtil.assertMatch;
  *
  * @param <T> the type of the test object, must extends {@code AbstractId}.
  * @param <S> the type of the {@code Service} for objects T-type, must extends {@code TypicalService<T>}.
- * @param <R> the type of the {@code TestData} with T-type data, must extends {@code AbstractTestData<T>}.
  * @see TypicalService
  * @see AbstractTestData
  */
@@ -44,7 +43,7 @@ import static util.TestUtil.assertMatch;
 @RunWith(SpringRunner.class)
 @ActiveProfiles(resolver = ActiveDbProfilesResolver.class)
 @Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
-public abstract class AbstractServiceTest<T extends AbstractId, S extends TypicalService<T>, R extends AbstractTestData<T>> {
+public abstract class AbstractServiceTest<T extends AbstractId, S extends TypicalService<T>> {
     /**
      * Logger.
      */
@@ -60,11 +59,11 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     /**
      * The keeper of the test data.
      */
-    protected R testData;
+    protected AbstractTestData<T> testData;
 
     /**
      * Sets the specified Service to the {@code service} field.
-     * Must be realized in the heir classes.
+     * Must be realized in the heir classes for initialization of the {@code service} field.
      * @param service the specified Service.
      */
     public abstract void setService(S service);
@@ -122,7 +121,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
      *
      * @param testData the specified value of the TestData.
      */
-    public AbstractServiceTest(R testData) {
+    public AbstractServiceTest(AbstractTestData<T> testData) {
         this.testData = testData;
     }
 
