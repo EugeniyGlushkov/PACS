@@ -63,6 +63,9 @@
         <!-- Tests -->
         <junit.version>4.12</junit.version>
         <assertj.version>3.11.1</assertj.version>
+
+        <!--Tools-->
+        <ehcache.version>3.6.1</ehcache.version>
     </properties>
 
     <dependencies>
@@ -95,6 +98,19 @@
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <version>2.3.1</version>
+        </dependency>
+
+        <!-- https://medium.com/criciumadev/java-10-migration-5d853f5b5f7e -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.1</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+            <version>1.2.0</version>
         </dependency>
 
         <!--DataBase-->
@@ -133,10 +149,17 @@
             <version>${javax-el.version}</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.ehcache.modules</groupId>
-            <artifactId>ehcache-107</artifactId>
-            <version>3.6.2</version>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <scope>runtime</scope>
+            <version>${ehcache.version}</version>
         </dependency>
 
          <!--Spring-->

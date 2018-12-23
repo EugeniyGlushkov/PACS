@@ -9,6 +9,8 @@ import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -95,13 +97,17 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     @PersistenceContext
     EntityManager entityManager;
 
+    @Autowired
+    private CacheManager cacheManager;
+
     /**
      * Executes before every test and activate enum's dictionaries.
      */
     @Before
-    public void before() {
+    public void before() throws NullPointerException{
         EnumLoader enumLoader = new EnumLoader(entityManager);
         enumLoader.init();
+        cacheManager.getCache(service.getCacheAlias()).clear();
     }
 
     /**

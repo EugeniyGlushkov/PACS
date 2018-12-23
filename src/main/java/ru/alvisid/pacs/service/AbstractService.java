@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.Employee;
@@ -37,7 +38,7 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      */
     @Override
     public S create(S obj) {
-        Assert.notNull(obj, "employee must not be null");
+        Assert.notNull(obj, obj.getClass().getSimpleName() + " must not be null");
         return repository.save(obj);
     }
 
@@ -49,7 +50,7 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      */
     @Override
     public void update(S obj) throws NotFoundException {
-        Assert.notNull(obj, "employee must not be null");
+        Assert.notNull(obj, obj.getClass().getSimpleName() + " must not be null");
         checkNotFoundWithId(repository.save(obj), obj.getId());
     }
 

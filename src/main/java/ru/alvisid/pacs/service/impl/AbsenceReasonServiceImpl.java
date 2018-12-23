@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ru.alvisid.pacs.model.AbsenceReason;
 import ru.alvisid.pacs.repository.impl.DataJpaAbsenceReasonRepositoryImpl;
@@ -14,9 +15,16 @@ import java.util.List;
 @Service
 public class AbsenceReasonServiceImpl
         extends AbstractService<DataJpaAbsenceReasonRepositoryImpl, AbsenceReason> implements AbsenceReasonService {
+    private static final String CACHE_ALIAS = "absenceReasons";
+
     @Autowired
     public AbsenceReasonServiceImpl(DataJpaAbsenceReasonRepositoryImpl absenceReasonRepository) {
         super(absenceReasonRepository);
+    }
+
+    @Override
+    public String getCacheAlias() {
+        return CACHE_ALIAS;
     }
 
     @Override

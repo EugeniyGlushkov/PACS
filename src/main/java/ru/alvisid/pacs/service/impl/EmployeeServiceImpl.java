@@ -27,6 +27,8 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFound;
 @Service
 public class EmployeeServiceImpl
         extends AbstractService<DataJpaEmployeeRepositoryImpl, Employee> implements EmployeeService{
+    private static final String CACHE_ALIAS = "employees";
+
     /**
      * Constructs new {@code EmployeeServiceImpl} and set a specified employee's repository implementation
      * to the superclass's repository field.
@@ -36,6 +38,11 @@ public class EmployeeServiceImpl
     @Autowired
     public EmployeeServiceImpl(DataJpaEmployeeRepositoryImpl repository) {
         super(repository);
+    }
+
+    @Override
+    public String getCacheAlias() {
+        return CACHE_ALIAS;
     }
 
     /**
