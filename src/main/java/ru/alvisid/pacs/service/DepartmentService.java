@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.service;
 
 import ru.alvisid.pacs.model.Department;
+import ru.alvisid.pacs.util.cache.Cacheable;
 
 /**
  * The specific functional for the department's service.

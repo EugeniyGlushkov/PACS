@@ -18,6 +18,7 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.alvisid.pacs.model.abstractions.AbstractId;
 import ru.alvisid.pacs.repository.loader.EnumLoader;
+import ru.alvisid.pacs.util.cache.Cacheable;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import ru.alvisid.pacs.util.profileResolver.ActiveDbProfilesResolver;
 import util.AbstractTestData;
@@ -107,7 +108,9 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     public void before() throws NullPointerException{
         EnumLoader enumLoader = new EnumLoader(entityManager);
         enumLoader.init();
-        cacheManager.getCache(service.getCacheAlias()).clear();
+        if (service instanceof Cacheable) {
+            cacheManager.getCache(((Cacheable)service).getCacheAlias()).clear();
+        }
     }
 
     /**

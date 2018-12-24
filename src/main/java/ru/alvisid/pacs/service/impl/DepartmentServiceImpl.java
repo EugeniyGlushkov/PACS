@@ -2,13 +2,15 @@ package ru.alvisid.pacs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.ActiveProfiles;
 import ru.alvisid.pacs.model.Department;
 import ru.alvisid.pacs.repository.impl.DataJpaDepartmentRepositoryImpl;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.DepartmentService;
+import ru.alvisid.pacs.util.cache.Cacheable;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
+import ru.alvisid.pacs.util.profileResolver.Profiles;
 
 import java.util.List;
 
@@ -23,8 +25,10 @@ import java.util.List;
  */
 @Service
 public class DepartmentServiceImpl
-        extends AbstractService<DataJpaDepartmentRepositoryImpl, Department> implements DepartmentService {
-
+        extends AbstractService <DataJpaDepartmentRepositoryImpl, Department> implements DepartmentService, Cacheable {
+    /**
+     * Cache alias for access to the ehcache.
+     */
     private static final String CACHE_ALIAS = "departments";
 
     /**
@@ -38,32 +42,13 @@ public class DepartmentServiceImpl
         super(repository);
     }
 
+    /**
+     * Returns a cache alias for this service.
+     *
+     * @return the cache alias for this service.
+     */
     @Override
     public String getCacheAlias() {
         return CACHE_ALIAS;
-    }
-
-    @CacheEvict(value = CACHE_ALIAS, allEntries = true)
-    @Override
-    public Department create(Department obj) {
-        return super.create(obj);
-    }
-
-    @CacheEvict(value = CACHE_ALIAS, allEntries = true)
-    @Override
-    public void update(Department obj) throws NotFoundException {
-        super.update(obj);
-    }
-
-    @CacheEvict(value = CACHE_ALIAS, allEntries = true)
-    @Override
-    public void delete(int id) throws NotFoundException {
-        super.delete(id);
-    }
-
-    @Cacheable(CACHE_ALIAS)
-    @Override
-    public List<Department> getAll() {
-        return super.getAll();
     }
 }

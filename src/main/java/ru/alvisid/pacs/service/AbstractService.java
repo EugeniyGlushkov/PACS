@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -36,6 +37,7 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      * @param obj the object to create.
      * @return the created object.
      */
+    @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     @Override
     public S create(S obj) {
         Assert.notNull(obj, obj.getClass().getSimpleName() + " must not be null");
@@ -48,6 +50,7 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      * @param obj the object to update.
      * @throws NotFoundException if there aren't updated object in the data base.
      */
+    @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     @Override
     public void update(S obj) throws NotFoundException {
         Assert.notNull(obj, obj.getClass().getSimpleName() + " must not be null");
@@ -60,6 +63,7 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      * @param id the specified id of a deleted object.
      * @throws NotFoundException if the entity with the specified id isn't found.
      */
+    @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     @Override
     public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(repository.delete(id), id);
@@ -82,6 +86,7 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      *
      * @return the list with all objects.
      */
+    @Cacheable(cacheResolver = "cacheResolver")
     @Override
     public List <S> getAll() {
         return repository.getAll();

@@ -51,6 +51,4 @@ public interface TypicalService<T> {
      * @return the list with all objects.
      */
     List<T> getAll();
-
-    String getCacheAlias();
 }

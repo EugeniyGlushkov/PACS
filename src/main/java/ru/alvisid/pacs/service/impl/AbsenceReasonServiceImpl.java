@@ -15,16 +15,10 @@ import java.util.List;
 @Service
 public class AbsenceReasonServiceImpl
         extends AbstractService<DataJpaAbsenceReasonRepositoryImpl, AbsenceReason> implements AbsenceReasonService {
-    private static final String CACHE_ALIAS = "absenceReasons";
 
     @Autowired
     public AbsenceReasonServiceImpl(DataJpaAbsenceReasonRepositoryImpl absenceReasonRepository) {
         super(absenceReasonRepository);
-    }
-
-    @Override
-    public String getCacheAlias() {
-        return CACHE_ALIAS;
     }
 
     @Override
