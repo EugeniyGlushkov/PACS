@@ -37,7 +37,6 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      * @param obj the object to create.
      * @return the created object.
      */
-    @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     @Override
     public S create(S obj) {
         Assert.notNull(obj, obj.getClass().getSimpleName() + " must not be null");
@@ -86,14 +85,13 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      *
      * @return the list with all objects.
      */
-    @Cacheable(cacheResolver = "cacheResolver")
     @Override
     public List <S> getAll() {
         return repository.getAll();
     }
 
     /**
-     * Constructs new servise with the specified repository implementation.
+     * Constructs new service with the specified repository implementation.
      *
      * @param repository the specific repository implementation
      * which corresponds to service's object: type {@code S}.
