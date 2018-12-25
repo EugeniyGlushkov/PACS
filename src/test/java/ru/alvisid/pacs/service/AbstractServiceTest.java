@@ -38,6 +38,8 @@ import static util.TestUtil.assertMatch;
  * @param <S> the type of the {@code Service} for objects T-type, must extends {@code TypicalService<T>}.
  * @see TypicalService
  * @see AbstractTestData
+ * @author Glushkov Evgeniy
+ * @version 1.0
  */
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",

@@ -81,9 +81,9 @@ public class ValidationUtil {
      * @param enumDict enum class represents dictionary.
      * @param dict     list of the dictionary members from the data base.
      */
-    public static void checkDictionary(Class<? extends Enum> enumDict, List<? extends AbstractDictionary> dict) {
-        List<Enum> constants = Arrays.asList(enumDict.getEnumConstants());
-        List<String> dictStrs = dict.stream()
+    public static void checkDictionary(Class <? extends Enum> enumDict, List <? extends AbstractDictionary> dict) {
+        List <Enum> constants = Arrays.asList(enumDict.getEnumConstants());
+        List <String> dictStrs = dict.stream()
                 .map(AbstractDictionary::getCode)
                 .collect(Collectors.toList());
 

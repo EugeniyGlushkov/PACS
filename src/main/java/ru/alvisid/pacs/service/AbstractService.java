@@ -1,12 +1,7 @@
 package ru.alvisid.pacs.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import ru.alvisid.pacs.model.Employee;
-import ru.alvisid.pacs.model.abstractions.AbstractId;
 import ru.alvisid.pacs.model.abstractions.HasId;
 import ru.alvisid.pacs.repository.TypicalRepository;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
@@ -94,7 +89,7 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      * Constructs new service with the specified repository implementation.
      *
      * @param repository the specific repository implementation
-     * which corresponds to service's object: type {@code S}.
+     *                   which corresponds to service's object: type {@code S}.
      */
     public AbstractService(T repository) {
         this.repository = repository;
