@@ -1,14 +1,13 @@
 package ru.alvisid.pacs.service;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
+import org.junit.rules.ExternalResource;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.test.context.ActiveProfiles;
@@ -22,11 +21,11 @@ import ru.alvisid.pacs.util.cache.Cached;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import ru.alvisid.pacs.util.profileResolver.ActiveDbProfilesResolver;
 import util.AbstractTestData;
+import util.TimingRules;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.slf4j.LoggerFactory.getLogger;
 import static util.TestUtil.assertMatch;
@@ -50,21 +49,19 @@ import static util.TestUtil.assertMatch;
 @Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
 public abstract class AbstractServiceTest<T extends AbstractId, S extends TypicalService <T>> {
     /**
-     * Logger.
+     * Service for testing.
      */
-    public static Logger log = getLogger("result");
-
-    /**
-     * The executing tests results.
-     */
-    private static StringBuilder results = new StringBuilder();
-
     protected S service;
 
     /**
      * The keeper of the test data.
      */
     protected AbstractTestData <T> testData;
+
+    static {
+        // needed only for java.util.logging (postgres driver)
+        SLF4JBridgeHandler.install();
+    }
 
     /**
      * Sets the specified Service to the {@code service} field.
@@ -75,6 +72,13 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     public abstract void setService(S service);
 
     /**
+     * Execute for test class.
+     * @see TimingRules#SUMMARY
+     */
+    @ClassRule
+    public static ExternalResource summary = TimingRules.SUMMARY;
+
+    /**
      * The {@code ExpectedException} rule allows to verify that a test method code
      * throws a specific exception.
      */
@@ -82,17 +86,11 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     public ExpectedException thrown = ExpectedException.none();
 
     /**
-     * Rule - after every test method commits test method executing time to the {@code results} field.
+     * Executes for every test.
+     * @see TimingRules#STOPWATCH
      */
     @Rule
-    public Stopwatch stopwatch = new Stopwatch() {
-        @Override
-        protected void finished(long nanos, Description description) {
-            String result = String.format("\n%-25s %7d", description.getMethodName(), TimeUnit.NANOSECONDS.toMillis(nanos));
-            results.append(result);
-            log.info(result + " ms\n");
-        }
-    };
+    public Stopwatch stopwatch = TimingRules.STOPWATCH;
 
     /**
      * {@code EntityManager} for enums activate enum's dictionaries.
@@ -113,18 +111,6 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
         if (service instanceof Cached) {
             cacheManager.getCache(((Cached)service).getCacheAlias()).clear();
         }
-    }
-
-    /**
-     * Executes after test class and print test results.
-     */
-    @AfterClass
-    public static void printResult() {
-        log.info("\n---------------------------------" +
-                "\nTest                 Duration, ms" +
-                "\n---------------------------------" +
-                results +
-                "\n---------------------------------");
     }
 
     /**
