@@ -100,6 +100,7 @@ public class DataJpaDepartmentRepositoryImpl implements DepartmentRepository {
      */
     @Override
     public Department getWithWeekEndsAndSched(int id) {
-        return null;
+        Department department = crudRepository.getWithWeekEndsAndSched(id);
+        return department;
     }
 }

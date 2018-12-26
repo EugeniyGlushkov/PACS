@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.BatchSize;
 import ru.alvisid.pacs.model.abstractions.AbstractPerson;
 
 import javax.persistence.*;
@@ -65,6 +66,7 @@ public class Employee extends AbstractPerson {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @Size(max = 255)
+    @BatchSize(size = 200)
     private Set <Role> roles;
 
     /**

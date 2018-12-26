@@ -4,9 +4,11 @@ import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import ru.alvisid.pacs.model.Department;
+import ru.alvisid.pacs.model.WeekDay;
 import util.DepartmentTestData;
 
 import static util.DepartmentTestData.*;
+import static util.TestUtil.assertMatch;
 
 /**
  * Department's specific tests.
@@ -47,5 +49,13 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
         Department updated = testData.getUpdated();
         updated.setName(DEPARTMENT_2.getName());
         service.update(updated);
+    }
+
+    @Test
+    public void getWithWeekEndsAndSched() {
+        Department expectedDepartment = testData.getGotten();
+        Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
+        System.out.println(WeekDay.MONDAY.ordinal());
+        assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
     }
 }
