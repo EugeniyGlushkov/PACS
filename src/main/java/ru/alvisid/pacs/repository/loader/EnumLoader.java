@@ -126,7 +126,14 @@ public class EnumLoader {
             modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
 
             field.set(null, valuesArray);
+
+            //del
+            field = enumClass.getDeclaredField("enumConstants");
+            System.out.println(field);
+            field.setAccessible(true);
+            field.set(enumClass.getClass(), valuesArray);
         } catch (Exception exc) {
+            System.out.println(exc.getCause());
             throw new EnumLoaderException("Can't update values array: ", exc);
         }
     }

@@ -54,8 +54,13 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
     @Test
     public void getWithWeekEndsAndSched() {
         Department expectedDepartment = testData.getGotten();
-        Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
         System.out.println(WeekDay.MONDAY.ordinal());
+        Enum[] days = WeekDay.values();
+        System.out.println(days.length + "\n");
+        for (Enum e : days) {
+            System.out.println(e == null ? 0 : e.ordinal() );
+        }
+        Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
         assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
     }
 }

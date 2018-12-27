@@ -44,7 +44,6 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      * @param obj the object to update.
      * @throws NotFoundException if there aren't updated object in the data base.
      */
-    @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     @Override
     public void update(S obj) throws NotFoundException {
         Assert.notNull(obj, obj.getClass().getSimpleName() + " must not be null");
@@ -57,7 +56,6 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      * @param id the specified id of a deleted object.
      * @throws NotFoundException if the entity with the specified id isn't found.
      */
-    @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     @Override
     public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(repository.delete(id), id);

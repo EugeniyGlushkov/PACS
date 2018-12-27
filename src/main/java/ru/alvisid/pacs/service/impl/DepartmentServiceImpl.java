@@ -9,6 +9,8 @@ import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.DepartmentService;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
+import java.util.List;
+
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 
 /**
