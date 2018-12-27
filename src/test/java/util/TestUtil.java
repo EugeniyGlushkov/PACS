@@ -12,7 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class TestUtil {
     /**
-     * Checks matching the specified actual parameter for the specified expected parameter.
+     * Checks matching the specified actual parameter for the specified expected parameter
+     * ignoring given fields
      *
      * @param ignoringFields the names of the fields for excluding from the matching, may be empty.
      * @param actual         the specified actual parameter.
@@ -26,7 +27,8 @@ public class TestUtil {
     }
 
     /**
-     * Checks matching the specified actual parameter's set for the specified expected parameter's set.
+     * Checks matching the specified actual parameter's set for the specified expected parameter's set
+     * ignoring given fields
      *
      * @param ignoringFields the names of the fields for excluding from the matching, may be empty.
      * @param actual         the specified actual parameter's set.
@@ -40,7 +42,8 @@ public class TestUtil {
     }
 
     /**
-     * Checks matching the specified actual parameter's set for the specified expected parameter's set.
+     * Checks matching the specified actual parameter's set for the specified expected parameter's set
+     * ignoring given fields
      *
      * @param ignoringFields the names of the fields for excluding from the matching, may be empty.
      * @param actual         the specified actual parameter's set.
@@ -51,6 +54,28 @@ public class TestUtil {
      */
     public static <T> void assertMatch(String[] ignoringFields, Iterable <T> actual, Iterable <T> expected) {
         assertThat(actual).usingElementComparatorIgnoringFields(ignoringFields).isEqualTo(expected);
+    }
+
+    /**
+     * Checks matching the specified actual parameter for the specified expected parameter.
+     *
+     * @param actual   the specified actual parameter.
+     * @param expected the specified expected parameter.
+     * @param <T>      the type of the checked parameters.
+     */
+    public static <T> void assertMatch(T actual, T expected) {
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    /**
+     * Checks matching the specified actual parameter's set for the specified expected parameter's set.
+     *
+     * @param actual   the specified actual parameter's set.
+     * @param expected the specified expected parameter's set.
+     * @param <T>      the type of the checked parameters.
+     */
+    public static <T> void assertMatch(Iterable <T> actual, T... expected) {
+        assertMatch(actual, List.of(expected));
     }
 
     // never instantiated

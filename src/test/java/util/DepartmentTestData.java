@@ -1,6 +1,9 @@
 package util;
 
 import ru.alvisid.pacs.model.Department;
+import ru.alvisid.pacs.model.WeekDay;
+
+import java.util.*;
 
 /**
  * Test data for {@code Department} class.
@@ -22,13 +25,24 @@ public class DepartmentTestData extends AbstractTestData <Department> {
         super(100000, new String[]{"weekEnds", "deptSchedule"});
     }
 
+    public static final List <WeekDay>
+            WEEKENDS_1 = new ArrayList <>(),
+            WEEKENDS_2 = new ArrayList <>(),
+            WEEKENDS_3 = new ArrayList <>();
+
+    static {
+        Collections.addAll(WEEKENDS_1, WeekDay.SATURDAY, WeekDay.SUNDAY);
+        Collections.addAll(WEEKENDS_2, WeekDay.SATURDAY, WeekDay.SUNDAY);
+        Collections.addAll(WEEKENDS_3,WeekDay.FRIDAY, WeekDay.SATURDAY, WeekDay.SUNDAY);
+    }
+
     /**
      * Object which represents existing entity in the data base.
      */
     public static final Department
-            DEPARTMENT_1 = new Department(1, "ООО \"Рога и копыта\"", "Компания по производству субпродуктов."),
-            DEPARTMENT_2 = new Department(2, "Отдел кадров", "Управление персоналом."),
-            DEPARTMENT_3 = new Department(3, "Бухгалтерия", "Финансовые операции и отчетность");
+            DEPARTMENT_1 = new Department(1, "ООО \"Рога и копыта\"", "Компания по производству субпродуктов.", WEEKENDS_1),
+            DEPARTMENT_2 = new Department(2, "Отдел кадров", "Управление персоналом.", WEEKENDS_2),
+            DEPARTMENT_3 = new Department(3, "Бухгалтерия", "Финансовые операции и отчетность", WEEKENDS_3);
 
     /**
      * New {@code Department} with id-null.

@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.repository.loader;
 
 import org.springframework.stereotype.Component;
+import ru.alvisid.pacs.model.EditType;
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.model.enumActivate.MappedEnum;
 import ru.alvisid.pacs.util.ValidationUtil;
@@ -12,7 +13,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.metamodel.EntityType;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -71,7 +74,7 @@ public class EnumLoader {
                 continue;
             }
 
-            //Get MappedEnum object of the carrent entity.
+            //Get MappedEnum object of the current entity.
             MappedEnum mappedEnum = ((Class<?>) obj).getAnnotation(MappedEnum.class);
             updateEnumIdentifiers(mappedEnum.enumClass(), (Class<AbstractDictionary>) obj);
             updateEnumValues(mappedEnum.enumClass());
@@ -102,6 +105,8 @@ public class EnumLoader {
      * Updates array field {@code $VALUES} of the constants in the specified enum class
      * so that array index of the enum constant equals appropriate id
      * from the dictionary table.
+     * Updates array field {@code enumConstants} in the <em>Class</em> of the {@code enumClass}
+     * because it is initialized before array field {@code $VALUES}, and has n-1 element.
      *
      * @param enumClass the enum class to apdate array field {@code $VALUES}.
      */
@@ -127,11 +132,9 @@ public class EnumLoader {
 
             field.set(null, valuesArray);
 
-            //del
-            field = enumClass.getDeclaredField("enumConstants");
-            System.out.println(field);
+            field = enumClass.getClass().getDeclaredField("enumConstants");
             field.setAccessible(true);
-            field.set(enumClass.getClass(), valuesArray);
+            field.set(enumClass, valuesArray);
         } catch (Exception exc) {
             System.out.println(exc.getCause());
             throw new EnumLoaderException("Can't update values array: ", exc);

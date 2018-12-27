@@ -1,12 +1,16 @@
 package ru.alvisid.pacs.model;
 
-import org.hibernate.Hibernate;
+import javassist.runtime.Desc;
+import org.hibernate.annotations.SortComparator;
+import org.hibernate.annotations.SortNatural;
 import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,6 +41,7 @@ public class Department extends AbstractEntity {
             uniqueConstraints = @UniqueConstraint(columnNames = {"dep_id", "weekday_id"}, name = "depid_weekdayid_idx"))
     @Column(name = "weekday_id")
     @ElementCollection(fetch = FetchType.LAZY)
+    @OrderBy("ASC")
     private List <WeekDay> weekEnds;
 
     /**
@@ -178,7 +183,7 @@ public class Department extends AbstractEntity {
         this(department.getId(),
                 department.getName(),
                 department.getDescription(),
-                department.getWeekEnds(),
+                new ArrayList <>(department.getWeekEnds()),
                 department.getDeptSchedule());
     }
 

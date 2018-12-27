@@ -3,6 +3,7 @@ package ru.alvisid.pacs.service;
 import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.transaction.annotation.Transactional;
 import ru.alvisid.pacs.model.Department;
 import ru.alvisid.pacs.model.WeekDay;
 import util.DepartmentTestData;
@@ -54,13 +55,10 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
     @Test
     public void getWithWeekEndsAndSched() {
         Department expectedDepartment = testData.getGotten();
-        System.out.println(WeekDay.MONDAY.ordinal());
-        Enum[] days = WeekDay.values();
-        System.out.println(days.length + "\n");
-        for (Enum e : days) {
-            System.out.println(e == null ? 0 : e.ordinal() );
-        }
+        System.out.println(expectedDepartment.getWeekEnds());
         Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
+        System.out.println(actualDepartment.getWeekEnds());
         assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
+        assertMatch(new String[0], actualDepartment.getWeekEnds(), expectedDepartment.getWeekEnds());
     }
 }
