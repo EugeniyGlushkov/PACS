@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @version 1.0
  */
 public class TestUtil {
-    private static final String[] WITHOUT_IGNORING_FIELDS = new String[0];
+    public static final String[] WITHOUT_IGNORING_FIELDS = new String[0];
 
     /**
      * Checks matching the specified actual parameter for the specified expected parameter
