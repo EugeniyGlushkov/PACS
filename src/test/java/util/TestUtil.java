@@ -80,6 +80,13 @@ public class TestUtil {
         assertMatch(actual, List.of(expected));
     }
 
+    /**
+     * Checks matching the specified actual parameter's set for the specified expected parameter's set.
+     *
+     * @param actual   the specified actual parameter's set.
+     * @param expected the specified expected parameter's set.
+     * @param <T>      the type of the checked parameters.
+     */
     public static <T> void assertMatch(Iterable <T> actual, Iterable <T> expected) {
         assertMatch(WITHOUT_IGNORING_FIELDS, actual, expected);
     }

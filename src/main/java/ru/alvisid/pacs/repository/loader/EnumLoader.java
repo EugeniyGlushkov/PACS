@@ -1,7 +1,6 @@
 package ru.alvisid.pacs.repository.loader;
 
 import org.springframework.stereotype.Component;
-import ru.alvisid.pacs.model.EditType;
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.model.enumActivate.MappedEnum;
 import ru.alvisid.pacs.util.ValidationUtil;
@@ -13,9 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.metamodel.EntityType;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -46,7 +43,7 @@ public class EnumLoader {
      *
      * @param entityManager the specified entity manager.
      */
-    public EnumLoader(EntityManager entityManager){
+    public EnumLoader(EntityManager entityManager) {
         em = entityManager;
     }
 
@@ -57,26 +54,23 @@ public class EnumLoader {
     @PostConstruct
     public void init() {
         //Get all mapped entity types.
-        Set<EntityType<?>> entities = em.getMetamodel().getEntities();
+        Set <EntityType <?>> entities = em.getMetamodel().getEntities();
 
         //Get all mapped classes.
-        List<?> entityClasses = entities.stream()
+        List <?> entityClasses = entities.stream()
                 .map(EntityType::getJavaType)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
         for (Object obj : entityClasses) {
-            if (!AbstractDictionary.class.isAssignableFrom((Class<AbstractDictionary>) obj)) {
-                continue;
-            }
-
-            if (!((Class) obj).isAnnotationPresent(MappedEnum.class)) {
+            if (!AbstractDictionary.class.isAssignableFrom((Class <AbstractDictionary>) obj) ||
+                    !((Class) obj).isAnnotationPresent(MappedEnum.class)) {
                 continue;
             }
 
             //Get MappedEnum object of the current entity.
-            MappedEnum mappedEnum = ((Class<?>) obj).getAnnotation(MappedEnum.class);
-            updateEnumIdentifiers(mappedEnum.enumClass(), (Class<AbstractDictionary>) obj);
+            MappedEnum mappedEnum = ((Class <?>) obj).getAnnotation(MappedEnum.class);
+            updateEnumIdentifiers(mappedEnum.enumClass(), (Class <AbstractDictionary>) obj);
             updateEnumValues(mappedEnum.enumClass());
         }
     }
@@ -90,11 +84,11 @@ public class EnumLoader {
      * @param enumClass the identified enum class represents dictionary from data base.
      * @param dictClass the dictionary mapped class.
      */
-    private void updateEnumIdentifiers(Class<? extends Enum> enumClass,
-                                       Class<? extends AbstractDictionary> dictClass) {
+    private void updateEnumIdentifiers(Class <? extends Enum> enumClass,
+                                       Class <? extends AbstractDictionary> dictClass) {
         //Create SQL query and get list of the dictionary values.
         String sql = "FROM " + dictClass.getSimpleName();
-        List<AbstractDictionary> valueList = em.createQuery(sql).getResultList();
+        List <AbstractDictionary> valueList = em.createQuery(sql).getResultList();
 
         ValidationUtil.checkDictionary(enumClass, valueList);
 
@@ -110,7 +104,7 @@ public class EnumLoader {
      *
      * @param enumClass the enum class to apdate array field {@code $VALUES}.
      */
-    private void updateEnumValues(Class<? extends Enum> enumClass) {
+    private void updateEnumValues(Class <? extends Enum> enumClass) {
         Enum[] enumConstants = enumClass.getEnumConstants();
 
         Object valuesArray = Array.newInstance(enumClass, enumConstants.length + 1);

@@ -45,8 +45,8 @@ INSERT INTO positions (position, description) VALUES
 
 INSERT INTO dep_schedules (dep_id, start_work, end_work, start_lunch, end_lunch) VALUES
   (1, '09:00:00', '18:00:00', '12:00:00', '13:00:00'),  /*10001*/
-  (2, '08:00:00', '17:00:00', '11:00:00', '12:00:00'),  /*10002*/
-  (3, '09:00:00', '18:00:00', '12:30:00', '13:30:00');  /*10003*/
+  (2, '08:00:00', '17:00:00', '11:00:00', '12:00:00');  /*10002*/
+  /*(3, '09:00:00', '18:00:00', '12:30:00', '13:30:00');*/  /*10003*/
 
 INSERT INTO weekends (dep_id, weekday_id) VALUES
   (1, 6), /*id 1*/

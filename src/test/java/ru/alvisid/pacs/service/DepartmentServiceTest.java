@@ -3,9 +3,7 @@ package ru.alvisid.pacs.service;
 import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.transaction.annotation.Transactional;
 import ru.alvisid.pacs.model.Department;
-import ru.alvisid.pacs.model.WeekDay;
 import util.DepartmentTestData;
 
 import static util.DepartmentTestData.*;
@@ -59,6 +57,21 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
     @Test
     public void getWithWeekEndsAndSched() {
         Department expectedDepartment = testData.getGotten();
+        Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
+        assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
+        assertMatch(actualDepartment.getWeekEnds(), expectedDepartment.getWeekEnds());
+        assertMatch(actualDepartment.getDeptSchedule(), expectedDepartment.getDeptSchedule());
+    }
+
+
+    /**
+     * Checks matching the actual updated value from DB to the expected updated value from {@code testData}.
+     * {@code deptSchedule} field isn't updated, because it is updating in the it's service.
+     */
+    @Test
+    public void updateWeekEndsWithAllFields(){
+        Department expectedDepartment = testData.getUpdated();
+        service.update(expectedDepartment);
         Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
         assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
         assertMatch(actualDepartment.getWeekEnds(), expectedDepartment.getWeekEnds());

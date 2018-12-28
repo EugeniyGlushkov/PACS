@@ -8,10 +8,7 @@ import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * A department with a specifiec name.
@@ -183,7 +180,7 @@ public class Department extends AbstractEntity {
         this(department.getId(),
                 department.getName(),
                 department.getDescription(),
-                new ArrayList <>(department.getWeekEnds()),
+                Objects.isNull(department.getWeekEnds())? null : new ArrayList <>(department.getWeekEnds()),
                 department.getDeptSchedule());
     }
 
