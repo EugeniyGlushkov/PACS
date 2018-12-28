@@ -16,8 +16,8 @@ DELETE FROM employees;
 DELETE FROM positions;
 DELETE FROM departments;
 
-ALTER SEQUENCE PERS_SEQ RESTART WITH 10000;
-ALTER SEQUENCE SCHEDULES_SEQ RESTART WITH 10000;
+ALTER SEQUENCE PERS_SEQ RESTART WITH 10001;
+ALTER SEQUENCE SCHEDULES_SEQ RESTART WITH 10001;
 ALTER SEQUENCE ACTIONS_SEQ RESTART WITH 1;
 ALTER SEQUENCE POINT_PERMITS_SEQ RESTART WITH 1;
 ALTER SEQUENCE POINT_ACTIONS_SEQ RESTART WITH 1;
@@ -70,10 +70,10 @@ INSERT INTO employees (dep_id, pos_id, card_num, last_name, first_name, second_n
   (1, 1, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru');
 
 INSERT INTO employee_roles (emp_id, role) VALUES
-  (10000, 'ROLE_USER');
+  (10001, 'ROLE_USER');
 
 INSERT INTO absences (emp_id, reason_id, start_absence, end_absence, description) VALUES
-  (10000, 1, '2018-05-03', '2018-05-12', 'больничный лист №12345.');
+  (10001, 1, '2018-05-03', '2018-05-12', 'больничный лист №12345.');
 
 INSERT INTO absences (emp_id, reason_id, start_absence, end_absence, description) VALUES
-  (10000, 1, '2018-05-13', '2018-05-31', 'больничный лист №12345.');;
+  (10001, 1, '2018-05-13', '2018-05-31', 'больничный лист №12345.');;

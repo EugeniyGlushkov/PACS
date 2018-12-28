@@ -136,8 +136,7 @@ public class EnumLoader {
             field.setAccessible(true);
             field.set(enumClass, valuesArray);
         } catch (Exception exc) {
-            System.out.println(exc.getCause());
-            throw new EnumLoaderException("Can't update values array: ", exc);
+            throw new EnumLoaderException("Can't update values array: " + enumClass.getName(), exc);
         }
     }
 

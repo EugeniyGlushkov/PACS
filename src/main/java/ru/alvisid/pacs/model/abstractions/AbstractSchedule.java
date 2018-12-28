@@ -234,7 +234,7 @@ public abstract class AbstractSchedule implements HasId {
             return false;
         }
 
-        AbstractId that = (AbstractId) o;
+        AbstractSchedule that = (AbstractSchedule) o;
 
         return id != null ? id.equals(that.id) : that.id == null;
     }

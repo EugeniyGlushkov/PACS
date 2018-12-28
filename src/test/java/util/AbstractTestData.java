@@ -12,7 +12,7 @@ public abstract class AbstractTestData<T> {
     /**
      * Id of the missing object.
      */
-    public final int NOT_FOUND_ID;
+    public final int NOT_FOUND_ID = 100000;
 
     /**
      * Names of the fields which are excluding from matching.
@@ -22,14 +22,11 @@ public abstract class AbstractTestData<T> {
 
     /**
      * Constructs new {@code TestData} and sets the specified
-     * {@code NOT_FOUND_ID} field,
      * {@code IGNORING_FIELDS} field
      *
-     * @param notFoundId the specified id of the missing object.
      * @param ignoringFields the names of the fields which are excluding from matching.
      */
-    AbstractTestData(int notFoundId, String[] ignoringFields) {
-        this.NOT_FOUND_ID = notFoundId;
+    AbstractTestData(String... ignoringFields) {
         this.IGNORING_FIELDS = ignoringFields;
     }
 

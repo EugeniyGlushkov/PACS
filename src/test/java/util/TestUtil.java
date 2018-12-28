@@ -11,6 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @version 1.0
  */
 public class TestUtil {
+    private static final String[] WITHOUT_IGNORING_FIELDS = new String[0];
+
     /**
      * Checks matching the specified actual parameter for the specified expected parameter
      * ignoring given fields
@@ -64,7 +66,7 @@ public class TestUtil {
      * @param <T>      the type of the checked parameters.
      */
     public static <T> void assertMatch(T actual, T expected) {
-        assertThat(actual).isEqualTo(expected);
+        assertMatch(WITHOUT_IGNORING_FIELDS, actual, expected);
     }
 
     /**
@@ -76,6 +78,10 @@ public class TestUtil {
      */
     public static <T> void assertMatch(Iterable <T> actual, T... expected) {
         assertMatch(actual, List.of(expected));
+    }
+
+    public static <T> void assertMatch(Iterable <T> actual, Iterable <T> expected) {
+        assertMatch(WITHOUT_IGNORING_FIELDS, actual, expected);
     }
 
     // never instantiated

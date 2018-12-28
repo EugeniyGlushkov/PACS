@@ -52,13 +52,16 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
         service.update(updated);
     }
 
+    /**
+     * Checks matching the actual gotten value from DB to the expected gotten value from {@code testData}
+     * without ignoring fields.
+     */
     @Test
     public void getWithWeekEndsAndSched() {
         Department expectedDepartment = testData.getGotten();
-        System.out.println(expectedDepartment.getWeekEnds());
         Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
-        System.out.println(actualDepartment.getWeekEnds());
         assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
-        assertMatch(new String[0], actualDepartment.getWeekEnds(), expectedDepartment.getWeekEnds());
+        assertMatch(actualDepartment.getWeekEnds(), expectedDepartment.getWeekEnds());
+        assertMatch(actualDepartment.getDeptSchedule(), expectedDepartment.getDeptSchedule());
     }
 }
