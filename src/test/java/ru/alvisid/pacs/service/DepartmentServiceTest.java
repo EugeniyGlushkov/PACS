@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.service;
 
+import javax.validation.ConstraintViolationException;
+
 import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -12,7 +14,7 @@ import static util.TestUtil.assertMatch;
 /**
  * Department's specific tests.
  */
-public class DepartmentServiceTest extends AbstractServiceTest <Department, DepartmentService> {
+public class DepartmentServiceTest extends AbstractServiceTest<Department, DepartmentService> {
     public DepartmentServiceTest() {
         super(new DepartmentTestData());
     }
@@ -69,12 +71,43 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
      * {@code deptSchedule} field isn't updated, because it is updating in the it's service.
      */
     @Test
-    public void updateWeekEndsWithAllFields(){
+    public void updateWeekEndsWithAllFields() {
         Department expectedDepartment = testData.getUpdated();
         service.update(expectedDepartment);
         Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
         assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
         assertMatch(actualDepartment.getWeekEnds(), expectedDepartment.getWeekEnds());
         assertMatch(actualDepartment.getDeptSchedule(), expectedDepartment.getDeptSchedule());
+    }
+
+    @Test
+    public void testValidation() {
+        validateRootCause(() -> service.create(new Department(null, "Test validate, name is null")),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Department("", "Test validate, name is empty")),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Department("    ", "Test validate, name is blank")),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Department("A", "Test validate, name's size < 2")),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Department(
+                        "Test validate, name's size > 255" +
+                                "Test validate, name's size > 255" +
+                                "Test validate, name's size > 255" +
+                                "Test validate, name's size > 255" +
+                                "Test validate, name's size > 255" +
+                                "Test validate, name's size > 255" +
+                                "Test validate, name's size > 255" +
+                                "Test validate, name's size > 255",
+                        "Test validate, name's size > 255")),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Department("Test validate, description is null", null)),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Department("Test validate, description is empty", "")),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Department("Test validate, description is blank", "    ")),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Department("Test validate, description's size < 2", "A")),
+                ConstraintViolationException.class);
     }
 }

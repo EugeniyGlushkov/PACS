@@ -26,7 +26,7 @@ public class Department extends AbstractEntity {
      * Must be non null, unique and has least one non space symbol.
      */
     @NotBlank
-    @Size(min = 1, max = 255)
+    @Size(min = 2, max = 255)
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
