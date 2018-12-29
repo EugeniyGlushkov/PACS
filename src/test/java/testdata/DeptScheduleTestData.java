@@ -1,12 +1,12 @@
-package util;
+package testdata;
 
 import ru.alvisid.pacs.model.DeptSchedule;
 
 import java.time.LocalTime;
 
-import static util.DepartmentTestData.*;
+import static testdata.DepartmentTestData.*;
 
-public class DeptScheduleTestData extends AbstractTestData<DeptSchedule> {
+public class DeptScheduleTestData extends AbstractTestData <DeptSchedule> {
 
     public static final DeptSchedule
     DEPT_SCHEDULE_1 = new DeptSchedule(10001,
@@ -51,5 +51,9 @@ public class DeptScheduleTestData extends AbstractTestData<DeptSchedule> {
     @Override
     public DeptSchedule[] getAllArray() {
         return new DeptSchedule[0];
+    }
+
+    public DeptScheduleTestData() {
+        super();
     }
 }

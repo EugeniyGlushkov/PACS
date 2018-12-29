@@ -81,9 +81,9 @@ public class ValidationUtil {
      * @param enumDict enum class represents dictionary.
      * @param dict     list of the dictionary members from the data base.
      */
-    public static void checkDictionary(Class<? extends Enum> enumDict, List<? extends AbstractDictionary> dict) {
-        List<Enum> constants = Arrays.asList(enumDict.getEnumConstants());
-        List<String> dictStrs = dict.stream()
+    public static void checkDictionary(Class <? extends Enum> enumDict, List <? extends AbstractDictionary> dict) {
+        List <Enum> constants = Arrays.asList(enumDict.getEnumConstants());
+        List <String> dictStrs = dict.stream()
                 .map(AbstractDictionary::getCode)
                 .collect(Collectors.toList());
 
@@ -102,6 +102,12 @@ public class ValidationUtil {
         });
     }
 
+    /**
+     * Returns a root of the specified {@code Throwable} object.
+     *
+     * @param throwable the specified {@code Throwable} object.
+     * @return the root of the specified {@code Throwable} object.
+     */
     //  http://stackoverflow.com/a/28565320/548473
     public static Throwable getRootCause(Throwable throwable) {
         Throwable result = throwable;

@@ -1,4 +1,4 @@
-package util;
+package testdata;
 
 /**
  * Contains test data and methods which are common

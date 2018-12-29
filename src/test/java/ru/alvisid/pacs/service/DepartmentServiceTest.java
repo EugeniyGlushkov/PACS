@@ -6,9 +6,9 @@ import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import ru.alvisid.pacs.model.Department;
-import util.DepartmentTestData;
+import testdata.DepartmentTestData;
 
-import static util.DepartmentTestData.*;
+import static testdata.DepartmentTestData.*;
 import static util.TestUtil.assertMatch;
 
 /**
@@ -80,6 +80,10 @@ public class DepartmentServiceTest extends AbstractServiceTest<Department, Depar
         assertMatch(actualDepartment.getDeptSchedule(), expectedDepartment.getDeptSchedule());
     }
 
+    /**
+     * Checks the matching root exception to expected exception when objects with invalid
+     * values is created.
+     */
     @Test
     public void testValidation() {
         validateRootCause(() -> service.create(new Department(null, "Test validate, name is null")),

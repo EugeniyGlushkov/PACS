@@ -1,11 +1,11 @@
-package util;
+package testdata;
 
 import ru.alvisid.pacs.model.Department;
 import ru.alvisid.pacs.model.WeekDay;
 
 import java.util.*;
 
-import static util.DeptScheduleTestData.*;
+import static testdata.DeptScheduleTestData.*;
 
 /**
  * Test data for {@code Department} class.
@@ -13,7 +13,7 @@ import static util.DeptScheduleTestData.*;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public class DepartmentTestData extends AbstractTestData<Department> {
+public class DepartmentTestData extends AbstractTestData <Department> {
     /**
      * Constructs new {@code DepartmentTestData} and sets
      * {@code NOT_FOUND_ID} field,

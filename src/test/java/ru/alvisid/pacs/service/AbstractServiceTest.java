@@ -17,11 +17,10 @@ import ru.alvisid.pacs.model.abstractions.AbstractId;
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.model.enumActivate.MappedEnum;
 import ru.alvisid.pacs.repository.loader.EnumLoader;
-import ru.alvisid.pacs.util.ValidationUtil;
 import ru.alvisid.pacs.util.cache.Cached;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import ru.alvisid.pacs.util.profileResolver.ActiveDbProfilesResolver;
-import util.AbstractTestData;
+import testdata.AbstractTestData;
 import util.TimingRules;
 
 import javax.persistence.EntityManager;
@@ -55,7 +54,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.*;
 @RunWith(SpringRunner.class)
 @ActiveProfiles(resolver = ActiveDbProfilesResolver.class)
 @Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
-public abstract class AbstractServiceTest<T extends AbstractId, S extends TypicalService<T>> {
+public abstract class AbstractServiceTest<T extends AbstractId, S extends TypicalService <T>> {
     /**
      * Service for testing.
      */
@@ -64,7 +63,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     /**
      * The keeper of the test data.
      */
-    protected AbstractTestData<T> testData;
+    protected AbstractTestData <T> testData;
 
     static {
         // needed only for java.util.logging (postgres driver)
@@ -140,23 +139,23 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
             n+1 element.*/
             if (enumsIsUpdated) {
                 //Get all mapped entity types.
-                Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
+                Set <EntityType <?>> entities = entityManager.getMetamodel().getEntities();
 
                 //Get all mapped classes.
-                List<?> entityClasses = entities.stream()
+                List <?> entityClasses = entities.stream()
                         .map(EntityType::getJavaType)
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList());
 
                 for (Object obj : entityClasses) {
-                    if (!AbstractDictionary.class.isAssignableFrom((Class<AbstractDictionary>) obj) ||
+                    if (!AbstractDictionary.class.isAssignableFrom((Class <AbstractDictionary>) obj) ||
                             !((Class) obj).isAnnotationPresent(MappedEnum.class)) {
                         continue;
                     }
 
                     //Get MappedEnum object of the current entity.
-                    MappedEnum mappedEnum = ((Class<?>) obj).getAnnotation(MappedEnum.class);
-                    Class<? extends Enum> enumClass = mappedEnum.enumClass();
+                    MappedEnum mappedEnum = ((Class <?>) obj).getAnnotation(MappedEnum.class);
+                    Class <? extends Enum> enumClass = mappedEnum.enumClass();
                     Enum[] oldValues = enumClass.getEnumConstants();
                     Enum[] newValues = Arrays.copyOfRange(oldValues, 1, oldValues.length);
                     Field field = enumClass.getClass().getDeclaredField("enumConstants");
@@ -178,7 +177,7 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
      *
      * @param testData the specified value of the TestData.
      */
-    public AbstractServiceTest(AbstractTestData<T> testData) {
+    public AbstractServiceTest(AbstractTestData <T> testData) {
         this.testData = testData;
     }
 
@@ -268,11 +267,18 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
      */
     @Test
     public void getAll() {
-        List<T> actualAllObjects = service.getAll();
+        List <T> actualAllObjects = service.getAll();
         assertMatch(testData.IGNORING_FIELDS, actualAllObjects, testData.getAllArray());
     }
 
-    public <T extends Throwable> void validateRootCause(Runnable runnable, Class<T> exceptionClass) {
+    /**
+     * Checks root exception's class of the thrown exception to the expected exception's class.
+     *
+     * @param runnable       the runnable object which throws exception.
+     * @param exceptionClass the expected exception class.
+     * @param <T>            the type of the expected exception.
+     */
+    public <T extends Throwable> void validateRootCause(Runnable runnable, Class <T> exceptionClass) {
         try {
             runnable.run();
             Assert.fail("Expected: " + exceptionClass.getName());
