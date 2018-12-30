@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.abstractions.AbstractId;
@@ -16,6 +18,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "point_permits", uniqueConstraints =
 @UniqueConstraint(columnNames = {"pointact_id", "emp_id"}, name = "permits_copoint_emp_con"))
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PointPermit extends AbstractId {
     /**
      * The certain permitted action at the certain control point.

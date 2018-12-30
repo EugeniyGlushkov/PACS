@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.abstractions.AbstractId;
@@ -16,12 +18,13 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "point_actions", uniqueConstraints =
 @UniqueConstraint(columnNames = {"controlpoint_id", "acttype_id"}, name = "conpoint_acttype_idx"))
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PointAction extends AbstractId {
     /**
      * The control point where the action able to be done.
      */
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "controlpoint_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ControlPoint controlPoint;
@@ -30,7 +33,7 @@ public class PointAction extends AbstractId {
      * The action which able to be done at the control point.
      */
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "acttype_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ActionType actionType;

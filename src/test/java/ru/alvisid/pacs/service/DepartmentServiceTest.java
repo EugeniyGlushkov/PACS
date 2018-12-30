@@ -59,7 +59,9 @@ public class DepartmentServiceTest extends AbstractServiceTest<Department, Depar
     @Test
     public void getWithWeekEndsAndSched() {
         Department expectedDepartment = testData.getGotten();
-        Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
+        Department //actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
+        actualDepartment = service.get(expectedDepartment.getId());
+        actualDepartment = service.get(expectedDepartment.getId());
         assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
         assertMatch(actualDepartment.getWeekEnds(), expectedDepartment.getWeekEnds());
         assertMatch(actualDepartment.getDeptSchedule(), expectedDepartment.getDeptSchedule());

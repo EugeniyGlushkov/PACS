@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -18,6 +20,7 @@ import java.time.LocalDate;
         @UniqueConstraint(columnNames = {"emp_id", "end_absence"}, name = "abs_empid_end_idx")
 })
 @Check(constraints = "start_absence < end_absence")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Absence extends AbstractHasEmpEntity {
     /**
      * The reason of the absence.

@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.model;
 
-import org.hibernate.Hibernate;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.abstractions.AbstractId;
@@ -18,13 +19,14 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "days_off", uniqueConstraints =
 @UniqueConstraint(columnNames = {"dep_id", "date"}, name = "depid_daysoff_idx"))
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class DayOff extends AbstractId {
 
     /**
      * The department to which the day off.
      */
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dep_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Department department;

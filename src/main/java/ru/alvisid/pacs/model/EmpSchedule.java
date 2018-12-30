@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.model;
 
-import org.hibernate.annotations.Check;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.abstractions.AbstractSchedule;
@@ -18,6 +19,7 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "emp_schedules", uniqueConstraints =
 @UniqueConstraint(columnNames = "emp_id", name = "empsched_unique_empid_idx"))
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class EmpSchedule extends AbstractSchedule {
     /**
      * The specific employee.

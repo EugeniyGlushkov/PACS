@@ -1,8 +1,7 @@
 package ru.alvisid.pacs.model;
 
-import org.hibernate.annotations.Immutable;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import ru.alvisid.pacs.model.abstractions.AbstractHasEmpEntity;
 
 import javax.persistence.*;
@@ -15,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "edits", uniqueConstraints =
 @UniqueConstraint(columnNames = {"emp_id", "edit_date"}, name = "edits_emp_date_idx"))
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Edit extends AbstractHasEmpEntity {
     /**
      * Type of the edit.

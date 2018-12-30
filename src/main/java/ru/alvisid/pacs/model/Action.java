@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.model;
 
-import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.abstractions.AbstractId;
@@ -18,12 +19,13 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "actions", uniqueConstraints =
 @UniqueConstraint(columnNames = {"emp_id", "time"}, name = "act_emp_time_con"))
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Action extends AbstractId {
     /**
      * The employee which did the action.
      */
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employee employee;
@@ -32,7 +34,7 @@ public class Action extends AbstractId {
      * The point's action wich was done.
      */
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pointact_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private PointAction pointAction;

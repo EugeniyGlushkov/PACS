@@ -1,6 +1,8 @@
 package ru.alvisid.pacs.model;
 
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import ru.alvisid.pacs.model.abstractions.AbstractPerson;
 
 import javax.persistence.*;
@@ -19,11 +21,12 @@ import java.util.Set;
         @UniqueConstraint(columnNames = "card_num", name = "employees_unique_card_num_idx"),
         @UniqueConstraint(columnNames = "email", name = "employees_unique_emale_idx")
 })
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Employee extends AbstractPerson {
     /**
      * The department where the person works.
      */
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dep_id")
     private Department department;
 
@@ -31,7 +34,7 @@ public class Employee extends AbstractPerson {
      * The position of the person.
      */
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pos_id", nullable = false)
     private Position position;
 
@@ -67,6 +70,7 @@ public class Employee extends AbstractPerson {
     @ElementCollection(fetch = FetchType.EAGER)
     @Size(max = 255)
     @BatchSize(size = 200)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set <Role> roles;
 
     /**

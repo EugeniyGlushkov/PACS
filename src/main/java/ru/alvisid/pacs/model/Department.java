@@ -1,8 +1,7 @@
 package ru.alvisid.pacs.model;
 
-import javassist.runtime.Desc;
-import org.hibernate.annotations.SortComparator;
-import org.hibernate.annotations.SortNatural;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
 import javax.persistence.*;
@@ -19,6 +18,7 @@ import java.util.*;
 @Entity
 @Table(name = "departments", uniqueConstraints =
 @UniqueConstraint(columnNames = "name", name = "departments_unique_name_idx"))
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Department extends AbstractEntity {
     /**
      * The name of the department.

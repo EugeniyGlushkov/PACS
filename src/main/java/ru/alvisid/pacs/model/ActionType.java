@@ -2,6 +2,8 @@ package ru.alvisid.pacs.model;
 
 import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -17,6 +19,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "action_types")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class ActionType extends AbstractEntity {
     /**
      * Title of the action.
