@@ -13,6 +13,19 @@ import java.util.List;
  */
 public interface EmployeeRepository extends TypicalRepository<Employee> {
     /**
+     * Saves or updates a given object with inserted parameters.
+     *
+     * @param employee   the object to save or update.
+     * @param deptId     department's id, the department will be inserted to the object's
+     *                   {@code department} field.
+     * @param positionId position's id, the position will be inserted to the object's
+     *                   {@code position} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    Employee save(Employee employee, int deptId, int positionId);
+
+    /**
      * Returns the list with all employees by department's id.
      *
      * @param deptId the department's id.

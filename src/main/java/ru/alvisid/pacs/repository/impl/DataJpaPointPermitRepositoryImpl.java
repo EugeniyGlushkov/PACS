@@ -5,6 +5,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.PointPermit;
 import ru.alvisid.pacs.repository.PointPermitRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudPointActionRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudPointPermitRepository;
 
 import java.util.List;
@@ -36,13 +38,30 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
     private final CrudPointPermitRepository crudRepository;
 
     /**
-     * Constructs a new DataJpaPointPermitRepositoryImpl with the specified CrudPointPermitRepository.
+     * An interface for employee repository which extends JpaRepository.
+     */
+    private final CrudEmployeeRepository crudEmployeeRepository;
+
+    /**
+     * An interface for point action repository which extends JpaRepository.
+     */
+    private final CrudPointActionRepository crudPointActionRepository;
+
+    /**
+     * Constructs a new DataJpaPointPermitRepositoryImpl with the specified CrudPointPermitRepository,
+     * CrudEmployeeRepository and CrudPointActionRepository.
      *
-     * @param crudRepository the specified CrudPointPermitRepository.
+     * @param crudRepository            the specified <em>CrudPointPermitRepository</em>.
+     * @param crudEmployeeRepository    the specified <em>CrudEmployeeRepository</em>.
+     * @param crudPointActionRepository the specified <em>CrudPointActionRepository</em>.
      */
     @Autowired
-    public DataJpaPointPermitRepositoryImpl(CrudPointPermitRepository crudRepository) {
+    public DataJpaPointPermitRepositoryImpl(CrudPointPermitRepository crudRepository,
+                                            CrudEmployeeRepository crudEmployeeRepository,
+                                            CrudPointActionRepository crudPointActionRepository) {
         this.crudRepository = crudRepository;
+        this.crudEmployeeRepository = crudEmployeeRepository;
+        this.crudPointActionRepository = crudPointActionRepository;
     }
 
     /**
@@ -60,6 +79,24 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
         }
 
         return null;
+    }
+
+    /**
+     * Saves or updates a given object with inserted parameters.
+     *
+     * @param pointPermit   the object to save or update.
+     * @param empId         the employee's id, the employee will be inserted to the
+     *                      saved object's {@code employee} field.
+     * @param pointActionId the point action's id, the point action will be inserted to the
+     *                      saved object's {@code pointAction} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    @Override
+    public PointPermit save(PointPermit pointPermit, int empId, int pointActionId) {
+        pointPermit.setEmployee(crudEmployeeRepository.getOne(empId));
+        pointPermit.setPointAction(crudPointActionRepository.getOne(pointActionId));
+        return save(pointPermit);
     }
 
     /**
@@ -95,7 +132,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
      * @see DataJpaPointPermitRepositoryImpl#getAllByControlPointId(int)
      */
     @Override
-    public List <PointPermit> getAll() {
+    public List<PointPermit> getAll() {
         return crudRepository.findAll(SORT_SERCODE_LNAME_FNAME_SNAME_TYPE);
     }
 
@@ -110,7 +147,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
      * @see CrudPointPermitRepository#findAllByEmployeeId(int)
      */
     @Override
-    public List <PointPermit> getAllByEmpId(int empId) {
+    public List<PointPermit> getAllByEmpId(int empId) {
         return crudRepository.findAllByEmployeeId(empId);
     }
 
@@ -125,7 +162,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
      * @see DataJpaPointPermitRepositoryImpl#getAllByEmpId(int)
      */
     @Override
-    public List <PointPermit> getAllByControlPointId(int cPointId) {
+    public List<PointPermit> getAllByControlPointId(int cPointId) {
         return crudRepository.findAllByControlPointId(cPointId, SORT_SERCODE_LNAME_FNAME_SNAME_TYPE);
     }
 }

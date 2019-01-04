@@ -12,6 +12,17 @@ import java.util.List;
  */
 public interface DeptScheduleRepository extends TypicalRepository<DeptSchedule> {
     /**
+     * Saves or updates a given object with inserted parameter.
+     *
+     * @param schedule the object to save or update.
+     * @param deptId   department's id, the department will be inserted to the object's
+     *                 {@code department} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    DeptSchedule save(DeptSchedule schedule, int deptId);
+
+    /**
      * Returns the department's schedule by department {@code id}.
      *
      * @param deptId the department's id.

@@ -21,15 +21,6 @@ import javax.validation.constraints.NotNull;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PointPermit extends AbstractId {
     /**
-     * The certain permitted action at the certain control point.
-     */
-    @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "pointact_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private PointAction pointAction;
-
-    /**
      * The employee to which the certain permitted action corresponds.
      */
     @NotNull
@@ -37,6 +28,15 @@ public class PointPermit extends AbstractId {
     @JoinColumn(name = "emp_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employee employee;
+
+    /**
+     * The certain permitted action at the certain control point.
+     */
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "pointact_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private PointAction pointAction;
 
     /**
      * Returns the certain point action.

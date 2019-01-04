@@ -5,6 +5,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.PointAction;
 import ru.alvisid.pacs.repository.PointActionRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudActionTypeRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudControlPointRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudPointActionRepository;
 
 import java.util.List;
@@ -31,13 +33,30 @@ public class DataJpaPointActionRepositoryImpl implements PointActionRepository {
     private final CrudPointActionRepository crudRepository;
 
     /**
-     * Constructs a new DataJpaPointActionRepositoryImpl with the specified CrudPointActionRepository.
+     * An interface for control point's repository which extends JpaRepository.
+     */
+    private final CrudControlPointRepository crudControlPointRepository;
+
+    /**
+     * An interface for action's type repository which extends JpaRepository.
+     */
+    private final CrudActionTypeRepository crudActionTypeRepository;
+
+    /**
+     * Constructs a new DataJpaPointActionRepositoryImpl with the specified CrudPointActionRepository,
+     * CrudControlPointRepository and CrudActionTypeRepository.
      *
-     * @param crudRepository the specified CrudPointActionRepository.
+     * @param crudRepository             the specified <em>CrudPointActionRepository</em>.
+     * @param crudControlPointRepository the specified <em>CrudControlPointRepository</em>.
+     * @param crudActionTypeRepository   the specified <em>CrudActionTypeRepository</em>.
      */
     @Autowired
-    public DataJpaPointActionRepositoryImpl(CrudPointActionRepository crudRepository) {
+    public DataJpaPointActionRepositoryImpl(CrudPointActionRepository crudRepository,
+                                            CrudControlPointRepository crudControlPointRepository,
+                                            CrudActionTypeRepository crudActionTypeRepository) {
         this.crudRepository = crudRepository;
+        this.crudControlPointRepository = crudControlPointRepository;
+        this.crudActionTypeRepository = crudActionTypeRepository;
     }
 
     /**
@@ -50,11 +69,29 @@ public class DataJpaPointActionRepositoryImpl implements PointActionRepository {
      */
     @Override
     public PointAction save(PointAction pointAction) {
-        if (pointAction.isNew() || !Objects.isNull(get(pointAction.getId()))){
+        if (pointAction.isNew() || !Objects.isNull(get(pointAction.getId()))) {
             return crudRepository.save(pointAction);
         }
 
         return null;
+    }
+
+    /**
+     * Saves or updates a given object with inserted parameters.
+     *
+     * @param pointAction    the object to save or update.
+     * @param controlPointId the control point's id, the control point will be inserted to the
+     *                       saved object's {@code controlPoint} field.
+     * @param actionTypeId   the control point's id, the control point will be inserted to the
+     *                       saved object's {@code controlPoint} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    @Override
+    public PointAction save(PointAction pointAction, int controlPointId, int actionTypeId) {
+        pointAction.setControlPoint(crudControlPointRepository.getOne(controlPointId));
+        pointAction.setActionType(crudActionTypeRepository.getOne(actionTypeId));
+        return save(pointAction);
     }
 
     /**
@@ -87,7 +124,7 @@ public class DataJpaPointActionRepositoryImpl implements PointActionRepository {
      * @return list of all point's actions.
      */
     @Override
-    public List <PointAction> getAll() {
+    public List<PointAction> getAll() {
         return crudRepository.findAll(SORT_CPOINT_ACTTYPE);
     }
 }

@@ -5,7 +5,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Absence;
 import ru.alvisid.pacs.repository.AbsenceRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudAbsenceReasonRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudAbsenceRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,13 +41,30 @@ public class DataJpaAbsenceRepositoryImpl implements AbsenceRepository {
     private final CrudAbsenceRepository crudRepository;
 
     /**
-     * Constructs a new DataJpaAbsenceRepositoryImpl with the specified CrudAbsenceRepository.
+     * An interface for employee repository which extends JpaRepository.
+     */
+    private final CrudEmployeeRepository crudEmployeeRepository;
+
+    /**
+     * An interface for absence reason repository which extends JpaRepository.
+     */
+    private final CrudAbsenceReasonRepository crudAbsenceReasonRepository;
+
+    /**
+     * Constructs a new DataJpaAbsenceRepositoryImpl with the specified CrudAbsenceRepository,
+     * CrudEmployeeRepository and CrudAbsenceReasonRepository.
      *
-     * @param crudRepository the specified CrudAbsenceRepository.
+     * @param crudRepository              the specified <em>CrudAbsenceRepository</em>.
+     * @param crudEmployeeRepository      the specified <em>CrudEmployeeRepository</em>.
+     * @param crudAbsenceReasonRepository the specified <em>CrudAbsenceReasonRepository</em>.
      */
     @Autowired
-    public DataJpaAbsenceRepositoryImpl(CrudAbsenceRepository crudRepository) {
+    public DataJpaAbsenceRepositoryImpl(CrudAbsenceRepository crudRepository,
+                                        CrudEmployeeRepository crudEmployeeRepository,
+                                        CrudAbsenceReasonRepository crudAbsenceReasonRepository) {
         this.crudRepository = crudRepository;
+        this.crudEmployeeRepository = crudEmployeeRepository;
+        this.crudAbsenceReasonRepository = crudAbsenceReasonRepository;
     }
 
     /**
@@ -63,6 +82,24 @@ public class DataJpaAbsenceRepositoryImpl implements AbsenceRepository {
         }
 
         return null;
+    }
+
+    /**
+     * Saves or updates a given object with inserted parameters.
+     *
+     * @param absence         the object to save or update with inserted parameters.
+     * @param empId           the employee's id, the employee will be inserted to the
+     *                        saved object's {@code employee} field.
+     * @param absenceReasonId absence reason's id, the absence reason will be
+     *                        inserted to the saved object's {@code absenceReason} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    @Override
+    public Absence save(Absence absence, int empId, int absenceReasonId) {
+        absence.setAbsenceReason(crudAbsenceReasonRepository.getOne(absenceReasonId));
+        absence.setEmployee(crudEmployeeRepository.getOne(empId));
+        return save(absence);
     }
 
     /**
@@ -98,7 +135,7 @@ public class DataJpaAbsenceRepositoryImpl implements AbsenceRepository {
      * @see DataJpaAbsenceRepositoryImpl#getAllByEmplDeptId(int)
      */
     @Override
-    public List <Absence> getAll() {
+    public List<Absence> getAll() {
         return crudRepository.findAll(SORT_LNAME_FNAME_SNAME_STARTDATE);
     }
 
@@ -113,7 +150,7 @@ public class DataJpaAbsenceRepositoryImpl implements AbsenceRepository {
      * @see DataJpaAbsenceRepositoryImpl#getAllByEmplDeptId(int)
      */
     @Override
-    public List <Absence> getAllByEmplId(int id) {
+    public List<Absence> getAllByEmplId(int id) {
         return crudRepository.findAllByEmployeeId(id, SORT_STARTDATE);
     }
 
@@ -128,7 +165,7 @@ public class DataJpaAbsenceRepositoryImpl implements AbsenceRepository {
      * @see DataJpaAbsenceRepositoryImpl#getAllByEmplId(int)
      */
     @Override
-    public List <Absence> getAllByEmplDeptId(int id) {
+    public List<Absence> getAllByEmplDeptId(int id) {
         return crudRepository.findAllByEmployeeDepartmentId(id, SORT_LNAME_FNAME_SNAME_STARTDATE);
     }
 }

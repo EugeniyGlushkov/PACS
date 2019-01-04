@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.DeptSchedule;
 import ru.alvisid.pacs.repository.DeptScheduleRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudDepartmentRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudDeptScheduleRepository;
 
 import java.util.List;
@@ -32,13 +33,22 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
     private final CrudDeptScheduleRepository crudRepository;
 
     /**
-     * Constructs a new DataJpaDeptScheduleRepositoryImpl with the specified CrudDeptScheduleRepository.
+     * An interface for department repository which extends JpaRepository.
+     */
+    private final CrudDepartmentRepository crudDepartmentRepository;
+
+    /**
+     * Constructs a new DataJpaDeptScheduleRepositoryImpl with the specified CrudDeptScheduleRepository
+     * and CrudDepartmentRepository.
      *
-     * @param crudRepository the specified CrudDeptScheduleRepository.
+     * @param crudRepository           the specified <em>CrudDeptScheduleRepository</em>.
+     * @param crudDepartmentRepository the specified <em>CrudDepartmentRepository</em>.
      */
     @Autowired
-    public DataJpaDeptScheduleRepositoryImpl(CrudDeptScheduleRepository crudRepository) {
+    public DataJpaDeptScheduleRepositoryImpl(CrudDeptScheduleRepository crudRepository,
+                                             CrudDepartmentRepository crudDepartmentRepository) {
         this.crudRepository = crudRepository;
+        this.crudDepartmentRepository = crudDepartmentRepository;
     }
 
     /**
@@ -56,6 +66,21 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
         }
 
         return null;
+    }
+
+    /**
+     * Saves or updates a given object with inserted parameter.
+     *
+     * @param schedule the object to save or update.
+     * @param deptId   department's id, the department will be inserted to the object's
+     *                 {@code department} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    @Override
+    public DeptSchedule save(DeptSchedule schedule, int deptId) {
+        schedule.setDepartment(crudDepartmentRepository.getOne(deptId));
+        return crudRepository.save(schedule);
     }
 
     /**
@@ -88,7 +113,7 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
      * @return the list of all department schedules.
      */
     @Override
-    public List <DeptSchedule> getAll() {
+    public List<DeptSchedule> getAll() {
         return crudRepository.findAll(SORT_DEPTID);
     }
 

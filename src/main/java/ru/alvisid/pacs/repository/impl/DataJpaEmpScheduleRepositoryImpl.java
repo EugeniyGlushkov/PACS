@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.EmpSchedule;
 import ru.alvisid.pacs.repository.EmpScheduleRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudEmpScheduleRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
 
 import java.util.List;
 import java.util.Objects;
@@ -33,13 +34,22 @@ public class DataJpaEmpScheduleRepositoryImpl implements EmpScheduleRepository {
     private final CrudEmpScheduleRepository crudRepository;
 
     /**
-     * Constructs a new DataJpaEmpScheduleRepositoryImpl with the specified CrudEmpScheduleRepository.
+     * An interface for employee repository which extends JpaRepository.
+     */
+    private final CrudEmployeeRepository crudEmployeeRepository;
+
+    /**
+     * Constructs a new DataJpaEmpScheduleRepositoryImpl with the specified CrudEmpScheduleRepository
+     * and CrudEmployeeRepository.
      *
-     * @param crudRepository the specified CrudEmpScheduleRepository.
+     * @param crudRepository         the specified <em>CrudEmpScheduleRepository</em>.
+     * @param crudEmployeeRepository the specified <em>CrudEmployeeRepository</em>.
      */
     @Autowired
-    public DataJpaEmpScheduleRepositoryImpl(CrudEmpScheduleRepository crudRepository) {
+    public DataJpaEmpScheduleRepositoryImpl(CrudEmpScheduleRepository crudRepository,
+                                            CrudEmployeeRepository crudEmployeeRepository) {
         this.crudRepository = crudRepository;
+        this.crudEmployeeRepository = crudEmployeeRepository;
     }
 
     /**
@@ -56,6 +66,20 @@ public class DataJpaEmpScheduleRepositoryImpl implements EmpScheduleRepository {
             return crudRepository.save(empSchedule);
         }
 
+        return null;
+    }
+
+    /**
+     * Saves or updates a given object with inserted parameter.
+     *
+     * @param empSchedule the object to save or update.
+     * @param empId       the employee's id, the employee will be inserted to the
+     *                    saved object's {@code employee} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    @Override
+    public EmpSchedule save(EmpSchedule empSchedule, int empId) {
         return null;
     }
 
@@ -89,7 +113,7 @@ public class DataJpaEmpScheduleRepositoryImpl implements EmpScheduleRepository {
      * @return the list of all employee schedules.
      */
     @Override
-    public List <EmpSchedule> getAll() {
+    public List<EmpSchedule> getAll() {
         return crudRepository.findAll(SORT_LNAME_FNAME_SNAME);
     }
 

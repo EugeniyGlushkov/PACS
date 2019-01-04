@@ -13,6 +13,19 @@ import java.util.List;
  */
 public interface ActionRepository extends TypicalRepository<Action> {
     /**
+     * Saves or updates a given object with inserted parameters.
+     *
+     * @param action        the object to save or update.
+     * @param empId         the employee's id, the employee will be inserted to the
+     *                      saved object's {@code employee} field.
+     * @param pointActionId the point action's id, the point action will be inserted to the
+     *                      saved object's {@code pointAction} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    Action save(Action action, int empId, int pointActionId);
+
+    /**
      * Returns the list with all actions by employee's id.
      *
      * @param id the employee's id.

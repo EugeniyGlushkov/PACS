@@ -31,7 +31,7 @@ public class Action extends AbstractId {
     private Employee employee;
 
     /**
-     * The point's action wich was done.
+     * The point's action which was done.
      */
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)

@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model.abstractions;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.Employee;
 
 import javax.persistence.*;
@@ -17,6 +19,7 @@ public abstract class AbstractHasEmpEntity extends AbstractEntity {
     @NotNull
     @JoinColumn(name = "emp_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     protected Employee employee;
 
     /**

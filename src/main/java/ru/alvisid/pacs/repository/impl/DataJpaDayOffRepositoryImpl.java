@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.DayOff;
 import ru.alvisid.pacs.repository.DayOffRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudDayOffRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudDepartmentRepository;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,13 +31,22 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
     private final CrudDayOffRepository crudRepository;
 
     /**
-     * Constructs a new DataJpaDayOffRepositoryImpl with the specified CrudDayOffRepository.
+     * An interface for department repository which extends JpaRepository.
+     */
+    private final CrudDepartmentRepository crudDepartmentRepository;
+
+    /**
+     * Constructs a new DataJpaDayOffRepositoryImpl with the specified CrudDayOffRepository
+     * and CrudDepartmentRepository.
      *
-     * @param crudRepository the specified CrudDayOffRepository.
+     * @param crudRepository           the specified <em>CrudDayOffRepository</em>.
+     * @param crudDepartmentRepository the specified <em>CrudDepartmentRepository</em>.
      */
     @Autowired
-    public DataJpaDayOffRepositoryImpl(CrudDayOffRepository crudRepository) {
+    public DataJpaDayOffRepositoryImpl(CrudDayOffRepository crudRepository,
+                                       CrudDepartmentRepository crudDepartmentRepository) {
         this.crudRepository = crudRepository;
+        this.crudDepartmentRepository = crudDepartmentRepository;
     }
 
     /**
@@ -54,6 +64,21 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
         }
 
         return null;
+    }
+
+    /**
+     * Saves or updates a given object with inserted parameter.
+     *
+     * @param dayOff the object to save or update.
+     * @param deptId department's id, the department will be inserted to the object's
+     *               {@code department} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    @Override
+    public DayOff save(DayOff dayOff, int deptId) {
+        dayOff.setDepartment(crudDepartmentRepository.getOne(deptId));
+        return save(dayOff);
     }
 
     /**
@@ -86,7 +111,7 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
      * @return list of all days off.
      */
     @Override
-    public List <DayOff> getAll() {
+    public List<DayOff> getAll() {
         return null;
     }
 }

@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Edit;
+import ru.alvisid.pacs.model.EditType;
 import ru.alvisid.pacs.repository.EditRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudEditRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,13 +43,22 @@ public class DataJpaEditRepositoryImpl implements EditRepository {
     private final CrudEditRepository crudRepository;
 
     /**
-     * Constructs a new DataJpaEditRepositoryImpl with the specified CrudEditRepository.
+     * An interface for employee repository which extends JpaRepository.
+     */
+    private final CrudEmployeeRepository crudEmployeeRepository;
+
+    /**
+     * Constructs a new DataJpaEditRepositoryImpl with the specified CrudEditRepository
+     * and CrudEmployeeRepository.
      *
-     * @param crudRepository the specified CrudEditRepository.
+     * @param crudRepository         the specified <em>CrudEditRepository</em>.
+     * @param crudEmployeeRepository the specified <em>CrudEmployeeRepository</em>.
      */
     @Autowired
-    public DataJpaEditRepositoryImpl(CrudEditRepository crudRepository) {
+    public DataJpaEditRepositoryImpl(CrudEditRepository crudRepository,
+                                     CrudEmployeeRepository crudEmployeeRepository) {
         this.crudRepository = crudRepository;
+        this.crudEmployeeRepository = crudEmployeeRepository;
     }
 
     /**
@@ -65,6 +76,24 @@ public class DataJpaEditRepositoryImpl implements EditRepository {
         }
 
         return null;
+    }
+
+    /**
+     * Saves or updates a given object with inserted parameters.
+     *
+     * @param edit     the object to save or update.
+     * @param empId    the employee's id, the employee will be inserted to the
+     *                 saved object's {@code employee} field.
+     * @param editType the edit type's string, the edit type will be inserted to the
+     *                 saved object's {@code editType} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    @Override
+    public Edit save(Edit edit, int empId, String editType) {
+        edit.setEmployee(crudEmployeeRepository.getOne(empId));
+        edit.setEditType(EditType.valueOf(editType));
+        return save(edit);
     }
 
     /**

@@ -5,7 +5,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Employee;
 import ru.alvisid.pacs.repository.EmployeeRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudDepartmentRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudPositionRepository;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,13 +34,30 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
     private final CrudEmployeeRepository crudRepository;
 
     /**
-     * Constructs a new DataJpaEmployeeRepositoryImpl with the specified CrudEmployeeRepository.
+     * An interface for department repository which extends JpaRepository.
+     */
+    private final CrudDepartmentRepository crudDepartmentRepository;
+
+    /**
+     * An interface for position repository which extends JpaRepository.
+     */
+    private final CrudPositionRepository crudPositionRepository;
+
+    /**
+     * Constructs a new DataJpaEmployeeRepositoryImpl with the specified CrudEmployeeRepository,
+     * CrudDepartmentRepository and CrudPositionRepository.
      *
-     * @param crudRepository the specified CrudEmployeeRepository.
+     * @param crudRepository           the specified <em>CrudEmployeeRepository</em>.
+     * @param crudDepartmentRepository the specified <em>CrudDepartmentRepository</em>.
+     * @param crudPositionRepository   the specified <em>CrudPositionRepository</em>.
      */
     @Autowired
-    public DataJpaEmployeeRepositoryImpl(CrudEmployeeRepository crudRepository) {
+    public DataJpaEmployeeRepositoryImpl(CrudEmployeeRepository crudRepository,
+                                         CrudDepartmentRepository crudDepartmentRepository,
+                                         CrudPositionRepository crudPositionRepository) {
         this.crudRepository = crudRepository;
+        this.crudDepartmentRepository = crudDepartmentRepository;
+        this.crudPositionRepository = crudPositionRepository;
     }
 
     /**
@@ -56,6 +75,24 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
         }
 
         return null;
+    }
+
+    /**
+     * Saves or updates a given object with inserted parameters.
+     *
+     * @param employee   the object to save or update.
+     * @param deptId     department's id, the department will be inserted to the object's
+     *                   {@code department} field.
+     * @param positionId position's id, the position will be inserted to the object's
+     *                   {@code position} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    @Override
+    public Employee save(Employee employee, int deptId, int positionId) {
+        employee.setDepartment(crudDepartmentRepository.getOne(deptId));
+        employee.setPosition(crudPositionRepository.getOne(positionId));
+        return save(employee);
     }
 
     /**
@@ -88,7 +125,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
-    public List <Employee> getAll() {
+    public List<Employee> getAll() {
         return crudRepository.findAll(SORT_LNAME_FNAME_SNAME);
     }
 
@@ -100,7 +137,7 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
      * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
      */
     @Override
-    public List <Employee> getAllByDeptId(int deptId) {
+    public List<Employee> getAllByDeptId(int deptId) {
         return crudRepository.findAllByDeptId(deptId, SORT_LNAME_FNAME_SNAME);
     }
 

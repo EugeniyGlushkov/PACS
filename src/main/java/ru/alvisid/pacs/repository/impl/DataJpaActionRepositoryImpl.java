@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.Action;
 import ru.alvisid.pacs.repository.ActionRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudActionRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
+import ru.alvisid.pacs.repository.datajpa.CrudPointActionRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,13 +43,30 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
     private final CrudActionRepository crudRepository;
 
     /**
-     * Constructs a new DataJpaActionRepositoryImpl with the specified CrudActionRepository.
+     * An interface for employee repository which extends JpaRepository.
+     */
+    private final CrudEmployeeRepository crudEmployeeRepository;
+
+    /**
+     * An interface for point action repository which extends JpaRepository.
+     */
+    private final CrudPointActionRepository crudPointActionRepository;
+
+    /**
+     * Constructs a new DataJpaActionRepositoryImpl with the specified CrudActionRepository
+     * CrudEmployeeRepository and CrudPointActionRepository.
      *
-     * @param crudRepository the specified CrudActionRepository.
+     * @param crudRepository            the specified <em>CrudActionRepository</em>.
+     * @param crudEmployeeRepository    the specified <em>CrudEmployeeRepository</em>.
+     * @param crudPointActionRepository the specified <em>CrudEmployeeRepository</em>.
      */
     @Autowired
-    public DataJpaActionRepositoryImpl(CrudActionRepository crudRepository) {
+    public DataJpaActionRepositoryImpl(CrudActionRepository crudRepository,
+                                       CrudEmployeeRepository crudEmployeeRepository,
+                                       CrudPointActionRepository crudPointActionRepository) {
         this.crudRepository = crudRepository;
+        this.crudEmployeeRepository = crudEmployeeRepository;
+        this.crudPointActionRepository = crudPointActionRepository;
     }
 
     /**
@@ -65,6 +84,24 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
         }
 
         return null;
+    }
+
+    /**
+     * Saves or updates a given object with inserted parameters.
+     *
+     * @param action        the object to save or update.
+     * @param empId         the employee's id, the employee will be inserted to the
+     *                      saved object's {@code employee} field.
+     * @param pointActionId the point action's id, the point action will be inserted to the
+     *                      saved object's {@code pointAction} field.
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
+     */
+    @Override
+    public Action save(Action action, int empId, int pointActionId) {
+        action.setEmployee(crudEmployeeRepository.getOne(empId));
+        action.setPointAction(crudPointActionRepository.getOne(pointActionId));
+        return save(action);
     }
 
     /**
