@@ -1,6 +1,5 @@
 package ru.alvisid.pacs.service;
 
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.abstractions.HasId;
 import ru.alvisid.pacs.repository.TypicalRepository;
@@ -18,8 +17,8 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public abstract class AbstractService<T extends TypicalRepository <S>, S extends HasId>
-        implements TypicalService <S> {
+public abstract class AbstractService<T extends TypicalRepository<S>, S extends HasId>
+        implements TypicalService<S> {
     /**
      * The specific repository implementation
      * which corresponds to service's object: type {@code S}.
@@ -35,6 +34,11 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
     @Override
     public S create(S obj) {
         Assert.notNull(obj, obj.getClass().getSimpleName() + " must not be null");
+
+        if (!obj.isNew()) {
+            throw new IllegalArgumentException(obj.getClass().getSimpleName() + " must be new (has id = null)!");
+        }
+
         return repository.save(obj);
     }
 
@@ -79,7 +83,7 @@ public abstract class AbstractService<T extends TypicalRepository <S>, S extends
      * @return the list with all objects.
      */
     @Override
-    public List <S> getAll() {
+    public List<S> getAll() {
         return repository.getAll();
     }
 

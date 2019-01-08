@@ -22,5 +22,6 @@
     </cache-template>
 
     <cache alias="departments" uses-template="singleNonExpiryCache"/>
+    <cache alias="deptSchedule" uses-template="singleNonExpiryCache"/>
 </config>
 

@@ -15,19 +15,6 @@ import static testdata.DeptScheduleTestData.*;
  */
 public class DepartmentTestData extends AbstractTestData <Department> {
     /**
-     * Constructs new {@code DepartmentTestData} and sets
-     * {@code NOT_FOUND_ID} field,
-     * {@code IGNORING_FIELDS} field
-     * in the superclass.
-     *
-     * @see AbstractTestData#NOT_FOUND_ID
-     * @see AbstractTestData#IGNORING_FIELDS
-     */
-    public DepartmentTestData() {
-        super("weekEnds", "deptSchedule");
-    }
-
-    /**
      * Collection with weekend's days.
      */
     public static final List<WeekDay>
@@ -69,7 +56,7 @@ public class DepartmentTestData extends AbstractTestData <Department> {
      * New {@code Department} with id-null.
      */
     public static final Department NEW_DEPARTMENT =
-            new Department(null, "Новый департамент", "Департамент для тестов");
+            new Department("Новый департамент", "Департамент для тестов");
 
     /**
      * Returns a new {@code Department} from the test data.
@@ -114,12 +101,12 @@ public class DepartmentTestData extends AbstractTestData <Department> {
     /**
      * Returns the all {@code Departments} from the test data with the specified created object.
      *
-     * @param expectedCreatedDept the specified created {@code Department}.
+     * @param expectedCreatedObj the specified created {@code Department}.
      * @return the all {@code Departments} from test data with the specified created {@code Department}.
      */
     @Override
-    public Department[] getCreatedArray(Department expectedCreatedDept) {
-        return new Department[]{DEPARTMENT_3, expectedCreatedDept, DEPARTMENT_1, DEPARTMENT_2};
+    public Department[] getCreatedArray(Department expectedCreatedObj) {
+        return new Department[]{DEPARTMENT_3, expectedCreatedObj, DEPARTMENT_1, DEPARTMENT_2};
     }
 
     /**
@@ -140,5 +127,16 @@ public class DepartmentTestData extends AbstractTestData <Department> {
     @Override
     public Department[] getAllArray() {
         return new Department[]{DEPARTMENT_3, DEPARTMENT_1, DEPARTMENT_2};
+    }
+
+    /**
+     * Constructs new {@code DepartmentTestData} and sets
+     * {@code IGNORING_FIELDS} field
+     * in the superclass.
+     *
+     * @see AbstractTestData#IGNORING_FIELDS
+     */
+    public DepartmentTestData() {
+        super("weekEnds", "deptSchedule");
     }
 }

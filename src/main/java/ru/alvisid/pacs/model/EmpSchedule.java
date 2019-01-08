@@ -53,8 +53,9 @@ public class EmpSchedule extends AbstractSchedule {
      * Initializes a newly created <b>EmpSchedule</b> object with null employee value
      * and null fields of the superclass.
      *
-     * @see EmpSchedule#EmpSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Employee)
-     * @see EmpSchedule#EmpSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Employee)
+     * @see EmpSchedule#EmpSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see EmpSchedule#EmpSchedule(Employee, LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see EmpSchedule#EmpSchedule(Integer, Employee, LocalTime, LocalTime, LocalTime, LocalTime)
      * @see EmpSchedule#EmpSchedule(EmpSchedule)
      */
     public EmpSchedule() {
@@ -62,23 +63,42 @@ public class EmpSchedule extends AbstractSchedule {
 
     /**
      * Constructs a <b>EmpSchedule</b> object with specified start work time, end work time
-     * start lunch time, end lunch time
-     * employee values and null id value.
+     * start lunch time, end lunch time values,
+     * null employee and id values.
      *
      * @param startWorkTime  the start work time of the schedule.
      * @param endWorkTime    the end work time of the schedule.
      * @param startLunchTime the start lunch time of the schedule
      * @param endLunchTime   the end lunch time of the schedule.
-     * @param employee       the employee who has the schedule.
      * @see EmpSchedule#EmpSchedule()
-     * @see EmpSchedule#EmpSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Employee)
+     * @see EmpSchedule#EmpSchedule(Employee, LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see EmpSchedule#EmpSchedule(Integer, Employee, LocalTime, LocalTime, LocalTime, LocalTime)
      * @see EmpSchedule#EmpSchedule(EmpSchedule)
      */
     public EmpSchedule(LocalTime startWorkTime, LocalTime endWorkTime,
-                       LocalTime startLunchTime, LocalTime endLunchTime,
-                       Employee employee) {
-        super(startWorkTime, endWorkTime, startLunchTime, endLunchTime);
-        this.employee = employee;
+                       LocalTime startLunchTime, LocalTime endLunchTime) {
+        this(null, null, startWorkTime, endWorkTime, startLunchTime, endLunchTime);
+    }
+
+    /**
+     * Constructs a <b>EmpSchedule</b> object with specified start work time, end work time
+     * start lunch time, end lunch time
+     * employee values and null id value.
+     *
+     * @param employee       the employee who has the schedule.
+     * @param startWorkTime  the start work time of the schedule.
+     * @param endWorkTime    the end work time of the schedule.
+     * @param startLunchTime the start lunch time of the schedule
+     * @param endLunchTime   the end lunch time of the schedule.
+     * @see EmpSchedule#EmpSchedule()
+     * @see EmpSchedule#EmpSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see EmpSchedule#EmpSchedule(Integer, Employee, LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see EmpSchedule#EmpSchedule(EmpSchedule)
+     */
+    public EmpSchedule(Employee employee,
+                       LocalTime startWorkTime, LocalTime endWorkTime,
+                       LocalTime startLunchTime, LocalTime endLunchTime) {
+        this(null, employee, startWorkTime, endWorkTime, startLunchTime, endLunchTime);
     }
 
     /**
@@ -87,20 +107,21 @@ public class EmpSchedule extends AbstractSchedule {
      * start lunch time, end lunch time
      * and employee values.
      *
-     * @param id             the specifiec id.
+     * @param id             the specific id.
+     * @param employee       the employee who has the schedule.
      * @param startWorkTime  the start work time of the schedule.
      * @param endWorkTime    the end work time of the schedule.
      * @param startLunchTime the start lunch time of the schedule
      * @param endLunchTime   the end lunch time of the schedule.
-     * @param employee       the employee who has the schedule.
      * @see EmpSchedule#EmpSchedule()
-     * @see EmpSchedule#EmpSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Employee)
+     * @see EmpSchedule#EmpSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see EmpSchedule#EmpSchedule(Employee, LocalTime, LocalTime, LocalTime, LocalTime)
      * @see EmpSchedule#EmpSchedule(EmpSchedule)
      */
     public EmpSchedule(Integer id,
+                       Employee employee,
                        LocalTime startWorkTime, LocalTime endWorkTime,
-                       LocalTime startLunchTime, LocalTime endLunchTime,
-                       Employee employee) {
+                       LocalTime startLunchTime, LocalTime endLunchTime) {
         super(id, startWorkTime, endWorkTime, startLunchTime, endLunchTime);
         this.employee = employee;
     }
@@ -111,16 +132,17 @@ public class EmpSchedule extends AbstractSchedule {
      *
      * @param schedule the specified object to copying.
      * @see EmpSchedule#EmpSchedule()
-     * @see EmpSchedule#EmpSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Employee)
-     * @see EmpSchedule#EmpSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Employee)
+     * @see EmpSchedule#EmpSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see EmpSchedule#EmpSchedule(Employee, LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see EmpSchedule#EmpSchedule(Integer, Employee, LocalTime, LocalTime, LocalTime, LocalTime)
      */
     public EmpSchedule(EmpSchedule schedule) {
         this(schedule.getId(),
+                schedule.getEmployee(),
                 schedule.getStartWorkTime(),
                 schedule.getEndWorkTime(),
                 schedule.getStartLunchTime(),
-                schedule.getEndLunchTime(),
-                schedule.getEmployee());
+                schedule.getEndLunchTime());
     }
 
     /**

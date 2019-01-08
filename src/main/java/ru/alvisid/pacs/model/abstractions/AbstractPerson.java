@@ -139,6 +139,7 @@ public abstract class AbstractPerson implements HasId {
      *
      * @return {@code true} if id is null.
      */
+    @Override
     public boolean isNew() {
         return Objects.isNull(id);
     }
@@ -191,7 +192,7 @@ public abstract class AbstractPerson implements HasId {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
 

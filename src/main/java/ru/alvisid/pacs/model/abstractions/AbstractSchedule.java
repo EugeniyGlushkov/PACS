@@ -159,6 +159,7 @@ public abstract class AbstractSchedule implements HasId {
      *
      * @return {@code true} if id is null.
      */
+    @Override
     public boolean isNew() {
         return Objects.isNull(id);
     }
@@ -166,30 +167,9 @@ public abstract class AbstractSchedule implements HasId {
     /**
      * Initializes a newly created object with null fields.
      *
-     * @see AbstractSchedule#AbstractSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
      * @see AbstractSchedule#AbstractSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime)
      */
     public AbstractSchedule() {
-    }
-
-    /**
-     * Constructs <b>AbstractSchedule</b> object with null-id,
-     * and initializes fields with start work time, end work time,
-     * start lunch time and end lunch time.
-     *
-     * @param startWorkTime  the start work time of the schedule.
-     * @param endWorkTime    the end work time of the schedule.
-     * @param startLunchTime the start lunch time of the schedule.
-     * @param endLunchTime   the end lunch time of the schedule.
-     * @see AbstractSchedule#AbstractSchedule()
-     * @see AbstractSchedule#AbstractSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime)
-     */
-    public AbstractSchedule(LocalTime startWorkTime, LocalTime endWorkTime,
-                            LocalTime startLunchTime, LocalTime endLunchTime) {
-        this.startWorkTime = startWorkTime;
-        this.endWorkTime = endWorkTime;
-        this.startLunchTime = startLunchTime;
-        this.endLunchTime = endLunchTime;
     }
 
     /**
@@ -203,7 +183,6 @@ public abstract class AbstractSchedule implements HasId {
      * @param startLunchTime the start lunch time of the schedule.
      * @param endLunchTime   the end lunch time of the schedule.
      * @see AbstractSchedule#AbstractSchedule()
-     * @see AbstractSchedule#AbstractSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
      */
     public AbstractSchedule(Integer id,
                             LocalTime startWorkTime, LocalTime endWorkTime,
@@ -226,7 +205,7 @@ public abstract class AbstractSchedule implements HasId {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
 
@@ -236,7 +215,7 @@ public abstract class AbstractSchedule implements HasId {
 
         AbstractSchedule that = (AbstractSchedule) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        return Objects.isNull(id) ? Objects.isNull(that.id) : id.equals(that.id);
     }
 
     /**

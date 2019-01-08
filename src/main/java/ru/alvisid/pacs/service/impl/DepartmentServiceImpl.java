@@ -9,17 +9,16 @@ import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.DepartmentService;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
-import java.util.List;
-
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 
 /**
  * Implementation of the {@code DepartmentService} interface.
- * Extends <b>AbstractService</b>'s functionality.
+ * Extends <b>AbstractService</b> and <b>AbstractCachedService</b> functionality.
  *
  * @author Glushkov Evgeniy
  * @version 1.0
  * @see DepartmentService
+ * @see AbstractCachedService
  * @see AbstractService
  */
 @Service

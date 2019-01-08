@@ -13,8 +13,15 @@ import static util.TestUtil.assertMatch;
 
 /**
  * Department's specific tests.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ * @see AbstractServiceTest
  */
 public class DepartmentServiceTest extends AbstractServiceTest<Department, DepartmentService> {
+    /**
+     * Constructs new <em>DepartmentServiceTest</em> object.
+     */
     public DepartmentServiceTest() {
         super(new DepartmentTestData());
     }
@@ -59,9 +66,7 @@ public class DepartmentServiceTest extends AbstractServiceTest<Department, Depar
     @Test
     public void getWithWeekEndsAndSched() {
         Department expectedDepartment = testData.getGotten();
-        Department //actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
-        actualDepartment = service.get(expectedDepartment.getId());
-        actualDepartment = service.get(expectedDepartment.getId());
+        Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
         assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
         assertMatch(actualDepartment.getWeekEnds(), expectedDepartment.getWeekEnds());
         assertMatch(actualDepartment.getDeptSchedule(), expectedDepartment.getDeptSchedule());

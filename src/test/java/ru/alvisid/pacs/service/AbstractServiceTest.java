@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.alvisid.pacs.model.abstractions.AbstractId;
+import ru.alvisid.pacs.model.abstractions.HasId;
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.model.enumActivate.MappedEnum;
 import ru.alvisid.pacs.repository.loader.EnumLoader;
@@ -54,7 +54,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.*;
 @RunWith(SpringRunner.class)
 @ActiveProfiles(resolver = ActiveDbProfilesResolver.class)
 @Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
-public abstract class AbstractServiceTest<T extends AbstractId, S extends TypicalService <T>> {
+public abstract class AbstractServiceTest<T extends HasId, S extends TypicalService <T>> {
     /**
      * Service for testing.
      */
@@ -161,7 +161,6 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
                     Field field = enumClass.getClass().getDeclaredField("enumConstants");
                     field.setAccessible(true);
                     field.set(enumClass, newValues);
-                    System.out.println(enumClass.getEnumConstants().length);
                 }
             }
 
@@ -195,8 +194,20 @@ public abstract class AbstractServiceTest<T extends AbstractId, S extends Typica
     }
 
     /**
+     * Checks the {@code IllegalArgumentException} and exception's message
+     * when old (id is not null) create trying.
+     */
+    @Test
+    public void createOldObject() {
+        T oldObj = testData.getGotten();
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(oldObj.getClass().getSimpleName() + " must be new (has id = null)!");
+        service.create(oldObj);
+    }
+
+    /**
      * Checks a matching the actual updated value from DB to the expected updated value from {@code testData}:
-     * update an exiting object from DB;
+     * update an exiting object in the DB;
      * checks matching the actual list of all objects to the expected list of all objects from {@code testData}.
      */
     @Test

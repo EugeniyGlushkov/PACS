@@ -20,4 +20,11 @@ public interface HasId {
      * @param id the specifiec id.
      */
     void setId(Integer id);
+
+    /**
+     * Returns {@code true} if id is null.
+     *
+     * @return {@code true} if id is null.
+     */
+    public boolean isNew();
 }

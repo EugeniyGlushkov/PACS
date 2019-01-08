@@ -25,7 +25,7 @@ public class DeptSchedule extends AbstractSchedule {
      * The specific department.
      * Must be non null.
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dep_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
@@ -52,8 +52,9 @@ public class DeptSchedule extends AbstractSchedule {
     /**
      * Initializes a newly created <b>DeptSchedule</b> object with null department value and null fiels of the superclass.
      *
-     * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Department)
-     * @see DeptSchedule#DeptSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Department)
+     * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see DeptSchedule#DeptSchedule(Department, LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see DeptSchedule#DeptSchedule(Integer, Department, LocalTime, LocalTime, LocalTime, LocalTime)
      * @see DeptSchedule#DeptSchedule(DeptSchedule)
      */
     public DeptSchedule() {
@@ -61,23 +62,44 @@ public class DeptSchedule extends AbstractSchedule {
 
     /**
      * Constructs a <b>DeptSchedule</b> object with specified start work time, end work time
-     * start lunch time, end lunch time
-     * department values and null id value.
+     * start lunch time, end lunch time values,
+     * null id and department values.
      *
      * @param startWorkTime  the start work time of the schedule.
      * @param endWorkTime    the end work time of the schedule.
      * @param startLunchTime the start lunch time of the schedule
      * @param endLunchTime   the end lunch time of the schedule.
-     * @param department     the department who has the schedule.
      * @see DeptSchedule#DeptSchedule()
-     * @see DeptSchedule#DeptSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Department)
+     * @see DeptSchedule#DeptSchedule(Department, LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see DeptSchedule#DeptSchedule(Integer, Department, LocalTime, LocalTime, LocalTime, LocalTime)
      * @see DeptSchedule#DeptSchedule(DeptSchedule)
      */
     public DeptSchedule(LocalTime startWorkTime, LocalTime endWorkTime,
-                        LocalTime startLunchTime, LocalTime endLunchTime,
-                        Department department) {
-        super(startWorkTime, endWorkTime, startLunchTime, endLunchTime);
-        this.department = department;
+                        LocalTime startLunchTime, LocalTime endLunchTime) {
+
+        this(null, null, startWorkTime, endWorkTime, startLunchTime, endLunchTime);
+    }
+
+    /**
+     * Constructs a <b>DeptSchedule</b> object with specified start work time, end work time
+     * start lunch time, end lunch time
+     * department values and null id value.
+     *
+     * @param department     the department who has the schedule.
+     * @param startWorkTime  the start work time of the schedule.
+     * @param endWorkTime    the end work time of the schedule.
+     * @param startLunchTime the start lunch time of the schedule
+     * @param endLunchTime   the end lunch time of the schedule.
+     * @see DeptSchedule#DeptSchedule()
+     * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see DeptSchedule#DeptSchedule(Integer, Department, LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see DeptSchedule#DeptSchedule(DeptSchedule)
+     */
+    public DeptSchedule(Department department,
+                        LocalTime startWorkTime, LocalTime endWorkTime,
+                        LocalTime startLunchTime, LocalTime endLunchTime) {
+
+        this(null, department, startWorkTime, endWorkTime, startLunchTime, endLunchTime);
     }
 
     /**
@@ -86,20 +108,21 @@ public class DeptSchedule extends AbstractSchedule {
      * start lunch time, end lunch time
      * and department values.
      *
-     * @param id             the specifiec id.
+     * @param id             the specific id.
+     * @param department     the department who has the schedule.
      * @param startWorkTime  the start work time of the schedule.
      * @param endWorkTime    the end work time of the schedule.
      * @param startLunchTime the start lunch time of the schedule
      * @param endLunchTime   the end lunch time of the schedule.
-     * @param department     the department who has the schedule.
      * @see DeptSchedule#DeptSchedule()
-     * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Department)
+     * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see DeptSchedule#DeptSchedule(Department, LocalTime, LocalTime, LocalTime, LocalTime)
      * @see DeptSchedule#DeptSchedule(DeptSchedule)
      */
     public DeptSchedule(Integer id,
+                        Department department,
                         LocalTime startWorkTime, LocalTime endWorkTime,
-                        LocalTime startLunchTime, LocalTime endLunchTime,
-                        Department department) {
+                        LocalTime startLunchTime, LocalTime endLunchTime) {
         super(id, startWorkTime, endWorkTime, startLunchTime, endLunchTime);
         this.department = department;
     }
@@ -110,16 +133,17 @@ public class DeptSchedule extends AbstractSchedule {
      *
      * @param schedule the specified object to copying.
      * @see DeptSchedule#DeptSchedule()
-     * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime, Department)
-     * @see DeptSchedule#DeptSchedule(Integer, LocalTime, LocalTime, LocalTime, LocalTime, Department)
+     * @see DeptSchedule#DeptSchedule(LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see DeptSchedule#DeptSchedule(Department, LocalTime, LocalTime, LocalTime, LocalTime)
+     * @see DeptSchedule#DeptSchedule(Integer, Department, LocalTime, LocalTime, LocalTime, LocalTime)
      */
     public DeptSchedule(DeptSchedule schedule) {
         this(schedule.getId(),
+                schedule.getDepartment(),
                 schedule.getStartWorkTime(),
                 schedule.getEndWorkTime(),
                 schedule.getStartLunchTime(),
-                schedule.getEndLunchTime(),
-                schedule.getDepartment());
+                schedule.getEndLunchTime());
     }
 
     /**

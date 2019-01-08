@@ -12,8 +12,6 @@ import ru.alvisid.pacs.repository.datajpa.CrudDeptScheduleRepository;
 import java.util.List;
 import java.util.Objects;
 
-import static ru.alvisid.pacs.util.ValidationUtil.*;
-
 /**
  * DataJpa implementation of the DeptScheduleRepository.
  *
@@ -80,7 +78,7 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
     @Override
     public DeptSchedule save(DeptSchedule schedule, int deptId) {
         schedule.setDepartment(crudDepartmentRepository.getOne(deptId));
-        return crudRepository.save(schedule);
+        return save(schedule);
     }
 
     /**
