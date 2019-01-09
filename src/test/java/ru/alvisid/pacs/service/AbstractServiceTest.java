@@ -17,6 +17,7 @@ import ru.alvisid.pacs.model.abstractions.HasId;
 import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
 import ru.alvisid.pacs.model.enumActivate.MappedEnum;
 import ru.alvisid.pacs.repository.loader.EnumLoader;
+import ru.alvisid.pacs.repository.util.JpaUtil;
 import ru.alvisid.pacs.util.cache.Cached;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import ru.alvisid.pacs.util.profileResolver.ActiveDbProfilesResolver;
@@ -54,7 +55,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.*;
 @RunWith(SpringRunner.class)
 @ActiveProfiles(resolver = ActiveDbProfilesResolver.class)
 @Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
-public abstract class AbstractServiceTest<T extends HasId, S extends TypicalService <T>> {
+public abstract class AbstractServiceTest<T extends HasId, S extends TypicalService<T>> {
     /**
      * Service for testing.
      */
@@ -63,7 +64,7 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
     /**
      * The keeper of the test data.
      */
-    protected AbstractTestData <T> testData;
+    protected AbstractTestData<T> testData;
 
     static {
         // needed only for java.util.logging (postgres driver)
@@ -119,11 +120,20 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
     private CacheManager cacheManager;
 
     /**
+     * Current {@code JpaUtil} object.
+     */
+    @Autowired
+    private JpaUtil jpaUtil;
+
+    /**
      * Executes before every test,
-     * clears cache if {@code service} is {@code Cached}
-     * and activate enum's dictionaries.
+     * clears cache if {@code service} is {@code Cached},
+     * clears 2nd level Hibernate cache
+     * and activate enum's dictionaries if enums is not activated.
      *
      * @see Cached
+     * @see JpaUtil#clear2ndLevelHibernateCache()
+     * @see EnumLoader
      */
     @Rule
     public ExternalResource beforeRule = new ExternalResource() {
@@ -133,40 +143,13 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
                 cacheManager.getCache(((Cached) service).getCacheAlias()).clear();
             }
 
-            /*Sets enumConstants field in the enum's classes to the start condition
-            because enum array size not equals number of dictionary members from DB.
-            zero-value from enum array is null in the updated enum, and the array has
-            n+1 element.*/
-            if (enumsIsUpdated) {
-                //Get all mapped entity types.
-                Set <EntityType <?>> entities = entityManager.getMetamodel().getEntities();
+            jpaUtil.clear2ndLevelHibernateCache();
 
-                //Get all mapped classes.
-                List <?> entityClasses = entities.stream()
-                        .map(EntityType::getJavaType)
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toList());
-
-                for (Object obj : entityClasses) {
-                    if (!AbstractDictionary.class.isAssignableFrom((Class <AbstractDictionary>) obj) ||
-                            !((Class) obj).isAnnotationPresent(MappedEnum.class)) {
-                        continue;
-                    }
-
-                    //Get MappedEnum object of the current entity.
-                    MappedEnum mappedEnum = ((Class <?>) obj).getAnnotation(MappedEnum.class);
-                    Class <? extends Enum> enumClass = mappedEnum.enumClass();
-                    Enum[] oldValues = enumClass.getEnumConstants();
-                    Enum[] newValues = Arrays.copyOfRange(oldValues, 1, oldValues.length);
-                    Field field = enumClass.getClass().getDeclaredField("enumConstants");
-                    field.setAccessible(true);
-                    field.set(enumClass, newValues);
-                }
+            if (!enumsIsUpdated) {
+                EnumLoader enumLoader = new EnumLoader(entityManager);
+                enumLoader.init();
+                enumsIsUpdated = true;
             }
-
-            EnumLoader enumLoader = new EnumLoader(entityManager);
-            enumLoader.init();
-            enumsIsUpdated = true;
         }
     };
 
@@ -176,7 +159,7 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
      *
      * @param testData the specified value of the TestData.
      */
-    public AbstractServiceTest(AbstractTestData <T> testData) {
+    public AbstractServiceTest(AbstractTestData<T> testData) {
         this.testData = testData;
     }
 
@@ -278,7 +261,7 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
      */
     @Test
     public void getAll() {
-        List <T> actualAllObjects = service.getAll();
+        List<T> actualAllObjects = service.getAll();
         assertMatch(testData.IGNORING_FIELDS, actualAllObjects, testData.getAllArray());
     }
 
@@ -289,7 +272,7 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
      * @param exceptionClass the expected exception class.
      * @param <T>            the type of the expected exception.
      */
-    public <T extends Throwable> void validateRootCause(Runnable runnable, Class <T> exceptionClass) {
+    public <T extends Throwable> void validateRootCause(Runnable runnable, Class<T> exceptionClass) {
         try {
             runnable.run();
             Assert.fail("Expected: " + exceptionClass.getName());
