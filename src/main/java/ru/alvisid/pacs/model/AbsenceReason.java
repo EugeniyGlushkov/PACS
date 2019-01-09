@@ -1,5 +1,7 @@
 package ru.alvisid.pacs.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "absence_reasons")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class AbsenceReason extends AbstractEntity {
     /**
      * A text title of the reason.

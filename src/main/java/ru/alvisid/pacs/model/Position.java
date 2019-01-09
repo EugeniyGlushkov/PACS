@@ -68,8 +68,8 @@ public class Position extends AbstractEntity {
      * @see Position#Position(Integer, String, String)
      * @see Position#Position(Position)
      */
-    public Position(String description, String position) {
-        this(null, description, position);
+    public Position(String position, String description) {
+        this(null, position, description);
     }
 
     /**
@@ -82,7 +82,7 @@ public class Position extends AbstractEntity {
      * @see Position#Position(String, String)
      * @see Position#Position(Position)
      */
-    public Position(Integer id, String description, String position) {
+    public Position(Integer id, String position, String description) {
         super(id, description);
         this.position = position;
     }
@@ -98,8 +98,8 @@ public class Position extends AbstractEntity {
      */
     public Position(Position position) {
         this(position.getId(),
-                position.getDescription(),
-                position.getPosition());
+                position.getPosition(),
+                position.getDescription());
     }
 
     /**

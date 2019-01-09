@@ -31,7 +31,7 @@ public class DeptScheduleServiceImpl
     /**
      * Cache alias for access to the ehcache.
      */
-    private static final String CACHE_ALIAS = "deptSchedule";
+    private static final String CACHE_ALIAS = "deptSchedules";
 
     /**
      * Creates and saves a given department schedule in the data base

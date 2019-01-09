@@ -22,6 +22,7 @@
     </cache-template>
 
     <cache alias="departments" uses-template="singleNonExpiryCache"/>
-    <cache alias="deptSchedule" uses-template="singleNonExpiryCache"/>
+    <cache alias="deptSchedules" uses-template="singleNonExpiryCache"/>
+    <cache alias="positions" uses-template="singleNonExpiryCache"/>
 </config>
 
