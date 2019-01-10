@@ -2,6 +2,12 @@ package testdata;
 
 import ru.alvisid.pacs.model.Position;
 
+/**
+ * Test data for {@code Position} class.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ */
 public class PositionTestData extends AbstractTestData <Position> {
     /**
      * Object which represents existing entity in the data base.
@@ -17,14 +23,16 @@ public class PositionTestData extends AbstractTestData <Position> {
     /**
      * New {@code Position} with id-null.
      */
-    public static final Position NEW_POSITION = new Position("Начальник производства", "Руководит производством.");
+    public static final Position NEW_POSITION =
+            new Position("Начальник производства", "Руководит производством.");
 
     /**
      * POSITION_1 with an updated data.
      *
      * @see PositionTestData#POSITION_1
      */
-    public static final Position UPDATED_POSITION_1 = new Position(1, "Президент", "Президент фирмы.");
+    public static final Position UPDATED_POSITION_1 =
+            new Position(1, "Президент", "Президент фирмы.");
 
     /**
      * Returns a new {@code Position} from the test data.

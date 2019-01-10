@@ -2,6 +2,7 @@ package ru.alvisid.pacs.model;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.UniqueElements;
 import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
 import javax.persistence.Column;
@@ -66,8 +67,8 @@ public class AbsenceReason extends AbstractEntity {
      * @see AbsenceReason#AbsenceReason(Integer, String, String)
      * @see AbsenceReason#AbsenceReason(AbsenceReason)
      */
-    public AbsenceReason(String description, String reason) {
-        this(null, description, reason);
+    public AbsenceReason(String reason, String description) {
+        this(null, reason, description);
     }
 
     /**
@@ -80,7 +81,7 @@ public class AbsenceReason extends AbstractEntity {
      * @see AbsenceReason#AbsenceReason(String, String)
      * @see AbsenceReason#AbsenceReason(AbsenceReason)
      */
-    public AbsenceReason(Integer id, String description, String reason) {
+    public AbsenceReason(Integer id, String reason, String description) {
         super(id, description);
         this.reason = reason;
     }
@@ -96,8 +97,8 @@ public class AbsenceReason extends AbstractEntity {
      */
     public AbsenceReason(AbsenceReason absenceReason) {
         this(absenceReason.getId(),
-                absenceReason.getDescription(),
-                absenceReason.getReason());
+                absenceReason.getReason(),
+                absenceReason.getDescription());
     }
 
     /**

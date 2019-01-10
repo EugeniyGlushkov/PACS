@@ -3,7 +3,6 @@ package ru.alvisid.pacs.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.alvisid.pacs.model.Position;
-import testdata.AbstractTestData;
 import testdata.PositionTestData;
 
 import javax.validation.ConstraintViolationException;
@@ -23,6 +22,11 @@ public class PositionServiceTest extends AbstractServiceTest <Position, Position
         super(new PositionTestData());
     }
 
+    /**
+     * Sets the {@code PositionService} to the superclass.
+     *
+     * @param service the specified Service.
+     */
     @Override
     @Autowired
     public void setService(PositionService service) {

@@ -39,6 +39,7 @@ public class Department extends AbstractEntity {
     @Column(name = "weekday_id")
     @ElementCollection(fetch = FetchType.LAZY)
     @OrderBy("ASC")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List <WeekDay> weekEnds;
 
     /**

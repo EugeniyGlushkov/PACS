@@ -65,7 +65,10 @@ INSERT INTO days_off (dep_id, date) VALUES
 (1, '2018-01-02'); /*id 4*/
 
 INSERT INTO absence_reasons (reason, description) VALUES
-  ('больничный', 'отсутствие по болезни.');
+  ('больничный', 'отсутствие по болезни.'),       /*id 1*/
+  ('командировка', 'нахождение в командировке.'), /*id 2*/
+  ('отпуск', 'отдых в отпуске.'),                 /*id 3*/
+  ('отгул', 'отсутствие по причине отгула.');     /*id 4*/
 
 INSERT INTO employees (dep_id, pos_id, card_num, last_name, first_name, second_name, email) VALUES
   (1, 1, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru');

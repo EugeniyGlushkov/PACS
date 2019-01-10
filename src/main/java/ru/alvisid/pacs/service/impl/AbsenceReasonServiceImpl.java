@@ -7,7 +7,6 @@ import ru.alvisid.pacs.repository.impl.DataJpaAbsenceReasonRepositoryImpl;
 import ru.alvisid.pacs.service.AbsenceReasonService;
 import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
-import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
 import java.util.List;
 
@@ -40,8 +39,13 @@ public class AbsenceReasonServiceImpl
         super(repository);
     }
 
+    /**
+     * Returns a cache alias for this service.
+     *
+     * @return the cache alias for this service.
+     */
     @Override
     public String getCacheAlias() {
-        return null;
+        return CACHE_ALIAS;
     }
 }
