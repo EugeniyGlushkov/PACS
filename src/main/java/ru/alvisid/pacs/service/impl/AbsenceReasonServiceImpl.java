@@ -1,48 +1,47 @@
 package ru.alvisid.pacs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ru.alvisid.pacs.model.AbsenceReason;
 import ru.alvisid.pacs.repository.impl.DataJpaAbsenceReasonRepositoryImpl;
 import ru.alvisid.pacs.service.AbsenceReasonService;
+import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
 import java.util.List;
 
-
+/**
+ * Implementation of the {@code PositionService} interface.
+ * Extends <b>AbstractService</b> and <b>AbstractCachedService</b> functionality.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ * @see AbsenceReasonService
+ * @see AbstractCachedService
+ * @see AbstractService
+ */
 @Service
 public class AbsenceReasonServiceImpl
-        extends AbstractService<DataJpaAbsenceReasonRepositoryImpl, AbsenceReason> implements AbsenceReasonService {
+        extends AbstractCachedService<DataJpaAbsenceReasonRepositoryImpl, AbsenceReason> implements AbsenceReasonService {
+    /**
+     * Cache alias for access to the ehcache.
+     */
+    private static final String CACHE_ALIAS = "absenceReason";
 
+    /**
+     * Constructs new {@code AbsenceReasonServiceImpl} and set a specified absence reason's repository implementation
+     * to the superclass's repository field.
+     *
+     * @param repository the specified position's repository implementation.
+     */
     @Autowired
-    public AbsenceReasonServiceImpl(DataJpaAbsenceReasonRepositoryImpl absenceReasonRepository) {
-        super(absenceReasonRepository);
+    public AbsenceReasonServiceImpl(DataJpaAbsenceReasonRepositoryImpl repository) {
+        super(repository);
     }
 
     @Override
-    public AbsenceReason create(AbsenceReason absenceReason) {
-        return null;
-    }
-
-    @Override
-    public void update(AbsenceReason absenceReason) throws NotFoundException {
-
-    }
-
-    @Override
-    public void delete(int id) throws NotFoundException {
-
-    }
-
-    @Override
-    public AbsenceReason get(int id) throws NotFoundException {
-        return null;
-    }
-
-    @Override
-    public List<AbsenceReason> getAll() {
+    public String getCacheAlias() {
         return null;
     }
 }
