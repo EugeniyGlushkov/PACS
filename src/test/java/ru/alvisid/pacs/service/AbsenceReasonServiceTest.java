@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.alvisid.pacs.model.AbsenceReason;
 import testdata.AbsenceReasonTestData;
-import testdata.AbstractTestData;
 
 import javax.validation.ConstraintViolationException;
 

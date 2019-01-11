@@ -7,12 +7,10 @@ import ru.alvisid.pacs.model.Employee;
 import ru.alvisid.pacs.repository.impl.DataJpaEmployeeRepositoryImpl;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.EmployeeService;
-import ru.alvisid.pacs.service.TypicalService;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
 import java.util.List;
 
-import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFound;
 
 /**

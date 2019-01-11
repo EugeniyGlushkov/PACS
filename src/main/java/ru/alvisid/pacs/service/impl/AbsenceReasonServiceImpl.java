@@ -8,8 +8,6 @@ import ru.alvisid.pacs.service.AbsenceReasonService;
 import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
 
-import java.util.List;
-
 /**
  * Implementation of the {@code PositionService} interface.
  * Extends <b>AbstractService</b> and <b>AbstractCachedService</b> functionality.
