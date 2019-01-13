@@ -70,6 +70,11 @@ INSERT INTO absence_reasons (reason, description) VALUES
   ('отпуск', 'отдых в отпуске.'),                 /*id 3*/
   ('отгул', 'отсутствие по причине отгула.');     /*id 4*/
 
+INSERT INTO action_types (type, description) VALUES
+('exit', 'Вход через контрольную точку.'),
+('enter', 'Выход через контрольную точку.'),
+('unlock', 'Unlock on the point.');
+
 INSERT INTO employees (dep_id, pos_id, card_num, last_name, first_name, second_name, email) VALUES
   (1, 1, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru');
 

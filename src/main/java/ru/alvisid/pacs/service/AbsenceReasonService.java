@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.service;
 
 import ru.alvisid.pacs.model.AbsenceReason;
+
 /**
  * The specific functional for the absence reason's service.
  *

@@ -4,6 +4,7 @@ import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -61,27 +62,27 @@ public class ActionType extends AbstractEntity {
     /**
      * Constructs a <b>ActionType</b> object with specified description, type and null id values.
      *
-     * @param description the action type's description.
      * @param type        the identifier of the action type.
+     * @param description the action type's description.
      * @see ActionType#ActionType()
      * @see ActionType#ActionType(Integer, String, String)
      * @see ActionType#ActionType(ActionType)
      */
-    public ActionType(String description, String type) {
-        this(null, description, type);
+    public ActionType(String type, String description) {
+        this(null, type, description);
     }
 
     /**
      * Constructs a <b>ActionType</b> object with specified id, description and type values.
      *
      * @param id          the specifiec identifier.
-     * @param description the action type's description.
      * @param type        the identifier of the action type.
+     * @param description the action type's description.
      * @see ActionType#ActionType()
      * @see ActionType#ActionType(String, String)
      * @see ActionType#ActionType(ActionType)
      */
-    public ActionType(Integer id, String description, String type) {
+    public ActionType(Integer id, String type, String description) {
         super(id, description);
         this.type = type;
     }
@@ -97,8 +98,8 @@ public class ActionType extends AbstractEntity {
      */
     public ActionType(ActionType actionType) {
         this(actionType.getId(),
-                actionType.getDescription(),
-                actionType.getType());
+                actionType.getType(),
+                actionType.getDescription());
     }
 
     /**

@@ -1,41 +1,39 @@
 package ru.alvisid.pacs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.alvisid.pacs.model.AbsenceReason;
-import ru.alvisid.pacs.repository.impl.DataJpaAbsenceReasonRepositoryImpl;
-import ru.alvisid.pacs.service.AbsenceReasonService;
+import ru.alvisid.pacs.model.ActionType;
+import ru.alvisid.pacs.repository.impl.DataJpaActionTypeRepositoryImpl;
 import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
+import ru.alvisid.pacs.service.ActionTypeService;
 
 /**
- * Implementation of the {@code AbsenceReasonService} interface.
+ * Implementation of the {@code ActionTypeService} interface.
  * Extends <b>AbstractService</b> and <b>AbstractCachedService</b> functionality.
  *
  * @author Glushkov Evgeniy
  * @version 1.0
- * @see AbsenceReasonService
+ * @see ActionTypeService
  * @see AbstractCachedService
  * @see AbstractService
  */
-@Service
-public class AbsenceReasonServiceImpl
-        extends AbstractCachedService<DataJpaAbsenceReasonRepositoryImpl, AbsenceReason> implements AbsenceReasonService {
+public class ActionTypeServiceImpl extends AbstractCachedService<DataJpaActionTypeRepositoryImpl, ActionType> {
     /**
      * Cache alias for access to the ehcache.
      */
-    private static final String CACHE_ALIAS = "absenceReasons";
+    private static final String CACHE_ALIAS = "actionTypes";
 
     /**
-     * Constructs new {@code AbsenceReasonServiceImpl} and set a specified absence reason's repository implementation
+     * Constructs new {@code ActionTypeServiceImpl} and set a specified action type's repository implementation
      * to the superclass's repository field.
      *
      * @param repository the specified position's repository implementation.
      */
     @Autowired
-    public AbsenceReasonServiceImpl(DataJpaAbsenceReasonRepositoryImpl repository) {
+    public ActionTypeServiceImpl(DataJpaActionTypeRepositoryImpl repository) {
         super(repository);
     }
+
 
     /**
      * Returns a cache alias for this service.
