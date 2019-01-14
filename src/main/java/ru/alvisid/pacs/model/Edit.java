@@ -20,8 +20,8 @@ public class Edit extends AbstractHasEmpEntity {
      * Type of the edit.
      */
     @NotNull
-    @Column(name = "type_id", nullable = false)
     @Enumerated(EnumType.ORDINAL)
+    @Column(name = "type_id", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private EditType editType;
 

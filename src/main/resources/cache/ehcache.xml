@@ -25,5 +25,6 @@
     <cache alias="deptSchedules" uses-template="singleNonExpiryCache"/>
     <cache alias="positions" uses-template="singleNonExpiryCache"/>
     <cache alias="absenceReasons" uses-template="singleNonExpiryCache"/>
+    <cache alias="controlPoints" uses-template="singleNonExpiryCache"/>
 </config>
 

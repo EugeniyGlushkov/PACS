@@ -4,6 +4,7 @@ import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -65,27 +66,27 @@ public class ControlPoint extends AbstractEntity {
     /**
      * Constructs a <b>ControlPoint</b> object with specified description, serialCode and null id values.
      *
-     * @param description the control point's description.
      * @param serialCode  the identifier of the control point.
+     * @param description the control point's description.
      * @see ControlPoint#ControlPoint()
      * @see ControlPoint#ControlPoint(Integer, String, String)
      * @see ControlPoint#ControlPoint(ControlPoint)
      */
-    public ControlPoint(String description, String serialCode) {
-        this(null, description, serialCode);
+    public ControlPoint(String serialCode, String description) {
+        this(null, serialCode, description);
     }
 
     /**
      * Constructs a <b>ControlPoint</b> object with specified id, description and serialCode values.
      *
      * @param id          the specifiec identifier.
-     * @param description the control point's description.
      * @param serialCode  the identifier of the control point.
+     * @param description the control point's description.
      * @see ControlPoint#ControlPoint()
      * @see ControlPoint#ControlPoint(String, String)
      * @see ControlPoint#ControlPoint(ControlPoint)
      */
-    public ControlPoint(Integer id, String description, String serialCode) {
+    public ControlPoint(Integer id, String serialCode, String description) {
         super(id, description);
         this.serialCode = serialCode;
     }
@@ -101,8 +102,8 @@ public class ControlPoint extends AbstractEntity {
      */
     public ControlPoint(ControlPoint controlPoint) {
         this(controlPoint.getId(),
-                controlPoint.getDescription(),
-                controlPoint.getSerialCode());
+                controlPoint.getSerialCode(),
+                controlPoint.getDescription());
     }
 
     /**
