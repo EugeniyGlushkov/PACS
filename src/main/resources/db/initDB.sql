@@ -121,17 +121,15 @@ CREATE TABLE control_points
 );
 
 /*
-Отношение "Тип действия" (вход, выход и т.п.)
+Отношение-справочник "Тип действия" (вход, выход и т.п.)
 содержит соответственно:
 -первичный ключ;
--название действия;
--описание действия.
+-код действия.
  */
 CREATE TABLE action_types
 (
-  id          SERIAL PRIMARY KEY,
-  type        VARCHAR(50) UNIQUE NOT NULL,
-  description VARCHAR            NOT NULL
+  id   SMALLINT PRIMARY KEY,
+  code VARCHAR UNIQUE NOT NULL
 );
 
 /*
@@ -543,6 +541,12 @@ INSERT INTO week_days (id, code) VALUES
   (5, 'FRIDAY'),
   (6, 'SATURDAY'),
   (7, 'SUNDAY');
+
+INSERT INTO action_types (id, code) VALUES
+  (1, 'ENTER'),
+  (2, 'EXIT'),
+  (3, 'LOCK'),
+  (4, 'UNLOCK');
 
 INSERT INTO edit_types (id, code) VALUES
   (1, 'CREATE'),

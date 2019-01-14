@@ -5,7 +5,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.alvisid.pacs.model.PointAction;
 import ru.alvisid.pacs.repository.PointActionRepository;
-import ru.alvisid.pacs.repository.datajpa.CrudActionTypeRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudControlPointRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudPointActionRepository;
 
@@ -38,25 +37,17 @@ public class DataJpaPointActionRepositoryImpl implements PointActionRepository {
     private final CrudControlPointRepository crudControlPointRepository;
 
     /**
-     * An interface for action's type repository which extends JpaRepository.
-     */
-    private final CrudActionTypeRepository crudActionTypeRepository;
-
-    /**
      * Constructs a new DataJpaPointActionRepositoryImpl with the specified CrudPointActionRepository,
      * CrudControlPointRepository and CrudActionTypeRepository.
      *
      * @param crudRepository             the specified <em>CrudPointActionRepository</em>.
      * @param crudControlPointRepository the specified <em>CrudControlPointRepository</em>.
-     * @param crudActionTypeRepository   the specified <em>CrudActionTypeRepository</em>.
      */
     @Autowired
     public DataJpaPointActionRepositoryImpl(CrudPointActionRepository crudRepository,
-                                            CrudControlPointRepository crudControlPointRepository,
-                                            CrudActionTypeRepository crudActionTypeRepository) {
+                                            CrudControlPointRepository crudControlPointRepository) {
         this.crudRepository = crudRepository;
         this.crudControlPointRepository = crudControlPointRepository;
-        this.crudActionTypeRepository = crudActionTypeRepository;
     }
 
     /**
@@ -82,15 +73,12 @@ public class DataJpaPointActionRepositoryImpl implements PointActionRepository {
      * @param pointAction    the object to save or update.
      * @param controlPointId the control point's id, the control point will be inserted to the
      *                       saved object's {@code controlPoint} field.
-     * @param actionTypeId   the control point's id, the control point will be inserted to the
-     *                       saved object's {@code controlPoint} field.
      * @return a saved or update object,
      * null - if there aren't updated object in the data base.
      */
     @Override
-    public PointAction save(PointAction pointAction, int controlPointId, int actionTypeId) {
+    public PointAction save(PointAction pointAction, int controlPointId) {
         pointAction.setControlPoint(crudControlPointRepository.getOne(controlPointId));
-        pointAction.setActionType(crudActionTypeRepository.getOne(actionTypeId));
         return save(pointAction);
     }
 

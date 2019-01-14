@@ -33,9 +33,9 @@ public class PointAction extends AbstractId {
      * The action which able to be done at the control point.
      */
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "acttype_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "acttype_id", nullable = false)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private ActionType actionType;
 
     /**

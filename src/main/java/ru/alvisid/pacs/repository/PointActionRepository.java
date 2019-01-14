@@ -15,9 +15,9 @@ public interface PointActionRepository extends TypicalRepository<PointAction> {
      * @param pointAction    the object to save or update.
      * @param controlPointId the control point's id, the control point will be inserted to the
      *                       saved object's {@code controlPoint} field.
-     * @param actionTypeId   the control point's id, the control point will be inserted to the
      *                       saved object's {@code controlPoint} field.
-     * @return
+     * @return a saved or update object,
+     * null - if there aren't updated object in the data base.
      */
-    PointAction save(PointAction pointAction, int controlPointId, int actionTypeId);
+    PointAction save(PointAction pointAction, int controlPointId);
 }

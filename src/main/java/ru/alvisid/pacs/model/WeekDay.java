@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-
 public enum WeekDay {
     MONDAY,
     TUESDAY,
