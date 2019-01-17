@@ -18,7 +18,7 @@ import java.util.Optional;
  * @version 1.0
  */
 @Transactional(readOnly = true)
-public interface CrudControlPointRepository extends JpaRepository<ControlPoint, Integer> {
+public interface CrudControlPointRepository extends JpaRepository <ControlPoint, Integer> {
     /**
      * Saves or updates a given control point.
      * If there are a given object in the data base then the given object will be update.
@@ -50,7 +50,7 @@ public interface CrudControlPointRepository extends JpaRepository<ControlPoint, 
      * @return a container with control point by given id inside.
      */
     @Override
-    Optional<ControlPoint> findById(Integer integer);
+    Optional <ControlPoint> findById(Integer integer);
 
     /**
      * Returns all control points sorted with a given sort.
@@ -59,5 +59,13 @@ public interface CrudControlPointRepository extends JpaRepository<ControlPoint, 
      * @return list of all control points.
      */
     @Override
-    List<ControlPoint> findAll(Sort sort);
+    List <ControlPoint> findAll(Sort sort);
+
+    /**
+     * Returns a control point by the serial code.
+     *
+     * @param serialCode the specified serial code.
+     * @return the control point by the given serial code.
+     */
+    ControlPoint findBySerialCode(String serialCode);
 }

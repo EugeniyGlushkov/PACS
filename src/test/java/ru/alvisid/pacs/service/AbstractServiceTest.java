@@ -14,8 +14,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.alvisid.pacs.model.abstractions.HasId;
-import ru.alvisid.pacs.model.enumActivate.AbstractDictionary;
-import ru.alvisid.pacs.model.enumActivate.MappedEnum;
 import ru.alvisid.pacs.repository.loader.EnumLoader;
 import ru.alvisid.pacs.repository.util.JpaUtil;
 import ru.alvisid.pacs.util.cache.Cached;
@@ -26,13 +24,7 @@ import util.TimingRules;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.metamodel.EntityType;
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static util.TestUtil.assertMatch;

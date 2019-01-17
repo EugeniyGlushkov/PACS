@@ -58,6 +58,6 @@ public class EmployeeServiceImpl
     @Override
     public Employee getByEmail(String email) throws NotFoundException {
         Assert.notNull(email, "email must not be null");
-        return checkNotFound(repository.getByEmail(email), "Not found entity with email=" + email);
+        return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
 }

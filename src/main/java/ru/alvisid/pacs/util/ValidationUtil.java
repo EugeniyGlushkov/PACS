@@ -28,7 +28,7 @@ public class ValidationUtil {
      */
     public static void checkNotFound(boolean found, String message) {
         if (!found) {
-            throw new NotFoundException(message);
+            throw new NotFoundException("Not found entity with " + message);
         }
     }
 
@@ -56,7 +56,7 @@ public class ValidationUtil {
      * @see ValidationUtil#checkNotFound(Object, String)
      */
     public static void checkNotFoundWithId(boolean found, int id) {
-        checkNotFound(found, "Not found entity with id=" + id);
+        checkNotFound(found, "id=" + id);
     }
 
     /**
@@ -70,7 +70,7 @@ public class ValidationUtil {
      * @see ValidationUtil#checkNotFoundWithId(boolean, int)
      */
     public static <T> T checkNotFoundWithId(T object, int id) {
-        return checkNotFound(object, "Not found entity with id=" + id);
+        return checkNotFound(object, "id=" + id);
     }
 
     /**

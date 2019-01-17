@@ -88,4 +88,15 @@ public class DataJpaControlPointRepositoryImpl implements ControlPointRepository
     public List<ControlPoint> getAll() {
         return crudRepository.findAll(SORT_CODE);
     }
+
+    /**
+     * Returns a control point by the serial code.
+     *
+     * @param serialCode the specified serial code.
+     * @return the control point by the given serial code.
+     */
+    @Override
+    public ControlPoint getBySerialCode(String serialCode) {
+        return crudRepository.findBySerialCode(serialCode);
+    }
 }

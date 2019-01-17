@@ -99,6 +99,5 @@ public class DeptScheduleServiceTest extends AbstractServiceTest<DeptSchedule, D
         DeptSchedule newDeptSchedule = testData.getNew();
         newDeptSchedule.setDepartment(null);
         validateRootCause(() -> service.create(newDeptSchedule), ConstraintViolationException.class);
-
     }
 }

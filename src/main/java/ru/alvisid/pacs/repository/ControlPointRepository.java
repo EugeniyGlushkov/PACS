@@ -9,4 +9,11 @@ import ru.alvisid.pacs.model.ControlPoint;
  * @version 1.0
  */
 public interface ControlPointRepository extends TypicalRepository <ControlPoint> {
+    /**
+     * Returns a control point by given serial code.
+     *
+     * @param serialCode the specified serial code.
+     * @return the control point by given serial code.
+     */
+    ControlPoint getBySerialCode(String serialCode);
 }

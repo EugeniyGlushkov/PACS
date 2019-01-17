@@ -1,11 +1,16 @@
 package ru.alvisid.pacs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.ControlPoint;
 import ru.alvisid.pacs.repository.impl.DataJpaControlPointRepositoryImpl;
 import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.ControlPointService;
+import ru.alvisid.pacs.util.exceptions.NotFoundException;
+
+import static ru.alvisid.pacs.util.ValidationUtil.checkNotFound;
 
 /**
  * Implementation of the {@code ControlPointService} interface.
@@ -17,6 +22,7 @@ import ru.alvisid.pacs.service.ControlPointService;
  * @see AbstractCachedService
  * @see AbstractService
  */
+@Service
 public class ControlPointServiceImpl
         extends AbstractCachedService <DataJpaControlPointRepositoryImpl, ControlPoint> implements ControlPointService {
     /**
@@ -43,5 +49,18 @@ public class ControlPointServiceImpl
     @Override
     public String getCacheAlias() {
         return CACHE_ALIAS;
+    }
+
+    /**
+     * Returns a control point by the serial code.
+     *
+     * @param serialCode the specified serial code.
+     * @return the control point by the given serial code.
+     * @throws NotFoundException if the control point with the specified serial code isn't found.
+     */
+    @Override
+    public ControlPoint getBySerialCode(String serialCode) throws NotFoundException {
+        Assert.notNull(serialCode, "serial code must not be null");
+        return checkNotFound(repository.getBySerialCode(serialCode), "serial code=" + serialCode);
     }
 }
