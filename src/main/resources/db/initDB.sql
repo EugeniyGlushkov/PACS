@@ -475,7 +475,7 @@ BEGIN
              OR (NEW.end_absence >= a.start_absence AND NEW.end_absence <= a.end_absence)
             ))
   THEN
-    RAISE EXCEPTION 'Impossible insert, because new data intesepts with old data!';
+    RAISE EXCEPTION 'Impossible insert, because new data intercepts with old data!';
   END IF;
   RETURN NEW;
 END;
@@ -497,7 +497,7 @@ BEGIN
             AND pp.pointact_id = NEW.pointact_id
   )
   THEN
-    RAISE EXCEPTION 'Impossible insert, because eployee with id=% has not point action with id=% !',
+    RAISE EXCEPTION 'Impossible insert, because employee with id=% has not point action with id=% !',
     NEW.emp_id, NEW.pointact_id;
   END IF;
   RETURN NEW;

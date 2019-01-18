@@ -503,7 +503,7 @@ BEGIN
           OR (NEW.end_absence >= a.start_absence AND NEW.end_absence <= a.end_absence)
           ))
   THEN
-    SIGNAL SQLSTATE '22000' SET MESSAGE_TEXT = 'Impossible insert, because new data intesepts with old data!';
+    SIGNAL SQLSTATE '22000' SET MESSAGE_TEXT = 'Impossible insert, because new data intercepts with old data!';
   END IF;
 END;
 
@@ -525,7 +525,7 @@ BEGIN
     )
   THEN
     SIGNAL SQLSTATE '22000' SET MESSAGE_TEXT =
-      'Impossible insert, because current eployee has not point inserting action!';
+      'Impossible insert, because current employee has not point inserting action!';
   END IF;
 END;
 
