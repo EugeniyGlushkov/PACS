@@ -17,11 +17,11 @@ public class DepartmentTestData extends AbstractTestData <Department> {
     /**
      * Collection with weekend's days.
      */
-    public static final List<WeekDay>
-            WEEKENDS_1 = new ArrayList<>(),
-            WEEKENDS_2 = new ArrayList<>(),
-            WEEKENDS_3 = new ArrayList<>(),
-            UPDATED_WEEKENDS_1 = new ArrayList<>();
+    public static final List <WeekDay>
+            WEEKENDS_1 = new ArrayList <>(),
+            WEEKENDS_2 = new ArrayList <>(),
+            WEEKENDS_3 = new ArrayList <>(),
+            UPDATED_WEEKENDS_1 = new ArrayList <>();
 
     static {
         Collections.addAll(WEEKENDS_1, WeekDay.SATURDAY, WeekDay.SUNDAY);
