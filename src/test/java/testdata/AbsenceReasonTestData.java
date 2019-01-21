@@ -117,16 +117,4 @@ public class AbsenceReasonTestData extends AbstractTestData <AbsenceReason> {
                 ABSENCE_REASON_3
         };
     }
-
-    /**
-     * Constructs new {@code AbsenceReasonTestData} and sets
-     * {@code IGNORING_FIELDS} field
-     * in the superclass.
-     * There are no ignoring fields in the class.
-     *
-     * @see AbstractTestData#IGNORING_FIELDS
-     */
-    public AbsenceReasonTestData() {
-        super();
-    }
 }

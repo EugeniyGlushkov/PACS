@@ -4,6 +4,7 @@ package ru.alvisid.pacs.repository;
 import ru.alvisid.pacs.model.Visitor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -14,10 +15,20 @@ import java.util.List;
  */
 public interface VisitorRepository extends TypicalRepository<Visitor> {
     /**
-     * Returns a visitors list which contains visitors with specified visit's date.
+     * Returns a visitor by given temporary number.
      *
-     * @param localDate the visit's date.
-     * @return the visitors list which contains visitors with specified visit's date.
+     * @param tempNum the specified temporary number.
+     * @return the visitor by given temporary number.
      */
-    List<Visitor> getAllByVisitDate(LocalDate localDate);
+    Visitor getByTempNum(String tempNum);
+
+    /**
+     * Returns a visitors list which contains visitors
+     * with enter time in a specified time interval.
+     *
+     * @param startTime the start of the time interval.
+     * @param endTime   the end of the time interval.
+     * @return the visitors list which contains visitors with enter time in a specified time interval.
+     */
+    List<Visitor> getAllByEnterTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 }

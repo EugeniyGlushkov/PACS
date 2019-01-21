@@ -24,8 +24,8 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
     /**
      * Sort by last name, first name, second name.
      */
-    private static final Sort SORT_LNAME_FNAME_SNAME =
-            new Sort(Sort.Direction.ASC, "lastName", "firstName", "secondName");
+    private static final Sort SORT_ENTERTIME_LNAME_FNAME_SNAME =
+            new Sort(Sort.Direction.DESC, "enterTime", "lastName", "firstName", "secondName");
 
     /**
      * An interface for visitor repository which extends JpaRepository.
@@ -85,24 +85,34 @@ public class DataJpaVisitorRepositoryImpl implements VisitorRepository {
      * Returns all visitors sorted with cpecifiec sort.
      *
      * @return list of all visitors.
-     * @see DataJpaVisitorRepositoryImpl#SORT_LNAME_FNAME_SNAME
+     * @see DataJpaVisitorRepositoryImpl#SORT_ENTERTIME_LNAME_FNAME_SNAME
      */
     @Override
     public List <Visitor> getAll() {
-        return crudRepository.findAll(SORT_LNAME_FNAME_SNAME);
+        return crudRepository.findAll(SORT_ENTERTIME_LNAME_FNAME_SNAME);
     }
 
     /**
-     * Returns a visitors list which contains visitors with specified visit's date.
+     * Returns a visitor by given temporary number.
      *
-     * @param localDate the visit's date.
-     * @return the visitors list which contains visitors with specified visit's date.
+     * @param tempNum the specified temporary number.
+     * @return the visitor by given temporary number.
      */
     @Override
-    public List <Visitor> getAllByVisitDate(LocalDate localDate) {
-        LocalDateTime startTime = LocalDateTime.of(localDate, LocalTime.of(0, 0));
-        LocalDateTime endTime = startTime.plusDays(1);
+    public Visitor getByTempNum(String tempNum) {
+        return crudRepository.getByTempNum(tempNum);
+    }
 
-        return crudRepository.getAllByEnterTimeBetween(startTime, endTime, SORT_LNAME_FNAME_SNAME);
+    /**
+     * Returns a visitors list which contains visitors
+     * with enter time in a specified time interval.
+     *
+     * @param startTime the start of the time interval.
+     * @param endTime   the end of the time interval.
+     * @return the visitors list which contains visitors with enter time in a specified time interval.
+     */
+    @Override
+    public List<Visitor> getAllByEnterTimeBetween(LocalDateTime startTime, LocalDateTime endTime) {
+        return crudRepository.getAllByEnterTimeBetween(startTime, endTime, SORT_ENTERTIME_LNAME_FNAME_SNAME);
     }
 }

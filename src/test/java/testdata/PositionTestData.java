@@ -122,16 +122,4 @@ public class PositionTestData extends AbstractTestData <Position> {
                 POSITION_2,
                 POSITION_4};
     }
-
-    /**
-     * Constructs new {@code PositionTestData} and sets
-     * {@code IGNORING_FIELDS} field
-     * in the superclass.
-     * There are no ignoring fields in the class.
-     *
-     * @see AbstractTestData#IGNORING_FIELDS
-     */
-    public PositionTestData() {
-        super();
-    }
 }

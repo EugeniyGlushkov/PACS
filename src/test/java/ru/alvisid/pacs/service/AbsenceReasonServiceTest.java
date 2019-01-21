@@ -2,6 +2,7 @@ package ru.alvisid.pacs.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import ru.alvisid.pacs.model.AbsenceReason;
 import testdata.AbsenceReasonTestData;
 
@@ -31,6 +32,17 @@ public class AbsenceReasonServiceTest extends AbstractServiceTest<AbsenceReason,
     @Autowired
     public void setService(AbsenceReasonService service) {
         this.service = service;
+    }
+
+    /**
+     * Checks the {@code DataAccessException} when absence reason with duplicate reason create.
+     */
+    @Test
+    public void duplicateReasonCreate() {
+        AbsenceReason reasonDuplicateNew = testData.getNew();
+        reasonDuplicateNew.setReason(testData.getGotten().getReason());
+        thrown.expect(DataAccessException.class);
+        service.create(reasonDuplicateNew);
     }
 
     /**

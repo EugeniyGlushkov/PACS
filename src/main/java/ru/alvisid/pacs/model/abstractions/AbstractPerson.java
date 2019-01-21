@@ -130,7 +130,7 @@ public abstract class AbstractPerson implements HasId {
      *
      * @param secondName the person's second name.
      */
-    public void setSecondtName(String secondName) {
+    public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
 

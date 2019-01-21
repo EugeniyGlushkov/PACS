@@ -110,16 +110,4 @@ public class DeptScheduleTestData extends AbstractTestData<DeptSchedule> {
     public DeptSchedule[] getAllArray() {
         return new DeptSchedule[]{DEPT_SCHEDULE_1, DEPT_SCHEDULE_2};
     }
-
-    /**
-     * Constructs new {@code DeptScheduleTestData} and sets
-     * {@code IGNORING_FIELDS} field
-     * in the superclass.
-     * There are no ignoring fields in the class.
-     *
-     * @see AbstractTestData#IGNORING_FIELDS
-     */
-    public DeptScheduleTestData() {
-        super();
-    }
 }

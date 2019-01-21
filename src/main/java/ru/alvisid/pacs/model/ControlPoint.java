@@ -30,7 +30,7 @@ public class ControlPoint extends AbstractEntity {
      * Must be non null, unique and has least one non space symbol.
      */
     @NotBlank
-    @Size(max = 50)
+    @Size(min = 2, max = 50)
     @Column(name = "serial_id", nullable = false, unique = true)
     private String serialCode;
 

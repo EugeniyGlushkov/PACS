@@ -2,6 +2,7 @@ package ru.alvisid.pacs.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import ru.alvisid.pacs.model.ControlPoint;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import testdata.ControlPointTestData;
@@ -36,6 +37,16 @@ public class ControlPointServiceTest extends AbstractServiceTest <ControlPoint, 
     public void setService(ControlPointService service) {
         this.service = service;
     }
+    /**
+     * Checks the {@code DataAccessException} when control point with duplicate serial code create.
+     */
+    @Test
+    public void createDuplicateSerialCode() {
+        ControlPoint serialCodeDuplicateNew = testData.getNew();
+        serialCodeDuplicateNew.setSerialCode(testData.getGotten().getSerialCode());
+        thrown.expect(DataAccessException.class);
+        service.create(serialCodeDuplicateNew);
+    }
 
     /**
      * Checks matching the actual gotten by serial code value from DB to the expected gotten value from {@code testData}.
@@ -69,6 +80,8 @@ public class ControlPointServiceTest extends AbstractServiceTest <ControlPoint, 
         validateRootCause(() -> service.create(new ControlPoint("", "Test validate, serial code is empty")),
                 ConstraintViolationException.class);
         validateRootCause(() -> service.create(new ControlPoint("    ", "Test validate, serial code is blank")),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new ControlPoint("A", "Test validate, serial code's size < 2")),
                 ConstraintViolationException.class);
         validateRootCause(() -> service.create(new ControlPoint(
                         "Test validate, serial code's size > 50" +

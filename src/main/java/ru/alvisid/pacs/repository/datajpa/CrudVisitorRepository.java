@@ -60,6 +60,14 @@ public interface CrudVisitorRepository extends JpaRepository <Visitor, Integer> 
     List <Visitor> findAll(Sort sort);
 
     /**
+     * Returns a visitor by the temporary number.
+     *
+     * @param tempNum the specified temporary number.
+     * @return the visitor by the temporary number.
+     */
+    Visitor getByTempNum(String tempNum);
+
+    /**
      * Returns a visitors list which contains visitors
      * with enter time in a specified time interval sorted with a given sort.
      *

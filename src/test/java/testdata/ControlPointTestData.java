@@ -119,16 +119,4 @@ public class ControlPointTestData extends AbstractTestData<ControlPoint> {
                 CONTROL_POINT_2
         };
     }
-
-    /**
-     * Constructs new {@code ControlPointTestData} and sets
-     * {@code IGNORING_FIELDS} field
-     * in the superclass.
-     * There are no ignoring fields in the class.
-     *
-     * @see AbstractTestData#IGNORING_FIELDS
-     */
-    public ControlPointTestData() {
-        super();
-    }
 }
