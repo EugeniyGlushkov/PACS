@@ -497,7 +497,7 @@ BEGIN
             AND pp.pointact_id = NEW.pointact_id
   )
   THEN
-    RAISE EXCEPTION 'Impossible insert, because employee with id=% has not point action with id=% !',
+    RAISE EXCEPTION 'Impossible insert, because employee with id=% has no permit for point action with id=% !',
     NEW.emp_id, NEW.pointact_id;
   END IF;
   RETURN NEW;

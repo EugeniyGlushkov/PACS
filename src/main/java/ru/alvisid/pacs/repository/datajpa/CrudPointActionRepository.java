@@ -60,4 +60,13 @@ public interface CrudPointActionRepository extends JpaRepository <PointAction, I
      */
     @Override
     List <PointAction> findAll(Sort sort);
+
+    /**
+     * Returns the list with all point actions by control point's id.
+     *
+     * @param ctrlPointId the specified control point's id.
+     * @return the list with all point actions by control point's id.
+     */
+    @Query("SELECT pa FROM PointAction pa WHERE pa.controlPoint.id=:ctrlPointId")
+    List<PointAction> getAllByControlPointId(@Param("ctrlPointId") int ctrlPointId);
 }

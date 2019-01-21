@@ -2,6 +2,8 @@ package ru.alvisid.pacs.repository;
 
 import ru.alvisid.pacs.model.PointAction;
 
+import java.util.List;
+
 /**
  * The generalized functional for point action's repository.
  *
@@ -20,4 +22,12 @@ public interface PointActionRepository extends TypicalRepository<PointAction> {
      * null - if there aren't updated object in the data base.
      */
     PointAction save(PointAction pointAction, int controlPointId);
+
+    /**
+     * Returns the list with all point actions by control point's id.
+     *
+     * @param ctrlPointId the specified control point's id.
+     * @return the list with all point actions by control point's id.
+     */
+    List<PointAction> getAllByControlPointId(int ctrlPointId);
 }
