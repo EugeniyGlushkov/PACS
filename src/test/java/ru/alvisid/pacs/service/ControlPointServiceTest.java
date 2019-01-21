@@ -10,6 +10,7 @@ import testdata.ControlPointTestData;
 import javax.validation.ConstraintViolationException;
 
 import static util.TestUtil.assertMatch;
+import static testdata.ControlPointTestData.*;
 
 /**
  * ControlPoint's specific tests.
@@ -37,6 +38,7 @@ public class ControlPointServiceTest extends AbstractServiceTest <ControlPoint, 
     public void setService(ControlPointService service) {
         this.service = service;
     }
+
     /**
      * Checks the {@code DataAccessException} when control point with duplicate serial code create.
      */
@@ -46,6 +48,17 @@ public class ControlPointServiceTest extends AbstractServiceTest <ControlPoint, 
         serialCodeDuplicateNew.setSerialCode(testData.getGotten().getSerialCode());
         thrown.expect(DataAccessException.class);
         service.create(serialCodeDuplicateNew);
+    }
+
+    /**
+     * Checks the {@code DataAccessException} when control point with duplicate serial code update.
+     */
+    @Test
+    public void updateDuplicateSerialCode() {
+        ControlPoint serialCodeDuplicateUpd = testData.getUpdated();
+        serialCodeDuplicateUpd.setSerialCode(CONTROL_POINT_3.getSerialCode());
+        thrown.expect(DataAccessException.class);
+        service.update(serialCodeDuplicateUpd);
     }
 
     /**

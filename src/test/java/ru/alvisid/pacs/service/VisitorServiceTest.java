@@ -2,6 +2,7 @@ package ru.alvisid.pacs.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import ru.alvisid.pacs.model.Visitor;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import testdata.VisitorTestData;
@@ -10,6 +11,7 @@ import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
 import static util.TestUtil.assertMatch;
+import static testdata.VisitorTestData.*;
 
 /**
  * Visitor's specific tests.
@@ -18,7 +20,7 @@ import static util.TestUtil.assertMatch;
  * @version 1.0
  * @see AbstractServiceTest
  */
-public class VisitorServiceTest extends AbstractServiceTest<Visitor, VisitorService> {
+public class VisitorServiceTest extends AbstractServiceTest <Visitor, VisitorService> {
     /**
      * Constructs new <em>VisitorServiceTest</em> object.
      */
@@ -82,6 +84,52 @@ public class VisitorServiceTest extends AbstractServiceTest<Visitor, VisitorServ
         thrown.expectMessage("Param start time=" + startTime +
                 " must be before than param end time=" + endTime);
         service.getAllByEnterTimeBetween(startTime, endTime);
+    }
+
+    /**
+     * Checks the {@code DataAccessException} when visitor with {@code startTime} is null
+     * and {@code endTime} is not null create.
+     */
+    @Test
+    public void createStartTimeConstraint() {
+        Visitor newVisitor = testData.getNew();
+        newVisitor.setExitTime(testData.getGotten().getExitTime());
+        thrown.expect(DataAccessException.class);
+        service.create(newVisitor);
+    }
+
+    /**
+     * Checks the {@code DataAccessException} when visitor with {@code startTime} is null
+     * and {@code endTime} is not null update.
+     */
+    @Test
+    public void updateStartTimeConstraint() {
+        Visitor updateVisitor = testData.getUpdated();
+        updateVisitor.setEnterTime(null);
+        thrown.expect(DataAccessException.class);
+        service.update(updateVisitor);
+    }
+
+    /**
+     * Checks the {@code DataAccessException} when visitor with duplicate temporary number create.
+     */
+    @Test
+    public void createDuplicateTempNum() {
+        Visitor tempNumDuplicateNew = testData.getNew();
+        tempNumDuplicateNew.setTempNum(testData.getGotten().getTempNum());
+        thrown.expect(DataAccessException.class);
+        service.create(tempNumDuplicateNew);
+    }
+
+    /**
+     * Checks the {@code DataAccessException} when visitor with duplicate temporary number update.
+     */
+    @Test
+    public void updateDuplicateTempNum() {
+        Visitor tempNumDuplicateUpd = testData.getUpdated();
+        tempNumDuplicateUpd.setTempNum(VISITOR_3.getTempNum());
+        thrown.expect(DataAccessException.class);
+        service.update(tempNumDuplicateUpd);
     }
 
     /**

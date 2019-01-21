@@ -2,10 +2,13 @@ package ru.alvisid.pacs.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import ru.alvisid.pacs.model.Position;
 import testdata.PositionTestData;
 
 import javax.validation.ConstraintViolationException;
+
+import static testdata.PositionTestData.*;
 
 /**
  * Position's specific tests.
@@ -31,6 +34,28 @@ public class PositionServiceTest extends AbstractServiceTest <Position, Position
     @Autowired
     public void setService(PositionService service) {
         super.service = service;
+    }
+
+    /**
+     * Checks the {@code DataAccessException} when position with duplicate position-field create.
+     */
+    @Test
+    public void createDuplicatePosition() {
+        Position positionDuplicateNew = testData.getNew();
+        positionDuplicateNew.setPosition(testData.getGotten().getPosition());
+        thrown.expect(DataAccessException.class);
+        service.create(positionDuplicateNew);
+    }
+
+    /**
+     * Checks the {@code DataAccessException} when position with duplicate position-field update.
+     */
+    @Test
+    public void updateDuplicatePosition() {
+        Position positionDuplicateUpd = testData.getUpdated();
+        positionDuplicateUpd.setPosition(POSITION_2.getPosition());
+        thrown.expect(DataAccessException.class);
+        service.update(positionDuplicateUpd);
     }
 
     /**

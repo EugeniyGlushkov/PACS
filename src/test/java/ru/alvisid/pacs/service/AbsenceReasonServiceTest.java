@@ -8,6 +8,8 @@ import testdata.AbsenceReasonTestData;
 
 import javax.validation.ConstraintViolationException;
 
+import static testdata.AbsenceReasonTestData.*;
+
 /**
  * AbsenceReason's specific tests.
  *
@@ -38,11 +40,22 @@ public class AbsenceReasonServiceTest extends AbstractServiceTest<AbsenceReason,
      * Checks the {@code DataAccessException} when absence reason with duplicate reason create.
      */
     @Test
-    public void duplicateReasonCreate() {
+    public void createDuplicateReason() {
         AbsenceReason reasonDuplicateNew = testData.getNew();
         reasonDuplicateNew.setReason(testData.getGotten().getReason());
         thrown.expect(DataAccessException.class);
         service.create(reasonDuplicateNew);
+    }
+
+    /**
+     * Checks the {@code DataAccessException} when absence reason with duplicate reason update.
+     */
+    @Test
+    public void updateDuplicateReason() {
+        AbsenceReason reasonDuplicateUpd = testData.getUpdated();
+        reasonDuplicateUpd.setReason(ABSENCE_REASON_1.getReason());
+        thrown.expect(DataAccessException.class);
+        service.update(reasonDuplicateUpd);
     }
 
     /**
