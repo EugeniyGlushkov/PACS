@@ -40,4 +40,13 @@ public interface EmployeeRepository extends TypicalRepository<Employee> {
      * @return the employee by given email.
      */
     Employee getByEmail(String email);
+
+    /**
+     * Returns an employee with filled fields: {@code department} and {@code position}
+     * by specified id.
+     *
+     * @param id the specified employee's id.
+     * @return the employee with filled fields: {@code department} and {@code position}.
+     */
+    Employee getWithDeptAndPosition(int id);
 }

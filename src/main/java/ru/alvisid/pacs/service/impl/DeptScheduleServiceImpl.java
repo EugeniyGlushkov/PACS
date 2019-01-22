@@ -87,7 +87,7 @@ public class DeptScheduleServiceImpl
      * Constructs new {@code DeptScheduleServiceImpl} and set a specified department schedule's repository implementation
      * to the superclass's repository field.
      *
-     * @param repository the specified department's repository implementation.
+     * @param repository the specified department schedule's repository implementation.
      */
     @Autowired
     public DeptScheduleServiceImpl(DataJpaDeptScheduleRepositoryImpl repository) {

@@ -126,4 +126,16 @@ public class DataJpaPointActionRepositoryImpl implements PointActionRepository {
     public List <PointAction> getAllByControlPointId(int ctrlPointId) {
         return crudRepository.getAllByControlPointId(ctrlPointId);
     }
+
+    /**
+     * Returns a point action with filled fields: {@code controlPoint} and {@code actionType}
+     * by specified id.
+     *
+     * @param id the specified point action's id.
+     * @return the point action with filled fields: {@code controlPoint} and {@code actionType}.
+     */
+    @Override
+    public PointAction getWithCtrlPointAndActionType(int id) {
+        return crudRepository.getWithCtrlPointAndActionType(id);
+    }
 }

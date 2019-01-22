@@ -71,6 +71,7 @@ public interface CrudDepartmentRepository extends JpaRepository <Department, Int
      */
     @EntityGraph(attributePaths = {"weekEnds", "deptSchedule"})
     @Query("SELECT d FROM Department d WHERE d.id=?1")
+    //del
     //@Query("SELECT d FROM Department d LEFT JOIN FETCH d.weekEnds LEFT JOIN FETCH d.deptSchedule WHERE d.id=?1")
     Department getWithWeekEndsAndSched(int id);
 }

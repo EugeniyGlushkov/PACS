@@ -25,7 +25,7 @@ public class EmpSchedule extends AbstractSchedule {
      * The specific employee.
      * Must be non null.
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull

@@ -34,7 +34,7 @@ public class DepartmentServiceTest extends AbstractServiceTest<Department, Depar
     @Override
     @Autowired
     public void setService(DepartmentService service) {
-        super.service = service;
+        this.service = service;
     }
 
     /**

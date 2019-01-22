@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.repository.datajpa;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -69,4 +70,16 @@ public interface CrudPointActionRepository extends JpaRepository <PointAction, I
      */
     @Query("SELECT pa FROM PointAction pa WHERE pa.controlPoint.id=:ctrlPointId")
     List<PointAction> getAllByControlPointId(@Param("ctrlPointId") int ctrlPointId);
+
+
+    /**
+     * Returns a point action with filled fields: {@code controlPoint} and {@code actionType}
+     * by specified id.
+     *
+     * @param id the specified point action's id.
+     * @return the point action with filled fields: {@code controlPoint} and {@code actionType}.
+     */
+    @EntityGraph(attributePaths = {"controlPoint", "actionType"})
+    @Query("SELECT pa FROM PointAction pa WHERE pa.id=?1")
+    PointAction getWithCtrlPointAndActionType(int id);
 }

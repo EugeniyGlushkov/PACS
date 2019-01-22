@@ -16,6 +16,7 @@ public interface DepartmentService extends TypicalService <Department> {
      *
      * @param id the specified department's id.
      * @return the department with filled fields: {@code weekEnds} and {@code deptSchedule}.
+     * @throws NotFoundException if the entity with the specified id isn't found.
      */
     Department getWithWeekEndsAndSched(int id) throws NotFoundException;
 }

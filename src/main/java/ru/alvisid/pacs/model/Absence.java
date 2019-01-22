@@ -25,7 +25,7 @@ public class Absence extends AbstractHasEmpEntity {
     /**
      * The reason of the absence.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reason_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull

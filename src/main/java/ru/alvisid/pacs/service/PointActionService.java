@@ -3,6 +3,8 @@ package ru.alvisid.pacs.service;
 import ru.alvisid.pacs.model.PointAction;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
+import java.util.List;
+
 /**
  * The specific functional for the point action's service.
  *
@@ -29,4 +31,23 @@ public interface PointActionService extends TypicalService <PointAction> {
      * @throws NotFoundException if there aren't updated object in the data base.
      */
     void update(PointAction pointAction, int controlPointId) throws NotFoundException;
+
+
+    /**
+     * Returns the list with all point actions by control point's id.
+     *
+     * @param ctrlPointId the specified control point's id.
+     * @return the list with all point actions by control point's id.
+     */
+    List <PointAction> getAllByControlPointId(int ctrlPointId);
+
+    /**
+     * Returns a point action with filled fields: {@code controlPoint} and {@code actionType}
+     * by specified id.
+     *
+     * @param id the specified point action's id.
+     * @return the point action with filled fields: {@code controlPoint} and {@code actionType}.
+     * @throws NotFoundException if the entity with the specified id isn't found.
+     */
+    PointAction getWithCtrlPointAndActionType(int id) throws NotFoundException;
 }

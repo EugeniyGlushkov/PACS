@@ -30,4 +30,13 @@ public interface PointActionRepository extends TypicalRepository<PointAction> {
      * @return the list with all point actions by control point's id.
      */
     List<PointAction> getAllByControlPointId(int ctrlPointId);
+
+    /**
+     * Returns a point action with filled fields: {@code controlPoint} and {@code actionType}
+     * by specified id.
+     *
+     * @param id the specified point action's id.
+     * @return the point action with filled fields: {@code controlPoint} and {@code actionType}.
+     */
+    PointAction getWithCtrlPointAndActionType(int id);
 }

@@ -18,7 +18,7 @@ public abstract class AbstractHasEmpEntity extends AbstractEntity {
      */
     @NotNull
     @JoinColumn(name = "emp_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     protected Employee employee;
 

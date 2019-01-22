@@ -165,6 +165,8 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
         T newObj = testData.getNew();
         T createdObj = service.create(newObj);
         newObj.setId(createdObj.getId());
+        System.out.println(newObj);
+        System.out.println(createdObj);
         assertMatch(testData.IGNORING_FIELDS, service.getAll(), testData.getCreatedArray(newObj));
     }
 

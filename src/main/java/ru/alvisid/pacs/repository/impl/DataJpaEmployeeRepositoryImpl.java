@@ -151,4 +151,16 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
     public Employee getByEmail(String email) {
         return crudRepository.getByEmail(email);
     }
+
+    /**
+     * Returns an employee with filled fields: {@code department} and {@code position}
+     * by specified id.
+     *
+     * @param id the specified employee's id.
+     * @return the employee with filled fields: {@code department} and {@code position}.
+     */
+    @Override
+    public Employee getWithDeptAndPosition(int id) {
+        return crudRepository.getWithDeptAndPosition(id);
+    }
 }

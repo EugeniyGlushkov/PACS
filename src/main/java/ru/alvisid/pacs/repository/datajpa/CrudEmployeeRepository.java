@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.repository.datajpa;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -82,4 +83,15 @@ public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer
      * @return the employee by the given email.
      */
     Employee getByEmail(String email);
+
+    /**
+     * Returns an employee with filled fields: {@code department} and {@code position}
+     * by specified id.
+     *
+     * @param id the specified employee's id.
+     * @return the employee with filled fields: {@code department} and {@code position}.
+     */
+    @EntityGraph(attributePaths = {"department", "position"})
+    @Query("SELECT e FROM Employee e WHERE e.id=?1")
+    Employee getWithDeptAndPosition(int id);
 }
