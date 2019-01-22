@@ -5,7 +5,7 @@ import ru.alvisid.pacs.model.PointAction;
 
 import static testdata.ControlPointTestData.*;
 
-public class PointActionTestData extends AbstractTestData <PointAction> {
+public class PointActionTestData extends AbstractTestData<PointAction> {
     /**
      * Object which represents existing entity in the data base.
      */
@@ -79,13 +79,13 @@ public class PointActionTestData extends AbstractTestData <PointAction> {
     @Override
     public PointAction[] getCreatedArray(PointAction expectedCreatedObj) {
         return new PointAction[]{
-                expectedCreatedObj,
-                POINT_ACTION_5,
-                POINT_ACTION_6,
                 POINT_ACTION_1,
                 POINT_ACTION_2,
                 POINT_ACTION_3,
-                POINT_ACTION_4
+                POINT_ACTION_4,
+                expectedCreatedObj,
+                POINT_ACTION_5,
+                POINT_ACTION_6
         };
     }
 
@@ -97,11 +97,11 @@ public class PointActionTestData extends AbstractTestData <PointAction> {
     @Override
     public PointAction[] getDeletedArray() {
         return new PointAction[]{
-                POINT_ACTION_5,
-                POINT_ACTION_6,
                 POINT_ACTION_1,
                 POINT_ACTION_2,
-                POINT_ACTION_3
+                POINT_ACTION_3,
+                POINT_ACTION_5,
+                POINT_ACTION_6
         };
     }
 
@@ -113,12 +113,12 @@ public class PointActionTestData extends AbstractTestData <PointAction> {
     @Override
     public PointAction[] getAllArray() {
         return new PointAction[]{
-                POINT_ACTION_5,
-                POINT_ACTION_6,
                 POINT_ACTION_1,
                 POINT_ACTION_2,
                 POINT_ACTION_3,
-                POINT_ACTION_4
+                POINT_ACTION_4,
+                POINT_ACTION_5,
+                POINT_ACTION_6
         };
     }
 

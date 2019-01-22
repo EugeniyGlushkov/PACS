@@ -23,8 +23,8 @@ public class DataJpaPointActionRepositoryImpl implements PointActionRepository {
      * Sort by control point's serial code and action's type.
      */
     private static final Sort SORT_CPOINT_ACTTYPE = new Sort(Sort.Direction.ASC,
-            "controlPoint.serialCode",
-            "actionType.type");
+            "controlPoint.id",
+            "actionType");
 
     /**
      * An interface for point's action repository which extends JpaRepository.

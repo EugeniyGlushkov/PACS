@@ -60,6 +60,7 @@ public interface CrudPointActionRepository extends JpaRepository <PointAction, I
      * @return list of all point's actions.
      */
     @Override
+    @EntityGraph(attributePaths = {"controlPoint"})
     List <PointAction> findAll(Sort sort);
 
     /**
@@ -79,7 +80,7 @@ public interface CrudPointActionRepository extends JpaRepository <PointAction, I
      * @param id the specified point action's id.
      * @return the point action with filled fields: {@code controlPoint} and {@code actionType}.
      */
-    @EntityGraph(attributePaths = {"controlPoint", "actionType"})
+    @EntityGraph(attributePaths = {"controlPoint"})
     @Query("SELECT pa FROM PointAction pa WHERE pa.id=?1")
     PointAction getWithCtrlPointAndActionType(int id);
 }
