@@ -78,10 +78,11 @@ public class DeptScheduleServiceTest extends AbstractServiceTest<DeptSchedule, D
     public void updateWithDeptIdNotFound() {
         DeptSchedule updatedDeptSchedule = testData.getUpdated();
         updatedDeptSchedule.setId(testData.NOT_FOUND_ID);
+        int deptId = updatedDeptSchedule.getDepartment().getId();
+        updatedDeptSchedule.setDepartment(null);
         thrown.expect(NotFoundException.class);
-        System.out.println(updatedDeptSchedule);
         thrown.expectMessage("Not found entity with id=" + testData.NOT_FOUND_ID);
-        service.update(updatedDeptSchedule, updatedDeptSchedule.getDepartment().getId());
+        service.update(updatedDeptSchedule, deptId);
     }
 
 

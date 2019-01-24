@@ -6,6 +6,7 @@ import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import ru.alvisid.pacs.model.Department;
+import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import testdata.DepartmentTestData;
 
 import static testdata.DepartmentTestData.*;
@@ -18,7 +19,7 @@ import static util.TestUtil.assertMatch;
  * @version 1.0
  * @see AbstractServiceTest
  */
-public class DepartmentServiceTest extends AbstractServiceTest<Department, DepartmentService> {
+public class DepartmentServiceTest extends AbstractServiceTest <Department, DepartmentService> {
     /**
      * Constructs new <em>DepartmentServiceTest</em> object.
      */
@@ -72,19 +73,14 @@ public class DepartmentServiceTest extends AbstractServiceTest<Department, Depar
         assertMatch(actualDepartment.getDeptSchedule(), expectedDepartment.getDeptSchedule());
     }
 
-
     /**
-     * Checks matching the actual updated value from DB to the expected updated value from {@code testData}.
-     * {@code deptSchedule} field isn't updated, because it is updating in the it's service.
+     * Checks the {@code NotFoundException} when there are no object with the specified id in the DB.
      */
     @Test
-    public void updateWeekEndsWithAllFields() {
-        Department expectedDepartment = testData.getUpdated();
-        service.update(expectedDepartment);
-        Department actualDepartment = service.getWithWeekEndsAndSched(expectedDepartment.getId());
-        assertMatch(testData.IGNORING_FIELDS, actualDepartment, expectedDepartment);
-        assertMatch(actualDepartment.getWeekEnds(), expectedDepartment.getWeekEnds());
-        assertMatch(actualDepartment.getDeptSchedule(), expectedDepartment.getDeptSchedule());
+    public void getWithWeekEndsAndSchedNotFound() {
+        thrown.expect(NotFoundException.class);
+        thrown.expectMessage("Not found entity with id=" + testData.NOT_FOUND_ID);
+        service.getWithWeekEndsAndSched(testData.NOT_FOUND_ID);
     }
 
     /**
