@@ -74,13 +74,7 @@ public class DeptScheduleServiceImpl
      */
     @Override
     public DeptSchedule getByDeptId(int deptId) {
-        DeptSchedule deptScheduleById = repository.getByDeptId(deptId);
-
-        if (Objects.isNull(deptScheduleById)) {
-            throw new NotFoundException("There are no department's schedule with department id: " + deptId + " in the DB!");
-        }
-
-        return deptScheduleById;
+        return repository.getByDeptId(deptId);
     }
 
     /**

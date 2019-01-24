@@ -20,11 +20,6 @@ import static util.TestUtil.assertMatch;
  */
 public class DeptScheduleServiceTest extends AbstractServiceTest<DeptSchedule, DeptScheduleService> {
     /**
-     * Current {@code DepartmentTestData} object.
-     */
-    DepartmentTestData departmentTestData = new DepartmentTestData();
-
-    /**
      * Constructs new <em>DeptScheduleServiceTest</em> object.
      */
     public DeptScheduleServiceTest() {

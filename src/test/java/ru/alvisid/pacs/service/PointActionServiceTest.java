@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.service;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.alvisid.pacs.model.PointAction;
 import testdata.AbstractTestData;
@@ -22,5 +23,11 @@ public class PointActionServiceTest extends AbstractServiceTest<PointAction, Poi
     @Autowired
     public void setService(PointActionService service) {
         this.service = service;
+    }
+
+    @Test
+    public void createWithCtrlPointId() {
+        PointAction expectedPointAction = testData.getNew();
+        int expectedCtrlPointId = expectedPointAction.getControlPoint().getId();
     }
 }

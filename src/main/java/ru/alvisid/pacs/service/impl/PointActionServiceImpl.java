@@ -75,20 +75,20 @@ public class PointActionServiceImpl
     @Override
     @Cacheable(cacheResolver = "cacheResolver")
     public List <PointAction> getAllByControlPointId(int ctrlPointId) {
-        return null;
+        return repository.getAllByControlPointId(ctrlPointId);
     }
 
     /**
-     * Returns a point action with filled fields: {@code controlPoint} and {@code actionType}
+     * Returns a point action with filled field: {@code controlPoint}
      * by specified id.
      *
      * @param id the specified point action's id.
-     * @return the point action with filled fields: {@code controlPoint} and {@code actionType}.
+     * @return the point action with filled field: {@code controlPoint}.
      * @throws NotFoundException if the entity with the specified id isn't found.
      */
     @Override
-    public PointAction getWithCtrlPointAndActionType(int id) throws NotFoundException {
-        return null;
+    public PointAction getWithCtrlPoint(int id) throws NotFoundException {
+        return checkNotFoundWithId(repository.getWithCtrlPoint(id), id);
     }
 
     /**

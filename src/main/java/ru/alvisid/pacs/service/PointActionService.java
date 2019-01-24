@@ -42,12 +42,12 @@ public interface PointActionService extends TypicalService <PointAction> {
     List <PointAction> getAllByControlPointId(int ctrlPointId);
 
     /**
-     * Returns a point action with filled fields: {@code controlPoint} and {@code actionType}
+     * Returns a point action with filled field: {@code controlPoint}
      * by specified id.
      *
      * @param id the specified point action's id.
-     * @return the point action with filled fields: {@code controlPoint} and {@code actionType}.
+     * @return the point action with filled field: {@code controlPoint}.
      * @throws NotFoundException if the entity with the specified id isn't found.
      */
-    PointAction getWithCtrlPointAndActionType(int id) throws NotFoundException;
+    PointAction getWithCtrlPoint(int id) throws NotFoundException;
 }
