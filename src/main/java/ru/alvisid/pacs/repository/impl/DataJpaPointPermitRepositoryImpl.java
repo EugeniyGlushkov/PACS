@@ -132,7 +132,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
      * @see DataJpaPointPermitRepositoryImpl#getAllByControlPointId(int)
      */
     @Override
-    public List<PointPermit> getAll() {
+    public List <PointPermit> getAll() {
         return crudRepository.findAll(SORT_SERCODE_LNAME_FNAME_SNAME_TYPE);
     }
 
@@ -147,7 +147,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
      * @see CrudPointPermitRepository#findAllByEmployeeId(int)
      */
     @Override
-    public List<PointPermit> getAllByEmpId(int empId) {
+    public List <PointPermit> getAllByEmpId(int empId) {
         return crudRepository.findAllByEmployeeId(empId);
     }
 
@@ -162,7 +162,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
      * @see DataJpaPointPermitRepositoryImpl#getAllByEmpId(int)
      */
     @Override
-    public List<PointPermit> getAllByControlPointId(int cPointId) {
+    public List <PointPermit> getAllByControlPointId(int cPointId) {
         return crudRepository.findAllByControlPointId(cPointId, SORT_SERCODE_LNAME_FNAME_SNAME_TYPE);
     }
 }
