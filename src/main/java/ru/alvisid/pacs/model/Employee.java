@@ -39,6 +39,13 @@ public class Employee extends AbstractPerson {
     private Position position;
 
     /**
+     * An employee's chief.
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chief_id")
+    private Employee chief;
+
+    /**
      * The card's number of the person.
      */
     @NotNull
@@ -78,7 +85,7 @@ public class Employee extends AbstractPerson {
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     @OrderBy("pointAction.controlPoint.serialCode, pointAction.actionType.type ASC")
-    private List<PointPermit> pointPermits;
+    private List <PointPermit> pointPermits;
 
     /**
      * Returns the employee's department.
@@ -96,6 +103,15 @@ public class Employee extends AbstractPerson {
      */
     public Position getPosition() {
         return position;
+    }
+
+    /**
+     * Returns the employee's chief.
+     *
+     * @return the employee's chief.
+     */
+    public Employee getChief() {
+        return chief;
     }
 
     /**
@@ -153,12 +169,21 @@ public class Employee extends AbstractPerson {
     }
 
     /**
-     * Sets the specified value to the
+     * Sets the specified value to the {@code position} field.
      *
-     * @param position the specified value of the position.
+     * @param position the specified value to the {@code position} field.
      */
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    /**
+     * Sets the specified value to the {@code chief} field.
+     *
+     * @param chief the specified value to the {@code chief} field.
+     */
+    public void setChief(Employee chief) {
+        this.chief = chief;
     }
 
     /**
@@ -198,12 +223,21 @@ public class Employee extends AbstractPerson {
     }
 
     /**
+     * Sets the specified value to the {@code pointPermits} field.
+     *
+     * @param pointPermits the specified value to the {@code pointPermits} field.
+     */
+    public void setPointPermits(List <PointPermit> pointPermits) {
+        this.pointPermits = pointPermits;
+    }
+
+    /**
      * Initializes a newly created <b>Employee</b> object with null fields values
      * and null fields of the superclass.
      *
-     * @see Employee#Employee(String, String, String, Department, Position, Integer, String)
-     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String)
-     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String, EmpSchedule, Set)
+     * @see Employee#Employee(String, String, String, Department, Position, Employee, Integer, String)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Employee, Integer, String)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Employee, Integer, String, EmpSchedule, Set)
      * @see Employee#Employee(Employee)
      */
     public Employee() {
@@ -220,17 +254,18 @@ public class Employee extends AbstractPerson {
      * @param secondName the employee's second name.
      * @param department the employee's department.
      * @param position   the employee's position.
+     * @param chief      the employee's chief.
      * @param cardNum    the employee's card's number.
      * @param email      the employee's email.
      * @see Employee#Employee()
-     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String)
-     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String, EmpSchedule, Set)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Employee, Integer, String)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Employee, Integer, String, EmpSchedule, Set)
      * @see Employee#Employee(Employee)
      */
     public Employee(String lastName, String firstName, String secondName,
-                    Department department, Position position, Integer cardNum, String email) {
+                    Department department, Position position, Employee chief, Integer cardNum, String email) {
         this(null, lastName, firstName, secondName,
-                department, position, cardNum, email);
+                department, position, chief, cardNum, email);
     }
 
     /**
@@ -245,16 +280,17 @@ public class Employee extends AbstractPerson {
      * @param secondName the employee's second name.
      * @param department the employee's department.
      * @param position   the employee's position.
+     * @param chief      the employee's chief.
      * @param cardNum    the employee's card's number.
      * @param email      the employee's email.
      * @see Employee#Employee()
-     * @see Employee#Employee(String, String, String, Department, Position, Integer, String)
-     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String, EmpSchedule, Set)
+     * @see Employee#Employee(String, String, String, Department, Position, Employee, Integer, String)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Employee, Integer, String, EmpSchedule, Set)
      * @see Employee#Employee(Employee)
      */
     public Employee(Integer id, String lastName, String firstName, String secondName,
-                    Department department, Position position, Integer cardNum, String email) {
-        this(id, lastName, firstName, secondName, department, position, cardNum, email, null, null);
+                    Department department, Position position, Employee chief, Integer cardNum, String email) {
+        this(id, lastName, firstName, secondName, department, position, chief, cardNum, email, null, null);
     }
 
     /**
@@ -269,21 +305,23 @@ public class Employee extends AbstractPerson {
      * @param secondName the employee's second name.
      * @param department the employee's department.
      * @param position   the employee's position.
+     * @param chief      the employee's chief.
      * @param cardNum    the employee's card's number.
      * @param email      the employee's email.
      * @param schedule   the employee's schedule.
      * @param roles      the employee's roles.
      * @see Employee#Employee()
-     * @see Employee#Employee(String, String, String, Department, Position, Integer, String)
-     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String)
+     * @see Employee#Employee(String, String, String, Department, Position, Employee, Integer, String)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Employee, Integer, String)
      * @see Employee#Employee(Employee)
      */
     public Employee(Integer id, String lastName, String firstName, String secondName,
-                    Department department, Position position, Integer cardNum, String email,
+                    Department department, Position position, Employee chief, Integer cardNum, String email,
                     EmpSchedule schedule, Set <Role> roles) {
         super(id, lastName, firstName, secondName);
         this.department = department;
         this.position = position;
+        this.chief = chief;
         this.cardNum = cardNum;
         this.email = email;
         this.schedule = schedule;
@@ -296,9 +334,9 @@ public class Employee extends AbstractPerson {
      *
      * @param employee the specified object to copying.
      * @see Employee#Employee()
-     * @see Employee#Employee(String, String, String, Department, Position, Integer, String)
-     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String)
-     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String, EmpSchedule, Set)
+     * @see Employee#Employee(String, String, String, Department, Position, Employee, Integer, String)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Employee, Integer, String)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Employee, Integer, String, EmpSchedule, Set)
      */
     public Employee(Employee employee) {
         this(employee.getId(),
@@ -307,6 +345,7 @@ public class Employee extends AbstractPerson {
                 employee.getSecondName(),
                 employee.getDepartment(),
                 employee.getPosition(),
+                employee.getChief(),
                 employee.getCardNum(),
                 employee.getEmail(),
                 employee.getSchedule(),
@@ -327,6 +366,7 @@ public class Employee extends AbstractPerson {
                 ", secondName='" + secondName + '\'' +
                 ", department=" + department +
                 ", position=" + position +
+                ", chief's id=" + chief.getId() +
                 ", cardNum=" + cardNum +
                 ", email='" + email + '\'' +
                 ", roles='" + roles + '\'' +

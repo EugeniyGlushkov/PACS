@@ -11,6 +11,7 @@ DELETE FROM days_off;
 DELETE FROM weekends;
 DELETE FROM absence_reasons;
 DELETE FROM control_points;
+DELETE FROM department_chiefs;
 DELETE FROM employees;
 DELETE FROM positions;
 DELETE FROM departments;
@@ -23,6 +24,7 @@ ALTER SEQUENCE actions_id_seq RESTART WITH 1;
 ALTER SEQUENCE control_points_id_seq RESTART WITH 1;
 ALTER SEQUENCE days_off_id_seq RESTART WITH 1;
 ALTER SEQUENCE departments_id_seq RESTART WITH 1;
+ALTER SEQUENCE department_chiefs_id_seq RESTART WITH 1;
 ALTER SEQUENCE edits_id_seq RESTART WITH 1;
 ALTER SEQUENCE point_actions_id_seq RESTART WITH 1;
 ALTER SEQUENCE point_permits_id_seq RESTART WITH 1;
@@ -42,7 +44,7 @@ INSERT INTO absence_reasons (reason, description) VALUES
   ('больничный', 'отсутствие по болезни.');
 
 INSERT INTO employees (dep_id, pos_id, card_num, last_name, first_name, second_name, email) VALUES
-  (1, 1, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru');
+  (1, 1, NULL, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru');
 
 INSERT INTO employee_roles (emp_id, role) VALUES
   (10000, 'ROLE_USER');

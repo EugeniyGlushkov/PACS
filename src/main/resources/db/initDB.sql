@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS edit_types;
 DROP TABLE IF EXISTS week_days;
 DROP TABLE IF EXISTS action_types;
 DROP TABLE IF EXISTS control_points;
+DROP TABLE IF EXISTS department_chiefs;
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS positions;
 DROP TABLE IF EXISTS departments;
@@ -93,18 +94,34 @@ CREATE TABLE employees
   id          INTEGER PRIMARY KEY  DEFAULT nextval('PERS_SEQ'),
   dep_id      INTEGER,
   pos_id      INTEGER      NOT NULL,
+  chief_id    INTEGER,
   card_num    INTEGER      NOT NULL,
   last_name   VARCHAR(100) NOT NULL,
   first_name  VARCHAR(100) NOT NULL,
   second_name VARCHAR(100) NOT NULL,
   email       VARCHAR(100) NOT NULL,
   FOREIGN KEY (dep_id) REFERENCES departments (id),
-  FOREIGN KEY (pos_id) REFERENCES positions (id)
+  FOREIGN KEY (pos_id) REFERENCES positions (id),
+  FOREIGN KEY (chief_id) REFERENCES employees (id)
 );
 CREATE UNIQUE INDEX employees_unique_card_num_idx
   ON employees (card_num);
 CREATE UNIQUE INDEX employees_unique_emale_idx
   ON employees (email);
+
+/*
+Отношение "Начальник департамента"
+содержит соответственно:
+-первичный ключ;
+-id департамента;
+-id работника.
+ */
+CREATE TABLE department_chiefs
+(
+  id     SERIAL PRIMARY KEY,
+  dep_id INTEGER UNIQUE     NOT NULL,
+  emp_id INTEGER UNIQUE     NOT NULL
+);
 
 /*
 Отношение "Контрольная точка" (турникет, электронный замок и т.п.)

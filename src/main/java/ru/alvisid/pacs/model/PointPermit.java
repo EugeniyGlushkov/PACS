@@ -100,7 +100,7 @@ public class PointPermit extends AbstractId {
     /**
      * Constructs a new <b>PointPermit</b> object and sets the id, pointAction and employee values.
      *
-     * @param id          the specifiec id.
+     * @param id          the specified id.
      * @param pointAction the specified point action
      * @param employee    the specified employee.
      * @see PointPermit#PointPermit()

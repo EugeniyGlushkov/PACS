@@ -102,7 +102,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
     /**
      * Deletes a point permit by given id.
      *
-     * @param id the specifiec id of the deleted point permit.
+     * @param id the specific id of the deleted point permit.
      * @return true - the entity is deleted, false - the entity isn't found.
      */
     @Override
@@ -113,9 +113,9 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
     /**
      * Returns a point permit by given id.
      *
-     * @param id the specifiec id of point permit to get.
+     * @param id the specific id of point permit to get.
      * @return a point permit by the given id,
-     * null - if there aren't point permit with cpecifiec id in the DB.
+     * null - if there aren't point permit with specific id in the DB.
      */
     @Override
     public PointPermit get(int id) {
