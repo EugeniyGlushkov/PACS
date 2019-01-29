@@ -11,7 +11,7 @@ DELETE FROM days_off;
 DELETE FROM weekends;
 DELETE FROM absence_reasons;
 DELETE FROM control_points;
-DELETE FROM department_chiefs;
+DELETE FROM chiefs;
 DELETE FROM employees;
 DELETE FROM positions;
 DELETE FROM departments;
@@ -29,7 +29,7 @@ ALTER SEQUENCE ABSENCE_REASONS_SEQ RESTART WITH 1;
 ALTER SEQUENCE CONTROL_POINTS_SEQ RESTART WITH 1;
 ALTER SEQUENCE POSITIONS_SEQ RESTART WITH 1;
 ALTER SEQUENCE DEPARTMENTS_SEQ RESTART WITH 1;
-ALTER SEQUENCE DEPARTMENT_CHIEFS_SEQ RESTART WITH 1;
+ALTER SEQUENCE CHIEFS_SEQ RESTART WITH 1;
 
 INSERT INTO departments (name, description) VALUES
   ('ООО "Рога и копыта"', 'Компания по производству субпродуктов.'), /*id 1*/
@@ -91,11 +91,26 @@ INSERT INTO point_actions (controlpoint_id, acttype_id) VALUES
   (3, 4), /*id 5*/
   (4, 4); /*id 6*/
 
-INSERT INTO employees (dep_id, pos_id, chief_id, card_num, last_name, first_name, second_name, email) VALUES
-  (1, 1, NULL, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru'); /*10006*/
+INSERT INTO employees (dep_id, pos_id, card_num, last_name, first_name, second_name, email) VALUES
+  (1, 1, 333222, 'Иванов', 'Иван', 'Иванович', 'ivanov@mail.ru'),     /*10006*/
+  (2, 2, 225485, 'Тищенко', 'Лидия', 'Петровна', 'tlpet@gmail.com'),  /*10007*/
+  (3, 3, 256432, 'Иванков', 'Пётр', 'Ильич', 'ivpil@list.ru'),        /*10008*/
+  (2, 4, 965677, 'Сидоркина', 'Анна', 'Андреевна', 'secret@list.ru'), /*10009*/
+  (3, 5, 124344, 'Батурина', 'Ольга', 'Игоревна', 'buhg@list.ru'),    /*10010*/
+  (2, 6, 555433, 'Балабанов', 'Евгений', 'Олегович', 'admin@bk.ru');  /*10011*/
 
 INSERT INTO employee_roles (emp_id, role) VALUES
-  (10006, 'ROLE_USER');
+  (10006, 'ROLE_USER'),
+  (10006, 'ALL_READ'),
+  (10007, 'ROLE_DEPSREAD'),
+  (10007, 'ROLE_EMPSWRIGHT'),
+  (10007, 'ROLE_USER'),
+  (10008, 'ROLE_DEPSREAD'),
+  (10008, 'ROLE_USER'),
+  (10009, 'ROLE_USER'),
+  (10010, 'ROLE_USER'),
+  (10011, 'ROLE_USER'),
+  (10011, 'ROLE_ADMIN');
 
 INSERT INTO absences (emp_id, reason_id, start_absence, end_absence, description) VALUES
   (10006, 1, '2018-05-03', '2018-05-12', 'больничный лист №12345.');

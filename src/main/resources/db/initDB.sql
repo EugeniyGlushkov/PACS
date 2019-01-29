@@ -2,8 +2,6 @@ DROP TRIGGER IF EXISTS chek_abs
 ON absences;
 DROP TRIGGER IF EXISTS chek_act
 ON actions;
-DROP TRIGGER IF EXISTS new_emp
-ON employees;
 
 DROP FUNCTION IF EXISTS new_absence();
 DROP FUNCTION IF EXISTS new_action();
@@ -25,7 +23,7 @@ DROP TABLE IF EXISTS edit_types;
 DROP TABLE IF EXISTS week_days;
 DROP TABLE IF EXISTS action_types;
 DROP TABLE IF EXISTS control_points;
-DROP TABLE IF EXISTS department_chiefs;
+DROP TABLE IF EXISTS chiefs;
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS positions;
 DROP TABLE IF EXISTS departments;
@@ -94,15 +92,13 @@ CREATE TABLE employees
   id          INTEGER PRIMARY KEY  DEFAULT nextval('PERS_SEQ'),
   dep_id      INTEGER,
   pos_id      INTEGER      NOT NULL,
-  chief_id    INTEGER,
   card_num    INTEGER      NOT NULL,
   last_name   VARCHAR(100) NOT NULL,
   first_name  VARCHAR(100) NOT NULL,
   second_name VARCHAR(100) NOT NULL,
   email       VARCHAR(100) NOT NULL,
   FOREIGN KEY (dep_id) REFERENCES departments (id),
-  FOREIGN KEY (pos_id) REFERENCES positions (id),
-  FOREIGN KEY (chief_id) REFERENCES employees (id)
+  FOREIGN KEY (pos_id) REFERENCES positions (id)
 );
 CREATE UNIQUE INDEX employees_unique_card_num_idx
   ON employees (card_num);
@@ -110,17 +106,19 @@ CREATE UNIQUE INDEX employees_unique_emale_idx
   ON employees (email);
 
 /*
-Отношение "Начальник департамента"
+Отношение "Начальник сотрудника"
 содержит соответственно:
 -первичный ключ;
--id департамента;
--id работника.
+-id работника;
+-id начальника.
  */
-CREATE TABLE department_chiefs
+CREATE TABLE chiefs
 (
-  id     SERIAL PRIMARY KEY,
-  dep_id INTEGER UNIQUE     NOT NULL,
-  emp_id INTEGER UNIQUE     NOT NULL
+  id        SERIAL PRIMARY KEY,
+  emp_id    INTEGER UNIQUE     NOT NULL,
+  chief_id  INTEGER UNIQUE,
+  FOREIGN KEY (emp_id) REFERENCES employees (id) ON DELETE CASCADE,
+  FOREIGN KEY (chief_id) REFERENCES employees (id)
 );
 
 /*
@@ -450,31 +448,6 @@ CREATE INDEX visitors_names_idx
   ON visitors (temp_num, last_name, first_name, second_name);
 
 /*
-Функция добавляет расписание работника со значениями из расписания его отдела.
- */
-CREATE FUNCTION new_employee()
-  RETURNS TRIGGER AS
-$new_emp$
-BEGIN
-  INSERT INTO emp_schedules (emp_id, start_work, end_work, start_lunch, end_lunch) VALUES
-    (NEW.id,
-     (SELECT start_work
-      FROM dep_schedules
-      WHERE dep_schedules.dep_id = NEW.dep_id),
-     (SELECT end_work
-      FROM dep_schedules
-      WHERE dep_schedules.dep_id = NEW.dep_id),
-     (SELECT start_lunch
-      FROM dep_schedules
-      WHERE dep_schedules.dep_id = NEW.dep_id),
-     (SELECT end_lunch
-      FROM dep_schedules
-      WHERE dep_schedules.dep_id = NEW.dep_id));
-  RETURN NEW;
-END;
-$new_emp$ LANGUAGE plpgsql;
-
-/*
 Функция для проверки того, что добавляемый интервал времени отсутствия не пересекается
 интервалами уже существующих отсутствий: работник не может одновременно быть в отпуске и командировке.
 При выявлении пересечения выбрасывается исключение.
@@ -520,15 +493,6 @@ BEGIN
   RETURN NEW;
 END;
 $chek_act$ LANGUAGE plpgsql;
-
-/*
-Триггер срабатывает после добавления нового работника и вызывает функцию new_employee().
- */
-CREATE TRIGGER new_emp
-AFTER INSERT
-  ON employees
-FOR EACH ROW
-EXECUTE PROCEDURE new_employee();
 
 /*
 Триггер, срабатывающий перед добавлением новых данных в отношение "Отсутствия"

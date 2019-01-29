@@ -89,13 +89,13 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
      */
     @Test
     public void testValidation() {
-        validateRootCause(() -> service.create(new Department(null, "Test validate, name is null")),
+        validateRootCause(() -> service.create(new Department(null, null, "Test validate, name is null")),
                 ConstraintViolationException.class);
-        validateRootCause(() -> service.create(new Department("", "Test validate, name is empty")),
+        validateRootCause(() -> service.create(new Department("", null, "Test validate, name is empty")),
                 ConstraintViolationException.class);
-        validateRootCause(() -> service.create(new Department("    ", "Test validate, name is blank")),
+        validateRootCause(() -> service.create(new Department("    ", null, "Test validate, name is blank")),
                 ConstraintViolationException.class);
-        validateRootCause(() -> service.create(new Department("A", "Test validate, name's size < 2")),
+        validateRootCause(() -> service.create(new Department("A", null, "Test validate, name's size < 2")),
                 ConstraintViolationException.class);
         validateRootCause(() -> service.create(new Department(
                         "Test validate, name's size > 255" +
@@ -106,15 +106,16 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
                                 "Test validate, name's size > 255" +
                                 "Test validate, name's size > 255" +
                                 "Test validate, name's size > 255",
+                        null,
                         "Test validate, name's size > 255")),
                 ConstraintViolationException.class);
-        validateRootCause(() -> service.create(new Department("Test validate, description is null", null)),
+        validateRootCause(() -> service.create(new Department("Test validate, description is null", null, null)),
                 ConstraintViolationException.class);
-        validateRootCause(() -> service.create(new Department("Test validate, description is empty", "")),
+        validateRootCause(() -> service.create(new Department("Test validate, description is empty", null, "")),
                 ConstraintViolationException.class);
-        validateRootCause(() -> service.create(new Department("Test validate, description is blank", "    ")),
+        validateRootCause(() -> service.create(new Department("Test validate, description is blank", null, "    ")),
                 ConstraintViolationException.class);
-        validateRootCause(() -> service.create(new Department("Test validate, description's size < 2", "A")),
+        validateRootCause(() -> service.create(new Department("Test validate, description's size < 2", null, "A")),
                 ConstraintViolationException.class);
     }
 }

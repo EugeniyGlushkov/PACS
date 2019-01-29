@@ -23,6 +23,11 @@ public enum Role {
     ROLE_DEPSREAD,
 
     /**
+     * Person who can read all data.
+     */
+    ALL_READ,
+
+    /**
      * Person who can add and edit employee's data.
      */
     ROLE_EMPSWRIGHT,
