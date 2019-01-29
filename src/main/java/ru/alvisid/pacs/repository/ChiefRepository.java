@@ -1,7 +1,6 @@
 package ru.alvisid.pacs.repository;
 
 import ru.alvisid.pacs.model.Chief;
-import ru.alvisid.pacs.model.Employee;
 
 /**
  * The generalized functional for the repository of the employee's chief.

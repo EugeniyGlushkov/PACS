@@ -35,11 +35,11 @@ public class DepartmentTestData extends AbstractTestData <Department> {
      */
     public static final Department
             DEPARTMENT_1 =
-            new Department(1, "ООО \"Рога и копыта\"", null, "Компания по производству субпродуктов.", WEEKENDS_1, null),
+            new Department(1, "ООО \"Рога и копыта\"", "Компания по производству субпродуктов.", WEEKENDS_1, null),
             DEPARTMENT_2 =
-                    new Department(2, "Отдел кадров", null, "Управление персоналом.", WEEKENDS_2, null),
+                    new Department(2, "Отдел кадров", "Управление персоналом.", WEEKENDS_2, null),
             DEPARTMENT_3 =
-                    new Department(3, "Бухгалтерия", null, "Финансовые операции и отчетность", WEEKENDS_3, null);
+                    new Department(3, "Бухгалтерия", "Финансовые операции и отчетность", WEEKENDS_3, null);
 
     /**
      * DEPARTMENT_1 with an updated data.
@@ -47,7 +47,7 @@ public class DepartmentTestData extends AbstractTestData <Department> {
      * @see DepartmentTestData#DEPARTMENT_1
      */
     public static final Department UPDATED_DEPARTMENT_1 =
-            new Department(1, "Обновленное название.", null, "Обновленный комментарий.", UPDATED_WEEKENDS_1, null);
+            new Department(1, "Обновленное название.", "Обновленный комментарий.", UPDATED_WEEKENDS_1, null);
 
     static {
         DEPARTMENT_1.setDeptSchedule(DEPT_SCHEDULE_1);
@@ -59,7 +59,7 @@ public class DepartmentTestData extends AbstractTestData <Department> {
      * New {@code Department} with id-null.
      */
     public static final Department NEW_DEPARTMENT =
-            new Department("Новый департамент", null, "Департамент для тестов");
+            new Department("Новый департамент", "Департамент для тестов");
 
     /**
      * Returns a new {@code Department} from the test data.

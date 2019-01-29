@@ -5,7 +5,6 @@ import org.springframework.data.domain.Sort;
 import ru.alvisid.pacs.model.Chief;
 import ru.alvisid.pacs.repository.ChiefRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudChiefRepository;
-import ru.alvisid.pacs.repository.datajpa.CrudDepartmentRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
 
 import java.util.List;

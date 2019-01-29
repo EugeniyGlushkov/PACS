@@ -2,8 +2,6 @@ package ru.alvisid.pacs.model;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import ru.alvisid.pacs.model.abstractions.AbstractEntity;
 
 import javax.persistence.*;
@@ -31,14 +29,6 @@ public class Department extends AbstractEntity {
     @Size(min = 2, max = 255)
     @Column(name = "name", nullable = false, unique = true)
     private String name;
-
-    /**
-     * The department's chief.
-     */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chief")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private Employee chief;
 
     /**
      * List of the outputs: week days when the department don't work constantly.
@@ -69,15 +59,6 @@ public class Department extends AbstractEntity {
     }
 
     /**
-     * Returns the department's chief.
-     *
-     * @return the department's chief.
-     */
-    public Employee getChief() {
-        return chief;
-    }
-
-    /**
      * Returns the list of the departmet's weekends.
      *
      * @return the list of the departmet's weekends.
@@ -105,15 +86,6 @@ public class Department extends AbstractEntity {
     }
 
     /**
-     * Sets the department's chief.
-     *
-     * @param chief the department's chief.
-     */
-    public void setChief(Employee chief) {
-        this.chief = chief;
-    }
-
-    /**
      * Sets the list of the departmet's weekends.
      *
      * @param weekEnds the list of the departmet's weekends.
@@ -135,9 +107,9 @@ public class Department extends AbstractEntity {
      * Initializes a newly created <b>Department</b> object with null name,
      * weekends, department's schedule values and null fields of the superclass.
      *
-     * @see Department#Department(String, Employee, String)
-     * @see Department#Department(Integer, String, Employee, String)
-     * @see Department#Department(Integer, String, Employee, String, List, DeptSchedule)
+     * @see Department#Department(String, String)
+     * @see Department#Department(Integer, String, String)
+     * @see Department#Department(Integer, String, String, List, DeptSchedule)
      * @see Department#Department(Department)
      */
     public Department() {
@@ -145,56 +117,52 @@ public class Department extends AbstractEntity {
 
     /**
      * Constructs a <b>Department</b> object with specified description, name
-     * chief and null id, weekends, department's schedule values.
+     * and null id, weekends, department's schedule values.
      *
      * @param name        the department's name.
-     * @param chief       the department's chief.
      * @param description the departmen's description.
      * @see Department#Department()
-     * @see Department#Department(Integer, String, Employee, String)
-     * @see Department#Department(Integer, String, Employee, String, List, DeptSchedule)
+     * @see Department#Department(Integer, String, String)
+     * @see Department#Department(Integer, String, String, List, DeptSchedule)
      * @see Department#Department(Department)
      */
-    public Department(String name, Employee chief, String description) {
-        this(null, name, chief, description);
+    public Department(String name, String description) {
+        this(null, name, description);
     }
 
     /**
-     * Constructs a <b>Department</b> object with specified id, description, name, chief values
+     * Constructs a <b>Department</b> object with specified id, description, name values
      * and null weekends, department's schedule values.
      *
      * @param id          the specific identifier.
      * @param name        the department's name.
-     * @param chief       the department's chief.
      * @param description the department's description.
      * @see Department#Department()
-     * @see Department#Department(String, Employee, String)
-     * @see Department#Department(Integer, String, Employee, String, List, DeptSchedule)
+     * @see Department#Department(String, String)
+     * @see Department#Department(Integer, String, String, List, DeptSchedule)
      * @see Department#Department(Department)
      */
-    public Department(Integer id, String name, Employee chief, String description) {
-        this(id, name, chief, description, null, null);
+    public Department(Integer id, String name, String description) {
+        this(id, name, description, null, null);
     }
 
     /**
      * Constructs a <b>Department</b> object with specified id, description, name,
-     * chief, department's weekends and schedule values.
+     * weekends department's and schedule values.
      *
      * @param id           the specific identifier.
      * @param name         the department's name.
-     * @param chief        the department's chief.
      * @param description  the department's description.
      * @param weekEnds     the weekends.
      * @param deptSchedule the department's schedule.
      * @see Department#Department()
-     * @see Department#Department(String, Employee, String)
-     * @see Department#Department(Integer, String, Employee, String)
+     * @see Department#Department(String, String)
+     * @see Department#Department(Integer, String, String)
      * @see Department#Department(Department)
      */
-    public Department(Integer id, String name, Employee chief, String description, List <WeekDay> weekEnds, DeptSchedule deptSchedule) {
+    public Department(Integer id, String name, String description, List <WeekDay> weekEnds, DeptSchedule deptSchedule) {
         super(id, description);
         this.name = name;
-        this.chief = chief;
         this.weekEnds = weekEnds;
         this.deptSchedule = deptSchedule;
     }
@@ -205,16 +173,15 @@ public class Department extends AbstractEntity {
      *
      * @param department the specified object to copying.
      * @see Department#Department()
-     * @see Department#Department(String, Employee, String)
-     * @see Department#Department(Integer, String, Employee, String)
-     * @see Department#Department(Integer, String, Employee, String, List, DeptSchedule)
+     * @see Department#Department(String, String)
+     * @see Department#Department(Integer, String, String)
+     * @see Department#Department(Integer, String, String, List, DeptSchedule)
      */
     public Department(Department department) {
         this(department.getId(),
                 department.getName(),
-                department.getChief(),
                 department.getDescription(),
-                Objects.isNull(department.getWeekEnds()) ? null : new ArrayList <>(department.getWeekEnds()),
+                Objects.isNull(department.getWeekEnds())? null : new ArrayList <>(department.getWeekEnds()),
                 department.getDeptSchedule());
     }
 
@@ -228,7 +195,6 @@ public class Department extends AbstractEntity {
         return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", chief='" + chief + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

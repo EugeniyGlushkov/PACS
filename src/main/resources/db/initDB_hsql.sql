@@ -118,7 +118,7 @@ CREATE TABLE employees
   first_name  VARCHAR(100) NOT NULL,
   second_name VARCHAR(100) NOT NULL,
   email       VARCHAR(100) NOT NULL,
-  FOREIGN KEY (dep_id) REFERENCES departments (id),
+  FOREIGN KEY (dep_id) REFERENCES departments (id) ON DELETE SET NULL,
   FOREIGN KEY (pos_id) REFERENCES positions (id)
 );;
 CREATE UNIQUE INDEX employees_unique_card_num_idx
@@ -141,6 +141,7 @@ CREATE TABLE chiefs
   FOREIGN KEY (emp_id) REFERENCES employees (id)
     ON DELETE CASCADE,
   FOREIGN KEY (chief_id) REFERENCES employees (id)
+    ON DELETE NO ACTION
 );
 
 /*
@@ -443,7 +444,7 @@ CREATE TABLE employee_roles
 (
   emp_id INTEGER      NOT NULL,
   role   VARCHAR(255) NOT NULL,
-  FOREIGN KEY (emp_id) REFERENCES employees (id),
+  FOREIGN KEY (emp_id) REFERENCES employees (id) ON DELETE CASCADE,
   CONSTRAINT employee_roles_con UNIQUE (emp_id, role)
 );
 
