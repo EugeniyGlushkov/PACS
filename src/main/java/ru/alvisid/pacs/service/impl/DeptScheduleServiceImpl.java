@@ -5,14 +5,11 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.DeptSchedule;
-import ru.alvisid.pacs.repository.impl.DataJpaDeptScheduleRepositoryImpl;
+import ru.alvisid.pacs.repository.DeptScheduleRepository;
 import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.DeptScheduleService;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
-
-import java.util.Objects;
-
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 
 /**
@@ -27,7 +24,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
  */
 @Service
 public class DeptScheduleServiceImpl
-        extends AbstractCachedService<DataJpaDeptScheduleRepositoryImpl, DeptSchedule> implements DeptScheduleService {
+        extends AbstractCachedService<DeptScheduleRepository, DeptSchedule> implements DeptScheduleService {
     /**
      * Cache alias for access to the ehcache.
      */
@@ -84,7 +81,7 @@ public class DeptScheduleServiceImpl
      * @param repository the specified department schedule's repository implementation.
      */
     @Autowired
-    public DeptScheduleServiceImpl(DataJpaDeptScheduleRepositoryImpl repository) {
+    public DeptScheduleServiceImpl(DeptScheduleRepository repository) {
         super(repository);
     }
 

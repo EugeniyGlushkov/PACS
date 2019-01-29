@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.Visitor;
-import ru.alvisid.pacs.repository.impl.DataJpaVisitorRepositoryImpl;
+import ru.alvisid.pacs.repository.VisitorRepository;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.VisitorService;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,7 +25,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFound;
  */
 @Service
 public class VisitorServiceImpl
-        extends AbstractService<DataJpaVisitorRepositoryImpl, Visitor> implements VisitorService {
+        extends AbstractService<VisitorRepository, Visitor> implements VisitorService {
     /**
      * Constructs new {@code VisitorServiceImpl} and set a specified visitor's repository implementation
      * to the superclass's repository field.
@@ -34,7 +33,7 @@ public class VisitorServiceImpl
      * @param repository the specified visitor's repository implementation.
      */
     @Autowired
-    public VisitorServiceImpl(DataJpaVisitorRepositoryImpl repository) {
+    public VisitorServiceImpl(VisitorRepository repository) {
         super(repository);
     }
 

@@ -3,7 +3,7 @@ package ru.alvisid.pacs.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.alvisid.pacs.model.AbsenceReason;
-import ru.alvisid.pacs.repository.impl.DataJpaAbsenceReasonRepositoryImpl;
+import ru.alvisid.pacs.repository.AbsenceReasonRepository;
 import ru.alvisid.pacs.service.AbsenceReasonService;
 import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
@@ -20,7 +20,7 @@ import ru.alvisid.pacs.service.AbstractService;
  */
 @Service
 public class AbsenceReasonServiceImpl
-        extends AbstractCachedService<DataJpaAbsenceReasonRepositoryImpl, AbsenceReason> implements AbsenceReasonService {
+        extends AbstractCachedService<AbsenceReasonRepository, AbsenceReason> implements AbsenceReasonService {
     /**
      * Cache alias for access to the ehcache.
      */
@@ -33,7 +33,7 @@ public class AbsenceReasonServiceImpl
      * @param repository the specified position's repository implementation.
      */
     @Autowired
-    public AbsenceReasonServiceImpl(DataJpaAbsenceReasonRepositoryImpl repository) {
+    public AbsenceReasonServiceImpl(AbsenceReasonRepository repository) {
         super(repository);
     }
 

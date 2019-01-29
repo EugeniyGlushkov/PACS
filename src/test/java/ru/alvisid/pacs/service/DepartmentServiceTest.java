@@ -20,7 +20,7 @@ import static util.TestUtil.assertMatch;
  * @version 1.0
  * @see AbstractServiceTest
  */
-public class DepartmentServiceTest extends AbstractServiceTest <Department, DepartmentService> {
+public class DepartmentServiceTest extends AbstractServiceTest<Department, DepartmentService> {
     /**
      * Constructs new <em>DepartmentServiceTest</em> object.
      */
@@ -55,13 +55,24 @@ public class DepartmentServiceTest extends AbstractServiceTest <Department, Depa
     }
 
     /**
-     * Cleans
+     * Cleans deleted department and test delete super.
      */
     @Test
     @Override
     public void delete() {
-        //employeeService.delete(EMPLOYEE_2.getId());
+        employeeService.delete(EMPLOYEE_2.getId());
         employeeService.delete(EMPLOYEE_4.getId());
+        employeeService.delete(EMPLOYEE_6.getId());
+        super.delete();
+    }
+
+    /**
+     * Checks the {@code RuntimeException} and it's message when deleted department is not empty.
+     */
+    @Test
+    public void deleteNotEmpty() {
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage("Can not delete department with id=" + testData.getDeletedId() + ", it must be empty.");
         super.delete();
     }
 

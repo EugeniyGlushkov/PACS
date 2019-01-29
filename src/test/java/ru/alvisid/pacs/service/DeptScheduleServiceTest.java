@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.alvisid.pacs.model.DeptSchedule;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
-import testdata.DepartmentTestData;
 import testdata.DeptScheduleTestData;
 
 import javax.validation.ConstraintViolationException;

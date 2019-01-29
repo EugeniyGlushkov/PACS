@@ -6,7 +6,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.PointAction;
-import ru.alvisid.pacs.repository.impl.DataJpaPointActionRepositoryImpl;
+import ru.alvisid.pacs.repository.PointActionRepository;
 import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.PointActionService;
@@ -28,7 +28,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
  */
 @Service
 public class PointActionServiceImpl
-        extends AbstractCachedService <DataJpaPointActionRepositoryImpl, PointAction> implements PointActionService {
+        extends AbstractCachedService <PointActionRepository, PointAction> implements PointActionService {
     /**
      * Cache alias for access to the ehcache.
      */
@@ -98,7 +98,7 @@ public class PointActionServiceImpl
      * @param repository the specified point action's repository implementation.
      */
     @Autowired
-    public PointActionServiceImpl(DataJpaPointActionRepositoryImpl repository) {
+    public PointActionServiceImpl(PointActionRepository repository) {
         super(repository);
     }
 

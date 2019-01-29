@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.ControlPoint;
-import ru.alvisid.pacs.repository.impl.DataJpaControlPointRepositoryImpl;
+import ru.alvisid.pacs.repository.ControlPointRepository;
 import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.ControlPointService;
@@ -24,7 +24,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFound;
  */
 @Service
 public class ControlPointServiceImpl
-        extends AbstractCachedService <DataJpaControlPointRepositoryImpl, ControlPoint> implements ControlPointService {
+        extends AbstractCachedService <ControlPointRepository, ControlPoint> implements ControlPointService {
     /**
      * Cache alias for access to the ehcache.
      */
@@ -37,7 +37,7 @@ public class ControlPointServiceImpl
      * @param repository the specified position's repository implementation.
      */
     @Autowired
-    public ControlPointServiceImpl(DataJpaControlPointRepositoryImpl repository) {
+    public ControlPointServiceImpl(ControlPointRepository repository) {
         super(repository);
     }
 

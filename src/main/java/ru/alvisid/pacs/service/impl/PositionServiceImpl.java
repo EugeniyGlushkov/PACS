@@ -3,7 +3,7 @@ package ru.alvisid.pacs.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.alvisid.pacs.model.Position;
-import ru.alvisid.pacs.repository.impl.DataJpaPositionRepositoryImpl;
+import ru.alvisid.pacs.repository.PositionRepository;
 import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.PositionService;
@@ -20,7 +20,7 @@ import ru.alvisid.pacs.service.PositionService;
  */
 @Service
 public class PositionServiceImpl
-        extends AbstractCachedService <DataJpaPositionRepositoryImpl, Position> implements PositionService {
+        extends AbstractCachedService <PositionRepository, Position> implements PositionService {
     /**
      * Cache alias for access to the ehcache.
      */
@@ -33,7 +33,7 @@ public class PositionServiceImpl
      * @param repository the specified position's repository implementation.
      */
     @Autowired
-    public PositionServiceImpl(DataJpaPositionRepositoryImpl repository) {
+    public PositionServiceImpl(PositionRepository repository) {
         super(repository);
     }
 
