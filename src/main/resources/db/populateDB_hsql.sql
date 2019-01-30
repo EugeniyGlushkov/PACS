@@ -11,6 +11,7 @@ DELETE FROM days_off;
 DELETE FROM weekends;
 DELETE FROM absence_reasons;
 DELETE FROM control_points;
+DELETE FROM department_chiefs;
 DELETE FROM chiefs;
 DELETE FROM employees;
 DELETE FROM positions;
@@ -30,6 +31,7 @@ ALTER SEQUENCE CONTROL_POINTS_SEQ RESTART WITH 1;
 ALTER SEQUENCE POSITIONS_SEQ RESTART WITH 1;
 ALTER SEQUENCE DEPARTMENTS_SEQ RESTART WITH 1;
 ALTER SEQUENCE CHIEFS_SEQ RESTART WITH 1;
+ALTER SEQUENCE DEPARTMENT_CHIEFS_SEQ RESTART WITH 1;
 
 INSERT INTO departments (name, description) VALUES
   ('ООО "Рога и копыта"', 'Компания по производству субпродуктов.'), /*id 1*/

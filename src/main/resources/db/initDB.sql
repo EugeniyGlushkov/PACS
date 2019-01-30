@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS edit_types;
 DROP TABLE IF EXISTS week_days;
 DROP TABLE IF EXISTS action_types;
 DROP TABLE IF EXISTS control_points;
+DROP TABLE IF EXISTS department_chiefs;
 DROP TABLE IF EXISTS chiefs;
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS positions;
@@ -119,6 +120,22 @@ CREATE TABLE chiefs
   chief_id  INTEGER UNIQUE,
   FOREIGN KEY (emp_id) REFERENCES employees (id) ON DELETE CASCADE,
   FOREIGN KEY (chief_id) REFERENCES employees (id)
+);
+
+/*
+Отношение "Начальник департамента"
+содержит соответственно:
+-первичный ключ;
+-id департамента;
+-id работника.
+ */
+CREATE TABLE department_chiefs
+(
+  id     SERIAL PRIMARY KEY,
+  dep_id INTEGER UNIQUE     NOT NULL,
+  emp_id INTEGER UNIQUE     NOT NULL,
+  FOREIGN KEY (dep_id) REFERENCES departments (id) ON DELETE CASCADE,
+  FOREIGN KEY (emp_id) REFERENCES employees (id) ON DELETE CASCADE
 );
 
 /*
