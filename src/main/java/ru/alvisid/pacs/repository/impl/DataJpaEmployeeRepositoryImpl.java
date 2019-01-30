@@ -142,6 +142,17 @@ public class DataJpaEmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     /**
+     * Returns the list with all employees by position's id.
+     *
+     * @param posId the position's id.
+     * @return the list with all employees by position's id.
+     */
+    @Override
+    public List <Employee> getAllByPositionId(int posId) {
+        return crudRepository.findAllByPositionId(posId, SORT_LNAME_FNAME_SNAME);
+    }
+
+    /**
      * Returns an employee by given email.
      *
      * @param email the specified email.

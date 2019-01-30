@@ -24,7 +24,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
  */
 @Service
 public class DepartmentServiceImpl
-        extends AbstractCachedService<DepartmentRepository, Department> implements DepartmentService {
+        extends AbstractCachedService <DepartmentRepository, Department> implements DepartmentService {
     /**
      * Cache alias for access to the ehcache.
      */
@@ -35,10 +35,17 @@ public class DepartmentServiceImpl
      */
     private EmployeeService employeeService;
 
+    /**
+     * Deletes the object by specified id.
+     *
+     * @param id the specified id of a deleted object.
+     * @throws NotFoundException if the entity with the specified id isn't found.
+     * @throws IllegalStateException if there are some employees in the department.
+     */
     @Override
-    public void delete(int id) throws NotFoundException {
+    public void delete(int id) throws NotFoundException, IllegalStateException {
         if (!employeeService.getAllByDeptId(id).isEmpty()) {
-            throw new RuntimeException("Can not delete department with id=" + id + ", it must be empty.");
+            throw new IllegalStateException("Can not delete department with id=" + id + ", it must be empty.");
         }
 
         super.delete(id);
@@ -59,9 +66,10 @@ public class DepartmentServiceImpl
 
     /**
      * Constructs new {@code DepartmentServiceImpl} and set a specified department's repository implementation
-     * to the superclass's repository field.
+     * to the superclass's repository field, set a specified EmployeeService implementation.
      *
-     * @param repository the specified department's repository implementation.
+     * @param repository      the specified department's repository implementation.
+     * @param employeeService the specified EmployeeService implementation.
      */
     @Autowired
     public DepartmentServiceImpl(DepartmentRepository repository, EmployeeService employeeService) {

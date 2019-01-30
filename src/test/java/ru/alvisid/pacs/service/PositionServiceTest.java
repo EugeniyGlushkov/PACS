@@ -3,10 +3,13 @@ package ru.alvisid.pacs.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import ru.alvisid.pacs.model.Employee;
 import ru.alvisid.pacs.model.Position;
 import testdata.PositionTestData;
 
 import javax.validation.ConstraintViolationException;
+
+import java.util.List;
 
 import static testdata.PositionTestData.*;
 
@@ -26,6 +29,11 @@ public class PositionServiceTest extends AbstractServiceTest <Position, Position
     }
 
     /**
+     * The employee's service realization.
+     */
+    private EmployeeService employeeService;
+
+    /**
      * Sets the {@code PositionService} to the superclass.
      *
      * @param service the specified Service.
@@ -34,6 +42,43 @@ public class PositionServiceTest extends AbstractServiceTest <Position, Position
     @Autowired
     public void setService(PositionService service) {
         super.service = service;
+    }
+
+    /**
+     * Sets the {@code EmployeeService}.
+     *
+     * @param employeeService the specified EmployeeService.
+     */
+    @Autowired
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    /**
+     * Updates employee with the deleted position.
+     */
+    @Test
+    @Override
+    public void delete() {
+        List <Employee> updatedEmployees = employeeService.getAllByPositionId(testData.getDeletedId());
+
+        for (Employee emp : updatedEmployees) {
+            emp.setPosition(POSITION_5);
+            employeeService.update(emp);
+        }
+
+        super.delete();
+    }
+
+    /**
+     * Checks the {@code IllegalStateException} and it's message when there are some employees with deleted position.
+     */
+    @Test
+    public void deleteOccupied() {
+        thrown.expect(IllegalStateException.class);
+        thrown.expectMessage("Can not delete position with id=" + testData.getDeletedId()
+                + ", because there are some employees with the position.");
+        super.delete();
     }
 
     /**

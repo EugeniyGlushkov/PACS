@@ -6,8 +6,11 @@ import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import ru.alvisid.pacs.model.Department;
+import ru.alvisid.pacs.model.Employee;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import testdata.DepartmentTestData;
+
+import java.util.List;
 
 import static testdata.DepartmentTestData.*;
 import static testdata.EmployeeTestData.*;
@@ -60,18 +63,21 @@ public class DepartmentServiceTest extends AbstractServiceTest<Department, Depar
     @Test
     @Override
     public void delete() {
-        employeeService.delete(EMPLOYEE_2.getId());
-        employeeService.delete(EMPLOYEE_4.getId());
-        employeeService.delete(EMPLOYEE_6.getId());
+        List <Employee> deletedEmployees = employeeService.getAllByDeptId(testData.getDeletedId());
+
+        for (Employee emp : deletedEmployees) {
+            employeeService.delete(emp.getId());
+        }
+
         super.delete();
     }
 
     /**
-     * Checks the {@code RuntimeException} and it's message when deleted department is not empty.
+     * Checks the {@code IllegalStateException} and it's message when deleted department is not empty.
      */
     @Test
     public void deleteNotEmpty() {
-        thrown.expect(RuntimeException.class);
+        thrown.expect(IllegalStateException.class);
         thrown.expectMessage("Can not delete department with id=" + testData.getDeletedId() + ", it must be empty.");
         super.delete();
     }

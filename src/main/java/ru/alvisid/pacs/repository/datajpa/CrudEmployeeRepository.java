@@ -77,6 +77,16 @@ public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer
     List <Employee> findAllByDeptId(@Param("deptId") int deptId, Sort sort);
 
     /**
+     * Returns all employees by position's id sorted with a given sort.
+     *
+     * @param posId the department's id.
+     * @param sort   the sort for employees list.
+     * @return list of all employees by position's id sorted with a given sort.
+     */
+    @Query("SELECT e FROM Employee e WHERE e.position.id=:posId")
+    List <Employee> findAllByPositionId(@Param("posId") int posId, Sort sort);
+
+    /**
      * Returns an employee by the given email.
      *
      * @param email the specified email.

@@ -21,6 +21,14 @@ public interface EmployeeService extends TypicalService <Employee> {
     List <Employee> getAllByDeptId(int deptId);
 
     /**
+     * Returns the list with all employees by position's id.
+     *
+     * @param posId the position's id.
+     * @return the list with all employees by position's id.
+     */
+    List <Employee> getAllByPositionId(int posId);
+
+    /**
      * Returns an employee by given email.
      *
      * @param email the specified email.

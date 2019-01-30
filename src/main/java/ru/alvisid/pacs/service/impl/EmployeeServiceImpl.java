@@ -49,6 +49,17 @@ public class EmployeeServiceImpl
     }
 
     /**
+     * Returns all employees by position id .
+     *
+     * @param posId the position's id.
+     * @return list of all employees by position id.
+     */
+    @Override
+    public List <Employee> getAllByPositionId(int posId) {
+        return repository.getAllByPositionId(posId);
+    }
+
+    /**
      * Returns an employee by given email.
      *
      * @param email the specified email.
