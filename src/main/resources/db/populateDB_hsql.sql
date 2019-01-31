@@ -114,6 +114,15 @@ INSERT INTO employee_roles (emp_id, role) VALUES
   (10011, 'ROLE_USER'),
   (10011, 'ROLE_ADMIN');
 
+INSERT INTO emp_schedules (emp_id, start_work, end_work, start_lunch, end_lunch) VALUES
+  (10006, NULL, NULL, NULL, NULL),                          /*10003*/
+  (10009, '09:00:00', '18:00:00', '12:00:00', '13:00:00');  /*10004*/
+
+  INSERT INTO department_chiefs (dep_id, emp_id) VALUES
+  (1, 10006), /*1*/
+  (2, 10007), /*2*/
+  (3, 10008); /*3*/
+
 INSERT INTO absences (emp_id, reason_id, start_absence, end_absence, description) VALUES
   (10006, 1, '2018-05-03', '2018-05-12', 'больничный лист №12345.');
 

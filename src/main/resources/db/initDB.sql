@@ -5,7 +5,6 @@ ON actions;
 
 DROP FUNCTION IF EXISTS new_absence();
 DROP FUNCTION IF EXISTS new_action();
-DROP FUNCTION IF EXISTS new_employee();
 
 DROP TABLE IF EXISTS visitors;
 DROP TABLE IF EXISTS employee_roles;

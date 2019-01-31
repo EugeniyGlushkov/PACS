@@ -50,6 +50,25 @@ public class EmpSchedule extends AbstractSchedule {
     }
 
     /**
+     * Util method. Returns new {@code EmpSchedule} with specified employee,
+     * initialized start work time, end work time, start lunch time, end lunch time from
+     * specified schedule and id-null.
+     *
+     * @param employee the specified employee.
+     * @param schedule the specified schedule.
+     * @return the new {@code EmpSchedule} with specified employee,
+     * initialized start work time, end work time, start lunch time, end lunch time from
+     * specified schedule and id-null.
+     */
+    public static EmpSchedule valueOf(Employee employee, AbstractSchedule schedule) {
+        return new EmpSchedule(employee,
+                schedule.getStartWorkTime(),
+                schedule.getEndWorkTime(),
+                schedule.getStartLunchTime(),
+                schedule.getEndLunchTime());
+    }
+
+    /**
      * Initializes a newly created <b>EmpSchedule</b> object with null employee value
      * and null fields of the superclass.
      *

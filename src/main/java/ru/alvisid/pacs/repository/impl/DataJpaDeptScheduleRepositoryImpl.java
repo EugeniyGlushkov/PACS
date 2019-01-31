@@ -97,7 +97,7 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
      *
      * @param id the id of the department schedule to return.
      * @return a department schedule by given id,
-     * null - if there aren't department schedule with cpecifiec id  in the DB.
+     * null - if there aren't department schedule with specified id  in the DB.
      */
     @Override
     public DeptSchedule get(int id) {
@@ -119,7 +119,8 @@ public class DataJpaDeptScheduleRepositoryImpl implements DeptScheduleRepository
      * Returns a department schedule by given department id.
      *
      * @param deptId the department id.
-     * @return the department schedule by given department id.
+     * @return the department schedule by given department id,
+     * null - if there aren't department schedule with specified department's id in the DB.
      */
     @Override
     public DeptSchedule getByDeptId(int deptId) {

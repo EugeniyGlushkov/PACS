@@ -27,5 +27,6 @@
     <cache alias="absenceReasons" uses-template="singleNonExpiryCache"/>
     <cache alias="controlPoints" uses-template="singleNonExpiryCache"/>
     <cache alias="pointActions" uses-template="singleNonExpiryCache"/>
+    <cache alias="empSchedules" uses-template="singleNonExpiryCache"/>
 </config>
 

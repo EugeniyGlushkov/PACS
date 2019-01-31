@@ -26,7 +26,8 @@ public interface DeptScheduleRepository extends TypicalRepository<DeptSchedule> 
      * Returns the department's schedule by department {@code id}.
      *
      * @param deptId the department's id.
-     * @return the department's schedule by department {@code id}.
+     * @return the department's schedule by department {@code id},
+     * null - if there aren't department schedule with specified department's id in the DB.
      */
     DeptSchedule getByDeptId(int deptId);
 }

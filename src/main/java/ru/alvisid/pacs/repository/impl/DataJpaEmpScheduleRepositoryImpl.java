@@ -99,7 +99,7 @@ public class DataJpaEmpScheduleRepositoryImpl implements EmpScheduleRepository {
      *
      * @param id the id of the employee schedule to return.
      * @return an employee schedule by given id,
-     * null - if there aren't employee schedule with cpecifiec id  in the DB.
+     * null - if there aren't employee schedule with specified id in the DB.
      */
     @Override
     public EmpSchedule get(int id) {
@@ -121,7 +121,8 @@ public class DataJpaEmpScheduleRepositoryImpl implements EmpScheduleRepository {
      * Returns an employee schedule by given employee id.
      *
      * @param empId the employee id.
-     * @return the employee schedule by given employee id.
+     * @return the employee schedule by given employee id,
+     * null - if there aren't employee schedule with specified employee's id in the DB.
      */
     @Override
     public EmpSchedule getByEmpId(int empId) {
