@@ -51,7 +51,7 @@ public class EmpSchedule extends AbstractSchedule {
 
     /**
      * Util method. Returns new {@code EmpSchedule} with specified employee,
-     * initialized start work time, end work time, start lunch time, end lunch time from
+     * initialized start work time, end work time, start lunch time and lunch time from
      * specified schedule and id-null.
      *
      * @param employee the specified employee.

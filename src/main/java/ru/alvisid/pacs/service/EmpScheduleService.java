@@ -31,11 +31,17 @@ public interface EmpScheduleService extends TypicalService<EmpSchedule> {
     void update(EmpSchedule empSchedule, int empId) throws NotFoundException;
 
     /**
-     * Returns a department employee by given employee id.
+     * Returns an employee's schedule by given employee id.
+     * If there are no employee's schedule by the specified employee id in a data base
+     * then returns new employee's schedule which the employee by specified id based.
+     * If there no department' schedule in the data base
+     * then returns new employee's schedule: {@c employee}-field is initialized by specified empId,
+     * start work time, end work time, start lunch time and lunch time are nulls.
      *
      * @param empId the employee id.
      * @return the employee schedule by given employee id.
      * null if there are no employee schedule with the employee id.
+     * @throws NotFoundException if there are no employee by specified id in the data base.
      */
-    EmpSchedule getByEmpId(int empId);
+    EmpSchedule getByEmpId(int empId) throws NotFoundException;
 }
