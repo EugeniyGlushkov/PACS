@@ -173,7 +173,7 @@ public class EmpSchedule extends AbstractSchedule {
     public String toString() {
         return "EmpSchedule{" +
                 "id=" + id +
-                ", employee=" + employee +
+                ", employeeId=" + employee.getId() +
                 ", startWorkTime=" + startWorkTime +
                 ", endWorkTime=" + endWorkTime +
                 ", startLunchTime=" + startLunchTime +

@@ -200,7 +200,7 @@ public abstract class AbstractPerson implements HasId {
             return false;
         }
 
-        AbstractId that = (AbstractId) o;
+        AbstractPerson that = (AbstractPerson) o;
 
         return id != null ? id.equals(that.id) : that.id == null;
     }

@@ -2,6 +2,7 @@ package ru.alvisid.pacs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.DeptSchedule;
 import ru.alvisid.pacs.model.EmpSchedule;
@@ -14,6 +15,17 @@ import java.util.Objects;
 
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 
+/**
+ * Implementation of the {@code EmpScheduleService} interface.
+ * Extends <b>AbstractService</b> and <b>AbstractCachedService</b> functionality.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ * @see EmpScheduleService
+ * @see AbstractCachedService
+ * @see AbstractService
+ */
+@Service
 public class EmpScheduleServiceImpl
         extends AbstractCachedService<EmpScheduleRepository, EmpSchedule> implements EmpScheduleService {
     /**
@@ -66,7 +78,7 @@ public class EmpScheduleServiceImpl
      * If there are no employee's schedule by the specified employee id in a data base
      * then returns new employee's schedule which the employee by specified id based.
      * If there no department' schedule in the data base
-     * then returns new employee's schedule: {@c employee}-field is initialized by specified empId,
+     * then returns new employee's schedule: {@code employee}-field is initialized by specified empId,
      * start work time, end work time, start lunch time and lunch time are nulls.
      *
      * @param empId the employee id.

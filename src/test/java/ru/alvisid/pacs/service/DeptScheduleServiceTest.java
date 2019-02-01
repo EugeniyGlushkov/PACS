@@ -26,7 +26,7 @@ public class DeptScheduleServiceTest extends AbstractServiceTest<DeptSchedule, D
     }
 
     /**
-     * Sets the {@code DepartmentService} to the superclass.
+     * Sets the {@code DeptScheduleService} to the superclass.
      *
      * @param service the specified Service.
      */

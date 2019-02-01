@@ -116,7 +116,8 @@ INSERT INTO employee_roles (emp_id, role) VALUES
 
 INSERT INTO emp_schedules (emp_id, start_work, end_work, start_lunch, end_lunch) VALUES
   (10006, NULL, NULL, NULL, NULL),                          /*10003*/
-  (10009, '09:00:00', '18:00:00', '12:00:00', '13:00:00');  /*10004*/
+  (10008, NULL, NULL, '12:30:00','14:00:00'),               /*10004*/
+  (10009, '09:00:00', '18:00:00', '12:00:00', '13:00:00');  /*10005*/
 
   INSERT INTO department_chiefs (dep_id, emp_id) VALUES
   (1, 10006), /*1*/

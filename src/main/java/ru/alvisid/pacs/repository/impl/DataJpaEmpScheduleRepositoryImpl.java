@@ -80,7 +80,8 @@ public class DataJpaEmpScheduleRepositoryImpl implements EmpScheduleRepository {
      */
     @Override
     public EmpSchedule save(EmpSchedule empSchedule, int empId) {
-        return null;
+        empSchedule.setEmployee(crudEmployeeRepository.getOne(empId));
+        return save(empSchedule);
     }
 
     /**
