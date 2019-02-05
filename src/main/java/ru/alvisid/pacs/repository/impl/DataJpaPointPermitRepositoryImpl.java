@@ -155,14 +155,14 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
      * List is sorted by control point's serial code, employee's last name, first name, second name
      * and action's type of the point action.
      *
-     * @param cPointId the control point's id.
+     * @param ctrlPointId the control point's id.
      * @return Returns all point permits by control point's id.
      * @see DataJpaPointPermitRepositoryImpl#getAll()
      * @see DataJpaPointPermitRepositoryImpl#getAllByEmpId(int)
      * @see CrudPointPermitRepository#findAllByControlPointId(int, Sort)
      */
     @Override
-    public List <PointPermit> getAllByControlPointId(int cPointId) {
-        return crudRepository.findAllByControlPointId(cPointId, SORT_SERCODE_LNAME_FNAME_SNAME_TYPE);
+    public List <PointPermit> getAllByControlPointId(int ctrlPointId) {
+        return crudRepository.findAllByControlPointId(ctrlPointId, SORT_SERCODE_LNAME_FNAME_SNAME_TYPE);
     }
 }

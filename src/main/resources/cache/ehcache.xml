@@ -28,5 +28,6 @@
     <cache alias="controlPoints" uses-template="singleNonExpiryCache"/>
     <cache alias="pointActions" uses-template="singleNonExpiryCache"/>
     <cache alias="empSchedules" uses-template="singleNonExpiryCache"/>
+    <cache alias="pointPermits" uses-template="singleNonExpiryCache"/>
 </config>
 
