@@ -3,7 +3,12 @@ package ru.alvisid.pacs.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.alvisid.pacs.model.EmpSchedule;
+import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import testdata.EmpScheduleTestData;
+import testdata.EmployeeTestData;
+
+import javax.validation.ConstraintViolationException;
+import java.time.LocalTime;
 
 import static util.TestUtil.assertMatch;
 
@@ -14,7 +19,7 @@ import static util.TestUtil.assertMatch;
  * @version 1.0
  * @see AbstractServiceTest
  */
-public class EmpScheduleServiceTest extends AbstractServiceTest <EmpSchedule, EmpScheduleService> {
+public class EmpScheduleServiceTest extends AbstractServiceTest<EmpSchedule, EmpScheduleService> {
     /**
      * Constructs new <em>EmpScheduleServiceTest</em> object.
      */
@@ -65,5 +70,76 @@ public class EmpScheduleServiceTest extends AbstractServiceTest <EmpSchedule, Em
         expectedEmpSchedule = testData.getUpdated();
         expectedEmpSchedule.setId(actualEmpShedule.getId());
         assertMatch(testData.IGNORING_FIELDS, actualEmpShedule, expectedEmpSchedule);
+    }
+
+    /**
+     * Checks the {@code NotFoundException} when there are no updated object's id (updated object
+     * with inserted employee) in the DB.
+     */
+    @Test
+    public void updateWithEmpIdNotFound() {
+        EmpSchedule updatedEmpSchedule = testData.getUpdated();
+        updatedEmpSchedule.setId(testData.NOT_FOUND_ID);
+        int empId = updatedEmpSchedule.getEmployee().getId();
+        updatedEmpSchedule.setEmployee(null);
+        thrown.expect(NotFoundException.class);
+        thrown.expectMessage("Not found entity with id=" + testData.NOT_FOUND_ID);
+        service.update(updatedEmpSchedule, empId);
+    }
+
+    /**
+     * Checks matching the actual gotten value by employee's id from DB to the expected gotten value from {@code testData}.
+     */
+    @Test
+    public void getByEmpId() {
+        EmpSchedule expectedEmpSchedule = testData.getGotten();
+        EmpSchedule actualEmpSchedule = service.getByEmpId(expectedEmpSchedule.getEmployee().getId());
+        assertMatch(testData.IGNORING_FIELDS, actualEmpSchedule, expectedEmpSchedule);
+    }
+
+    /**
+     * Checks matching the actual gotten value by employee's id from DB to the expected gotten value from {@code testData}
+     * when there are not employee's schedule and gotten value is created by department's schedule of the employee.
+     */
+    @Test
+    public void getByEmpIdNotFoundEmpSchedule() {
+        EmpSchedule expectedEmpSchedule = new EmpSchedule(EmployeeTestData.EMPLOYEE_6,
+                LocalTime.of(8, 0), LocalTime.of(17, 0),
+                LocalTime.of(11, 0), LocalTime.of(12, 0));
+        EmpSchedule actualEmpSchedule = service.getByEmpId(EmployeeTestData.EMPLOYEE_6.getId());
+        assertMatch(testData.IGNORING_FIELDS, actualEmpSchedule, expectedEmpSchedule);
+    }
+
+    /**
+     * Checks matching the actual gotten value by employee's id from DB to the expected gotten value from {@code testData}
+     * when there are not employee's schedule, department's value and gotten value is created with null-schedule values.
+     */
+    @Test
+    public void getByEmpIdNotFoundDeptSchedule() {
+        EmpSchedule expectedEmpSchedule = new EmpSchedule(EmployeeTestData.EMPLOYEE_5,
+                null, null, null, null);
+        EmpSchedule actualEmpSchedule = service.getByEmpId(EmployeeTestData.EMPLOYEE_5.getId());
+        assertMatch(testData.IGNORING_FIELDS, actualEmpSchedule, expectedEmpSchedule);
+    }
+
+    /**
+     * Checks the {@code NotFoundException} when there are no employee with expected id in the DB.
+     */
+    @Test
+    public void getByEmpIdNotFoundEmoloyeeId() {
+        thrown.expect(NotFoundException.class);
+        thrown.expectMessage("Not found entity with id=" + testData.NOT_FOUND_ID);
+        service.getByEmpId(testData.NOT_FOUND_ID);
+    }
+
+    /**
+     * Checks the matching root exception to expected exception when objects with invalid
+     * values is created.
+     */
+    @Test
+    public void testValidation() {
+        EmpSchedule newEmpSchedule = testData.getNew();
+        newEmpSchedule.setEmployee(null);
+        validateRootCause(() -> service.create(newEmpSchedule), ConstraintViolationException.class);
     }
 }

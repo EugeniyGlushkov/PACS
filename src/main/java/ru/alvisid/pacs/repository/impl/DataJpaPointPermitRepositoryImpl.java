@@ -29,7 +29,6 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
             "employee.lastName",
             "employee.firstName",
             "employee.secondName",
-            "startAbsenceDate",
             "pointAction.actionType.type");
 
     /**
@@ -144,11 +143,11 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
      * @return the list with all point permits by employee's id.
      * @see DataJpaPointPermitRepositoryImpl#getAll()
      * @see DataJpaPointPermitRepositoryImpl#getAllByControlPointId(int)
-     * @see CrudPointPermitRepository#findAllByEmployeeId(int)
+     * @see CrudPointPermitRepository#findAllByEmployeeId(int, Sort)
      */
     @Override
     public List <PointPermit> getAllByEmpId(int empId) {
-        return crudRepository.findAllByEmployeeId(empId);
+        return crudRepository.findAllByEmployeeId(empId, SORT_SERCODE_LNAME_FNAME_SNAME_TYPE);
     }
 
     /**
@@ -160,6 +159,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
      * @return Returns all point permits by control point's id.
      * @see DataJpaPointPermitRepositoryImpl#getAll()
      * @see DataJpaPointPermitRepositoryImpl#getAllByEmpId(int)
+     * @see CrudPointPermitRepository#findAllByControlPointId(int, Sort)
      */
     @Override
     public List <PointPermit> getAllByControlPointId(int cPointId) {

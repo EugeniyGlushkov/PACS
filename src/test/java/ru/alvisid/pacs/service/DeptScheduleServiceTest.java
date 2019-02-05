@@ -4,11 +4,13 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.alvisid.pacs.model.DeptSchedule;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
+import testdata.DepartmentTestData;
 import testdata.DeptScheduleTestData;
 
 import javax.validation.ConstraintViolationException;
 
 import static util.TestUtil.assertMatch;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Department schedule's specific tests.
@@ -84,6 +86,24 @@ public class DeptScheduleServiceTest extends AbstractServiceTest<DeptSchedule, D
         service.update(updatedDeptSchedule, deptId);
     }
 
+    /**
+     * Checks matching the actual gotten value by department's id from DB to the expected gotten value from {@code testData}.
+     */
+    @Test
+    public void getByDeptId() {
+        DeptSchedule expectedDeptSchedule = testData.getGotten();
+        DeptSchedule actualDeptSchedule = service.getByDeptId(expectedDeptSchedule.getDepartment().getId());
+        assertMatch(testData.IGNORING_FIELDS, actualDeptSchedule, expectedDeptSchedule);
+    }
+
+    /**
+     * Checks matching the actual gotten value by department's id from DB to null.
+     */
+    @Test
+    public void getByDeptIdNotFoundDeptSchedule() {
+        DeptSchedule actualDeptSchedule = service.getByDeptId(testData.NOT_FOUND_ID);
+        assertThat(actualDeptSchedule).isNull();
+    }
 
     /**
      * Checks the matching root exception to expected exception when objects with invalid

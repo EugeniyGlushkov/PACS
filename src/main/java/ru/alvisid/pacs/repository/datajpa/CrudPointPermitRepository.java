@@ -70,7 +70,7 @@ public interface CrudPointPermitRepository extends JpaRepository <PointPermit, I
      */
     @Query("SELECT pp FROM PointPermit pp WHERE pp.employee.id=:empId " +
             "ORDER BY pp.pointAction.controlPoint.serialCode, pp.pointAction.actionType")
-    List <PointPermit> findAllByEmployeeId(@Param("empId") int empId);
+    List <PointPermit> findAllByEmployeeId(@Param("empId") int empId, Sort sort);
 
     /**
      * Returns the list with all point permits by the control point's id of the point permit
