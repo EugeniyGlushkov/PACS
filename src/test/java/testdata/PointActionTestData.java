@@ -5,6 +5,12 @@ import ru.alvisid.pacs.model.PointAction;
 
 import static testdata.ControlPointTestData.*;
 
+/**
+ * Test data for {@code PointAction} class.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ */
 public class PointActionTestData extends AbstractTestData<PointAction> {
     /**
      * Object which represents existing entity in the data base.
