@@ -68,19 +68,28 @@ public interface CrudPointPermitRepository extends JpaRepository <PointPermit, I
      * @param empId the employee's id.
      * @return the sorted list with all point permits by employee's id.
      */
-    @Query("SELECT pp FROM PointPermit pp WHERE pp.employee.id=:empId " +
-            "ORDER BY pp.pointAction.controlPoint.serialCode, pp.pointAction.actionType")
+    @Query("SELECT pp FROM PointPermit pp WHERE pp.employee.id=:empId")
     List <PointPermit> findAllByEmployeeId(@Param("empId") int empId, Sort sort);
 
     /**
      * Returns the list with all point permits by the control point's id of the point permit
      * and sorted by specified sort.
      *
-     * @param cPointId the department's id.
-     * @param sort     the specified list's sort.
+     * @param ctrlPointId the department's id.
+     * @param sort        the specified list's sort.
      * @return the list with all point permits by the control point's id of the point permit
      * and sorted by specified sort.
      */
-    @Query("SELECT pp FROM PointPermit pp WHERE pp.pointAction.controlPoint.id=:cPointId")
-    List <PointPermit> findAllByControlPointId(@Param("cPointId") int cPointId, Sort sort);
+    @Query("SELECT pp FROM PointPermit pp WHERE pp.pointAction.controlPoint.id=:ctrlPointId")
+    List <PointPermit> findAllByControlPointId(@Param("ctrlPointId") int ctrlPointId, Sort sort);
+
+    /**
+     * Returns the point permit by employee's id and control point's id.
+     *
+     * @param empId       the employee's id.
+     * @param ctrlPointId the control point's id.
+     * @return the point permit by employee's id and control point's id.
+     */
+    @Query("SELECT pp FROM PointPermit pp WHERE pp.employee.id=?1 AND pp.pointAction.controlPoint.id=?2")
+    PointPermit getByEmpIdAndCtrlPointId(int empId, int ctrlPointId);
 }

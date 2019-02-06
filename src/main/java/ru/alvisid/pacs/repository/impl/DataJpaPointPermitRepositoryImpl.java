@@ -29,7 +29,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
             "employee.lastName",
             "employee.firstName",
             "employee.secondName",
-            "pointAction.actionType.type");
+            "pointAction.actionType");
 
     /**
      * An interface for point permit repository which extends JpaRepository.
@@ -74,7 +74,7 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
     @Override
     public PointPermit save(PointPermit pointPermit) {
         if (pointPermit.isNew() || !Objects.isNull(get(pointPermit.getId()))) {
-            return save(pointPermit);
+            return crudRepository.save(pointPermit);
         }
 
         return null;
@@ -164,5 +164,17 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
     @Override
     public List <PointPermit> getAllByControlPointId(int ctrlPointId) {
         return crudRepository.findAllByControlPointId(ctrlPointId, SORT_SERCODE_LNAME_FNAME_SNAME_TYPE);
+    }
+
+    /**
+     * Returns the point permit by employee's id and control point's id.
+     *
+     * @param empId       the employee's id.
+     * @param ctrlPointId the control point's id.
+     * @return the point permit by employee's id and control point's id.
+     */
+    @Override
+    public PointPermit getByEmpIdAndCtrlPointId(int empId, int ctrlPointId) {
+        return crudRepository.getByEmpIdAndCtrlPointId(empId, ctrlPointId);
     }
 }

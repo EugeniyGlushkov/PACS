@@ -3,6 +3,7 @@ package ru.alvisid.pacs.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.PointPermit;
 import ru.alvisid.pacs.repository.PointPermitRepository;
@@ -25,6 +26,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
  * @see AbstractCachedService
  * @see AbstractService
  */
+@Service
 public class PointPermitServiceImpl
         extends AbstractCachedService <PointPermitRepository, PointPermit> implements PointPermitService {
     /**
@@ -88,6 +90,18 @@ public class PointPermitServiceImpl
     @Cacheable(cacheResolver = "cacheResolver")
     public List <PointPermit> getAllByControlPointId(int ctrlPointId) {
         return repository.getAllByControlPointId(ctrlPointId);
+    }
+
+    /**
+     * Returns the point permit by employee's id and control point's id.
+     *
+     * @param empId       the employee's id.
+     * @param ctrlPointId the control point's id.
+     * @return the point permit by employee's id and control point's id.
+     */
+    @Override
+    public PointPermit getByEmpIdAndCtrlPointId(int empId, int ctrlPointId) {
+        return repository.getByEmpIdAndCtrlPointId(empId, ctrlPointId);
     }
 
     /**

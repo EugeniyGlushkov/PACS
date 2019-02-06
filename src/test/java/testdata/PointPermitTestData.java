@@ -44,47 +44,184 @@ public class PointPermitTestData extends AbstractTestData<PointPermit> {
             POINT_PERMIT_26 = new PointPermit(26, POINT_ACTION_6, EMPLOYEE_1),
             POINT_PERMIT_27 = new PointPermit(27, POINT_ACTION_5, EMPLOYEE_4),
             POINT_PERMIT_28 = new PointPermit(28, POINT_ACTION_6, EMPLOYEE_4),
-            POINT_PERMIT_29 = new PointPermit(29, POINT_ACTION_5, EMPLOYEE_2),
-            POINT_PERMIT_30 = new PointPermit(30, POINT_ACTION_5, EMPLOYEE_3);
+            POINT_PERMIT_29 = new PointPermit(29, POINT_ACTION_6, EMPLOYEE_2),
+            POINT_PERMIT_30 = new PointPermit(30, POINT_ACTION_6, EMPLOYEE_3);
 
     /**
      * New {@code PointPermit} with id-null.
      */
     public final static PointPermit
-            NEW_POINT_PERMIT = new PointPermit(POINT_ACTION_6, EMPLOYEE_3);
+            NEW_POINT_PERMIT = new PointPermit(POINT_ACTION_6, EMPLOYEE_5);
 
+    /**
+     * POINT_PERMIT_16 with an updated data.
+     *
+     * @see PointPermitTestData#POINT_PERMIT_16
+     */
+    public final static PointPermit
+            UPDATE_POINT_PERMIT_16 = new PointPermit(16, POINT_ACTION_5, EMPLOYEE_6);
+
+    /**
+     * Returns a new {@code PointPermit} from the test data.
+     *
+     * @return the new {@code PointPermit} from the test data.
+     */
     @Override
     public PointPermit getNew() {
-        return null;
+        return new PointPermit(NEW_POINT_PERMIT);
     }
 
+    /**
+     * Returns an updated {@code PointPermit} from the test data.
+     *
+     * @return the updated {@code PointPermit} from the test data.
+     */
     @Override
     public PointPermit getUpdated() {
-        return null;
+        return new PointPermit(UPDATE_POINT_PERMIT_16);
     }
 
+    /**
+     * Returns an {@code PointPermit} that is equals entity which will be get from DB.
+     *
+     * @return the {@code PointPermit} that is equals entity which will be get from DB.
+     */
     @Override
     public PointPermit getGotten() {
-        return null;
+        return new PointPermit(POINT_PERMIT_22);
     }
 
+    /**
+     * Returns an {@code PointPermit}'s id for delete.
+     *
+     * @return the {@code PointPermit}'s id for delete.
+     */
     @Override
     public int getDeletedId() {
-        return 0;
+        return POINT_PERMIT_13.getId();
     }
 
+    /**
+     * Returns the all {@code PointPermit} from the test data with the specified created object.
+     *
+     * @param expectedCreatedObj the specified created object.
+     * @return the all {@code PointPermit} from test data with the specified created {@code PointPermit}.
+     */
     @Override
     public PointPermit[] getCreatedArray(PointPermit expectedCreatedObj) {
-        return new PointPermit[0];
+        return new PointPermit[]{
+                POINT_PERMIT_25,
+                POINT_PERMIT_27,
+                expectedCreatedObj,
+                POINT_PERMIT_30,
+                POINT_PERMIT_26,
+                POINT_PERMIT_28,
+                POINT_PERMIT_29,
+                POINT_PERMIT_21,
+                POINT_PERMIT_22,
+                POINT_PERMIT_17,
+                POINT_PERMIT_18,
+                POINT_PERMIT_9,
+                POINT_PERMIT_10,
+                POINT_PERMIT_1,
+                POINT_PERMIT_2,
+                POINT_PERMIT_13,
+                POINT_PERMIT_14,
+                POINT_PERMIT_5,
+                POINT_PERMIT_6,
+                POINT_PERMIT_23,
+                POINT_PERMIT_24,
+                POINT_PERMIT_19,
+                POINT_PERMIT_20,
+                POINT_PERMIT_11,
+                POINT_PERMIT_12,
+                POINT_PERMIT_3,
+                POINT_PERMIT_4,
+                POINT_PERMIT_15,
+                POINT_PERMIT_16,
+                POINT_PERMIT_7,
+                POINT_PERMIT_8
+        };
     }
 
+    /**
+     * Returns the all {@code PointPermit} from the test data without the deleted {@code PointPermit}.
+     *
+     * @return the all {@code PointPermit} from the test data without the deleted {@code PointPermit}.
+     */
     @Override
     public PointPermit[] getDeletedArray() {
-        return new PointPermit[0];
+        return new PointPermit[]{
+                POINT_PERMIT_25,
+                POINT_PERMIT_27,
+                POINT_PERMIT_30,
+                POINT_PERMIT_26,
+                POINT_PERMIT_28,
+                POINT_PERMIT_29,
+                POINT_PERMIT_21,
+                POINT_PERMIT_22,
+                POINT_PERMIT_17,
+                POINT_PERMIT_18,
+                POINT_PERMIT_9,
+                POINT_PERMIT_10,
+                POINT_PERMIT_1,
+                POINT_PERMIT_2,
+                POINT_PERMIT_14,
+                POINT_PERMIT_5,
+                POINT_PERMIT_6,
+                POINT_PERMIT_23,
+                POINT_PERMIT_24,
+                POINT_PERMIT_19,
+                POINT_PERMIT_20,
+                POINT_PERMIT_11,
+                POINT_PERMIT_12,
+                POINT_PERMIT_3,
+                POINT_PERMIT_4,
+                POINT_PERMIT_15,
+                POINT_PERMIT_16,
+                POINT_PERMIT_7,
+                POINT_PERMIT_8
+        };
     }
 
+    /**
+     * Returns the all {@code PointPermit} from the test data.
+     *
+     * @return the all {@code PointPermit} from the test data.
+     */
     @Override
     public PointPermit[] getAllArray() {
-        return new PointPermit[0];
+        return new PointPermit[]{
+                POINT_PERMIT_25,
+                POINT_PERMIT_27,
+                POINT_PERMIT_30,
+                POINT_PERMIT_26,
+                POINT_PERMIT_28,
+                POINT_PERMIT_29,
+                POINT_PERMIT_21,
+                POINT_PERMIT_22,
+                POINT_PERMIT_17,
+                POINT_PERMIT_18,
+                POINT_PERMIT_9,
+                POINT_PERMIT_10,
+                POINT_PERMIT_1,
+                POINT_PERMIT_2,
+                POINT_PERMIT_13,
+                POINT_PERMIT_14,
+                POINT_PERMIT_5,
+                POINT_PERMIT_6,
+                POINT_PERMIT_23,
+                POINT_PERMIT_24,
+                POINT_PERMIT_19,
+                POINT_PERMIT_20,
+                POINT_PERMIT_11,
+                POINT_PERMIT_12,
+                POINT_PERMIT_3,
+                POINT_PERMIT_4,
+                POINT_PERMIT_15,
+                POINT_PERMIT_16,
+                POINT_PERMIT_7,
+                POINT_PERMIT_8
+        };
     }
 }

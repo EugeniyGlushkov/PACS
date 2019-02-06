@@ -10,7 +10,7 @@ import java.util.List;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface PointPermitRepository extends TypicalRepository<PointPermit> {
+public interface PointPermitRepository extends TypicalRepository <PointPermit> {
     /**
      * Saves or updates a given object with inserted parameters.
      *
@@ -30,13 +30,22 @@ public interface PointPermitRepository extends TypicalRepository<PointPermit> {
      * @param empId the employee's id.
      * @return the list with all point's permits by employee's id.
      */
-    List<PointPermit> getAllByEmpId(int empId);
+    List <PointPermit> getAllByEmpId(int empId);
 
     /**
      * Returns the list with all point's permits by control point's id.
      *
-     * @param cPointId the control point's id.
+     * @param ctrlPointId the control point's id.
      * @return the list with all point's permits by control point's id.
      */
-    List<PointPermit> getAllByControlPointId(int cPointId);
+    List <PointPermit> getAllByControlPointId(int ctrlPointId);
+
+    /**
+     * Returns the point permit by employee's id and control point's id.
+     *
+     * @param empId       the employee's id.
+     * @param ctrlPointId the control point's id.
+     * @return the point permit by employee's id and control point's id.
+     */
+    PointPermit getByEmpIdAndCtrlPointId(int empId, int ctrlPointId);
 }

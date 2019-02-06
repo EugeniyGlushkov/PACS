@@ -69,7 +69,7 @@ INSERT INTO days_off (dep_id, date) VALUES
 INSERT INTO control_points (serial_id, description) VALUES
   ('SA1232', 'Турникет №1 на главной проходной.'),              /*id 1*/
   ('SQ145', 'Турникет №2 на главной проходной.'),               /*id 2*/
-  ('45SDD', 'Электронный замок, дверь в подсобное помещение.'), /*id 3*/
+  ('45SDD', 'Электронный замок, дверь в подсобное помещение.'),  /*id 3*/
   ('C34', 'Электронный замок, лифт №1, первый этаж.');          /*id 4*/
 
 INSERT INTO absence_reasons (reason, description) VALUES
@@ -153,8 +153,8 @@ INSERT INTO point_permits (pointact_id, emp_id) VALUES
 (6, 10006), /*26*/
 (5, 10009), /*27*/
 (6, 10009), /*28*/
-(5, 10007), /*29*/
-(5, 10008); /*30*/
+(6, 10007), /*29*/
+(6, 10008); /*30*/
 
 INSERT INTO absences (emp_id, reason_id, start_absence, end_absence, description) VALUES
   (10006, 1, '2018-05-03', '2018-05-12', 'больничный лист №12345.');
