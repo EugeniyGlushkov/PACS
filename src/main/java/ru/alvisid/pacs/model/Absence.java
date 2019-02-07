@@ -103,8 +103,8 @@ public class Absence extends AbstractHasEmpEntity {
      * Initializes a newly created <b>Absence</b> object with null fields
      * and null fields of the superclass.
      *
-     * @see Absence#Absence(String, Employee, AbsenceReason, LocalDate, LocalDate)
-     * @see Absence#Absence(Integer, String, Employee, AbsenceReason, LocalDate, LocalDate)
+     * @see Absence#Absence(Employee, AbsenceReason, LocalDate, LocalDate, String)
+     * @see Absence#Absence(Integer, Employee, AbsenceReason, LocalDate, LocalDate, String)
      * @see Absence#Absence(Absence)
      */
     public Absence() {
@@ -121,20 +121,20 @@ public class Absence extends AbstractHasEmpEntity {
      * @param startAbsenceDate the value of the startAbsenceDate.
      * @param endAbsenceDate   the value of the endAbsenceDate.
      * @see Absence#Absence()
-     * @see Absence#Absence(Integer, String, Employee, AbsenceReason, LocalDate, LocalDate)
+     * @see Absence#Absence(Integer, Employee, AbsenceReason, LocalDate, LocalDate, String)
      * @see Absence#Absence(Absence)
      */
-    public Absence(String description,
-                   Employee employee,
+    public Absence(Employee employee,
                    AbsenceReason absenceReason,
                    LocalDate startAbsenceDate,
-                   LocalDate endAbsenceDate) {
+                   LocalDate endAbsenceDate,
+                   String description) {
         this(null,
-                description,
                 employee,
                 absenceReason,
                 startAbsenceDate,
-                endAbsenceDate);
+                endAbsenceDate,
+                description);
     }
 
     /**
@@ -148,15 +148,15 @@ public class Absence extends AbstractHasEmpEntity {
      * @param startAbsenceDate the value of the startAbsenceDate.
      * @param endAbsenceDate   the value of the endAbsenceDate.
      * @see Absence#Absence()
-     * @see Absence#Absence(String, Employee, AbsenceReason, LocalDate, LocalDate)
+     * @see Absence#Absence(Employee, AbsenceReason, LocalDate, LocalDate, String)
      * @see Absence#Absence(Absence)
      */
     public Absence(Integer id,
-                   String description,
                    Employee employee,
                    AbsenceReason absenceReason,
                    LocalDate startAbsenceDate,
-                   LocalDate endAbsenceDate) {
+                   LocalDate endAbsenceDate,
+                   String description) {
         super(id, description, employee);
         this.absenceReason = absenceReason;
         this.startAbsenceDate = startAbsenceDate;
@@ -169,16 +169,16 @@ public class Absence extends AbstractHasEmpEntity {
      *
      * @param absence the specified object to copying.
      * @see Absence#Absence()
-     * @see Absence#Absence(String, Employee, AbsenceReason, LocalDate, LocalDate)
-     * @see Absence#Absence(Integer, String, Employee, AbsenceReason, LocalDate, LocalDate)
+     * @see Absence#Absence(Employee, AbsenceReason, LocalDate, LocalDate, String)
+     * @see Absence#Absence(Integer, Employee, AbsenceReason, LocalDate, LocalDate, String)
      */
     public Absence(Absence absence) {
         this(absence.getId(),
-                absence.getDescription(),
                 absence.getEmployee(),
                 absence.getAbsenceReason(),
                 absence.getStartAbsenceDate(),
-                absence.getEndAbsenceDate());
+                absence.getEndAbsenceDate(),
+                absence.getDescription());
     }
 
     /**
