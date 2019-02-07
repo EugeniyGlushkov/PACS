@@ -167,14 +167,14 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
     }
 
     /**
-     * Returns the point permit by employee's id and control point's id.
+     * Returns the list of point permits by employee's id and control point's id.
      *
      * @param empId       the employee's id.
      * @param ctrlPointId the control point's id.
-     * @return the point permit by employee's id and control point's id.
+     * @return the list of point permits by employee's id and control point's id.
      */
     @Override
-    public PointPermit getByEmpIdAndCtrlPointId(int empId, int ctrlPointId) {
-        return crudRepository.getByEmpIdAndCtrlPointId(empId, ctrlPointId);
+    public List <PointPermit> getAllByEmpIdAndCtrlPointId(int empId, int ctrlPointId) {
+        return crudRepository.getAllByEmpIdAndCtrlPointId(empId, ctrlPointId);
     }
 }

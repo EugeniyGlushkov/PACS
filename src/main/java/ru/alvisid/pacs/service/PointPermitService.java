@@ -53,11 +53,11 @@ public interface PointPermitService extends TypicalService <PointPermit> {
     List <PointPermit> getAllByControlPointId(int ctrlPointId);
 
     /**
-     * Returns the point permit by employee's id and control point's id.
+     * Returns the list of point permits by employee's id and control point's id.
      *
      * @param empId       the employee's id.
      * @param ctrlPointId the control point's id.
-     * @return the point permit by employee's id and control point's id.
+     * @return the list of point permits by employee's id and control point's id.
      */
-    PointPermit getByEmpIdAndCtrlPointId(int empId, int ctrlPointId);
+    List <PointPermit> getAllByEmpIdAndCtrlPointId(int empId, int ctrlPointId);
 }
