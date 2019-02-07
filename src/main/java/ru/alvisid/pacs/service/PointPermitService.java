@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.service;
 
+import ru.alvisid.pacs.model.ActionType;
 import ru.alvisid.pacs.model.PointPermit;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
@@ -41,7 +42,7 @@ public interface PointPermitService extends TypicalService <PointPermit> {
      * @return the list with all point permits by employee's id.
      * @see PointPermitService#getAllByControlPointId(int)
      */
-    List< PointPermit> getAllByEmpId(int empId);
+    List <PointPermit> getAllByEmpId(int empId);
 
     /**
      * Returns the list with all point permits by control point's id.
@@ -53,11 +54,12 @@ public interface PointPermitService extends TypicalService <PointPermit> {
     List <PointPermit> getAllByControlPointId(int ctrlPointId);
 
     /**
-     * Returns the list of point permits by employee's id and control point's id.
+     * Returns the point permit by employee's id, control point's id and action type.
      *
      * @param empId       the employee's id.
      * @param ctrlPointId the control point's id.
-     * @return the list of point permits by employee's id and control point's id.
+     * @param actionType  the action type.
+     * @return the point permit by employee's id, control point's id and action type.
      */
-    List <PointPermit> getAllByEmpIdAndCtrlPointId(int empId, int ctrlPointId);
+    PointPermit getByEmpIdCtrlPointIdAndActType(int empId, int ctrlPointId, ActionType actionType);
 }

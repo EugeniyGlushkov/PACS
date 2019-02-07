@@ -3,6 +3,7 @@ package ru.alvisid.pacs.repository.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import ru.alvisid.pacs.model.ActionType;
 import ru.alvisid.pacs.model.PointPermit;
 import ru.alvisid.pacs.repository.PointPermitRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudEmployeeRepository;
@@ -167,14 +168,15 @@ public class DataJpaPointPermitRepositoryImpl implements PointPermitRepository {
     }
 
     /**
-     * Returns the list of point permits by employee's id and control point's id.
+     * Returns the point permit by employee's id, control point's id and action type.
      *
      * @param empId       the employee's id.
      * @param ctrlPointId the control point's id.
-     * @return the list of point permits by employee's id and control point's id.
+     * @param actionType  the action type.
+     * @return the point permit by employee's id, control point's id and action type.
      */
     @Override
-    public List <PointPermit> getAllByEmpIdAndCtrlPointId(int empId, int ctrlPointId) {
-        return crudRepository.getAllByEmpIdAndCtrlPointId(empId, ctrlPointId);
+    public PointPermit getByEmpIdCtrlPointIdAndActType(int empId, int ctrlPointId, ActionType actionType) {
+        return crudRepository.getByEmpIdCtrlPointIdAndActType(empId, ctrlPointId, actionType);
     }
 }

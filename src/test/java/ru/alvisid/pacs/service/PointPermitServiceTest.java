@@ -6,12 +6,15 @@ import ru.alvisid.pacs.model.PointPermit;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import testdata.ControlPointTestData;
 import testdata.EmployeeTestData;
+import testdata.PointActionTestData;
 import testdata.PointPermitTestData;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 import static util.TestUtil.assertMatch;
 import static testdata.PointPermitTestData.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PointPermitServiceTest extends AbstractServiceTest <PointPermit, PointPermitService> {
     /**
@@ -108,7 +111,7 @@ public class PointPermitServiceTest extends AbstractServiceTest <PointPermit, Po
      */
     @Test
     public void getAllByControlPointId() {
-        List<PointPermit> actualPointPermits = service.getAllByControlPointId(ControlPointTestData.CONTROL_POINT_2.getId());
+        List <PointPermit> actualPointPermits = service.getAllByControlPointId(ControlPointTestData.CONTROL_POINT_2.getId());
         assertMatch(testData.IGNORING_FIELDS,
                 actualPointPermits,
                 POINT_PERMIT_23,
@@ -126,6 +129,41 @@ public class PointPermitServiceTest extends AbstractServiceTest <PointPermit, Po
     }
 
     /**
-     * Checks matching the actual gotten value from DB to the expected gotten value from {@code testData}.
+     * Checks matching the actual gotten value by employee's id, control point's id and action type from DB
+     * to the expected gotten value from {@code testData}.
      */
+    @Test
+    public void getByEmpIdCtrlPointIdAndActType() {
+        PointPermit expectedPointPermit = POINT_PERMIT_15;
+        PointPermit actualPointPermit = service.getByEmpIdCtrlPointIdAndActType(
+                expectedPointPermit.getEmployee().getId(),
+                expectedPointPermit.getPointAction().getControlPoint().getId(),
+                expectedPointPermit.getPointAction().getActionType());
+        assertMatch(actualPointPermit, expectedPointPermit);
+    }
+
+    /**
+     * Checks matching the actual gotten value by employee's id, control point's id and action type from DB
+     * to the null if there are not the value in the database.
+     */
+    @Test
+    public void getByEmpIdCtrlPointIdAndActTypeIsNull() {
+        PointPermit actualPointPermit = service.getByEmpIdCtrlPointIdAndActType(
+                EmployeeTestData.EMPLOYEE_5.getId(),
+                ControlPointTestData.CONTROL_POINT_4.getId(),
+                PointActionTestData.POINT_ACTION_4.getActionType());
+        assertThat(actualPointPermit).isNull();
+    }
+
+    /**
+     * Checks the matching root exception to expected exception when objects with invalid
+     * values is created.
+     */
+    @Test
+    public void testValidation() {
+        validateRootCause(() -> service.create(new PointPermit(null, EmployeeTestData.EMPLOYEE_3)),
+                ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new PointPermit(PointActionTestData.POINT_ACTION_3, null)),
+                ConstraintViolationException.class);
+    }
 }

@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.repository;
 
+import ru.alvisid.pacs.model.ActionType;
 import ru.alvisid.pacs.model.PointPermit;
 
 import java.util.List;
@@ -41,11 +42,12 @@ public interface PointPermitRepository extends TypicalRepository <PointPermit> {
     List <PointPermit> getAllByControlPointId(int ctrlPointId);
 
     /**
-     * Returns the list of point permits by employee's id and control point's id.
+     * Returns the point permit by employee's id, control point's id and action type.
      *
      * @param empId       the employee's id.
      * @param ctrlPointId the control point's id.
-     * @return the list of point permits by employee's id and control point's id.
+     * @param actionType  the action type.
+     * @return the point permit by employee's id, control point's id and action type.
      */
-    List <PointPermit> getAllByEmpIdAndCtrlPointId(int empId, int ctrlPointId);
+    PointPermit getByEmpIdCtrlPointIdAndActType(int empId, int ctrlPointId, ActionType actionType);
 }

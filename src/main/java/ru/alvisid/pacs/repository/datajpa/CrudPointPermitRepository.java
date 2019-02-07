@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+import ru.alvisid.pacs.model.ActionType;
 import ru.alvisid.pacs.model.PointPermit;
 
 import java.util.List;
@@ -84,12 +85,13 @@ public interface CrudPointPermitRepository extends JpaRepository <PointPermit, I
     List <PointPermit> findAllByControlPointId(@Param("ctrlPointId") int ctrlPointId, Sort sort);
 
     /**
-     * Returns the list of point permits by employee's id and control point's id.
+     * Returns the point permit by employee's id, control point's id and action type.
      *
      * @param empId       the employee's id.
      * @param ctrlPointId the control point's id.
-     * @return the list of point permits by employee's id and control point's id.
+     * @param actionType  the action type.
+     * @return the point permit by employee's id, control point's id and action type.
      */
-    @Query("SELECT pp FROM PointPermit pp WHERE pp.employee.id=?1 AND pp.pointAction.controlPoint.id=?2")
-    List <PointPermit> getAllByEmpIdAndCtrlPointId(int empId, int ctrlPointId);
+    @Query("SELECT pp FROM PointPermit pp WHERE pp.employee.id=?1 AND pp.pointAction.controlPoint.id=?2 AND pp.pointAction.actionType=?3")
+    PointPermit getByEmpIdCtrlPointIdAndActType(int empId, int ctrlPointId, ActionType actionType);
 }

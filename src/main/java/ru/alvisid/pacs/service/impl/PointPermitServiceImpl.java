@@ -5,6 +5,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.alvisid.pacs.model.ActionType;
 import ru.alvisid.pacs.model.PointPermit;
 import ru.alvisid.pacs.repository.PointPermitRepository;
 import ru.alvisid.pacs.service.AbstractCachedService;
@@ -93,15 +94,16 @@ public class PointPermitServiceImpl
     }
 
     /**
-     * Returns the list of point permits by employee's id and control point's id.
+     * Returns the point permit by employee's id, control point's id and action type.
      *
      * @param empId       the employee's id.
      * @param ctrlPointId the control point's id.
-     * @return the list of point permits by employee's id and control point's id.
+     * @param actionType  the action type.
+     * @return the point permit by employee's id, control point's id and action type.
      */
     @Override
-    public List <PointPermit> getAllByEmpIdAndCtrlPointId(int empId, int ctrlPointId) {
-        return repository.getAllByEmpIdAndCtrlPointId(empId, ctrlPointId);
+    public PointPermit getByEmpIdCtrlPointIdAndActType(int empId, int ctrlPointId, ActionType actionType) {
+        return repository.getByEmpIdCtrlPointIdAndActType(empId, ctrlPointId, actionType);
     }
 
     /**

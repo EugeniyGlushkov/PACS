@@ -111,7 +111,6 @@ public class PointActionServiceTest extends AbstractServiceTest <PointAction, Po
         service.getWithCtrlPoint(testData.NOT_FOUND_ID);
     }
 
-
     /**
      * Checks the matching root exception to expected exception when objects with invalid
      * values is created.
