@@ -32,7 +32,7 @@ public interface AbsenceService extends TypicalService<Absence> {
      * @param absenceReasonId absence reason's id to insert.
      * @throws NotFoundException if there aren't updated object in the data base.
      */
-    void update(Absence absence, int empId, int absenceReasonId);
+    void update(Absence absence, int empId, int absenceReasonId) throws NotFoundException;
 
     /**
      * Returns the list with all absences by employee's id.
