@@ -313,7 +313,7 @@ CREATE TABLE absences
   description   VARCHAR(500) NOT NULL,
   FOREIGN KEY (emp_id) REFERENCES employees (id),
   FOREIGN KEY (reason_id) REFERENCES absence_reasons (id),
-  CONSTRAINT abs_start_end_con CHECK (start_absence < end_absence)
+  CONSTRAINT abs_start_end_con CHECK (start_absence <= end_absence)
 );;
 CREATE INDEX abs_empid_idx
   ON absences (emp_id);
@@ -537,7 +537,7 @@ BEGIN
     )
   THEN
     SIGNAL SQLSTATE '22000' SET MESSAGE_TEXT =
-      'Impossible insert, because current employee has not point inserting action!';
+      'Impossible insert, because current employee has not inserting point action!';
   END IF;
 END;
 

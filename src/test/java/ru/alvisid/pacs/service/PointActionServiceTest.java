@@ -52,7 +52,7 @@ public class PointActionServiceTest extends AbstractServiceTest <PointAction, Po
     /**
      * Checks a matching the actual updated value from DB to the expected updated value from {@code testData}:
      * update an exiting object with inserted {@code control point} in the DB;
-     * checks matching the actual list of all objects to the expected list of all objects from {@code testData}.
+     * checks matching the actual value to the expected value from {@code testData}.
      */
     @Test
     public void updateWithCtrlPointId() {

@@ -190,7 +190,7 @@ public class Absence extends AbstractHasEmpEntity {
     public String toString() {
         return "Absence{" +
                 "id=" + id +
-                ", employee=" + employee +
+                ", employeeId=" + employee.getId() +
                 ", absenceReason=" + absenceReason +
                 ", startAbsenceDate=" + startAbsenceDate +
                 ", endAbsenceDate=" + endAbsenceDate +

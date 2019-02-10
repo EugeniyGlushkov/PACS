@@ -80,6 +80,6 @@ public interface CrudAbsenceRepository extends JpaRepository <Absence, Integer> 
      * @return the list with all absences by id of the employee's department
      * and sorted by specified sort.
      */
-    @Query("SELECT a FROM Absence a WHERE a.employee.department.id = deptId")
+    @Query("SELECT a FROM Absence a WHERE a.employee.department.id=:deptId")
     List <Absence> findAllByEmployeeDepartmentId(@Param("deptId") int deptId, Sort sort);
 }

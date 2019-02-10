@@ -14,7 +14,7 @@ import java.util.List;
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 
 /**
- * Implementation of the {@code PointPermitService} interface.
+ * Implementation of the {@code AbsenceService} interface.
  * Extends <b>AbstractService</b> and <b>AbstractCachedService</b> functionality.
  *
  * @author Glushkov Evgeniy

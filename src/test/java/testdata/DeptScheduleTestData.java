@@ -61,7 +61,7 @@ public class DeptScheduleTestData extends AbstractTestData<DeptSchedule> {
     }
 
     /**
-     * Returns an {@code DeptSchedule} that is equals entity which will be get from DB.
+     * Returns a {@code DeptSchedule} that is equals entity which will be get from DB.
      *
      * @return the {@code DeptSchedule} that is equals entity which will be get from DB.
      */
@@ -71,7 +71,7 @@ public class DeptScheduleTestData extends AbstractTestData<DeptSchedule> {
     }
 
     /**
-     * Returns an {@code DeptSchedule}'s id for delete.
+     * Returns a {@code DeptSchedule}'s id for delete.
      *
      * @return the {@code DeptSchedule}'s id for delete.
      */

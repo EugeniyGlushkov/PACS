@@ -283,7 +283,7 @@ CREATE TABLE absences
   description   VARCHAR NOT NULL,
   FOREIGN KEY (emp_id) REFERENCES employees (id),
   FOREIGN KEY (reason_id) REFERENCES absence_reasons (id),
-  CONSTRAINT abs_start_end_con CHECK (start_absence < end_absence)
+  CONSTRAINT abs_start_end_con CHECK (start_absence <= end_absence)
 );
 CREATE INDEX abs_empid_idx
   ON absences (emp_id);
