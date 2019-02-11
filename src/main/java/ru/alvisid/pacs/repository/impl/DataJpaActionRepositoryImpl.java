@@ -24,13 +24,8 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
     /**
      * Sort by action's time, employee's last name, first name and second name.
      */
-    private static final Sort SORT_CTRLPOINT_TIME_LNAME_FNAME_SNAME =
-            new Sort(Sort.Direction.ASC,
-                    "pointAction.controlPoint",
-                    "actionTime",
-                    "employee.lastName",
-                    "employee.firstName",
-                    "employee.secondName");
+    private static final Sort SORT_CTRLPOINTID_TIME =
+            new Sort(Sort.Direction.ASC, "pointAction.controlPoint.id", "actionTime");
 
     /**
      * Sort by action's time.
@@ -139,7 +134,7 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
      */
     @Override
     public List<Action> getAll() {
-        return crudRepository.findAll(SORT_CTRLPOINT_TIME_LNAME_FNAME_SNAME);
+        return crudRepository.findAll(SORT_CTRLPOINTID_TIME);
     }
 
     /**
@@ -148,7 +143,7 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
      *
      * @param id the employee's id.
      * @return all actions which are done by specifiec employee sorted with specified sort.
-     * @see DataJpaActionRepositoryImpl#SORT_CTRLPOINT_TIME_LNAME_FNAME_SNAME
+     * @see DataJpaActionRepositoryImpl#SORT_CTRLPOINTID_TIME
      * @see DataJpaActionRepositoryImpl#getAll()
      * @see DataJpaActionRepositoryImpl#getAllBetween(LocalDateTime, LocalDateTime)
      */
@@ -170,6 +165,6 @@ public class DataJpaActionRepositoryImpl implements ActionRepository {
      */
     @Override
     public List<Action> getAllBetween(LocalDateTime start, LocalDateTime end) {
-        return crudRepository.findAllBetween(start, end, SORT_CTRLPOINT_TIME_LNAME_FNAME_SNAME);
+        return crudRepository.findAllBetween(start, end, SORT_CTRLPOINTID_TIME);
     }
 }
