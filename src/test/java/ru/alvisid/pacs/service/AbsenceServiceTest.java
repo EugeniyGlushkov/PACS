@@ -30,7 +30,6 @@ public class AbsenceServiceTest extends AbstractServiceTest<Absence, AbsenceServ
         super(new AbsenceTestData());
     }
 
-
     /**
      * Sets the {@code AbsenceService} to the superclass.
      *

@@ -1,15 +1,20 @@
 package ru.alvisid.pacs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.Action;
+import ru.alvisid.pacs.model.PointPermit;
 import ru.alvisid.pacs.repository.ActionRepository;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.ActionService;
+import ru.alvisid.pacs.service.PointPermitService;
+import ru.alvisid.pacs.util.exceptions.IllegalActionException;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 
@@ -22,8 +27,34 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
  * @see ActionService
  * @see AbstractService
  */
+@Service
 public class ActionServiceImpl
         extends AbstractService<ActionRepository, Action> implements ActionService {
+    /**
+     * Current {@code PointPermitService} implementation.
+     */
+    private PointPermitService pointPermitService;
+
+    @Override
+    public Action create(Action action) {
+        PointPermit currentPointPermit = pointPermitService.getByEmpIdCtrlPointIdAndActType(action.getEmployee().getId(),
+                action.getPointAction().getControlPoint().getId(),
+                action.getPointAction().getActionType());
+
+        if (Objects.isNull(currentPointPermit)) {
+            throw new IllegalActionException("Employee [" + action.getEmployee() + "] " +
+                    "has not permit for action type [" + action.getPointAction().getActionType() + "] " +
+                    "at control point [" + action.getPointAction().getControlPoint() + "].");
+        }
+
+        return super.create(action);
+    }
+
+    @Override
+    public void update(Action action) throws NotFoundException {
+        super.update(action);
+    }
+
     /**
      * Creates and saves a given action in the data base
      * with inserted employee and point action.
@@ -84,7 +115,8 @@ public class ActionServiceImpl
      * @param repository the specified action's repository implementation.
      */
     @Autowired
-    public ActionServiceImpl(ActionRepository repository) {
+    public ActionServiceImpl(ActionRepository repository, PointPermitService pointPermitService) {
         super(repository);
+        this.pointPermitService = pointPermitService;
     }
 }
