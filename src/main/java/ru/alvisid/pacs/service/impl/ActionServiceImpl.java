@@ -35,23 +35,29 @@ public class ActionServiceImpl
      */
     private PointPermitService pointPermitService;
 
+    /**
+     * Creates and saves a specified action in the data base.
+     *
+     * @param action the specified action.
+     * @return the created object.
+     * @throws IllegalActionException if an employee has no permit for this action at the control point.
+     */
     @Override
-    public Action create(Action action) {
-        PointPermit currentPointPermit = pointPermitService.getByEmpIdCtrlPointIdAndActType(action.getEmployee().getId(),
-                action.getPointAction().getControlPoint().getId(),
-                action.getPointAction().getActionType());
-
-        if (Objects.isNull(currentPointPermit)) {
-            throw new IllegalActionException("Employee [" + action.getEmployee() + "] " +
-                    "has not permit for action type [" + action.getPointAction().getActionType() + "] " +
-                    "at control point [" + action.getPointAction().getControlPoint() + "].");
-        }
-
+    public Action create(Action action) throws IllegalActionException {
+        checkPermit(action);
         return super.create(action);
     }
 
+    /**
+     * Updates an existing in the data base action.
+     *
+     * @param action the action to create.
+     * @throws NotFoundException      if there aren't updated object in the data base.
+     * @throws IllegalActionException if an employee has no permit for this action at the control point.
+     */
     @Override
-    public void update(Action action) throws NotFoundException {
+    public void update(Action action) throws NotFoundException, IllegalActionException {
+        checkPermit(action);
         super.update(action);
     }
 
@@ -63,10 +69,12 @@ public class ActionServiceImpl
      * @param empId         the employee's id to insert.
      * @param pointActionId point action's id to insert.
      * @return the created object.
+     * @throws IllegalActionException if an employee has no permit for this action at the control point.
      */
     @Override
-    public Action create(Action action, int empId, int pointActionId) {
+    public Action create(Action action, int empId, int pointActionId) throws IllegalActionException {
         Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
+        checkPermit(action);
         return repository.save(action, empId, pointActionId);
     }
 
@@ -77,11 +85,13 @@ public class ActionServiceImpl
      * @param action        the point action to create.
      * @param empId         the employee's id to insert.
      * @param pointActionId point action's id to insert.
-     * @throws NotFoundException if there aren't updated object in the data base.
+     * @throws NotFoundException      if there aren't updated object in the data base.
+     * @throws IllegalActionException if an employee has no permit for this action at the control point.
      */
     @Override
-    public void update(Action action, int empId, int pointActionId) throws NotFoundException {
+    public void update(Action action, int empId, int pointActionId) throws NotFoundException, IllegalActionException {
         Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
+        checkPermit(action);
         checkNotFoundWithId(repository.save(action, empId, pointActionId), action.getId());
     }
 
@@ -106,6 +116,24 @@ public class ActionServiceImpl
     @Override
     public List<Action> getAllBetween(LocalDateTime start, LocalDateTime end) {
         return repository.getAllBetween(start, end);
+    }
+
+    /**
+     * Checks employee which does the specified action has permit for this action type at the control point.
+     *
+     * @param action the specified action.
+     * @throws IllegalActionException if an employee has no permit for this action at the control point.
+     */
+    private void checkPermit(Action action) throws IllegalActionException {
+        PointPermit currentPointPermit = pointPermitService.getByEmpIdCtrlPointIdAndActType(action.getEmployee().getId(),
+                action.getPointAction().getControlPoint().getId(),
+                action.getPointAction().getActionType());
+
+        if (!Objects.isNull(currentPointPermit)) {
+            throw new IllegalActionException("Employee [" + action.getEmployee() + "] " +
+                    "has no permit for action type [" + action.getPointAction().getActionType() + "] " +
+                    "at control point [" + action.getPointAction().getControlPoint() + "].");
+        }
     }
 
     /**

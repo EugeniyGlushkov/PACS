@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.service;
 
 import ru.alvisid.pacs.model.Action;
+import ru.alvisid.pacs.util.exceptions.IllegalActionException;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
 import java.time.LocalDateTime;
@@ -21,8 +22,9 @@ public interface ActionService extends TypicalService<Action> {
      * @param empId         the employee's id to insert.
      * @param pointActionId point action's id to insert.
      * @return the created object.
+     * @throws IllegalActionException if an employee has no permit for this action at the control point.
      */
-    Action create(Action action, int empId, int pointActionId);
+    Action create(Action action, int empId, int pointActionId) throws IllegalActionException;
 
     /**
      * Updates an existing in the data base action
@@ -32,8 +34,9 @@ public interface ActionService extends TypicalService<Action> {
      * @param empId         the employee's id to insert.
      * @param pointActionId point action's id to insert.
      * @throws NotFoundException if there aren't updated object in the data base.
+     * @throws IllegalActionException if an employee has no permit for this action at the control point.
      */
-    void update(Action action, int empId, int pointActionId) throws NotFoundException;
+    void update(Action action, int empId, int pointActionId) throws NotFoundException, IllegalActionException;
 
     /**
      * Returns the list with all absences by employee's id.

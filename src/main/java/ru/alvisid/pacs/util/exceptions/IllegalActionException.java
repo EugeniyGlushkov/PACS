@@ -1,7 +1,7 @@
 package ru.alvisid.pacs.util.exceptions;
 
 /**
- * The exception is thrown when employee has not permit for this action at the control point.
+ * The exception is thrown when an employee has no permit for this action at the control point.
  *
  * @author Glushkov Evgeniy
  * @version 1.0
