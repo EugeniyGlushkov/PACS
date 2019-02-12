@@ -36,4 +36,14 @@ public interface EmployeeService extends TypicalService <Employee> {
      * @throws NotFoundException if the employee with the specified email isn't found.
      */
     Employee getByEmail(String email) throws NotFoundException;
+
+    /**
+     * Returns an employee with filled fields: {@code department} and {@code position}
+     * by specified id.
+     *
+     * @param id the specified employee's id.
+     * @return the employee with filled fields: {@code department} and {@code position}.
+     * @throws NotFoundException if the entity with the specified id isn't found
+     */
+    Employee getWithDeptAndPosition(int id) throws NotFoundException;
 }

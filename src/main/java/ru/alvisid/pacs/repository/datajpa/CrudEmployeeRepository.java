@@ -95,13 +95,13 @@ public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer
     Employee getByEmail(String email);
 
     /**
-     * Returns an employee with filled fields: {@code department}, {@code position} and {@code chief}
+     * Returns an employee with filled fields: {@code department} and {@code position}
      * by specified id.
      *
      * @param id the specified employee's id.
-     * @return the employee with filled fields: {@code department}, {@code position} and {@code chief}.
+     * @return the employee with filled fields: {@code department} and {@code position.
      */
-    @EntityGraph(attributePaths = {"department", "position", "chief"})
+    @EntityGraph(attributePaths = {"department", "position"})
     @Query("SELECT e FROM Employee e WHERE e.id=?1")
-    Employee getWithDeptPositionAndChief(int id);
+    Employee getWithDeptAndPosition(int id);
 }

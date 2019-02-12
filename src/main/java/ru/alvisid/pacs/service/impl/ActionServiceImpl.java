@@ -3,12 +3,9 @@ package ru.alvisid.pacs.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import ru.alvisid.pacs.model.Action;
-import ru.alvisid.pacs.model.PointPermit;
+import ru.alvisid.pacs.model.*;
 import ru.alvisid.pacs.repository.ActionRepository;
-import ru.alvisid.pacs.service.AbstractService;
-import ru.alvisid.pacs.service.ActionService;
-import ru.alvisid.pacs.service.PointPermitService;
+import ru.alvisid.pacs.service.*;
 import ru.alvisid.pacs.util.exceptions.IllegalActionException;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
@@ -29,11 +26,21 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
  */
 @Service
 public class ActionServiceImpl
-        extends AbstractService<ActionRepository, Action> implements ActionService {
+        extends AbstractService <ActionRepository, Action> implements ActionService {
     /**
      * Current {@code PointPermitService} implementation.
      */
     private PointPermitService pointPermitService;
+
+    /**
+     * Current {@code EmployeeService} implementation.
+     */
+    private EmployeeService employeeService;
+
+    /**
+     * Current {@code PointActionService} implementation.
+     */
+    private PointActionService pointActionService;
 
     /**
      * Creates and saves a specified action in the data base.
@@ -44,7 +51,7 @@ public class ActionServiceImpl
      */
     @Override
     public Action create(Action action) throws IllegalActionException {
-        checkPermit(action);
+        checkPermit(action.getEmployee().getId(), action.getPointAction().getId());
         return super.create(action);
     }
 
@@ -57,7 +64,7 @@ public class ActionServiceImpl
      */
     @Override
     public void update(Action action) throws NotFoundException, IllegalActionException {
-        checkPermit(action);
+        checkPermit(action.getEmployee().getId(), action.getPointAction().getId());
         super.update(action);
     }
 
@@ -74,7 +81,7 @@ public class ActionServiceImpl
     @Override
     public Action create(Action action, int empId, int pointActionId) throws IllegalActionException {
         Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
-        checkPermit(action);
+        checkPermit(empId, pointActionId);
         return repository.save(action, empId, pointActionId);
     }
 
@@ -91,7 +98,7 @@ public class ActionServiceImpl
     @Override
     public void update(Action action, int empId, int pointActionId) throws NotFoundException, IllegalActionException {
         Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
-        checkPermit(action);
+        checkPermit(empId, pointActionId);
         checkNotFoundWithId(repository.save(action, empId, pointActionId), action.getId());
     }
 
@@ -102,7 +109,7 @@ public class ActionServiceImpl
      * @return all actions which are done.
      */
     @Override
-    public List<Action> getAllByEmplId(int id) {
+    public List <Action> getAllByEmplId(int id) {
         return repository.getAllByEmplId(id);
     }
 
@@ -114,37 +121,51 @@ public class ActionServiceImpl
      * @return all actions in the specified time interval sorted with specified sort.
      */
     @Override
-    public List<Action> getAllBetween(LocalDateTime start, LocalDateTime end) {
+    public List <Action> getAllBetween(LocalDateTime start, LocalDateTime end) {
         return repository.getAllBetween(start, end);
     }
 
     /**
      * Checks employee which does the specified action has permit for this action type at the control point.
      *
-     * @param action the specified action.
+     * @param empId      the specified employee's id.
+     * @param pointActId the specified point action's id.
      * @throws IllegalActionException if an employee has no permit for this action at the control point.
      */
-    private void checkPermit(Action action) throws IllegalActionException {
-        PointPermit currentPointPermit = pointPermitService.getByEmpIdCtrlPointIdAndActType(action.getEmployee().getId(),
-                action.getPointAction().getControlPoint().getId(),
-                action.getPointAction().getActionType());
+    private void checkPermit(int empId, int pointActId) throws IllegalActionException {
+        PointAction pointAction = pointActionService.getWithCtrlPoint(pointActId);
+        PointPermit currentPointPermit =
+                pointPermitService.getByEmpIdCtrlPointIdAndActType(empId,
+                        pointAction.getControlPoint().getId(),
+                        pointAction.getActionType());
 
-        if (!Objects.isNull(currentPointPermit)) {
-            throw new IllegalActionException("Employee [" + action.getEmployee() + "] " +
-                    "has no permit for action type [" + action.getPointAction().getActionType() + "] " +
-                    "at control point [" + action.getPointAction().getControlPoint() + "].");
+        if (Objects.isNull(currentPointPermit)) {
+            Employee employee = employeeService.getWithDeptAndPosition(empId);
+            throw new IllegalActionException("Employee [id=" + empId +
+                    ",lastName=' " + employee.getLastName() + '\'' +
+                    ", cardNum=" + employee.getCardNum() + "] " +
+                    "has no permit for action type [" + pointAction.getActionType() + "] " +
+                    "at control point [" + pointAction.getControlPoint() + "].");
         }
     }
 
     /**
-     * Constructs new {@code ActionServiceImpl} and set a specified action's repository implementation
-     * to the superclass's repository field.
+     * Constructs new {@code ActionServiceImpl} and sets a specified action's repository implementation
+     * to the superclass's repository field, sets pointPermitService, employeeService and controlPointService fields.
      *
-     * @param repository the specified action's repository implementation.
+     * @param repository         the specified action's repository implementation.
+     * @param pointPermitService the specified PointPermitService's repository implementation.
+     * @param employeeService    the specified EmployeeService's repository implementation.
+     * @param pointActionService the specified PointActionService's repository implementation.
      */
     @Autowired
-    public ActionServiceImpl(ActionRepository repository, PointPermitService pointPermitService) {
+    public ActionServiceImpl(ActionRepository repository,
+                             PointPermitService pointPermitService,
+                             EmployeeService employeeService,
+                             PointActionService pointActionService) {
         super(repository);
         this.pointPermitService = pointPermitService;
+        this.employeeService = employeeService;
+        this.pointActionService = pointActionService;
     }
 }

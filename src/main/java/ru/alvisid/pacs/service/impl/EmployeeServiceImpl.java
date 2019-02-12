@@ -12,6 +12,7 @@ import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import java.util.List;
 
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFound;
+import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 
 /**
  * Implementation of the {@code EmployeeService} interface.
@@ -70,5 +71,18 @@ public class EmployeeServiceImpl
     public Employee getByEmail(String email) throws NotFoundException {
         Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
+    }
+
+    /**
+     * Returns an employee with filled fields: {@code department} and {@code position}
+     * by specified id.
+     *
+     * @param id the specified employee's id.
+     * @return the employee with filled fields: {@code department} and {@code position}.
+     * @throws NotFoundException if the entity with the specified id isn't found
+     */
+    @Override
+    public Employee getWithDeptAndPosition(int id) throws NotFoundException {
+        return checkNotFoundWithId(repository.getWithDeptAndPosition(id), id);
     }
 }
