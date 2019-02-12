@@ -142,7 +142,7 @@ public class ActionServiceImpl
         if (Objects.isNull(currentPointPermit)) {
             Employee employee = employeeService.getWithDeptAndPosition(empId);
             throw new IllegalActionException("Employee [id=" + empId +
-                    ",lastName=' " + employee.getLastName() + '\'' +
+                    ", lastName=' " + employee.getLastName() + '\'' +
                     ", cardNum=" + employee.getCardNum() + "] " +
                     "has no permit for action type [" + pointAction.getActionType() + "] " +
                     "at control point [" + pointAction.getControlPoint() + "].");

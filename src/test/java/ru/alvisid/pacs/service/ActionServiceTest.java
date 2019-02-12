@@ -45,7 +45,7 @@ public class ActionServiceTest extends AbstractServiceTest<Action, ActionService
         createdAction.setPointAction(POINT_ACTION_5);
         thrown.expect(IllegalActionException.class);
         thrown.expectMessage("Employee [id=" + createdAction.getEmployee().getId() +
-                ",lastName=' " + createdAction.getEmployee().getLastName() + '\'' +
+                ", lastName=' " + createdAction.getEmployee().getLastName() + '\'' +
                 ", cardNum=" + createdAction.getEmployee().getCardNum() +"] " +
                 "has no permit for action type [" + createdAction.getPointAction().getActionType() + "] " +
                 "at control point [" + createdAction.getPointAction().getControlPoint() + "].");
@@ -62,7 +62,7 @@ public class ActionServiceTest extends AbstractServiceTest<Action, ActionService
         updatedAction.setPointAction(POINT_ACTION_5);
         thrown.expect(IllegalActionException.class);
         thrown.expectMessage("Employee [id=" + updatedAction.getEmployee().getId() +
-                ",lastName=' " + updatedAction.getEmployee().getLastName() + '\'' +
+                ", lastName=' " + updatedAction.getEmployee().getLastName() + '\'' +
                 ", cardNum=" + updatedAction.getEmployee().getCardNum() +"] " +
                 "has no permit for action type [" + updatedAction.getPointAction().getActionType() + "] " +
                 "at control point [" + updatedAction.getPointAction().getControlPoint() + "].");
