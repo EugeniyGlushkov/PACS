@@ -2,10 +2,12 @@ package ru.alvisid.pacs.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.alvisid.pacs.model.Action;
+import ru.alvisid.pacs.model.*;
+import ru.alvisid.pacs.service.impl.ActionServiceImpl;
 import ru.alvisid.pacs.util.exceptions.IllegalActionException;
 import testdata.ActionTestData;
 import testdata.EmployeeTestData;
+
 import static util.TestUtil.assertMatch;
 
 import static testdata.PointActionTestData.*;
@@ -44,11 +46,12 @@ public class ActionServiceTest extends AbstractServiceTest<Action, ActionService
         Action createdAction = testData.getNew();
         createdAction.setPointAction(POINT_ACTION_5);
         thrown.expect(IllegalActionException.class);
-        thrown.expectMessage("Employee [id=" + createdAction.getEmployee().getId() +
-                ", lastName=' " + createdAction.getEmployee().getLastName() + '\'' +
-                ", cardNum=" + createdAction.getEmployee().getCardNum() +"] " +
-                "has no permit for action type [" + createdAction.getPointAction().getActionType() + "] " +
-                "at control point [" + createdAction.getPointAction().getControlPoint() + "].");
+        thrown.expectMessage(String.format(ActionServiceImpl.MESSAGE_FORMAT,
+                createdAction.getEmployee().getId(),
+                createdAction.getEmployee().getLastName(),
+                createdAction.getEmployee().getCardNum(),
+                createdAction.getPointAction().getActionType(),
+                createdAction.getPointAction().getControlPoint()));
         service.create(createdAction);
     }
 
@@ -61,11 +64,12 @@ public class ActionServiceTest extends AbstractServiceTest<Action, ActionService
         updatedAction.setEmployee(EmployeeTestData.EMPLOYEE_2);
         updatedAction.setPointAction(POINT_ACTION_5);
         thrown.expect(IllegalActionException.class);
-        thrown.expectMessage("Employee [id=" + updatedAction.getEmployee().getId() +
-                ", lastName=' " + updatedAction.getEmployee().getLastName() + '\'' +
-                ", cardNum=" + updatedAction.getEmployee().getCardNum() +"] " +
-                "has no permit for action type [" + updatedAction.getPointAction().getActionType() + "] " +
-                "at control point [" + updatedAction.getPointAction().getControlPoint() + "].");
+        thrown.expectMessage(String.format(ActionServiceImpl.MESSAGE_FORMAT,
+                updatedAction.getEmployee().getId(),
+                updatedAction.getEmployee().getLastName(),
+                updatedAction.getEmployee().getCardNum(),
+                updatedAction.getPointAction().getActionType(),
+                updatedAction.getPointAction().getControlPoint()));
         service.update(updatedAction);
     }
 
@@ -87,4 +91,28 @@ public class ActionServiceTest extends AbstractServiceTest<Action, ActionService
         expectedAction.setId(actualAction.getId());
         assertMatch(testData.IGNORING_FIELDS, service.getAll(), testData.getCreatedArray(expectedAction));
     }
+
+    /**
+     * Checks the {@code IllegalActionException} when created action with inserted employee and point action
+     * has no permit for this action type at the control point.
+     */
+    @Test
+    public void createWithEmpIdAndPointActIdIllegalAction() {
+        Action createdAction = testData.getNew();
+        Employee insertedEmployee = createdAction.getEmployee();
+        PointAction insertedPointAction = POINT_ACTION_5;
+        createdAction.setEmployee(null);
+        createdAction.setPointAction(null);
+        thrown.expect(IllegalActionException.class);
+        thrown.expectMessage(String.format(ActionServiceImpl.MESSAGE_FORMAT,
+                insertedEmployee.getId(),
+                insertedEmployee.getLastName(),
+                insertedEmployee.getCardNum(),
+                insertedPointAction.getActionType(),
+                insertedPointAction.getControlPoint()));
+        service.update(createdAction, insertedEmployee.getId(), insertedPointAction.getId());
+    }
+
+    @Test
+    public void
 }

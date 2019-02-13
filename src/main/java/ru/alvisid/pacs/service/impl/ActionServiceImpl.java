@@ -28,6 +28,14 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 public class ActionServiceImpl
         extends AbstractService <ActionRepository, Action> implements ActionService {
     /**
+     * Formatted string for {@code IllegalActionException}'s message which shows:
+     * employee's id, employee's last name, employee's card number, action type and control point.
+     */
+    public static final String MESSAGE_FORMAT = "Employee [id=%d, lastName='%s', cardNum=%d] " +
+            "has no permit for action type [%s] " +
+            "at control point [%s].";
+
+    /**
      * Current {@code PointPermitService} implementation.
      */
     private PointPermitService pointPermitService;
@@ -141,11 +149,8 @@ public class ActionServiceImpl
 
         if (Objects.isNull(currentPointPermit)) {
             Employee employee = employeeService.getWithDeptAndPosition(empId);
-            throw new IllegalActionException("Employee [id=" + empId +
-                    ", lastName=' " + employee.getLastName() + '\'' +
-                    ", cardNum=" + employee.getCardNum() + "] " +
-                    "has no permit for action type [" + pointAction.getActionType() + "] " +
-                    "at control point [" + pointAction.getControlPoint() + "].");
+            throw new IllegalActionException(String.format(MESSAGE_FORMAT,
+                    empId, employee.getLastName(), employee.getCardNum(), pointAction.getActionType(), pointAction.getControlPoint()));
         }
     }
 
