@@ -54,7 +54,7 @@ public class EmpScheduleServiceImpl
     @Override
     @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     public EmpSchedule create(EmpSchedule empSchedule, int empId) {
-        Assert.notNull(empSchedule, empSchedule.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(empSchedule, currentClass.getSimpleName() + " must not be null");
         return repository.save(empSchedule, empId);
     }
 
@@ -69,7 +69,7 @@ public class EmpScheduleServiceImpl
     @Override
     @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     public void update(EmpSchedule empSchedule, int empId) throws NotFoundException {
-        Assert.notNull(empSchedule, empSchedule.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(empSchedule, currentClass.getSimpleName() + " must not be null");
         checkNotFoundWithId(repository.save(empSchedule, empId), empSchedule.getId());
     }
 

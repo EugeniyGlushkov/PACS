@@ -10,6 +10,7 @@ import ru.alvisid.pacs.service.AbstractCachedService;
 import ru.alvisid.pacs.service.AbstractService;
 import ru.alvisid.pacs.service.DeptScheduleService;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
+
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 
 /**
@@ -42,7 +43,7 @@ public class DeptScheduleServiceImpl
     @Override
     @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     public DeptSchedule create(DeptSchedule deptSchedule, int deptId) {
-        Assert.notNull(deptSchedule, deptSchedule.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(deptSchedule, currentClass.getSimpleName() + " must not be null");
         return repository.save(deptSchedule, deptId);
     }
 
@@ -58,7 +59,7 @@ public class DeptScheduleServiceImpl
     @Override
     @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     public void update(DeptSchedule deptSchedule, int deptId) throws NotFoundException {
-        Assert.notNull(deptSchedule, deptSchedule.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(deptSchedule, currentClass.getSimpleName() + " must not be null");
         checkNotFoundWithId(repository.save(deptSchedule, deptId), deptSchedule.getId());
     }
 

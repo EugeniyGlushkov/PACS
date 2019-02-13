@@ -46,7 +46,7 @@ public class PointActionServiceImpl
     @Override
     @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     public PointAction create(PointAction pointAction, int controlPointId) {
-        Assert.notNull(pointAction, pointAction.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(pointAction, currentClass.getSimpleName() + " must not be null");
         return repository.save(pointAction, controlPointId);
     }
 
@@ -62,7 +62,7 @@ public class PointActionServiceImpl
     @Override
     @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     public void update(PointAction pointAction, int controlPointId) throws NotFoundException {
-        Assert.notNull(pointAction, pointAction.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(pointAction, currentClass.getSimpleName() + " must not be null");
         checkNotFoundWithId(repository.save(pointAction, controlPointId), pointAction.getId());
     }
 

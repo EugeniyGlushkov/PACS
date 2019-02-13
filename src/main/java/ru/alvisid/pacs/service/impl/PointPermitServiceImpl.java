@@ -47,7 +47,7 @@ public class PointPermitServiceImpl
     @Override
     @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     public PointPermit create(PointPermit pointPermit, int empId, int pointActionId) {
-        Assert.notNull(pointPermit, pointPermit.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(pointPermit, currentClass.getSimpleName() + " must not be null");
         return repository.save(pointPermit, empId, pointActionId);
     }
 
@@ -63,7 +63,7 @@ public class PointPermitServiceImpl
     @Override
     @CacheEvict(cacheResolver = "cacheResolver", allEntries = true)
     public void update(PointPermit pointPermit, int empId, int pointActionId) throws NotFoundException {
-        Assert.notNull(pointPermit, pointPermit.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(pointPermit, currentClass.getSimpleName() + " must not be null");
         checkNotFoundWithId(repository.save(pointPermit, empId, pointActionId), pointPermit.getId());
     }
 

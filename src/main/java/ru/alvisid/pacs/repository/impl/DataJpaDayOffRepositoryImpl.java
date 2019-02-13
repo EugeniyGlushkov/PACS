@@ -8,6 +8,7 @@ import ru.alvisid.pacs.repository.DayOffRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudDayOffRepository;
 import ru.alvisid.pacs.repository.datajpa.CrudDepartmentRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +25,18 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
      */
     private static final Sort SORT_DEPTID_DATE =
             new Sort(Sort.Direction.ASC, "department.id,", "dateOff");
+
+    /**
+     * Sort by department's id.
+     */
+    private static final Sort SORT_DEPTID =
+            new Sort(Sort.Direction.ASC, "department.id,");
+
+    /**
+     * Sort by date.
+     */
+    private static final Sort SORT_DATE =
+            new Sort(Sort.Direction.ASC, "dateOff");
 
     /**
      * An interface for day off repository which extends JpaRepository.
@@ -113,5 +126,27 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
     @Override
     public List<DayOff> getAll() {
         return null;
+    }
+
+    /**
+     * Returns the list with all objects by a specified <b>department's id</b>.
+     *
+     * @param deptId the specified <b>department's id</b>.
+     * @return the list with all objects by a specified <b>department's id</b>.
+     */
+    @Override
+    public List <DayOff> getAllByDeptId(int deptId) {
+        return crudRepository.findAllByDepartmentId(deptId);
+    }
+
+    /**
+     * Returns the list with all objects by a specified <b>date</b>.
+     *
+     * @param date the specified <b>date</b>.
+     * @return the list with all objects by a specified <b>date</b>.
+     */
+    @Override
+    public List <DayOff> getAllByDate(LocalDate date) {
+        return crudRepository.getAllByDate(date);
     }
 }

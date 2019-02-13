@@ -36,7 +36,7 @@ public class AbsenceServiceImpl
      */
     @Override
     public Absence create(Absence absence, int empId, int absenceReasonId) {
-        Assert.notNull(absence, absence.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(absence, currentClass.getSimpleName() + " must not be null");
         return repository.save(absence, empId, absenceReasonId);
     }
 
@@ -51,7 +51,7 @@ public class AbsenceServiceImpl
      */
     @Override
     public void update(Absence absence, int empId, int absenceReasonId) throws NotFoundException {
-        Assert.notNull(absence, absence.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(absence, currentClass.getSimpleName() + " must not be null");
         checkNotFoundWithId(repository.save(absence, empId, absenceReasonId), absence.getId());
     }
 

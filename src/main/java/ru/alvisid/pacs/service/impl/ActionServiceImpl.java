@@ -59,7 +59,7 @@ public class ActionServiceImpl
      */
     @Override
     public Action create(Action action) throws IllegalActionException {
-        Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(action, currentClass.getSimpleName() + " must not be null");
         Assert.notNull(action.getEmployee(), "Employee of the created" + action + " must not be null");
         Assert.notNull(action.getPointAction(), "Point action of the created" + action + " must not be null");
         checkPermit(action.getEmployee().getId(), action.getPointAction().getId());
@@ -75,7 +75,7 @@ public class ActionServiceImpl
      */
     @Override
     public void update(Action action) throws NotFoundException, IllegalActionException {
-        Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(action, currentClass.getSimpleName() + " must not be null");
         Assert.notNull(action.getEmployee(), "Employee of the created" + action + " must not be null");
         Assert.notNull(action.getPointAction(), "Point action of the created" + action + " must not be null");
         checkPermit(action.getEmployee().getId(), action.getPointAction().getId());
@@ -94,7 +94,7 @@ public class ActionServiceImpl
      */
     @Override
     public Action create(Action action, int empId, int pointActionId) throws IllegalActionException {
-        Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(action, currentClass.getSimpleName() + " must not be null");
         checkPermit(empId, pointActionId);
         return repository.save(action, empId, pointActionId);
     }
@@ -111,7 +111,7 @@ public class ActionServiceImpl
      */
     @Override
     public void update(Action action, int empId, int pointActionId) throws NotFoundException, IllegalActionException {
-        Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(action, currentClass.getSimpleName() + " must not be null");
         checkPermit(empId, pointActionId);
         checkNotFoundWithId(repository.save(action, empId, pointActionId), action.getId());
     }

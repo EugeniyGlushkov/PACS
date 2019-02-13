@@ -5,6 +5,7 @@ import ru.alvisid.pacs.model.abstractions.HasId;
 import ru.alvisid.pacs.repository.TypicalRepository;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
@@ -20,6 +21,11 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
 public abstract class AbstractService<T extends TypicalRepository<S>, S extends HasId>
         implements TypicalService<S> {
     /**
+     * Current class;
+     */
+    protected Class<T> currentClass;
+
+    /**
      * The specific repository implementation
      * which corresponds to service's object: type {@code S}.
      */
@@ -33,7 +39,7 @@ public abstract class AbstractService<T extends TypicalRepository<S>, S extends 
      */
     @Override
     public S create(S obj) {
-        Assert.notNull(obj, obj.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(obj, currentClass.getSimpleName() + " must not be null");
 
         if (!obj.isNew()) {
             throw new IllegalArgumentException(obj.getClass().getSimpleName() + " must be new (has id = null)!");
@@ -50,7 +56,7 @@ public abstract class AbstractService<T extends TypicalRepository<S>, S extends 
      */
     @Override
     public void update(S obj) throws NotFoundException {
-        Assert.notNull(obj, obj.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(obj, currentClass.getSimpleName() + " must not be null");
         checkNotFoundWithId(repository.save(obj), obj.getId());
     }
 
@@ -95,5 +101,6 @@ public abstract class AbstractService<T extends TypicalRepository<S>, S extends 
      */
     public AbstractService(T repository) {
         this.repository = repository;
+        this.currentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.alvisid.pacs.model.DayOff;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,4 +61,22 @@ public interface CrudDayOffRepository extends JpaRepository <DayOff, Integer> {
      */
     @Override
     List <DayOff> findAll(Sort sort);
+
+    /**
+     * Returns the list with all objects by a specified <b>department's id</b>.
+     *
+     * @param deptId the specified <b>department's id</b>.
+     * @return the list with all objects by a specified <b>department's id</b>.
+     */
+    @Query("SELECT do FROM DayOff do WHERE do.department.id=:deptId")
+    List <DayOff> findAllByDepartmentId(@Param("deptId") int deptId);
+
+    /**
+     * Returns the list with all objects by a specified <b>date</b>.
+     *
+     * @param date the specified <b>date</b>.
+     * @return the list with all objects by a specified <b>date</b>.
+     */
+    @Query("SELECT do FROM DayOff do WHERE do.dateOff=:date")
+    List <DayOff> getAllByDate(@Param("date") LocalDate date);
 }
