@@ -62,7 +62,7 @@ public class AbsenceServiceTest extends AbstractServiceTest<Absence, AbsenceServ
 
     /**
      * Checks a matching the actual updated value from DB to the expected updated value from {@code testData}:
-     * update an exiting object with inserted {@code employee} {@code absence reason} in the DB;
+     * update an exiting object with inserted {@code employee} and {@code absence reason} in the DB;
      * checks matching the actual value to the expected value from {@code testData}.
      */
     @Test

@@ -59,6 +59,9 @@ public class ActionServiceImpl
      */
     @Override
     public Action create(Action action) throws IllegalActionException {
+        Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(action.getEmployee(), "Employee of the created" + action + " must not be null");
+        Assert.notNull(action.getPointAction(), "Point action of the created" + action + " must not be null");
         checkPermit(action.getEmployee().getId(), action.getPointAction().getId());
         return super.create(action);
     }
@@ -72,6 +75,9 @@ public class ActionServiceImpl
      */
     @Override
     public void update(Action action) throws NotFoundException, IllegalActionException {
+        Assert.notNull(action, action.getClass().getSimpleName() + " must not be null");
+        Assert.notNull(action.getEmployee(), "Employee of the created" + action + " must not be null");
+        Assert.notNull(action.getPointAction(), "Point action of the created" + action + " must not be null");
         checkPermit(action.getEmployee().getId(), action.getPointAction().getId());
         super.update(action);
     }
