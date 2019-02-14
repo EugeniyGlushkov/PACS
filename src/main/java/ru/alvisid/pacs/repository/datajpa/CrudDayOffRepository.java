@@ -63,20 +63,24 @@ public interface CrudDayOffRepository extends JpaRepository <DayOff, Integer> {
     List <DayOff> findAll(Sort sort);
 
     /**
-     * Returns the list with all objects by a specified <b>department's id</b>.
+     * Returns the list with all objects by a specified <b>department's id</b>
+     * sorted with a given sort.
      *
      * @param deptId the specified <b>department's id</b>.
+     * @param sort sort for days off list.
      * @return the list with all objects by a specified <b>department's id</b>.
      */
     @Query("SELECT do FROM DayOff do WHERE do.department.id=:deptId")
-    List <DayOff> findAllByDepartmentId(@Param("deptId") int deptId);
+    List <DayOff> findAllByDepartmentId(@Param("deptId") int deptId, Sort sort);
 
     /**
-     * Returns the list with all objects by a specified <b>date</b>.
+     * Returns the list with all objects by a specified <b>date</b>
+     * sorted with a given sort.
      *
      * @param date the specified <b>date</b>.
+     * @param sort sort for days off list.
      * @return the list with all objects by a specified <b>date</b>.
      */
     @Query("SELECT do FROM DayOff do WHERE do.dateOff=:date")
-    List <DayOff> getAllByDate(@Param("date") LocalDate date);
+    List <DayOff> getAllByDate(@Param("date") LocalDate date, Sort sort);
 }

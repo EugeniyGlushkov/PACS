@@ -125,7 +125,7 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
      */
     @Override
     public List<DayOff> getAll() {
-        return null;
+        return crudRepository.findAll(SORT_DEPTID_DATE);
     }
 
     /**
@@ -136,7 +136,7 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
      */
     @Override
     public List <DayOff> getAllByDeptId(int deptId) {
-        return crudRepository.findAllByDepartmentId(deptId);
+        return crudRepository.findAllByDepartmentId(deptId, SORT_DATE);
     }
 
     /**
@@ -147,6 +147,6 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
      */
     @Override
     public List <DayOff> getAllByDate(LocalDate date) {
-        return crudRepository.getAllByDate(date);
+        return crudRepository.getAllByDate(date, SORT_DEPTID);
     }
 }
