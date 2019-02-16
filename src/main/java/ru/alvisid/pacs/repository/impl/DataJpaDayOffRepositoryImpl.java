@@ -24,13 +24,13 @@ public class DataJpaDayOffRepositoryImpl implements DayOffRepository {
      * Sort by department's id and date.
      */
     private static final Sort SORT_DEPTID_DATE =
-            new Sort(Sort.Direction.ASC, "department.id,", "dateOff");
+            new Sort(Sort.Direction.ASC, "department.id", "dateOff");
 
     /**
      * Sort by department's id.
      */
     private static final Sort SORT_DEPTID =
-            new Sort(Sort.Direction.ASC, "department.id,");
+            new Sort(Sort.Direction.ASC, "department.id");
 
     /**
      * Sort by date.

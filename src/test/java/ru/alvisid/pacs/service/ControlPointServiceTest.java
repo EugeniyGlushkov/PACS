@@ -29,7 +29,7 @@ public class ControlPointServiceTest extends AbstractServiceTest <ControlPoint, 
 
 
     /**
-     * Sets the {@code ControlPointService} to the superclass.
+     * Sets the {@code ControlPointService} to the superclass's field.
      *
      * @param service the specified Service.
      */

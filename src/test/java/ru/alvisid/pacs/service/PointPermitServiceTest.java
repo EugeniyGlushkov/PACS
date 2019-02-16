@@ -32,7 +32,7 @@ public class PointPermitServiceTest extends AbstractServiceTest <PointPermit, Po
     }
 
     /**
-     * Sets the {@code PointPermitService} to the superclass.
+     * Sets the {@code PointPermitService} to the superclass's field.
      *
      * @param service the specified Service.
      */

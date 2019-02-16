@@ -34,7 +34,7 @@ public class ActionServiceTest extends AbstractServiceTest <Action, ActionServic
     }
 
     /**
-     * Sets the {@code ActionService} to the superclass.
+     * Sets the {@code ActionService} to the superclass's field.
      *
      * @param service the specified Service.
      */

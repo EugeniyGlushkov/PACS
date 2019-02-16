@@ -28,7 +28,7 @@ public class EmpScheduleServiceTest extends AbstractServiceTest<EmpSchedule, Emp
     }
 
     /**
-     * Sets the {@code EmpScheduleService} field.
+     * Sets the {@code EmpScheduleService} to the superclass's field.
      *
      * @param service the specified Service.
      */

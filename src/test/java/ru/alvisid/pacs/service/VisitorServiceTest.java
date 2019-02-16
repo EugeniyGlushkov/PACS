@@ -29,14 +29,14 @@ public class VisitorServiceTest extends AbstractServiceTest <Visitor, VisitorSer
     }
 
     /**
-     * Sets the {@code VisitorService} to the superclass.
+     * Sets the {@code VisitorService} to the superclass's field.
      *
      * @param service the specified Service.
      */
     @Override
     @Autowired
     public void setService(VisitorService service) {
-        super.service = service;
+        this.service = service;
     }
 
     /**

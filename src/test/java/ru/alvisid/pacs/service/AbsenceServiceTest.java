@@ -31,7 +31,7 @@ public class AbsenceServiceTest extends AbstractServiceTest<Absence, AbsenceServ
     }
 
     /**
-     * Sets the {@code AbsenceService} to the superclass.
+     * Sets the {@code AbsenceService} to the superclass's field.
      *
      * @param service the specified Service.
      */

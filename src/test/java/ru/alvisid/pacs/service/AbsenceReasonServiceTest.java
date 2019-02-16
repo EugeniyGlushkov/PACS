@@ -26,7 +26,7 @@ public class AbsenceReasonServiceTest extends AbstractServiceTest<AbsenceReason,
     }
 
     /**
-     * Sets the {@code AbsenceReasonService} to the superclass.
+     * Sets the {@code AbsenceReasonService} to the superclass's field.
      *
      * @param service the specified Service.
      */

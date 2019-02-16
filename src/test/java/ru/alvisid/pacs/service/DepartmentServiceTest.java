@@ -37,7 +37,7 @@ public class DepartmentServiceTest extends AbstractServiceTest<Department, Depar
     private EmployeeService employeeService;
 
     /**
-     * Sets the {@code DepartmentService} to the superclass.
+     * Sets the {@code DepartmentService} to the superclass's field.
      *
      * @param service the specified Service.
      */

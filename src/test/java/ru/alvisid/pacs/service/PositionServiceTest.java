@@ -34,14 +34,14 @@ public class PositionServiceTest extends AbstractServiceTest <Position, Position
     private EmployeeService employeeService;
 
     /**
-     * Sets the {@code PositionService} to the superclass.
+     * Sets the {@code PositionService} to the superclass's field.
      *
      * @param service the specified Service.
      */
     @Override
     @Autowired
     public void setService(PositionService service) {
-        super.service = service;
+        this.service = service;
     }
 
     /**

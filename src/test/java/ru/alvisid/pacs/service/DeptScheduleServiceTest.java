@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.alvisid.pacs.model.DeptSchedule;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
-import testdata.DepartmentTestData;
 import testdata.DeptScheduleTestData;
 
 import javax.validation.ConstraintViolationException;
@@ -28,14 +27,14 @@ public class DeptScheduleServiceTest extends AbstractServiceTest<DeptSchedule, D
     }
 
     /**
-     * Sets the {@code DeptScheduleService} to the superclass.
+     * Sets the {@code DeptScheduleService} to the superclass's field.
      *
      * @param service the specified Service.
      */
     @Override
     @Autowired
     public void setService(DeptScheduleService service) {
-        super.service = service;
+        this.service = service;
     }
 
     /**

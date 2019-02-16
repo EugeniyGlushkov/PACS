@@ -13,6 +13,13 @@ import static testdata.ControlPointTestData.CONTROL_POINT_3;
 import static util.TestUtil.assertMatch;
 import static testdata.PointActionTestData.*;
 
+/**
+ * PointAction's specific tests.
+ *
+ * @author Glushkov Evgeniy
+ * @version 1.0
+ * @see AbstractServiceTest
+ */
 public class PointActionServiceTest extends AbstractServiceTest <PointAction, PointActionService> {
     /**
      * Constructs new <em>PointActionServiceTest</em> object.
@@ -22,7 +29,7 @@ public class PointActionServiceTest extends AbstractServiceTest <PointAction, Po
     }
 
     /**
-     * Sets the {@code PointActionService} to the superclass.
+     * Sets the {@code PointActionService} to the superclass's field.
      *
      * @param service the specified Service.
      */
