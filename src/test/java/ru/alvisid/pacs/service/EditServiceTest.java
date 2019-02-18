@@ -22,7 +22,7 @@ import static testdata.EditTestData.*;
  * @version 1.0
  * @see AbstractServiceTest
  */
-public class EditServiceTest extends AbstractServiceTest<Edit, EditService> {
+public class EditServiceTest extends AbstractServiceTest <Edit, EditService> {
     /**
      * Constructs new <em>EditServiceTest</em> object.
      */
@@ -95,7 +95,7 @@ public class EditServiceTest extends AbstractServiceTest<Edit, EditService> {
      */
     @Test
     public void getAllByEmpId() {
-        List<Edit> actualEditsByEmpId = service.getAllByEmpId(EMPLOYEE_6.getId());
+        List <Edit> actualEditsByEmpId = service.getAllByEmpId(EMPLOYEE_6.getId());
         assertMatch(testData.IGNORING_FIELDS, actualEditsByEmpId, EDIT_3, EDIT_4);
     }
 
@@ -105,7 +105,7 @@ public class EditServiceTest extends AbstractServiceTest<Edit, EditService> {
      */
     @Test
     public void getAllBetween() {
-        List<Edit> actualEditsBetween = service.getAllBetween(
+        List <Edit> actualEditsBetween = service.getAllBetween(
                 LocalDateTime.of(2017, 2, 23, 0, 0, 0),
                 LocalDateTime.of(2017, 8, 27, 0, 0, 0));
         assertMatch(testData.IGNORING_FIELDS, actualEditsBetween, EDIT_2, EDIT_3);

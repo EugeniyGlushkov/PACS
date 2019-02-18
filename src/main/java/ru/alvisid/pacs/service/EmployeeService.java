@@ -13,6 +13,32 @@ import java.util.List;
  */
 public interface EmployeeService extends TypicalService <Employee> {
     /**
+     * Creates and saves a given employee in the data base
+     * with inserted department and position.
+     *
+     * @param employee   the object to save or update.
+     * @param deptId     a department's id, the department will be inserted to the object's
+     *                   {@code department} field.
+     * @param positionId a position's id, the position will be inserted to the object's
+     *                   {@code position} field.
+     * @return the created object.
+     */
+    Employee create(Employee employee, int deptId, int positionId);
+
+    /**
+     * Updates an existing in the data base employee
+     * with inserted department and position.
+     *
+     * @param employee   the object to save or update.
+     * @param deptId     a department's id, the department will be inserted to the object's
+     *                   {@code department} field.
+     * @param positionId a position's id, the position will be inserted to the object's
+     *                   {@code position} field.
+     * @throws NotFoundException if there aren't updated object in the data base.
+     */
+    void update(Employee employee, int deptId, int positionId) throws NotFoundException;
+
+    /**
      * Returns the list with all employees by department's id.
      *
      * @param deptId the department's id.

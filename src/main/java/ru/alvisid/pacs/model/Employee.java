@@ -208,6 +208,7 @@ public class Employee extends AbstractPerson {
      * @param cardNum    the employee's card's number.
      * @param email      the employee's email.
      * @see Employee#Employee()
+     * @see Employee#Employee(String, String, String, Department, Position, Integer, String, Set)
      * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String)
      * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String, Set)
      * @see Employee#Employee(Employee)
@@ -234,12 +235,37 @@ public class Employee extends AbstractPerson {
      * @param email      the employee's email.
      * @see Employee#Employee()
      * @see Employee#Employee(String, String, String, Department, Position, Integer, String)
+     * @see Employee#Employee(String, String, String, Department, Position, Integer, String, Set)
      * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String, Set)
      * @see Employee#Employee(Employee)
      */
     public Employee(Integer id, String lastName, String firstName, String secondName,
                     Department department, Position position, Integer cardNum, String email) {
         this(id, lastName, firstName, secondName, department, position, cardNum, email, null);
+    }
+
+    /**
+     * Constructs a <b>Department</b> object with specified
+     * {@code lastName}, {@code firstName}, {@code secondName},
+     * {@code department}, {@code position}, {@code cardNum}, {@code email}
+     * and {@code roles} values.
+     *
+     * @param lastName   the employee's last name.
+     * @param firstName  the employee's first name.
+     * @param secondName the employee's second name.
+     * @param department the employee's department.
+     * @param position   the employee's position.
+     * @param cardNum    the employee's card's number.
+     * @param email      the employee's email.
+     * @see Employee#Employee()
+     * @see Employee#Employee(String, String, String, Department, Position, Integer, String)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String)
+     * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String, Set)
+     * @see Employee#Employee(Employee)
+     */
+    public Employee(String lastName, String firstName, String secondName,
+                    Department department, Position position, Integer cardNum, String email, Set <Role> roles) {
+        this(null, lastName, firstName, secondName, department, position, cardNum, email, roles);
     }
 
     /**
@@ -259,6 +285,7 @@ public class Employee extends AbstractPerson {
      * @param roles      the employee's roles.
      * @see Employee#Employee()
      * @see Employee#Employee(String, String, String, Department, Position, Integer, String)
+     * @see Employee#Employee(String, String, String, Department, Position, Integer, String, Set)
      * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String)
      * @see Employee#Employee(Employee)
      */
@@ -280,6 +307,7 @@ public class Employee extends AbstractPerson {
      * @param employee the specified object to copying.
      * @see Employee#Employee()
      * @see Employee#Employee(String, String, String, Department, Position, Integer, String)
+     * @see Employee#Employee(String, String, String, Department, Position, Integer, String, Set)
      * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String)
      * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String, Set)
      */
