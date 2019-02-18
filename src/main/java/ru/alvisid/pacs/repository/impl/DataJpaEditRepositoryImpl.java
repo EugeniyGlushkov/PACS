@@ -79,20 +79,17 @@ public class DataJpaEditRepositoryImpl implements EditRepository {
     }
 
     /**
-     * Saves or updates a given object with inserted parameters.
+     * Saves or updates a given object with inserted parameter.
      *
      * @param edit     the object to save or update.
      * @param empId    the employee's id, the employee will be inserted to the
      *                 saved object's {@code employee} field.
-     * @param editType the edit type's string, the edit type will be inserted to the
-     *                 saved object's {@code editType} field.
      * @return a saved or update object,
      * null - if there aren't updated object in the data base.
      */
     @Override
-    public Edit save(Edit edit, int empId, String editType) {
+    public Edit save(Edit edit, int empId) {
         edit.setEmployee(crudEmployeeRepository.getOne(empId));
-        edit.setEditType(EditType.valueOf(editType));
         return save(edit);
     }
 
@@ -134,11 +131,11 @@ public class DataJpaEditRepositoryImpl implements EditRepository {
     }
 
     /**
-     * Returns all edits which are done by specifiec employee sorted with specified sort.
+     * Returns all edits which are done by specific employee sorted with specified sort.
      * List is sorted by edit's time and edit's type.
      *
      * @param id the employee's id.
-     * @return all edits which are done by specifiec employee sorted with specified sort.
+     * @return all edits which are done by specific employee sorted with specified sort.
      * @see DataJpaEditRepositoryImpl#SORT_TIME_TYPE_EMPL
      * @see DataJpaEditRepositoryImpl#getAll()
      * @see DataJpaEditRepositoryImpl#getAllBetween(LocalDateTime, LocalDateTime)

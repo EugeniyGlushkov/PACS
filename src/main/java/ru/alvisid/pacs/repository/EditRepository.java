@@ -13,17 +13,15 @@ import java.util.List;
  */
 public interface EditRepository extends TypicalRepository<Edit> {
     /**
-     * Saves or updates a given object with inserted parameters.
+     * Saves or updates a given object with inserted parameter.
      *
      * @param edit     the object to save or update.
      * @param empId    the employee's id, the employee will be inserted to the
      *                 saved object's {@code employee} field.
-     * @param editType the edit type's string, the edit type will be inserted to the
-     *                 saved object's {@code editType} field.
      * @return a saved or update object,
      * null - if there aren't updated object in the data base.
      */
-    Edit save(Edit edit, int empId, String editType);
+    Edit save(Edit edit, int empId);
 
     /**
      * Returns the list with all edits by employee's id.

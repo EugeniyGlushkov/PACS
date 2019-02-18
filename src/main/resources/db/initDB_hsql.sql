@@ -338,7 +338,7 @@ CREATE TABLE edits
   type_id     INTEGER                 NOT NULL,
   emp_id      INTEGER                 NOT NULL,
   edit_date   TIMESTAMP DEFAULT now() NOT NULL,
-  description VARCHAR(500)            NOT NULL,
+  description VARCHAR                 NOT NULL,
   FOREIGN KEY (type_id) REFERENCES edit_types (id),
   FOREIGN KEY (emp_id) REFERENCES employees (id)
 );;

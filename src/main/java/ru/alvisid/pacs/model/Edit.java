@@ -72,8 +72,8 @@ public class Edit extends AbstractHasEmpEntity {
      * Initializes a newly created <b>Edit</b> object with null fields
      * and null fields of the superclass.
      *
-     * @see Edit#Edit(String, Employee, EditType, LocalDateTime)
-     * @see Edit#Edit(Integer, String, Employee, EditType, LocalDateTime)
+     * @see Edit#Edit(EditType, Employee, LocalDateTime, String)
+     * @see Edit#Edit(Integer, EditType, Employee, LocalDateTime, String)
      * @see Edit#Edit(Edit)
      */
     public Edit() {
@@ -89,18 +89,18 @@ public class Edit extends AbstractHasEmpEntity {
      * @param editType     the specified value of the edit type.
      * @param editDateTime the specified value of the time when the edit was done.
      * @see Edit#Edit()
-     * @see Edit#Edit(Integer, String, Employee, EditType, LocalDateTime)
+     * @see Edit#Edit(Integer, EditType, Employee, LocalDateTime, String)
      * @see Edit#Edit(Edit)
      */
-    public Edit(String description,
+    public Edit(EditType editType,
                 Employee employee,
-                EditType editType,
-                LocalDateTime editDateTime) {
+                LocalDateTime editDateTime,
+                String description) {
         this(null,
-                description,
-                employee,
                 editType,
-                editDateTime);
+                employee,
+                editDateTime,
+                description);
     }
 
     /**
@@ -113,14 +113,14 @@ public class Edit extends AbstractHasEmpEntity {
      * @param editType     the specified value of the edit type.
      * @param editDateTime the specified value of the time when the edit was done.
      * @see Edit#Edit()
-     * @see Edit#Edit(String, Employee, EditType, LocalDateTime)
+     * @see Edit#Edit(EditType, Employee, LocalDateTime, String)
      * @see Edit#Edit(Edit)
      */
     public Edit(Integer id,
-                String description,
-                Employee employee,
                 EditType editType,
-                LocalDateTime editDateTime) {
+                Employee employee,
+                LocalDateTime editDateTime,
+                String description) {
         super(id, description, employee);
         this.editType = editType;
         this.editDateTime = editDateTime;
@@ -132,15 +132,15 @@ public class Edit extends AbstractHasEmpEntity {
      *
      * @param edit the specified object to copying.
      * @see Edit#Edit()
-     * @see Edit#Edit(String, Employee, EditType, LocalDateTime)
-     * @see Edit#Edit(Integer, String, Employee, EditType, LocalDateTime)
+     * @see Edit#Edit(EditType, Employee, LocalDateTime, String)
+     * @see Edit#Edit(Integer, EditType, Employee, LocalDateTime, String)
      */
     public Edit(Edit edit) {
         this(edit.getId(),
-                edit.getDescription(),
-                edit.getEmployee(),
                 edit.getEditType(),
-                edit.getEditDateTime());
+                edit.getEmployee(),
+                edit.getEditDateTime(),
+                edit.getDescription());
     }
 
     /**
