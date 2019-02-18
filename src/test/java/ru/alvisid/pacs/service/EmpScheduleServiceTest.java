@@ -68,7 +68,6 @@ public class EmpScheduleServiceTest extends AbstractServiceTest<EmpSchedule, Emp
         service.update(expectedEmpSchedule, expectedEmpId);
         EmpSchedule actualEmpShedule = service.get(expectedEmpSchedule.getId());
         expectedEmpSchedule = testData.getUpdated();
-        expectedEmpSchedule.setId(actualEmpShedule.getId());
         assertMatch(testData.IGNORING_FIELDS, actualEmpShedule, expectedEmpSchedule);
     }
 

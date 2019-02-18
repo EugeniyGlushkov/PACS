@@ -1,6 +1,7 @@
 package ru.alvisid.pacs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.alvisid.pacs.model.Edit;
 import ru.alvisid.pacs.repository.EditRepository;
@@ -22,6 +23,7 @@ import static ru.alvisid.pacs.util.ValidationUtil.checkNotFoundWithId;
  * @see EditService
  * @see AbstractService
  */
+@Service
 public class EditServiceImpl
         extends AbstractService<EditRepository, Edit> implements EditService {
 
@@ -87,4 +89,6 @@ public class EditServiceImpl
     public EditServiceImpl(EditRepository repository) {
         super(repository);
     }
+
+
 }

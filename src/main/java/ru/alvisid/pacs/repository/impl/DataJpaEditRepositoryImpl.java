@@ -28,7 +28,7 @@ public class DataJpaEditRepositoryImpl implements EditRepository {
             "editDateTime",
             "editType",
             "employee.lastName",
-            "emloyee.firstName",
+            "employee.firstName",
             "employee.secondName");
 
     /**
