@@ -109,7 +109,7 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
      * {@code CacheManager} for clearing cache.
      */
     @Autowired
-    private CacheManager cacheManager;
+    protected CacheManager cacheManager;
 
     /**
      * Current {@code JpaUtil} object.

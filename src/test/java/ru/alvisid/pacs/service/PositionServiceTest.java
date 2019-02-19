@@ -1,5 +1,6 @@
 package ru.alvisid.pacs.service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -52,6 +53,14 @@ public class PositionServiceTest extends AbstractServiceTest <Position, Position
     @Autowired
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
+    }
+
+    /**
+     * Clears employee's cache.
+     */
+    @Before
+    public void clearEmployeeCache(){
+        cacheManager.getCache("employees").clear();
     }
 
     /**

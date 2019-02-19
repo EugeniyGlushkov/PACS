@@ -68,13 +68,6 @@ public class Employee extends AbstractPerson {
     private Set <Role> roles;
 
     /**
-     * The point permits of the employee.
-     */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    @OrderBy("pointAction.controlPoint.serialCode, pointAction.actionType.type ASC")
-    private List <PointPermit> pointPermits;
-
-    /**
      * Returns the employee's department.
      *
      * @return the employee's department.
@@ -120,15 +113,6 @@ public class Employee extends AbstractPerson {
     }
 
     /**
-     * Returns the point permits of the employee.
-     *
-     * @return the point permits of the employee.
-     */
-    public List <PointPermit> getPointPermits() {
-        return pointPermits;
-    }
-
-    /**
      * Sets the specified value to the {@code department} field.
      *
      * @param department the specified value to the {@code department} field.
@@ -171,15 +155,6 @@ public class Employee extends AbstractPerson {
      */
     public void setRoles(Set <Role> roles) {
         this.roles = roles;
-    }
-
-    /**
-     * Sets the specified value to the {@code pointPermits} field.
-     *
-     * @param pointPermits the specified value to the {@code pointPermits} field.
-     */
-    public void setPointPermits(List <PointPermit> pointPermits) {
-        this.pointPermits = pointPermits;
     }
 
     /**
