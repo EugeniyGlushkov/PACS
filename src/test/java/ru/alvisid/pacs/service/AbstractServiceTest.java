@@ -109,7 +109,7 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
      * {@code CacheManager} for clearing cache.
      */
     @Autowired
-    protected CacheManager cacheManager;
+    private CacheManager cacheManager;
 
     /**
      * Current {@code JpaUtil} object.
@@ -132,7 +132,7 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
         @Override
         protected void before() throws Throwable {
             if (service instanceof Cached) {
-                cacheManager.getCache(((Cached) service).getCacheAlias()).clear();
+                cleanCacheByAlias(((Cached) service).getCacheAlias());
             }
 
             jpaUtil.clear2ndLevelHibernateCache();
@@ -271,5 +271,14 @@ public abstract class AbstractServiceTest<T extends HasId, S extends TypicalServ
         } catch (Exception exc) {
             Assert.assertThat(getRootCause(exc), instanceOf(exceptionClass));
         }
+    }
+
+    /**
+     * Cleans e-cache by the specified alias.
+     *
+     * @param cacheAlias the specified alias.
+     */
+    protected void cleanCacheByAlias(String cacheAlias) {
+        cacheManager.getCache(cacheAlias).clear();
     }
 }

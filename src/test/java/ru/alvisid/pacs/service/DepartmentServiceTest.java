@@ -5,8 +5,7 @@ import javax.validation.ConstraintViolationException;
 import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import ru.alvisid.pacs.model.Department;
-import ru.alvisid.pacs.model.Employee;
+import ru.alvisid.pacs.model.*;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import testdata.DepartmentTestData;
 
@@ -23,13 +22,33 @@ import static util.TestUtil.assertMatch;
  * @version 1.0
  * @see AbstractServiceTest
  */
-public class DepartmentServiceTest extends AbstractServiceTest<Department, DepartmentService> {
+public class DepartmentServiceTest extends AbstractServiceTest <Department, DepartmentService> {
     /**
      * Constructs new <em>DepartmentServiceTest</em> object.
      */
     public DepartmentServiceTest() {
         super(new DepartmentTestData());
     }
+
+    /**
+     * The point action's service realization.
+     */
+    private PointPermitService pointPermitService;
+
+    /**
+     * The point action's service realization.
+     */
+    private ActionService actionService;
+
+    /**
+     * The absence's service realization.
+     */
+    private AbsenceService absenceService;
+
+    /**
+     * The edit's service realization.
+     */
+    private EditService editService;
 
     /**
      * The employee's service realization.
@@ -48,25 +67,57 @@ public class DepartmentServiceTest extends AbstractServiceTest<Department, Depar
     }
 
     /**
-     * Sets the {@code EmployeeService}.
+     * Sets the {@code PointPermitService}, {@code ActionService}, {@code AbsenceService},
+     * {@code EditService} and {@code EmployeeService}.
      *
-     * @param employeeService the specified EmployeeService.
+     * @param pointPermitService the specified PointPermitService.
+     * @param actionService      the specified ActionService.
+     * @param absenceService     the specified AbsenceService.
+     * @param editService        the specified EditService.
+     * @param employeeService    the specified EmployeeService.
      */
     @Autowired
-    public void setEmployeeService(EmployeeService employeeService) {
+    public void setSupportingServices(PointPermitService pointPermitService,
+                                      ActionService actionService,
+                                      AbsenceService absenceService,
+                                      EditService editService,
+                                      EmployeeService employeeService) {
+        this.pointPermitService = pointPermitService;
+        this.actionService = actionService;
+        this.absenceService = absenceService;
+        this.editService = editService;
         this.employeeService = employeeService;
     }
-
     /**
-     * Cleans deleted department and test delete super.
+     * Cleans point permits, actions, absences, edits and employee tables in the data base
+     * and execute test method in the superclass.
      */
-    @Test
     @Override
     public void delete() {
-        List <Employee> deletedEmployees = employeeService.getAllByDeptId(testData.getDeletedId());
+        List <PointPermit> pointPermitsForDel = pointPermitService.getAll();
+        List <Action> actionsForDel = actionService.getAll();
+        List <Absence> absencesForDel = absenceService.getAll();
+        List <Edit> editsForDel = editService.getAll();
+        List <Employee> employeesForDel = employeeService.getAll();
 
-        for (Employee emp : deletedEmployees) {
-            employeeService.delete(emp.getId());
+        for (PointPermit pp : pointPermitsForDel) {
+            pointPermitService.delete(pp.getId());
+        }
+
+        for (Action act : actionsForDel) {
+            actionService.delete(act.getId());
+        }
+
+        for (Absence abs : absencesForDel) {
+            absenceService.delete(abs.getId());
+        }
+
+        for (Edit edit : editsForDel) {
+            editService.delete(edit.getId());
+        }
+
+        for (Employee empl : employeesForDel) {
+            employeeService.delete(empl.getId());
         }
 
         super.delete();

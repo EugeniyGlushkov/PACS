@@ -2,12 +2,16 @@ package ru.alvisid.pacs.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.alvisid.pacs.model.Action;
 import ru.alvisid.pacs.model.ActionType;
 import ru.alvisid.pacs.model.PointAction;
+import ru.alvisid.pacs.model.PointPermit;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import testdata.PointActionTestData;
 
 import javax.validation.ConstraintViolationException;
+
+import java.util.List;
 
 import static testdata.ControlPointTestData.CONTROL_POINT_3;
 import static util.TestUtil.assertMatch;
@@ -29,6 +33,16 @@ public class PointActionServiceTest extends AbstractServiceTest <PointAction, Po
     }
 
     /**
+     * The point action's service realization.
+     */
+    private PointPermitService pointPermitService;
+
+    /**
+     * The point action's service realization.
+     */
+    private ActionService actionService;
+
+    /**
      * Sets the {@code PointActionService} to the superclass's field.
      *
      * @param service the specified Service.
@@ -37,6 +51,38 @@ public class PointActionServiceTest extends AbstractServiceTest <PointAction, Po
     @Autowired
     public void setService(PointActionService service) {
         this.service = service;
+    }
+
+    /**
+     * Sets the {@code PointPermitService} and {@code ActionService}.
+     *
+     * @param pointPermitService the specified PointPermitService.
+     * @param actionService      the specified ActionService.
+     */
+    @Autowired
+    public void setSupportingServices(PointPermitService pointPermitService,
+                                      ActionService actionService) {
+        this.pointPermitService = pointPermitService;
+        this.actionService = actionService;
+    }
+
+    /**
+     * Cleans point permits and actions tables in the data base and execute test method in the superclass.
+     */
+    @Override
+    public void delete() {
+        List <PointPermit> pointPermitsForDel = pointPermitService.getAll();
+        List <Action> actionsForDel = actionService.getAll();
+
+        for (PointPermit pp : pointPermitsForDel) {
+            pointPermitService.delete(pp.getId());
+        }
+
+        for (Action act : actionsForDel) {
+            actionService.delete(act.getId());
+        }
+
+        super.delete();
     }
 
     /**

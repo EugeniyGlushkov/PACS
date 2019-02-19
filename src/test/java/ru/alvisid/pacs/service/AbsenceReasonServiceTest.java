@@ -3,10 +3,13 @@ package ru.alvisid.pacs.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import ru.alvisid.pacs.model.Absence;
 import ru.alvisid.pacs.model.AbsenceReason;
 import testdata.AbsenceReasonTestData;
 
 import javax.validation.ConstraintViolationException;
+
+import java.util.List;
 
 import static testdata.AbsenceReasonTestData.*;
 
@@ -26,6 +29,11 @@ public class AbsenceReasonServiceTest extends AbstractServiceTest<AbsenceReason,
     }
 
     /**
+     * The absence's service realization.
+     */
+    private AbsenceService absenceService;
+
+    /**
      * Sets the {@code AbsenceReasonService} to the superclass's field.
      *
      * @param service the specified Service.
@@ -34,6 +42,33 @@ public class AbsenceReasonServiceTest extends AbstractServiceTest<AbsenceReason,
     @Autowired
     public void setService(AbsenceReasonService service) {
         this.service = service;
+    }
+
+    /**
+     * Sets the {@code AbsenceService}.
+     *
+     * @param absenceService the specified AbsenceService.
+     */
+    @Autowired
+    public void setAbsenceService(AbsenceService absenceService) {
+        this.absenceService = absenceService;
+    }
+
+    /**
+     * Deletes absences which contains deleted absence reason and execute superclass's test method.
+     */
+    @Override
+    public void delete() {
+        List<Absence> absences = absenceService.getAll();
+        int deletedAbsenceReasonID = testData.getDeletedId();
+
+        for (Absence absence : absences) {
+            if (absence.getAbsenceReason().getId() == deletedAbsenceReasonID) {
+                absenceService.delete(absence.getId());
+            }
+        }
+
+        super.delete();
     }
 
     /**

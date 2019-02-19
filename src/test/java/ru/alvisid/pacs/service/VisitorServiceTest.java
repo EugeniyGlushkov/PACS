@@ -138,90 +138,120 @@ public class VisitorServiceTest extends AbstractServiceTest <Visitor, VisitorSer
      */
     @Test
     public void testValidation() {
-        Visitor newVisitor = testData.getNew();
-        newVisitor.setFirstName(null);
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setFirstName("");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setFirstName("    ");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setSecondName(null);
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setSecondName("");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setSecondName("    ");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setLastName(null);
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setLastName("");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setLastName("    ");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setTempNum(null);
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setTempNum("");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setTempNum("    ");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setDescription(null);
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setDescription("");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setDescription("    ");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setFirstName("Q");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setSecondName("Q");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setLastName("Q");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setTempNum("Q");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setDescription("Q");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setFirstName("More than 100 symbols" +
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", null, "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "", "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "    ", "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", null,
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "    ",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor(null, "Новое имя", "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("", "Новое имя", "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("    ", "Новое имя", "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Новая фамилия",
+                null, "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Новая фамилия",
+                "", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Новая фамилия",
+                "    ", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Новая фамилия",
+                "110120194", null,
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Новая фамилия",
+                "110120194", "",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Новая фамилия",
+                "110120194", "    ",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Q", "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Q",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Q", "Новое имя", "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Новая фамилия",
+                "Q", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Новая фамилия",
+                "110120194", "Q",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия",
                 "More than 100 symbols" +
+                        "More than 100 symbols" +
+                        "More than 100 symbols" +
+                        "More than 100 symbols" +
+                        "More than 100 symbols",
+                "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя",
                 "More than 100 symbols" +
+                        "More than 100 symbols" +
+                        "More than 100 symbols" +
+                        "More than 100 symbols" +
+                        "More than 100 symbols",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor(
                 "More than 100 symbols" +
-                "More than 100 symbols");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setSecondName("More than 100 symbols" +
-                "More than 100 symbols" +
-                "More than 100 symbols" +
-                "More than 100 symbols" +
-                "More than 100 symbols");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setLastName("More than 100 symbols" +
-                "More than 100 symbols" +
-                "More than 100 symbols" +
-                "More than 100 symbols" +
-                "More than 100 symbols");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
-        newVisitor.setId(null);
-        newVisitor.setTempNum("More than 20 symbols" +
-                "More than 20 symbols.");
-        validateRootCause(() -> service.create(newVisitor), ConstraintViolationException.class);
+                        "More than 100 symbols" +
+                        "More than 100 symbols" +
+                        "More than 100 symbols" +
+                        "More than 100 symbols",
+                "Новое имя", "Новая фамилия",
+                "110120194", "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Visitor("Новая фамилия", "Новое имя", "Новая фамилия",
+                "More than 20 symbols" +
+                        "More than 20 symbols.",
+                "Посещение директора.",
+                null,
+                null)), ConstraintViolationException.class);
     }
 }

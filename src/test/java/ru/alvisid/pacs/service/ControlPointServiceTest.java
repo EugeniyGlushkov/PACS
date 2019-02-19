@@ -3,11 +3,16 @@ package ru.alvisid.pacs.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import ru.alvisid.pacs.model.Action;
 import ru.alvisid.pacs.model.ControlPoint;
+import ru.alvisid.pacs.model.PointAction;
+import ru.alvisid.pacs.model.PointPermit;
 import ru.alvisid.pacs.util.exceptions.NotFoundException;
 import testdata.ControlPointTestData;
 
 import javax.validation.ConstraintViolationException;
+
+import java.util.List;
 
 import static util.TestUtil.assertMatch;
 import static testdata.ControlPointTestData.*;
@@ -27,6 +32,20 @@ public class ControlPointServiceTest extends AbstractServiceTest <ControlPoint, 
         super(new ControlPointTestData());
     }
 
+    /**
+     * The point action's service realization.
+     */
+    private PointPermitService pointPermitService;
+
+    /**
+     * The point action's service realization.
+     */
+    private ActionService actionService;
+
+    /**
+     * The point action's service realization.
+     */
+    private PointActionService pointActionService;
 
     /**
      * Sets the {@code ControlPointService} to the superclass's field.
@@ -37,6 +56,46 @@ public class ControlPointServiceTest extends AbstractServiceTest <ControlPoint, 
     @Autowired
     public void setService(ControlPointService service) {
         this.service = service;
+    }
+
+    /**
+     * Sets the {@code PointPermitService}, {@code ActionService} and {@code PointActionService}.
+     *
+     * @param pointPermitService the specified PointPermitService.
+     * @param actionService the specified ActionService.
+     * @param pointActionService the specified PointActionService.
+     */
+    @Autowired
+    public void setSupportingServices(PointPermitService pointPermitService,
+                                      ActionService actionService,
+                                      PointActionService pointActionService) {
+        this.pointPermitService = pointPermitService;
+        this.actionService = actionService;
+        this.pointActionService = pointActionService;
+    }
+
+    /**
+     * Cleans point permits, actions and point actions tables in the data base and execute test method in the superclass.
+     */
+    @Override
+    public void delete() {
+        List <PointPermit> pointPermitsForDel = pointPermitService.getAll();
+        List <Action> actionsForDel = actionService.getAll();
+        List <PointAction> pointActionsForDel = pointActionService.getAll();
+
+        for (PointPermit pp : pointPermitsForDel) {
+            pointPermitService.delete(pp.getId());
+        }
+
+        for (Action act : actionsForDel) {
+            actionService.delete(act.getId());
+        }
+
+        for (PointAction pointAction : pointActionsForDel) {
+            pointActionService.delete(pointAction.getId());
+        }
+
+        super.delete();
     }
 
     /**

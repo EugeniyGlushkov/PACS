@@ -56,11 +56,11 @@ public class PositionServiceTest extends AbstractServiceTest <Position, Position
     }
 
     /**
-     * Clears employee's cache.
+     * Cleans employee's cache.
      */
     @Before
-    public void clearEmployeeCache(){
-        cacheManager.getCache("employees").clear();
+    public void cleanEmployeeCache(){
+        cleanCacheByAlias("employees");
     }
 
     /**
