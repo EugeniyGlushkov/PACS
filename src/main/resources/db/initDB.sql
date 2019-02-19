@@ -23,7 +23,6 @@ DROP TABLE IF EXISTS week_days;
 DROP TABLE IF EXISTS action_types;
 DROP TABLE IF EXISTS control_points;
 DROP TABLE IF EXISTS department_chiefs;
-DROP TABLE IF EXISTS chiefs;
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS positions;
 DROP TABLE IF EXISTS departments;
@@ -104,22 +103,6 @@ CREATE UNIQUE INDEX employees_unique_card_num_idx
   ON employees (card_num);
 CREATE UNIQUE INDEX employees_unique_emale_idx
   ON employees (email);
-
-/*
-Отношение "Начальник сотрудника"
-содержит соответственно:
--первичный ключ;
--id работника;
--id начальника.
- */
-CREATE TABLE chiefs
-(
-  id        SERIAL PRIMARY KEY,
-  emp_id    INTEGER UNIQUE     NOT NULL,
-  chief_id  INTEGER UNIQUE,
-  FOREIGN KEY (emp_id) REFERENCES employees (id) ON DELETE CASCADE,
-  FOREIGN KEY (chief_id) REFERENCES employees (id)
-);
 
 /*
 Отношение "Начальник департамента"
