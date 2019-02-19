@@ -12,7 +12,7 @@ import java.util.List;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface EditService extends TypicalService<Edit> {
+public interface EditService extends TypicalService <Edit> {
     /**
      * Creates and saves a given edit in the data base
      * with inserted employee.
@@ -40,7 +40,7 @@ public interface EditService extends TypicalService<Edit> {
      * @param id the employee's id.
      * @return all edits which are done by specific employee.
      */
-    List<Edit> getAllByEmpId(int id);
+    List <Edit> getAllByEmpId(int id);
 
     /**
      * Returns all edits in the specified time interval.
@@ -48,6 +48,7 @@ public interface EditService extends TypicalService<Edit> {
      *
      * @param start the start of the time interval.
      * @param end   the end of the time interval.
+     * @return the list of the all edits between start time and end time.
      */
-    List<Edit> getAllBetween(LocalDateTime start, LocalDateTime end);
+    List <Edit> getAllBetween(LocalDateTime start, LocalDateTime end);
 }

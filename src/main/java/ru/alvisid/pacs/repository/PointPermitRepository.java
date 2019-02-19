@@ -20,8 +20,7 @@ public interface PointPermitRepository extends TypicalRepository <PointPermit> {
      *                      saved object's {@code employee} field.
      * @param pointActionId the point action's id, the point action will be inserted to the
      *                      saved object's {@code pointAction} field.
-     * @returna saved or update object,
-     * null - if there aren't updated object in the data base.
+     * @return the saved or updated object, null - if there aren't updated object in the data base.
      */
     PointPermit save(PointPermit pointPermit, int empId, int pointActionId);
 

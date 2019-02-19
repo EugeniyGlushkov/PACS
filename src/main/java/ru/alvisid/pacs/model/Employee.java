@@ -232,6 +232,7 @@ public class Employee extends AbstractPerson {
      * @param position   the employee's position.
      * @param cardNum    the employee's card's number.
      * @param email      the employee's email.
+     * @param roles      the employee's roles.
      * @see Employee#Employee()
      * @see Employee#Employee(String, String, String, Department, Position, Integer, String)
      * @see Employee#Employee(Integer, String, String, String, Department, Position, Integer, String)

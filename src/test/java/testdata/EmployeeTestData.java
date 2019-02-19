@@ -52,7 +52,7 @@ public class EmployeeTestData extends AbstractTestData <Employee> {
      * @see EmployeeTestData#EMPLOYEE_4
      */
     public static final Employee
-    UPDATED_EMPLOYEE_4 = new Employee(10009, "Сидоркина", "Анна", "Андреевна",
+            UPDATED_EMPLOYEE_4 = new Employee(10009, "Сидоркина", "Анна", "Андреевна",
             DEPARTMENT_3, POSITION_5, 225533, "buh-sid@mail.ru",
             Set.of(Role.ROLE_USER));
 

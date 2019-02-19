@@ -80,7 +80,7 @@ public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer
      * Returns all employees by position's id sorted with a given sort.
      *
      * @param posId the department's id.
-     * @param sort   the sort for employees list.
+     * @param sort  the sort for employees list.
      * @return list of all employees by position's id sorted with a given sort.
      */
     @Query("SELECT e FROM Employee e WHERE e.position.id=:posId")
@@ -99,7 +99,7 @@ public interface CrudEmployeeRepository extends JpaRepository <Employee, Integer
      * by specified id.
      *
      * @param id the specified employee's id.
-     * @return the employee with filled fields: {@code department} and {@code position.
+     * @return the employee with filled fields: {@code department} and {@code position}.
      */
     @EntityGraph(attributePaths = {"department", "position"})
     @Query("SELECT e FROM Employee e WHERE e.id=?1")

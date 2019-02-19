@@ -9,13 +9,13 @@ import ru.alvisid.pacs.util.exceptions.NotFoundException;
  * @author Glushkov Evgeniy
  * @version 1.0
  */
-public interface EmpScheduleService extends TypicalService<EmpSchedule> {
+public interface EmpScheduleService extends TypicalService <EmpSchedule> {
     /**
      * Creates and saves a given employee schedule in the data base
      * with inserted employee.
      *
      * @param empSchedule the employee schedule to create.
-     * @param empId the employee's id to insert.
+     * @param empId       the employee's id to insert.
      * @return the created object.
      */
     EmpSchedule create(EmpSchedule empSchedule, int empId);
@@ -25,7 +25,7 @@ public interface EmpScheduleService extends TypicalService<EmpSchedule> {
      * with inserted employee.
      *
      * @param empSchedule the employee schedule to update.
-     * @param empId the employee's id to insert.
+     * @param empId       the employee's id to insert.
      * @throws NotFoundException if there aren't updated object in the data base.
      */
     void update(EmpSchedule empSchedule, int empId) throws NotFoundException;
@@ -35,7 +35,7 @@ public interface EmpScheduleService extends TypicalService<EmpSchedule> {
      * If there are no employee's schedule by the specified employee id in a data base
      * then returns new employee's schedule which the employee by specified id based.
      * If there no department' schedule in the data base
-     * then returns new employee's schedule: {@c employee}-field is initialized by specified empId,
+     * then returns new employee's schedule: {@code employee}-field is initialized by specified empId,
      * start work time, end work time, start lunch time and lunch time are nulls.
      *
      * @param empId the employee id.
