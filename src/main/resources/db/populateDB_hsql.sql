@@ -11,7 +11,6 @@ DELETE FROM days_off;
 DELETE FROM weekends;
 DELETE FROM absence_reasons;
 DELETE FROM control_points;
-DELETE FROM department_chiefs;
 DELETE FROM employees;
 DELETE FROM positions;
 DELETE FROM departments;
@@ -29,7 +28,6 @@ ALTER SEQUENCE ABSENCE_REASONS_SEQ RESTART WITH 1;
 ALTER SEQUENCE CONTROL_POINTS_SEQ RESTART WITH 1;
 ALTER SEQUENCE POSITIONS_SEQ RESTART WITH 1;
 ALTER SEQUENCE DEPARTMENTS_SEQ RESTART WITH 1;
-ALTER SEQUENCE DEPARTMENT_CHIEFS_SEQ RESTART WITH 1;
 
 INSERT INTO departments (name, description) VALUES
   ('ООО "Рога и копыта"', 'Компания по производству субпродуктов.'), /*id 1*/
@@ -122,11 +120,6 @@ INSERT INTO emp_schedules (emp_id, start_work, end_work, start_lunch, end_lunch)
   (10006, NULL, NULL, NULL, NULL),                          /*10003*/
   (10008, NULL, NULL, '12:30:00','14:00:00'),               /*10004*/
   (10009, '09:00:00', '18:00:00', '12:00:00', '13:00:00');  /*10005*/
-
-INSERT INTO department_chiefs (dep_id, emp_id) VALUES
-  (1, 10006), /*1*/
-  (2, 10007), /*2*/
-  (3, 10008); /*3*/
 
 INSERT INTO point_permits (pointact_id, emp_id) VALUES
   (1, 10006), /*1*/
