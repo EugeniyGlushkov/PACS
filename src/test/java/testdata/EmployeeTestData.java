@@ -148,6 +148,13 @@ public class EmployeeTestData extends AbstractTestData <Employee> {
         };
     }
 
+    /**
+     * Constructs new {@code EmployeeTestData} and sets
+     * {@code IGNORING_FIELDS} field
+     * in the superclass.
+     *
+     * @see AbstractTestData#IGNORING_FIELDS
+     */
     public EmployeeTestData() {
         super("department", "position");
     }
