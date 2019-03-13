@@ -65,6 +65,9 @@
 
         <!--Tools-->
         <ehcache.version>3.6.1</ehcache.version>
+
+        <!--Web-->
+        <javax.version>1.2</javax.version>
     </properties>
 
     <dependencies>
@@ -176,7 +179,21 @@
         </dependency>
 
         <!--Web-->
-
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${javax.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
     </dependencies>
 
     <profiles>
